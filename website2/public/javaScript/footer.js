@@ -55,11 +55,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     item.addEventListener("mouseenter", () => {
       item.style.transform = "translateX(10px) scale(1.02)";
-      item.style.boxShadow = "0 8px 25px rgba(255, 0, 0, 0.2)";
+      item.style.boxShadow = "0 8px 25px rgba(0, 255, 102, 0.2)";
 
       if (icon) {
         icon.style.transform = "rotate(360deg) scale(1.2)";
-        icon.style.color = "#ff6600";
+        icon.style.color = "#22c55e";
       }
     });
 
@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (icon) {
         icon.style.transform = "rotate(0deg) scale(1)";
-        icon.style.color = "#ff0000";
+        icon.style.color = "#00ff66";
       }
     });
   });
@@ -80,15 +80,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     link.addEventListener("mouseenter", () => {
       link.style.transform = "translateX(15px) scale(1.05)";
-      link.style.background = "rgba(255, 0, 0, 0.15)";
+      link.style.background = "rgba(0, 255, 102, 0.15)";
 
       if (icon) {
         icon.style.transform = "rotate(360deg) scale(1.3)";
-        icon.style.color = "#ff6600";
+        icon.style.color = "#22c55e";
       }
 
       // Efecto de ondas
-      createRippleEffect(link, "rgba(255, 0, 0, 0.3)");
+      createRippleEffect(link, "rgba(0, 255, 102, 0.3)");
     });
 
     link.addEventListener("mouseleave", () => {
@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (icon) {
         icon.style.transform = "rotate(0deg) scale(1)";
-        icon.style.color = "#ff0000";
+        icon.style.color = "#00ff66";
       }
     });
 
@@ -112,7 +112,7 @@ document.addEventListener("DOMContentLoaded", function () {
     link.addEventListener("mouseenter", () => {
       // Efecto de elevación y rotación
       link.style.transform = "translateY(-8px) rotate(360deg) scale(1.15)";
-      link.style.boxShadow = "0 12px 30px rgba(255, 0, 0, 0.4)";
+      link.style.boxShadow = "0 12px 30px rgba(0, 255, 102, 0.4)";
 
       // Efecto de pulso
       link.classList.add("social-pulse");
@@ -144,11 +144,11 @@ document.addEventListener("DOMContentLoaded", function () {
       if (logoImage) {
         logoImage.style.transform = "rotate(360deg) scale(1.2)";
         logoImage.style.filter =
-          "brightness(1.5) drop-shadow(0 0 20px rgba(255, 0, 0, 0.8))";
+          "brightness(1.5) drop-shadow(0 0 20px rgba(0, 255, 102, 0.8))";
       }
 
       if (logoText) {
-        logoText.style.textShadow = "0 0 20px rgba(255, 0, 0, 0.8)";
+        logoText.style.textShadow = "0 0 20px rgba(0, 255, 102, 0.8)";
       }
     });
 
@@ -175,7 +175,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (icon) {
         icon.style.transform = "rotate(360deg) scale(1.3)";
-        icon.style.color = "#ff6600";
+        icon.style.color = "#22c55e";
       }
     });
 
@@ -184,7 +184,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (icon) {
         icon.style.transform = "rotate(0deg) scale(1)";
-        icon.style.color = "#ff0000";
+        icon.style.color = "#00ff66";
       }
     });
 
@@ -203,7 +203,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (versionBadge) {
     versionBadge.addEventListener("mouseenter", () => {
       versionBadge.style.transform = "scale(1.1) rotate(5deg)";
-      versionBadge.style.boxShadow = "0 8px 25px rgba(255, 0, 0, 0.5)";
+      versionBadge.style.boxShadow = "0 8px 25px rgba(0, 255, 102, 0.5)";
     });
 
     versionBadge.addEventListener("mouseleave", () => {
@@ -259,7 +259,7 @@ document.addEventListener("DOMContentLoaded", function () {
         particle.style.top = rect.top + rect.height / 2 + "px";
         particle.style.width = "4px";
         particle.style.height = "4px";
-        particle.style.background = "#ff0000";
+        particle.style.background = "#00ff66";
         particle.style.borderRadius = "50%";
         particle.style.pointerEvents = "none";
         particle.style.zIndex = "9999";
@@ -422,7 +422,7 @@ document.addEventListener("DOMContentLoaded", function () {
         opacity: 0;
         visibility: hidden;
         transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
+        box-shadow: 0 4px 15px rgba(0, 255, 102, 0.3);
       }
       
       .scroll-to-top.visible {
@@ -433,7 +433,7 @@ document.addEventListener("DOMContentLoaded", function () {
       
       .scroll-to-top:hover {
         transform: scale(1.1) rotate(360deg);
-        box-shadow: 0 8px 25px rgba(255, 0, 0, 0.5);
+        box-shadow: 0 8px 25px rgba(0, 255, 102, 0.5);
       }
       
       @keyframes fadeInUp {
@@ -498,15 +498,15 @@ document.addEventListener("DOMContentLoaded", function () {
       @keyframes versionPulse {
         0% {
           transform: scale(1);
-          box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7);
+          box-shadow: 0 0 0 0 rgba(0, 255, 102, 0.7);
         }
         70% {
           transform: scale(1.1);
-          box-shadow: 0 0 0 10px rgba(255, 0, 0, 0);
+          box-shadow: 0 0 0 10px rgba(0, 255, 102, 0);
         }
         100% {
           transform: scale(1);
-          box-shadow: 0 0 0 0 rgba(255, 0, 0, 0);
+          box-shadow: 0 0 0 0 rgba(0, 255, 102, 0);
         }
       }
       
