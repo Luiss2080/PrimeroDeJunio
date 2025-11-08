@@ -7,10 +7,10 @@ const Asociacion = () => {
   const observerRef = useRef();
 
   const tabs = [
-    { id: "metodologia", name: "Metodología", icon: "🎯" },
+    { id: "metodologia", name: "Metodología", icon: "🛵" },
     { id: "certificaciones", name: "Certificaciones", icon: "🏆" },
-    { id: "profesores", name: "Profesores", icon: "👨‍🏫" },
-    { id: "tecnologia", name: "Tecnología", icon: "💻" },
+    { id: "profesores", name: "Instructores", icon: "👨‍🏫" },
+    { id: "servicios", name: "Servicios", icon: "�" },
   ];
 
   const certifications = [
@@ -18,53 +18,53 @@ const Asociacion = () => {
       id: 1,
       name: "Conductor Certificado PRIMERO DE JUNIO",
       level: "Básico",
-      duration: "3 meses",
+      duration: "2 meses",
       icon: "🥉",
       requirements: [
-        "Completar curso básico",
-        "Aprobar examen teórico",
-        "Demostrar rentabilidad en demo",
+        "Completar curso de conducción defensiva",
+        "Aprobar examen teórico vial",
+        "Demostrar manejo seguro en prueba práctica",
       ],
       benefits: [
         "Certificado digital",
-        "Badge LinkedIn",
-        "Acceso comunidad básica",
+        "Acceso a rutas básicas",
+        "Descuento en mantenimiento",
       ],
     },
     {
       id: 2,
       name: "Conductor Profesional PRIMERO DE JUNIO",
       level: "Intermedio",
-      duration: "6 meses",
+      duration: "4 meses",
       icon: "🥈",
       requirements: [
         "Certificación básica",
-        "200+ operaciones rentables",
-        "Curso avanzado completado",
+        "500+ viajes completados",
+        "Curso de atención al cliente",
       ],
       benefits: [
         "Certificado físico",
-        "Descuentos especiales",
-        "Acceso room VIP",
-        "Señales premium",
+        "Acceso a rutas premium",
+        "Seguro de vida extendido",
+        "Tarifas preferenciales",
       ],
     },
     {
       id: 3,
       name: "Master Conductor PRIMERO DE JUNIO",
       level: "Avanzado",
-      duration: "12 meses",
+      duration: "6 meses",
       icon: "🥇",
       requirements: [
         "Certificación profesional",
-        "Cuenta fondeada $10K+",
-        "Mentoría completada",
+        "Capacitación como instructor",
+        "1000+ viajes sin incidentes",
       ],
       benefits: [
-        "Certificado ISO",
-        "Revenue sharing",
-        "Programa affiliate",
-        "Capital funding",
+        "Certificado especializado",
+        "Participación en ganancias",
+        "Programa de referidos",
+        "Financiamiento de vehículo",
       ],
     },
   ];
@@ -72,50 +72,50 @@ const Asociacion = () => {
   const professors = [
     {
       id: 1,
-      name: "Dr. Carlos Mendoza",
-      position: "Director Académico",
-      specialization: "Análisis Técnico Institucional",
-      experience: "15+ años",
+      name: "Carlos Mendoza",
+      position: "Director de Capacitación",
+      specialization: "Seguridad Vial y Conducción Defensiva",
+      experience: "12+ años",
       image: "👨‍🏫",
       achievements: [
-        "Ex-Goldman Sachs Senior Analyst",
-        "PhD en Finanzas Cuantitativas MIT",
-        "+$500M en assets under management",
-        "Autor de 'Advanced transporte Strategies'",
+        "Ex-Instructor de Policía Nacional",
+        "Especialista en Transporte Urbano",
+        "+5000 conductores capacitados",
+        "Certificación Internacional en Seguridad Vial",
       ],
-      courses: ["transporte Avanzado Pro", "Análisis Institucional"],
+      courses: ["Conducción Defensiva", "Mecánica Básica"],
       rating: 4.9,
     },
     {
       id: 2,
       name: "Ana Rodriguez",
-      position: "Head of Risk Management",
-      specialization: "Gestión de Riesgo & Psychology",
-      experience: "12+ años",
+      position: "Jefa de Atención al Cliente",
+      specialization: "Servicio al Cliente & Comunicación",
+      experience: "8+ años",
       image: "👩‍🏫",
       achievements: [
-        "Ex-JP Morgan Risk Director",
-        "CFA Chartered Financial Analyst",
-        "Especialista en Behavioral Finance",
-        "Speaker TEDx Financial Psychology",
+        "Ex-Gerente de Servicio Uber",
+        "Especialista en Experiencia del Usuario",
+        "Certificada en Comunicación Asertiva",
+        "Líder en Programas de Calidad",
       ],
-      courses: ["Psychology transporte", "Risk Management"],
+      courses: ["Atención al Cliente", "Comunicación Efectiva"],
       rating: 4.8,
     },
     {
       id: 3,
       name: "Luis Silva",
-      position: "Crypto & DeFi Specialist",
-      specialization: "Criptomonedas & Blockchain",
-      experience: "8+ años",
+      position: "Especialista en Tecnología",
+      specialization: "Aplicaciones Móviles & GPS",
+      experience: "6+ años",
       image: "👨‍💻",
       achievements: [
-        "Binance Advisory Board Member",
-        "Ethereum Foundation Grant Recipient",
-        "Founder of 3 DeFi protocols",
-        "$100M+ in DeFi transactions",
+        "Desarrollador de Apps de Transporte",
+        "Especialista en Sistemas GPS",
+        "Capacitador en Herramientas Digitales",
+        "Certificado en Innovación Tecnológica",
       ],
-      courses: ["Crypto Master", "DeFi transporte"],
+      courses: ["Uso de Apps", "Navegación GPS"],
       rating: 4.7,
     },
   ];
@@ -123,29 +123,29 @@ const Asociacion = () => {
   const testimonials = [
     {
       name: "María González",
-      position: "Estudiante Destacada 2024",
+      position: "Conductora Destacada 2024",
       image: "👩‍💼",
-      text: "La metodología de PRIMERO DE JUNIO es increíble. En 8 meses pasé de no saber nada a tener una cuenta fondeada de $50K.",
-      profit: "+420%",
-      country: "🇲🇽 México",
+      text: "Gracias a PRIMERO DE JUNIO logré tener mi propio mototaxi y ahora mantengo a mi familia dignamente. La capacitación fue excelente.",
+      profit: "+150%",
+      country: "�� Lima, Perú",
       certification: "Master Conductor",
     },
     {
       name: "Roberto Silva",
-      position: "Ex-Ingeniero",
+      position: "Ex-Obrero de Construcción",
       image: "👨‍💻",
-      text: "Dejé mi trabajo de ingeniería gracias a lo que aprendí en PRIMERO DE JUNIO. Ahora vivo del transporte profesionalmente.",
-      profit: "+280%",
-      country: "🇨🇴 Colombia",
+      text: "Cambié la construcción por el mototaxi. Ahora tengo horarios flexibles y gano más que antes. La asociación me apoyó en todo.",
+      profit: "+200%",
+      country: "�� Trujillo, Perú",
       certification: "Conductor Profesional",
     },
     {
       name: "Carmen López",
-      position: "Empresaria",
+      position: "Madre de Familia",
       image: "👩‍🚀",
-      text: "La certificación PRIMERO DE JUNIO me abrió puertas increíbles. Ahora gestiono carteras de inversión institucionales.",
-      profit: "+350%",
-      country: "🇪🇸 España",
+      text: "Como madre soltera, el mototaxi me permitió trabajar y cuidar a mis hijos. La flexibilidad horaria es increíble.",
+      profit: "+180%",
+      country: "🇵🇪 Arequipa, Perú",
       certification: "Master Conductor",
     },
   ];
@@ -153,41 +153,41 @@ const Asociacion = () => {
   const methodology = [
     {
       phase: "Fase 1",
-      title: "Fundamentos Sólidos",
-      duration: "4-6 semanas",
+      title: "Fundamentos de Conducción",
+      duration: "2-3 semanas",
       icon: "🏗️",
-      description: "Construimos las bases teóricas indispensables",
+      description: "Construimos las bases sólidas de conducción segura",
       topics: [
-        "rutas de transporte globales",
-        "Análisis técnico fundamental",
-        "Plataformas y herramientas",
-        "Psicología del Conductor principiante",
+        "Reglas de tránsito",
+        "Conducción defensiva",
+        "Mantenimiento básico del vehículo",
+        "Primeros auxilios básicos",
       ],
     },
     {
       phase: "Fase 2",
-      title: "Estrategias Avanzadas",
-      duration: "8-10 semanas",
+      title: "Servicio al Cliente",
+      duration: "3-4 semanas",
       icon: "⚡",
-      description: "Desarrollo de estrategias probadas y rentables",
+      description: "Desarrollo de habilidades de atención y comunicación",
       topics: [
-        "Patrones chartistas avanzados",
-        "Algoritmos de transporte",
-        "Gestión avanzada de riesgo",
-        "Backtesting y optimización",
+        "Técnicas de comunicación efectiva",
+        "Manejo de conflictos",
+        "Uso de aplicaciones móviles",
+        "Gestión de rutas y tarifas",
       ],
     },
     {
       phase: "Fase 3",
-      title: "transporte en Vivo",
-      duration: "12+ semanas",
+      title: "Práctica Supervisada",
+      duration: "4+ semanas",
       icon: "🚀",
-      description: "Aplicación práctica con capital real supervisado",
+      description: "Aplicación práctica con supervisión profesional",
       topics: [
-        "Room de transporte en vivo",
-        "Mentoría personalizada 1:1",
-        "Evaluación de performance",
-        "Preparación para funding",
+        "Rutas prácticas supervisadas",
+        "Evaluación de desempeño",
+        "Mentoría personalizada",
+        "Preparación para certificación",
       ],
     },
   ];
@@ -233,12 +233,12 @@ const Asociacion = () => {
         return (
           <div className="methodology-content">
             <div className="methodology-intro">
-              <h3>Metodología Probada Científicamente</h3>
+              <h3>Metodología Probada y Efectiva</h3>
               <p>
-                Nuestra metodología ha sido desarrollada y refinada durante más
-                de 10 años, combinando técnicas institucionales con innovación
-                tecnológica para crear conductores exitosos y consistentemente
-                rentables.
+                Nuestra metodología ha sido desarrollada y perfeccionada durante más
+                de 15 años, combinando técnicas de capacitación profesional con 
+                experiencia práctica para crear conductores exitosos, seguros y 
+                confiables.
               </p>
             </div>
             <div className="methodology-phases">
@@ -274,10 +274,10 @@ const Asociacion = () => {
         return (
           <div className="certifications-content">
             <div className="certifications-intro">
-              <h3>Certificaciones Reconocidas Internacionalmente</h3>
+              <h3>Certificaciones Reconocidas</h3>
               <p>
                 Nuestras certificaciones son reconocidas por las principales
-                instituciones financieras y prop firms a nivel mundial.
+                empresas de transporte y entidades reguladoras a nivel nacional.
               </p>
             </div>
             <div className="certifications-grid">
@@ -329,10 +329,10 @@ const Asociacion = () => {
         return (
           <div className="professors-content">
             <div className="professors-intro">
-              <h3>Aprende de los Mejores</h3>
+              <h3>Aprende de los Mejores Instructores</h3>
               <p>
-                Nuestro equipo docente está compuesto por ex-conductores
-                institucionales de las firmas más prestigiosas del mundo.
+                Nuestro equipo de instructores está compuesto por profesionales
+                especializados en transporte, seguridad vial y atención al cliente.
               </p>
             </div>
             <div className="professors-grid">
@@ -390,51 +390,51 @@ const Asociacion = () => {
           </div>
         );
 
-      case "tecnologia":
+      case "servicios":
         return (
-          <div className="technology-content">
-            <div className="technology-intro">
-              <h3>Tecnología de Vanguardia</h3>
+          <div className="services-content">
+            <div className="services-intro">
+              <h3>Servicios Integrales para Conductores</h3>
               <p>
-                Utilizamos las herramientas más avanzadas de la industria para
-                garantizar una experiencia de aprendizaje de clase mundial.
+                Ofrecemos un ecosistema completo de servicios diseñado para 
+                garantizar el éxito y bienestar de nuestros conductores asociados.
               </p>
             </div>
 
             <div className="tech-features">
-              <div className="tech-feature" data-section-id="tech-1">
-                <div className="tech-icon">🤖</div>
-                <h4>Inteligencia Artificial</h4>
+              <div className="tech-feature" data-section-id="service-1">
+                <div className="tech-icon">🛵</div>
+                <h4>Financiamiento de Vehículos</h4>
                 <p>
-                  Algoritmos de ML que analizan tu progreso y personalizan tu
-                  experiencia de aprendizaje en tiempo real.
+                  Programas de financiamiento flexibles para adquirir tu mototaxi 
+                  con tasas preferenciales y planes de pago adaptados a tus ingresos.
                 </p>
               </div>
 
-              <div className="tech-feature" data-section-id="tech-2">
-                <div className="tech-icon">📱</div>
-                <h4>Plataforma Móvil</h4>
+              <div className="tech-feature" data-section-id="service-2">
+                <div className="tech-icon">�️</div>
+                <h4>Seguro Integral</h4>
                 <p>
-                  Accede a todo el contenido desde cualquier dispositivo. Apps
-                  nativas para iOS y Android.
+                  Cobertura completa contra accidentes, robo y responsabilidad civil. 
+                  Protección para ti, tu vehículo y tus pasajeros.
                 </p>
               </div>
 
-              <div className="tech-feature" data-section-id="tech-3">
-                <div className="tech-icon">🔒</div>
-                <h4>Seguridad Bancaria</h4>
+              <div className="tech-feature" data-section-id="service-3">
+                <div className="tech-icon">�</div>
+                <h4>Mantenimiento Técnico</h4>
                 <p>
-                  Encriptación de grado militar y protocolos de seguridad
-                  utilizados por los bancos más grandes del mundo.
+                  Red de talleres especializados con descuentos exclusivos. 
+                  Mantenimiento preventivo y correctivo garantizado.
                 </p>
               </div>
 
-              <div className="tech-feature" data-section-id="tech-4">
-                <div className="tech-icon">📊</div>
-                <h4>Analytics Avanzado</h4>
+              <div className="tech-feature" data-section-id="service-4">
+                <div className="tech-icon">�</div>
+                <h4>App Móvil Exclusiva</h4>
                 <p>
-                  Dashboard personalizado con métricas detalladas de tu progreso
-                  y performance en tiempo real.
+                  Aplicación dedicada para gestionar rutas, pagos, soporte técnico 
+                  y comunicación directa con la asociación.
                 </p>
               </div>
             </div>
@@ -453,29 +453,29 @@ const Asociacion = () => {
         <div className="container">
           <div className="hero-content">
             <div className="hero-badge">
-              <span className="badge-icon">🎓</span>
-              <span>Asociación #1 en Latinoamérica</span>
+              <span className="badge-icon">🛵</span>
+              <span>Asociación #1 de Mototaxis en Perú</span>
             </div>
             <h1 className="hero-title">
               La Asociación Más
-              <span className="gradient-text"> Innovadora</span> del Mundo
+              <span className="gradient-text"> Confiable</span> de Mototaxis
             </h1>
             <p className="hero-description">
-              Metodología científicamente probada, profesores de clase mundial y
-              tecnología de vanguardia para formar conductores exitosos.
+              Metodología probada de capacitación, instructores especializados y 
+              servicios integrales para formar conductores exitosos y responsables.
             </p>
             <div className="hero-metrics">
               <div className="metric">
-                <div className="metric-number">500M+</div>
-                <div className="metric-label">Ganancias Generadas</div>
+                <div className="metric-number">2,500+</div>
+                <div className="metric-label">Conductores Activos</div>
               </div>
               <div className="metric">
-                <div className="metric-number">96.8%</div>
-                <div className="metric-label">Tasa de Éxito</div>
+                <div className="metric-number">98.5%</div>
+                <div className="metric-label">Satisfacción Cliente</div>
               </div>
               <div className="metric">
-                <div className="metric-number">ISO 9001</div>
-                <div className="metric-label">Certificado</div>
+                <div className="metric-number">15</div>
+                <div className="metric-label">Años de Experiencia</div>
               </div>
             </div>
           </div>
@@ -485,22 +485,22 @@ const Asociacion = () => {
               <div className="stat-card">
                 <div className="stat-icon">🏆</div>
                 <div className="stat-info">
-                  <div className="stat-number">15,247</div>
-                  <div className="stat-label">Estudiantes Exitosos</div>
+                  <div className="stat-number">2,500</div>
+                  <div className="stat-label">Conductores Certificados</div>
                 </div>
               </div>
               <div className="stat-card">
-                <div className="stat-icon">🌍</div>
+                <div className="stat-icon">🛵</div>
                 <div className="stat-info">
-                  <div className="stat-number">47</div>
-                  <div className="stat-label">Países</div>
+                  <div className="stat-number">850</div>
+                  <div className="stat-label">Vehículos Financiados</div>
                 </div>
               </div>
               <div className="stat-card">
                 <div className="stat-icon">💼</div>
                 <div className="stat-info">
-                  <div className="stat-number">89%</div>
-                  <div className="stat-label">Fondeo Rate</div>
+                  <div className="stat-number">95%</div>
+                  <div className="stat-label">Empleabilidad</div>
                 </div>
               </div>
             </div>
@@ -594,10 +594,10 @@ const Asociacion = () => {
         <div className="container">
           <div className="cta-content">
             <div className="cta-text">
-              <h2>¿Listo para Transformar tu Futuro?</h2>
+              <h2>¿Listo para Unirte a Nuestra Asociación?</h2>
               <p>
-                Únete a los miles de estudiantes que ya han cambiado sus vidas
-                con nuestra metodología probada.
+                Únete a los miles de conductores que ya han transformado sus vidas
+                con nuestra capacitación integral y servicios de apoyo.
               </p>
             </div>
             <div className="cta-actions">

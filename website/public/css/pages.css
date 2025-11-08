@@ -643,7 +643,7 @@
 .achievement-number {
   font-size: 1.8rem;
   font-weight: 800;
-  color: var(--primary-red);
+  color: var(--primary-green);
   font-family: var(--font-headings);
 }
 
@@ -678,7 +678,7 @@
 .showcase-title {
   font-size: 1.2rem;
   font-weight: 800;
-  color: var(--primary-red);
+  color: var(--primary-green);
   font-family: var(--font-headings);
 }
 
@@ -730,7 +730,7 @@
 }
 
 .mission-item h3 {
-  color: var(--primary-red);
+  color: var(--primary-green);
   margin-bottom: 20px;
 }
 
@@ -745,7 +745,7 @@
 }
 
 .impact-stats h3 {
-  color: var(--primary-red);
+  color: var(--primary-green);
   margin-bottom: 40px;
 }
 
@@ -784,7 +784,7 @@
   width: 2px;
   background: linear-gradient(
     180deg,
-    var(--primary-red),
+    var(--primary-green),
     var(--primary-orange)
   );
 }
@@ -809,7 +809,7 @@
   top: 20px;
   width: 12px;
   height: 12px;
-  background: var(--primary-red);
+  background: var(--primary-green);
   border-radius: 50%;
   border: 3px solid var(--dark-bg);
 }
@@ -818,7 +818,7 @@
   position: absolute;
   left: -80px;
   top: 15px;
-  background: var(--primary-red);
+  background: var(--primary-green);
   color: var(--white);
   padding: 8px 16px;
   border-radius: 20px;
@@ -940,7 +940,7 @@
 }
 
 .nav-dot.active {
-  background: var(--primary-red);
+  background: var(--primary-green);
   transform: scale(1.2);
 }
 

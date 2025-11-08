@@ -253,7 +253,7 @@
   background: rgba(255, 71, 87, 0.1);
   border: 1px solid rgba(255, 71, 87, 0.3);
   border-radius: 12px;
-  color: #ff4757;
+  color: #22c55e;
   text-align: center;
   font-weight: 600;
 }
@@ -474,7 +474,7 @@
 }
 
 .legend-dot.headquarters {
-  background: #ff4757;
+  background: #22c55e;
 }
 
 .legend-dot.branch {
@@ -554,7 +554,7 @@
 }
 
 .headquarters-badge {
-  background: #ff4757;
+  background: #22c55e;
   color: var(--white);
   padding: 4px 12px;
   border-radius: 12px;
