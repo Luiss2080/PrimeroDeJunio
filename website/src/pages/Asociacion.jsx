@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 
-const Asociación = () => {
+const Asociacion = () => {
   const [activeTab, setActiveTab] = useState("metodologia");
   const [visibleSections, setVisibleSections] = useState(new Set());
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
@@ -447,17 +447,17 @@ const Asociación = () => {
   };
 
   return (
-    <div className="Asociación-page">
+    <div className="asociacion-page">
       {/* Hero Section */}
-      <section className="Asociación-hero">
+      <section className="asociacion-hero">
         <div className="container">
           <div className="hero-content">
             <div className="hero-badge">
               <span className="badge-icon">ðŸŽ“</span>
-              <span>Asociación #1 en LatinoamÃ©rica</span>
+              <span>AsociaciÃ³n #1 en LatinoamÃ©rica</span>
             </div>
             <h1 className="hero-title">
-              La Asociación MÃ¡s
+              La AsociaciÃ³n MÃ¡s
               <span className="gradient-text"> Innovadora</span> del Mundo
             </h1>
             <p className="hero-description">
@@ -509,7 +509,7 @@ const Asociación = () => {
       </section>
 
       {/* Tabs Navigation */}
-      <section className="Asociación-tabs">
+      <section className="asociacion-tabs">
         <div className="container">
           <div className="tabs-nav">
             {tabs.map((tab) => (
@@ -527,7 +527,7 @@ const Asociación = () => {
       </section>
 
       {/* Tab Content */}
-      <section className="Asociación-content">
+      <section className="asociacion-content">
         <div className="container">
           <div className="tab-content">{renderTabContent()}</div>
         </div>
@@ -590,7 +590,7 @@ const Asociación = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="Asociación-cta">
+      <section className="asociacion-cta">
         <div className="container">
           <div className="cta-content">
             <div className="cta-text">
@@ -615,4 +615,4 @@ const Asociación = () => {
   );
 };
 
-export default Asociación;
+export default Asociacion;
