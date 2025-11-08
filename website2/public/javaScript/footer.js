@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
       item.style.boxShadow = "0 8px 25px rgba(0, 255, 102, 0.2)";
 
       if (icon) {
-        icon.style.transform = "rotate(360deg) scale(1.2)";
+        icon.style.transform = "translateY(-3px) scale(1.2)";
         icon.style.color = "#22c55e";
       }
     });
@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
       item.style.boxShadow = "";
 
       if (icon) {
-        icon.style.transform = "rotate(0deg) scale(1)";
+        icon.style.transform = "translateY(0) scale(1)";
         icon.style.color = "#00ff66";
       }
     });
@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function () {
       link.style.background = "rgba(0, 255, 102, 0.15)";
 
       if (icon) {
-        icon.style.transform = "rotate(360deg) scale(1.3)";
+        icon.style.transform = "translateY(-3px) scale(1.3)";
         icon.style.color = "#22c55e";
       }
 
@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
       link.style.background = "";
 
       if (icon) {
-        icon.style.transform = "rotate(0deg) scale(1)";
+        icon.style.transform = "translateY(0) scale(1)";
         icon.style.color = "#00ff66";
       }
     });
@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function () {
   socialLinks.forEach((link, index) => {
     link.addEventListener("mouseenter", () => {
       // Efecto de elevación y rotación
-      link.style.transform = "translateY(-8px) rotate(360deg) scale(1.15)";
+      link.style.transform = "translateY(-8px) translateY(-3px) scale(1.15)";
       link.style.boxShadow = "0 12px 30px rgba(0, 255, 102, 0.4)";
 
       // Efecto de pulso
@@ -122,7 +122,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     link.addEventListener("mouseleave", () => {
-      link.style.transform = "translateY(0) rotate(0deg) scale(1)";
+      link.style.transform = "translateY(0) translateY(0) scale(1)";
       link.style.boxShadow = "";
       link.classList.remove("social-pulse");
     });
@@ -142,7 +142,7 @@ document.addEventListener("DOMContentLoaded", function () {
       footerLogo.style.transform = "scale(1.08)";
 
       if (logoImage) {
-        logoImage.style.transform = "rotate(360deg) scale(1.2)";
+        logoImage.style.transform = "translateY(-3px) scale(1.2)";
         logoImage.style.filter =
           "brightness(1.5) drop-shadow(0 0 20px rgba(0, 255, 102, 0.8))";
       }
@@ -156,7 +156,7 @@ document.addEventListener("DOMContentLoaded", function () {
       footerLogo.style.transform = "scale(1)";
 
       if (logoImage) {
-        logoImage.style.transform = "rotate(0deg) scale(1)";
+        logoImage.style.transform = "translateY(0) scale(1)";
         logoImage.style.filter = "";
       }
 
@@ -174,7 +174,7 @@ document.addEventListener("DOMContentLoaded", function () {
       item.style.transform = "translateX(8px) scale(1.05)";
 
       if (icon) {
-        icon.style.transform = "rotate(360deg) scale(1.3)";
+        icon.style.transform = "translateY(-3px) scale(1.3)";
         icon.style.color = "#22c55e";
       }
     });
@@ -183,7 +183,7 @@ document.addEventListener("DOMContentLoaded", function () {
       item.style.transform = "translateX(0) scale(1)";
 
       if (icon) {
-        icon.style.transform = "rotate(0deg) scale(1)";
+        icon.style.transform = "translateY(0) scale(1)";
         icon.style.color = "#00ff66";
       }
     });
@@ -202,12 +202,12 @@ document.addEventListener("DOMContentLoaded", function () {
   // ===== ANIMACIÓN DEL BADGE DE VERSIÓN =====
   if (versionBadge) {
     versionBadge.addEventListener("mouseenter", () => {
-      versionBadge.style.transform = "scale(1.1) rotate(5deg)";
+      versionBadge.style.transform = "scale(1.1) translateY(-2px)";
       versionBadge.style.boxShadow = "0 8px 25px rgba(0, 255, 102, 0.5)";
     });
 
     versionBadge.addEventListener("mouseleave", () => {
-      versionBadge.style.transform = "scale(1) rotate(0deg)";
+      versionBadge.style.transform = "scale(1) translateY(0)";
       versionBadge.style.boxShadow = "";
     });
 
@@ -432,7 +432,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
       
       .scroll-to-top:hover {
-        transform: scale(1.1) rotate(360deg);
+        transform: scale(1.1) translateY(-3px);
         box-shadow: 0 8px 25px rgba(0, 255, 102, 0.5);
       }
       
