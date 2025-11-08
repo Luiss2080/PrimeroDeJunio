@@ -235,10 +235,10 @@ const Asociacion = () => {
             <div className="methodology-intro">
               <h3>Metodología Probada y Efectiva</h3>
               <p>
-                Nuestra metodología ha sido desarrollada y perfeccionada durante más
-                de 15 años, combinando técnicas de capacitación profesional con 
-                experiencia práctica para crear conductores exitosos, seguros y 
-                confiables.
+                Nuestra metodología ha sido desarrollada y perfeccionada durante
+                más de 15 años, combinando técnicas de capacitación profesional
+                con experiencia práctica para crear conductores exitosos,
+                seguros y confiables.
               </p>
             </div>
             <div className="methodology-phases">
@@ -332,7 +332,8 @@ const Asociacion = () => {
               <h3>Aprende de los Mejores Instructores</h3>
               <p>
                 Nuestro equipo de instructores está compuesto por profesionales
-                especializados en transporte, seguridad vial y atención al cliente.
+                especializados en transporte, seguridad vial y atención al
+                cliente.
               </p>
             </div>
             <div className="professors-grid">
@@ -396,8 +397,9 @@ const Asociacion = () => {
             <div className="services-intro">
               <h3>Servicios Integrales para Conductores</h3>
               <p>
-                Ofrecemos un ecosistema completo de servicios diseñado para 
-                garantizar el éxito y bienestar de nuestros conductores asociados.
+                Ofrecemos un ecosistema completo de servicios diseñado para
+                garantizar el éxito y bienestar de nuestros conductores
+                asociados.
               </p>
             </div>
 
@@ -406,8 +408,9 @@ const Asociacion = () => {
                 <div className="tech-icon">🛵</div>
                 <h4>Financiamiento de Vehículos</h4>
                 <p>
-                  Programas de financiamiento flexibles para adquirir tu mototaxi 
-                  con tasas preferenciales y planes de pago adaptados a tus ingresos.
+                  Programas de financiamiento flexibles para adquirir tu
+                  mototaxi con tasas preferenciales y planes de pago adaptados a
+                  tus ingresos.
                 </p>
               </div>
 
@@ -415,8 +418,8 @@ const Asociacion = () => {
                 <div className="tech-icon">�️</div>
                 <h4>Seguro Integral</h4>
                 <p>
-                  Cobertura completa contra accidentes, robo y responsabilidad civil. 
-                  Protección para ti, tu vehículo y tus pasajeros.
+                  Cobertura completa contra accidentes, robo y responsabilidad
+                  civil. Protección para ti, tu vehículo y tus pasajeros.
                 </p>
               </div>
 
@@ -424,7 +427,7 @@ const Asociacion = () => {
                 <div className="tech-icon">�</div>
                 <h4>Mantenimiento Técnico</h4>
                 <p>
-                  Red de talleres especializados con descuentos exclusivos. 
+                  Red de talleres especializados con descuentos exclusivos.
                   Mantenimiento preventivo y correctivo garantizado.
                 </p>
               </div>
@@ -433,8 +436,8 @@ const Asociacion = () => {
                 <div className="tech-icon">�</div>
                 <h4>App Móvil Exclusiva</h4>
                 <p>
-                  Aplicación dedicada para gestionar rutas, pagos, soporte técnico 
-                  y comunicación directa con la asociación.
+                  Aplicación dedicada para gestionar rutas, pagos, soporte
+                  técnico y comunicación directa con la asociación.
                 </p>
               </div>
             </div>
@@ -461,8 +464,9 @@ const Asociacion = () => {
               <span className="gradient-text"> Confiable</span> de Mototaxis
             </h1>
             <p className="hero-description">
-              Metodología probada de capacitación, instructores especializados y 
-              servicios integrales para formar conductores exitosos y responsables.
+              Metodología probada de capacitación, instructores especializados y
+              servicios integrales para formar conductores exitosos y
+              responsables.
             </p>
             <div className="hero-metrics">
               <div className="metric">
@@ -596,8 +600,8 @@ const Asociacion = () => {
             <div className="cta-text">
               <h2>¿Listo para Unirte a Nuestra Asociación?</h2>
               <p>
-                Únete a los miles de conductores que ya han transformado sus vidas
-                con nuestra capacitación integral y servicios de apoyo.
+                Únete a los miles de conductores que ya han transformado sus
+                vidas con nuestra capacitación integral y servicios de apoyo.
               </p>
             </div>
             <div className="cta-actions">
