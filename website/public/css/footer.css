@@ -568,21 +568,17 @@
   left: 100%;
 }
 
-/* Animación de flotación para iconos */
+/* Transición suave para iconos */
 .contact-icon svg,
 .system-icon svg,
 .feature-icon svg {
-  animation: float 3s ease-in-out infinite;
+  transition: transform 0.3s ease;
 }
 
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-3px);
-  }
+.contact-icon svg:hover,
+.system-icon svg:hover,
+.feature-icon svg:hover {
+  transform: translateY(-2px);
 }
 
 /* Efecto de escritura para el texto */
@@ -677,22 +673,10 @@
   transform: rotate(45deg) translateX(100%);
 }
 
-/* Gradiente animado para el badge de versión */
+/* Gradiente estático para el badge de versión */
 .version-badge {
-  background-size: 200% 200%;
-  animation: gradientShift 3s ease infinite;
-}
-
-@keyframes gradientShift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+  background: var(--gradient-primary);
+  transition: all 0.3s ease;
 }
 
 /* Efecto de sombra dinámica para elementos interactivos */
@@ -718,28 +702,15 @@
   width: 100%;
 }
 
-/* Animación de latido para elementos importantes */
+/* Efecto suave para elementos importantes */
 .version-badge,
 .footer-logo-image {
-  animation: heartbeat 2s ease-in-out infinite;
+  transition: transform 0.3s ease;
 }
 
-@keyframes heartbeat {
-  0% {
-    transform: scale(1);
-  }
-  14% {
-    transform: scale(1.05);
-  }
-  28% {
-    transform: scale(1);
-  }
-  42% {
-    transform: scale(1.05);
-  }
-  70% {
-    transform: scale(1);
-  }
+.version-badge:hover,
+.footer-logo-image:hover {
+  transform: scale(1.05);
 }
 
 /* Efecto de resplandor en hover */

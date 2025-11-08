@@ -572,7 +572,7 @@
 .contact-icon svg,
 .system-icon svg,
 .feature-icon svg {
-  animation: float 3s ease-in-out infinite;
+  transition: transform 0.3s ease;
 }
 
 @keyframes float {
@@ -680,7 +680,7 @@
 /* Gradiente animado para el badge de versión */
 .version-badge {
   background-size: 200% 200%;
-  animation: gradientShift 3s ease infinite;
+  background: var(--gradient-primary); transition: all 0.3s ease;
 }
 
 @keyframes gradientShift {
@@ -721,7 +721,7 @@
 /* Animación de latido para elementos importantes */
 .version-badge,
 .footer-logo-image {
-  animation: heartbeat 2s ease-in-out infinite;
+  transition: transform 0.3s ease;
 }
 
 @keyframes heartbeat {

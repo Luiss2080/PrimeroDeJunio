@@ -2696,7 +2696,7 @@ const Home = () => {
                   placeholder="Email"
                   style={{
                     background: "rgba(255, 255, 255, 0.1)",
-                    border: "1px solid rgba(255, 0, 0, 0.3)",
+                    border: "1px solid rgba(0, 255, 102, 0.3)",
                     borderRadius: "8px",
                     padding: "1rem",
                     color: "#fff",
@@ -2709,7 +2709,7 @@ const Home = () => {
                   placeholder="Teléfono"
                   style={{
                     background: "rgba(255, 255, 255, 0.1)",
-                    border: "1px solid rgba(255, 0, 0, 0.3)",
+                    border: "1px solid rgba(0, 255, 102, 0.3)",
                     borderRadius: "8px",
                     padding: "1rem",
                     color: "#fff",
@@ -2720,7 +2720,7 @@ const Home = () => {
                 <select
                   style={{
                     background: "rgba(255, 255, 255, 0.1)",
-                    border: "1px solid rgba(255, 0, 0, 0.3)",
+                    border: "1px solid rgba(0, 255, 102, 0.3)",
                     borderRadius: "8px",
                     padding: "1rem",
                     color: "#fff",
@@ -2738,7 +2738,7 @@ const Home = () => {
                   rows="4"
                   style={{
                     background: "rgba(255, 255, 255, 0.1)",
-                    border: "1px solid rgba(255, 0, 0, 0.3)",
+                    border: "1px solid rgba(0, 255, 102, 0.3)",
                     borderRadius: "8px",
                     padding: "1rem",
                     color: "#fff",
@@ -2752,7 +2752,7 @@ const Home = () => {
                   className="hover-card"
                   style={{
                     background:
-                      "linear-gradient(135deg, #FF0000 0%, #FF6600 100%)",
+                      "linear-gradient(135deg, #00ff66 0%, #22c55e 100%)",
                     color: "white",
                     border: "none",
                     borderRadius: "12px",
