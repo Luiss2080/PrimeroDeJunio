@@ -537,7 +537,8 @@ const Home = () => {
                 maxWidth: "600px",
               }}
             >
-              Únete a la élite de conductors profesionales con nuestra metodología
+              Únete a la élite de conductors profesionales con nuestra
+              metodología
               <span
                 style={{
                   color: "#FF6600",
@@ -989,7 +990,8 @@ const Home = () => {
                 fontWeight: "400",
               }}
             >
-              La diferencia entre el éxito y el fracaso en el Desarrollo está en la
+              La diferencia entre el éxito y el fracaso en el Desarrollo está en
+              la
               <strong style={{ color: "#FF6600" }}>
                 {" "}
                 metodología, el mentorship y la comunidad
@@ -1333,8 +1335,8 @@ const Home = () => {
                 margin: "0 auto 2rem",
               }}
             >
-              Más de 15,000 conductors ya han transformado su futuro financiero. Tu
-              turno de ser el siguiente success story.
+              Más de 15,000 conductors ya han transformado su futuro financiero.
+              Tu turno de ser el siguiente success story.
             </p>
             <button
               className="hover-card"
@@ -1970,8 +1972,8 @@ const Home = () => {
               }}
             >
               Más de{" "}
-              <strong style={{ color: "#FF6600" }}>10,000 conductors</strong> han
-              transformado sus vidas financieras con nuestra metodología
+              <strong style={{ color: "#FF6600" }}>10,000 conductors</strong>{" "}
+              han transformado sus vidas financieras con nuestra metodología
               exclusiva. Estos son sus resultados reales.
             </p>
           </div>
@@ -2596,7 +2598,11 @@ const Home = () => {
                   value: "Av. Tecnológica #456\nSanta Cruz, Bolivia",
                 },
                 { icon: "📞", label: "Teléfono", value: "+591 3 789-0123" },
-                { icon: "📧", label: "Email", value: "info@PRIMERO DE JUNIO.edu.bo" },
+                {
+                  icon: "📧",
+                  label: "Email",
+                  value: "info@PRIMERO DE JUNIO.edu.bo",
+                },
                 {
                   icon: "🕒",
                   label: "Horarios",
