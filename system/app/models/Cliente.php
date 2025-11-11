@@ -85,19 +85,40 @@ class Cliente extends Model
         return $this->db->fetch($sql, $params);
     }
 
-    public function obtenerHistorialViajes($clienteId, $limite = 20)
+    public function obtenerHistorialViajes($clienteId, $limite = 20, $offset = 0, $fechaInicio = null, $fechaFin = null)
     {
-        return $this->db->fetchAll(
-            "SELECT v.*, c.nombre as conductor_nombre, c.apellido as conductor_apellido,
-                    ve.placa, ve.marca, ve.modelo
-             FROM viajes v
-             INNER JOIN conductores c ON v.conductor_id = c.id
-             INNER JOIN vehiculos ve ON v.vehiculo_id = ve.id
-             WHERE v.cliente_id = ?
-             ORDER BY v.fecha_hora_inicio DESC
-             LIMIT ?",
-            [$clienteId, $limite]
-        );
+        $sql = "SELECT v.*, c.nombre as conductor_nombre, c.apellido as conductor_apellido,
+                       ve.placa, ve.marca, ve.modelo
+                FROM viajes v
+                INNER JOIN conductores c ON v.conductor_id = c.id
+                INNER JOIN vehiculos ve ON v.vehiculo_id = ve.id
+                WHERE v.cliente_id = ?";
+        
+        $params = [$clienteId];
+
+        if ($fechaInicio) {
+            $sql .= " AND DATE(v.fecha_hora_inicio) >= ?";
+            $params[] = $fechaInicio;
+        }
+
+        if ($fechaFin) {
+            $sql .= " AND DATE(v.fecha_hora_inicio) <= ?";
+            $params[] = $fechaFin;
+        }
+
+        $sql .= " ORDER BY v.fecha_hora_inicio DESC";
+        
+        if ($limite > 0) {
+            $sql .= " LIMIT ?";
+            $params[] = $limite;
+            
+            if ($offset > 0) {
+                $sql .= " OFFSET ?";
+                $params[] = $offset;
+            }
+        }
+
+        return $this->db->fetchAll($sql, $params);
     }
 
     public function obtenerClientesFrecuentes($limite = 10, $fechaInicio = null, $fechaFin = null)
@@ -213,5 +234,165 @@ class Cliente extends Model
         $params[] = $limite;
 
         return $this->db->fetchAll($sql, $params);
+    }
+
+    /**
+     * Obtener estadísticas de viajes de un cliente específico
+     */
+    public function obtenerEstadisticasViajes($clienteId, $fechaInicio = null, $fechaFin = null)
+    {
+        $sql = "SELECT 
+                    COUNT(*) as total_viajes,
+                    SUM(CASE WHEN estado = 'completado' THEN 1 ELSE 0 END) as viajes_completados,
+                    SUM(CASE WHEN estado = 'cancelado' THEN 1 ELSE 0 END) as viajes_cancelados,
+                    SUM(CASE WHEN estado = 'completado' THEN valor_total ELSE 0 END) as total_gastado,
+                    AVG(CASE WHEN estado = 'completado' THEN valor_total ELSE NULL END) as promedio_gasto,
+                    AVG(CASE WHEN estado = 'completado' AND calificacion IS NOT NULL THEN calificacion ELSE NULL END) as calificacion_promedio
+                FROM viajes 
+                WHERE cliente_id = ?";
+        
+        $params = [$clienteId];
+
+        if ($fechaInicio) {
+            $sql .= " AND DATE(fecha_hora_inicio) >= ?";
+            $params[] = $fechaInicio;
+        }
+
+        if ($fechaFin) {
+            $sql .= " AND DATE(fecha_hora_inicio) <= ?";
+            $params[] = $fechaFin;
+        }
+
+        return $this->db->fetch($sql, $params);
+    }
+
+    /**
+     * Obtener lugares más comunes de un cliente
+     */
+    public function obtenerLugaresComunes($clienteId, $limite = 10)
+    {
+        return $this->db->fetchAll(
+            "SELECT 
+                origen,
+                destino,
+                COUNT(*) as frecuencia,
+                AVG(valor_total) as precio_promedio
+             FROM viajes 
+             WHERE cliente_id = ? AND estado = 'completado'
+             GROUP BY origen, destino
+             ORDER BY frecuencia DESC
+             LIMIT ?",
+            [$clienteId, $limite]
+        );
+    }
+
+    /**
+     * Obtener clientes nuevos en un período
+     */
+    public function obtenerClientesNuevos($dias = 30)
+    {
+        return $this->db->fetchAll(
+            "SELECT * FROM clientes 
+             WHERE created_at >= DATE_SUB(NOW(), INTERVAL ? DAY)
+             ORDER BY created_at DESC",
+            [$dias]
+        );
+    }
+
+    /**
+     * Obtener clientes inactivos
+     */
+    public function obtenerInactivos($diasInactividad = 90)
+    {
+        return $this->db->fetchAll(
+            "SELECT cl.*, 
+                    MAX(v.fecha_hora_inicio) as ultimo_viaje,
+                    COUNT(v.id) as total_viajes
+             FROM clientes cl
+             LEFT JOIN viajes v ON cl.id = v.cliente_id
+             WHERE cl.estado = 'activo'
+             GROUP BY cl.id
+             HAVING ultimo_viaje IS NULL 
+                OR ultimo_viaje < DATE_SUB(NOW(), INTERVAL ? DAY)
+             ORDER BY ultimo_viaje DESC",
+            [$diasInactividad]
+        );
+    }
+
+    /**
+     * Obtener distribución por tipos
+     */
+    public function obtenerDistribucionTipos()
+    {
+        return $this->db->fetchAll(
+            "SELECT tipo_cliente, COUNT(*) as cantidad
+             FROM clientes 
+             WHERE estado = 'activo'
+             GROUP BY tipo_cliente
+             ORDER BY cantidad DESC"
+        );
+    }
+
+    /**
+     * Verificar si se puede eliminar un cliente
+     */
+    public function puedeEliminar($id)
+    {
+        $viajes = $this->db->fetch(
+            "SELECT COUNT(*) as count FROM viajes WHERE cliente_id = ?",
+            [$id]
+        );
+        
+        return $viajes['count'] == 0;
+    }
+
+    /**
+     * Validar documento único
+     */
+    public function validarDocumentoUnico($documento, $excludeId = null)
+    {
+        $sql = "SELECT COUNT(*) as count FROM clientes WHERE documento_identidad = ?";
+        $params = [$documento];
+        
+        if ($excludeId) {
+            $sql .= " AND id != ?";
+            $params[] = $excludeId;
+        }
+        
+        $result = $this->db->fetch($sql, $params);
+        return $result['count'] == 0;
+    }
+
+    /**
+     * Validar teléfono único
+     */
+    public function validarTelefonoUnico($telefono, $excludeId = null)
+    {
+        $sql = "SELECT COUNT(*) as count FROM clientes WHERE telefono = ?";
+        $params = [$telefono];
+        
+        if ($excludeId) {
+            $sql .= " AND id != ?";
+            $params[] = $excludeId;
+        }
+        
+        $result = $this->db->fetch($sql, $params);
+        return $result['count'] == 0;
+    }
+
+    /**
+     * Obtener campos buscables
+     */
+    protected function getSearchableFields()
+    {
+        return ['nombre', 'apellido', 'telefono', 'email', 'direccion_habitual'];
+    }
+
+    /**
+     * Obtener clientes activos
+     */
+    public function obtenerActivos()
+    {
+        return $this->where(['estado' => 'activo'], 'nombre, apellido');
     }
 }

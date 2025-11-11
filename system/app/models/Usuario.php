@@ -160,4 +160,80 @@ class Usuario extends Model
              WHERE r.nombre = 'conductor' AND u.estado = 'activo'"
         );
     }
+
+    /**
+     * Obtener usuarios con sus roles
+     */
+    public function obtenerConRoles()
+    {
+        return $this->db->fetchAll(
+            "SELECT u.*, r.nombre as rol_nombre, r.descripcion as rol_descripcion 
+             FROM usuarios u 
+             LEFT JOIN roles r ON u.rol_id = r.id 
+             ORDER BY u.nombre, u.apellido"
+        );
+    }
+
+    /**
+     * Obtener distribución de usuarios por roles
+     */
+    public function obtenerDistribucionRoles()
+    {
+        return $this->db->fetchAll(
+            "SELECT r.nombre as rol, COUNT(u.id) as cantidad
+             FROM roles r
+             LEFT JOIN usuarios u ON r.id = u.rol_id AND u.estado = 'activo'
+             WHERE r.estado = 'activo'
+             GROUP BY r.id, r.nombre
+             ORDER BY cantidad DESC"
+        );
+    }
+
+    /**
+     * Obtener actividad reciente de usuarios
+     */
+    public function obtenerActividadReciente($limite = 10)
+    {
+        return $this->db->fetchAll(
+            "SELECT u.*, r.nombre as rol_nombre, u.ultimo_acceso
+             FROM usuarios u 
+             LEFT JOIN roles r ON u.rol_id = r.id 
+             WHERE u.estado = 'activo' AND u.ultimo_acceso IS NOT NULL
+             ORDER BY u.ultimo_acceso DESC
+             LIMIT ?",
+            [$limite]
+        );
+    }
+
+    /**
+     * Verificar contraseña
+     */
+    public function verificarPassword($password, $hashedPassword)
+    {
+        return password_verify($password, $hashedPassword);
+    }
+
+    /**
+     * Verificar si se puede eliminar un usuario
+     */
+    public function puedeEliminar($id)
+    {
+        // Verificar si tiene viajes asociados como conductor
+        $viajesConductor = $this->db->fetch(
+            "SELECT COUNT(*) as count FROM viajes v
+             INNER JOIN conductores c ON v.conductor_id = c.id
+             WHERE c.usuario_id = ?",
+            [$id]
+        );
+        
+        return $viajesConductor['count'] == 0;
+    }
+
+    /**
+     * Obtener campos buscables
+     */
+    protected function getSearchableFields()
+    {
+        return ['nombre', 'apellido', 'email', 'telefono'];
+    }
 }

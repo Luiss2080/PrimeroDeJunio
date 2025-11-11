@@ -237,4 +237,316 @@ class Vehiculo extends Model
     {
         return $this->where(['propietario_cedula' => $cedulaPropietario]);
     }
+
+    /**
+     * Obtener conductor asignado a un vehículo
+     */
+    public function obtenerConductorAsignado($vehiculoId)
+    {
+        return $this->obtenerAsignado($vehiculoId);
+    }
+
+    /**
+     * Obtener historial de mantenimientos
+     */
+    public function obtenerHistorialMantenimientos($vehiculoId)
+    {
+        return $this->obtenerMantenimientos($vehiculoId);
+    }
+
+    /**
+     * Obtener estadísticas de viajes de un vehículo
+     */
+    public function obtenerEstadisticasViajes($vehiculoId, $fechaInicio = null, $fechaFin = null)
+    {
+        return $this->obtenerViajesRealizados($vehiculoId, $fechaInicio, $fechaFin);
+    }
+
+    /**
+     * Obtener próximos vencimientos de un vehículo
+     */
+    public function obtenerProximosVencimientos($vehiculoId)
+    {
+        $vehiculo = $this->find($vehiculoId);
+        if (!$vehiculo) return [];
+
+        $vencimientos = [];
+        $hoy = new DateTime();
+
+        // SOAT
+        if (!empty($vehiculo['soat_vigencia'])) {
+            $fechaVencimiento = new DateTime($vehiculo['soat_vigencia']);
+            $diasRestantes = $hoy->diff($fechaVencimiento)->days;
+            if ($fechaVencimiento >= $hoy) {
+                $vencimientos[] = [
+                    'tipo' => 'SOAT',
+                    'fecha' => $vehiculo['soat_vigencia'],
+                    'dias_restantes' => $diasRestantes,
+                    'estado' => $diasRestantes <= 30 ? 'proximo' : 'vigente'
+                ];
+            }
+        }
+
+        // Tecnomecánica
+        if (!empty($vehiculo['tecnicomecanica_vigencia'])) {
+            $fechaVencimiento = new DateTime($vehiculo['tecnicomecanica_vigencia']);
+            $diasRestantes = $hoy->diff($fechaVencimiento)->days;
+            if ($fechaVencimiento >= $hoy) {
+                $vencimientos[] = [
+                    'tipo' => 'Tecnomecánica',
+                    'fecha' => $vehiculo['tecnicomecanica_vigencia'],
+                    'dias_restantes' => $diasRestantes,
+                    'estado' => $diasRestantes <= 30 ? 'proximo' : 'vigente'
+                ];
+            }
+        }
+
+        return $vencimientos;
+    }
+
+    /**
+     * Asignar conductor a vehículo
+     */
+    public function asignarConductor($vehiculoId, $conductorId, $fechaAsignacion)
+    {
+        // Desasignar conductor anterior si existe
+        $this->db->execute(
+            "UPDATE asignaciones_vehiculo SET estado = 'inactiva', fecha_fin = NOW() 
+             WHERE vehiculo_id = ? AND estado = 'activa'",
+            [$vehiculoId]
+        );
+
+        // Crear nueva asignación
+        return $this->db->insert(
+            "INSERT INTO asignaciones_vehiculo (vehiculo_id, conductor_id, fecha_inicio, estado) 
+             VALUES (?, ?, ?, 'activa')",
+            [$vehiculoId, $conductorId, $fechaAsignacion]
+        );
+    }
+
+    /**
+     * Desasignar conductor de vehículo
+     */
+    public function desasignarConductor($vehiculoId)
+    {
+        return $this->db->execute(
+            "UPDATE asignaciones_vehiculo SET estado = 'inactiva', fecha_fin = NOW() 
+             WHERE vehiculo_id = ? AND estado = 'activa'",
+            [$vehiculoId]
+        );
+    }
+
+    /**
+     * Registrar mantenimiento
+     */
+    public function registrarMantenimiento($datos)
+    {
+        return $this->db->insert(
+            "INSERT INTO mantenimientos (vehiculo_id, tipo_mantenimiento, descripcion, fecha_programada, costo, estado) 
+             VALUES (?, ?, ?, ?, ?, ?)",
+            [
+                $datos['vehiculo_id'],
+                $datos['tipo'] ?? 'preventivo',
+                $datos['descripcion'],
+                $datos['fecha_programada'],
+                $datos['costo_estimado'] ?? 0,
+                'programado'
+            ]
+        );
+    }
+
+    /**
+     * Activar vehículo
+     */
+    public function activar($id)
+    {
+        return $this->update($id, ['estado' => 'activo']);
+    }
+
+    /**
+     * Desactivar vehículo
+     */
+    public function desactivar($id)
+    {
+        return $this->update($id, ['estado' => 'inactivo']);
+    }
+
+    /**
+     * Marcar en mantenimiento
+     */
+    public function marcarEnMantenimiento($id)
+    {
+        return $this->update($id, ['estado' => 'mantenimiento']);
+    }
+
+    /**
+     * Marcar como disponible
+     */
+    public function marcarDisponible($id)
+    {
+        return $this->update($id, ['estado' => 'activo']);
+    }
+
+    /**
+     * Obtener próximos vencimientos de todos los vehículos
+     */
+    public function obtenerProximosVencimientosTodos($dias = 30)
+    {
+        $soat = $this->obtenerVencimientosSoat($dias);
+        $tecnicomecanica = $this->obtenerVencimientosTecnicomecanica($dias);
+
+        $vencimientos = [];
+        
+        foreach ($soat as $v) {
+            $v['tipo'] = 'SOAT';
+            $vencimientos[] = $v;
+        }
+        
+        foreach ($tecnicomecanica as $v) {
+            $v['tipo'] = 'Tecnomecánica';
+            $vencimientos[] = $v;
+        }
+
+        // Ordenar por días restantes
+        usort($vencimientos, function($a, $b) {
+            return $a['dias_restantes'] - $b['dias_restantes'];
+        });
+
+        return $vencimientos;
+    }
+
+    /**
+     * Obtener historial de mantenimientos de todos los vehículos
+     */
+    public function obtenerHistorialMantenimientosTodos($vehiculoId = null, $fechaInicio = null, $fechaFin = null)
+    {
+        $sql = "SELECT m.*, v.placa, v.marca, v.modelo 
+                FROM mantenimientos m
+                INNER JOIN vehiculos v ON m.vehiculo_id = v.id
+                WHERE 1=1";
+        
+        $params = [];
+
+        if ($vehiculoId) {
+            $sql .= " AND m.vehiculo_id = ?";
+            $params[] = $vehiculoId;
+        }
+
+        if ($fechaInicio) {
+            $sql .= " AND DATE(m.fecha_programada) >= ?";
+            $params[] = $fechaInicio;
+        }
+
+        if ($fechaFin) {
+            $sql .= " AND DATE(m.fecha_programada) <= ?";
+            $params[] = $fechaFin;
+        }
+
+        $sql .= " ORDER BY m.fecha_programada DESC";
+
+        return $this->db->fetchAll($sql, $params);
+    }
+
+    /**
+     * Obtener todos los vehículos
+     */
+    public function obtenerTodos($incluirInactivos = false)
+    {
+        if ($incluirInactivos) {
+            return $this->all('placa');
+        }
+        
+        $sql = "SELECT * FROM {$this->table} WHERE estado IN ('activo', 'mantenimiento') ORDER BY placa";
+        return $this->db->fetchAll($sql);
+    }
+
+    /**
+     * Actualizar kilometraje
+     */
+    public function actualizarKilometraje($id, $nuevoKilometraje, $observaciones = '')
+    {
+        // Nota: Necesitaríamos agregar campo kilometraje a la tabla vehiculos
+        // Por ahora solo actualizar observaciones
+        return $this->update($id, ['observaciones' => $observaciones]);
+    }
+
+    /**
+     * Obtener vehículos en mantenimiento
+     */
+    public function obtenerVehiculosMantenimiento()
+    {
+        return $this->where(['estado' => 'mantenimiento'], 'placa');
+    }
+
+    /**
+     * Obtener rendimiento de la flota
+     */
+    public function obtenerRendimientoFlota()
+    {
+        return $this->db->fetchAll(
+            "SELECT v.placa, v.marca, v.modelo,
+                    COUNT(vi.id) as total_viajes,
+                    SUM(vi.valor_total) as ingresos_totales,
+                    AVG(vi.valor_total) as promedio_viaje,
+                    SUM(vi.distancia_km) as km_totales
+             FROM vehiculos v
+             LEFT JOIN viajes vi ON v.id = vi.vehiculo_id AND vi.estado = 'completado'
+             WHERE v.estado = 'activo'
+             GROUP BY v.id
+             ORDER BY ingresos_totales DESC"
+        );
+    }
+
+    /**
+     * Verificar si se puede eliminar un vehículo
+     */
+    public function puedeEliminar($id)
+    {
+        $viajes = $this->db->fetch(
+            "SELECT COUNT(*) as count FROM viajes WHERE vehiculo_id = ?",
+            [$id]
+        );
+        
+        return $viajes['count'] == 0;
+    }
+
+    /**
+     * Obtener campos buscables
+     */
+    protected function getSearchableFields()
+    {
+        return ['placa', 'marca', 'modelo', 'propietario_nombre', 'propietario_cedula'];
+    }
+
+    /**
+     * Obtener vehículos utilizados en un período
+     */
+    public function obtenerVehiculosUtilizadosPeriodo($periodo, $fecha = null)
+    {
+        $fechaInicio = null;
+        $fechaFin = null;
+
+        switch ($periodo) {
+            case 'dia':
+                $fechaInicio = $fechaFin = $fecha ?? date('Y-m-d');
+                break;
+            case 'semana':
+                $fechaInicio = date('Y-m-d', strtotime('monday this week'));
+                $fechaFin = date('Y-m-d', strtotime('sunday this week'));
+                break;
+            case 'mes':
+                $fechaInicio = date('Y-m-01');
+                $fechaFin = date('Y-m-t');
+                break;
+        }
+
+        return $this->db->fetch(
+            "SELECT COUNT(DISTINCT v.vehiculo_id) as cantidad
+             FROM viajes v
+             INNER JOIN vehiculos ve ON v.vehiculo_id = ve.id
+             WHERE DATE(v.fecha_hora_inicio) BETWEEN ? AND ?
+             AND ve.estado = 'activo'",
+            [$fechaInicio, $fechaFin]
+        )['cantidad'];
+    }
 }

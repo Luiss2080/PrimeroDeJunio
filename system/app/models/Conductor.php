@@ -24,14 +24,23 @@ class Conductor extends Model
         'observaciones'
     ];
 
-    public function obtenerConUsuario($id)
+    public function obtenerConUsuario($id = null)
     {
-        return $this->db->fetch(
+        if ($id !== null) {
+            return $this->db->fetch(
+                "SELECT c.*, u.email, u.avatar 
+                 FROM conductores c 
+                 LEFT JOIN usuarios u ON c.usuario_id = u.id 
+                 WHERE c.id = ?",
+                [$id]
+            );
+        }
+        
+        return $this->db->fetchAll(
             "SELECT c.*, u.email, u.avatar 
              FROM conductores c 
              LEFT JOIN usuarios u ON c.usuario_id = u.id 
-             WHERE c.id = ?",
-            [$id]
+             ORDER BY c.nombre, c.apellido"
         );
     }
 
@@ -213,5 +222,205 @@ class Conductor extends Model
         $params[] = $limite;
 
         return $this->db->fetchAll($sql, $params);
+    }
+
+    /**
+     * Obtener conductores activos
+     */
+    public function obtenerActivos()
+    {
+        return $this->where(['estado' => 'activo'], 'nombre, apellido');
+    }
+
+    /**
+     * Obtener conductores disponibles (sin vehículo asignado)
+     */
+    public function obtenerDisponibles()
+    {
+        return $this->db->fetchAll(
+            "SELECT c.* FROM conductores c 
+             LEFT JOIN asignaciones_vehiculo av ON c.id = av.conductor_id AND av.estado = 'activa'
+             WHERE c.estado = 'activo' AND av.id IS NULL
+             ORDER BY c.nombre, c.apellido"
+        );
+    }
+
+    /**
+     * Obtener estadísticas de viajes de un conductor
+     */
+    public function obtenerEstadisticasViajes($conductorId, $fechaInicio = null, $fechaFin = null)
+    {
+        $sql = "SELECT 
+                    COUNT(*) as total_viajes,
+                    SUM(CASE WHEN estado = 'completado' THEN 1 ELSE 0 END) as viajes_completados,
+                    SUM(CASE WHEN estado = 'cancelado' THEN 1 ELSE 0 END) as viajes_cancelados,
+                    SUM(CASE WHEN estado = 'completado' THEN valor_total ELSE 0 END) as total_ingresos,
+                    AVG(CASE WHEN estado = 'completado' THEN valor_total ELSE NULL END) as promedio_viaje,
+                    AVG(CASE WHEN estado = 'completado' AND calificacion IS NOT NULL THEN calificacion ELSE NULL END) as calificacion_promedio,
+                    SUM(CASE WHEN estado = 'completado' THEN distancia_km ELSE 0 END) as total_km
+                FROM viajes 
+                WHERE conductor_id = ?";
+        
+        $params = [$conductorId];
+
+        if ($fechaInicio) {
+            $sql .= " AND DATE(fecha_hora_inicio) >= ?";
+            $params[] = $fechaInicio;
+        }
+
+        if ($fechaFin) {
+            $sql .= " AND DATE(fecha_hora_inicio) <= ?";
+            $params[] = $fechaFin;
+        }
+
+        return $this->db->fetch($sql, $params);
+    }
+
+    /**
+     * Asignar vehículo a conductor
+     */
+    public function asignarVehiculo($conductorId, $vehiculoId, $fechaAsignacion, $turno = 'diurno')
+    {
+        // Primero desasignar vehículo actual si existe
+        $this->db->execute(
+            "UPDATE asignaciones_vehiculo SET estado = 'inactiva', fecha_fin = NOW() 
+             WHERE conductor_id = ? AND estado = 'activa'",
+            [$conductorId]
+        );
+
+        // Crear nueva asignación
+        return $this->db->insert(
+            "INSERT INTO asignaciones_vehiculo (conductor_id, vehiculo_id, turno, fecha_inicio, estado) 
+             VALUES (?, ?, ?, ?, 'activa')",
+            [$conductorId, $vehiculoId, $turno, $fechaAsignacion]
+        );
+    }
+
+    /**
+     * Desasignar vehículo de conductor
+     */
+    public function desasignarVehiculo($conductorId)
+    {
+        return $this->db->execute(
+            "UPDATE asignaciones_vehiculo SET estado = 'inactiva', fecha_fin = NOW() 
+             WHERE conductor_id = ? AND estado = 'activa'",
+            [$conductorId]
+        );
+    }
+
+    /**
+     * Obtener licencias próximas a vencer
+     */
+    public function obtenerLicenciasProximasVencer($dias = 30)
+    {
+        return $this->obtenerLicenciasPorVencer($dias);
+    }
+
+    /**
+     * Verificar si se puede eliminar un conductor
+     */
+    public function puedeEliminar($id)
+    {
+        $viajes = $this->db->fetch(
+            "SELECT COUNT(*) as count FROM viajes WHERE conductor_id = ?",
+            [$id]
+        );
+        
+        return $viajes['count'] == 0;
+    }
+
+    /**
+     * Obtener campos buscables
+     */
+    protected function getSearchableFields()
+    {
+        return ['nombre', 'apellido', 'cedula', 'telefono', 'licencia_numero'];
+    }
+
+    /**
+     * Obtener estadísticas de actividad por período
+     */
+    public function obtenerEstadisticasActividad($periodo, $fecha = null)
+    {
+        $fechaInicio = null;
+        $fechaFin = null;
+
+        switch ($periodo) {
+            case 'dia':
+                $fechaInicio = $fechaFin = $fecha ?? date('Y-m-d');
+                break;
+            case 'semana':
+                $fechaInicio = date('Y-m-d', strtotime('monday this week'));
+                $fechaFin = date('Y-m-d', strtotime('sunday this week'));
+                break;
+            case 'mes':
+                $fechaInicio = date('Y-m-01');
+                $fechaFin = date('Y-m-t');
+                break;
+        }
+
+        return $this->db->fetchAll(
+            "SELECT c.id, c.nombre, c.apellido,
+                    COUNT(v.id) as total_viajes,
+                    SUM(CASE WHEN v.estado = 'completado' THEN 1 ELSE 0 END) as viajes_completados
+             FROM conductores c
+             LEFT JOIN viajes v ON c.id = v.conductor_id 
+             AND DATE(v.fecha_hora_inicio) BETWEEN ? AND ?
+             WHERE c.estado = 'activo'
+             GROUP BY c.id",
+            [$fechaInicio, $fechaFin]
+        );
+    }
+
+    /**
+     * Obtener días para vencimiento de licencia
+     */
+    public function diasParaVencimientoLicencia($conductorId)
+    {
+        $conductor = $this->find($conductorId);
+        if (!$conductor || empty($conductor['licencia_vigencia'])) {
+            return null;
+        }
+
+        $hoy = new DateTime();
+        $vencimiento = new DateTime($conductor['licencia_vigencia']);
+        
+        if ($vencimiento < $hoy) {
+            return -1; // Ya venció
+        }
+
+        return $hoy->diff($vencimiento)->days;
+    }
+
+    /**
+     * Obtener conductores activos en un período
+     */
+    public function obtenerConductoresActivosPeriodo($periodo, $fecha = null)
+    {
+        $fechaInicio = null;
+        $fechaFin = null;
+
+        switch ($periodo) {
+            case 'dia':
+                $fechaInicio = $fechaFin = $fecha ?? date('Y-m-d');
+                break;
+            case 'semana':
+                $fechaInicio = date('Y-m-d', strtotime('monday this week'));
+                $fechaFin = date('Y-m-d', strtotime('sunday this week'));
+                break;
+            case 'mes':
+                $fechaInicio = date('Y-m-01');
+                $fechaFin = date('Y-m-t');
+                break;
+        }
+
+        return $this->db->fetch(
+            "SELECT COUNT(DISTINCT v.conductor_id) as cantidad
+             FROM viajes v
+             INNER JOIN conductores c ON v.conductor_id = c.id
+             WHERE DATE(v.fecha_hora_inicio) BETWEEN ? AND ?
+             AND c.estado = 'activo'",
+            [$fechaInicio, $fechaFin]
+        )['cantidad'];
     }
 }
