@@ -3,366 +3,268 @@
  * Dashboard Administrativo - Sistema PRIMERO DE JUNIO
  */
 
-$title = 'Dashboard Administrativo';
-$current_page = 'dashboard';
+$title = 'Panel de Administración';
+$pageTitle = 'Panel de Administración';
+$pageSubtitle = 'Gestión completa del sistema de mototaxis';
+$breadcrumb = [
+    ['title' => 'Inicio', 'url' => '/admin/dashboard'],
+    ['title' => 'Panel de Administración', 'url' => '']
+];
 
+$current_page = 'dashboard';
 ob_start();
 ?>
 
-<!-- Dashboard Header -->
-<div class="page-header">
-    <div class="header-content">
-        <div class="header-left">
-            <h1 class="page-title">
-                <i class="fas fa-tachometer-alt"></i>
-                Dashboard Administrativo
-            </h1>
-            <p class="page-subtitle">Panel de control y estadísticas generales</p>
+<!-- Dashboard de Estadísticas -->
+<div class="stats-grid">
+    <div class="stats-card" data-clickable="true" data-url="/admin/usuarios">
+        <div class="stats-icon">
+            <i class="fas fa-users"></i>
         </div>
-        <div class="header-right">
-            <div class="header-stats">
-                <div class="stat-item">
-                    <i class="fas fa-calendar-day"></i>
-                    <span><?= date('d/m/Y') ?></span>
+        <div class="stats-value">156</div>
+        <div class="stats-label">Usuarios Activos</div>
+        <div class="stats-change positive">
+            <i class="fas fa-arrow-up"></i>
+            +12%
+        </div>
+    </div>
+
+    <div class="stats-card" data-clickable="true" data-url="/admin/viajes">
+        <div class="stats-icon">
+            <i class="fas fa-route"></i>
+        </div>
+        <div class="stats-value">1247</div>
+        <div class="stats-label">Viajes Completados</div>
+        <div class="stats-change positive">
+            <i class="fas fa-arrow-up"></i>
+            +8%
+        </div>
+    </div>
+
+    <div class="stats-card" data-clickable="true" data-url="/admin/vehiculos">
+        <div class="stats-icon">
+            <i class="fas fa-motorcycle"></i>
+        </div>
+        <div class="stats-value">89</div>
+        <div class="stats-label">Vehículos Registrados</div>
+        <div class="stats-change positive">
+            <i class="fas fa-arrow-up"></i>
+            +5%
+        </div>
+    </div>
+
+    <div class="stats-card" data-clickable="true" data-url="/admin/ingresos">
+        <div class="stats-icon">
+            <i class="fas fa-dollar-sign"></i>
+        </div>
+        <div class="stats-value">$25680</div>
+        <div class="stats-label">Ingresos del Mes</div>
+        <div class="stats-change positive">
+            <i class="fas fa-arrow-up"></i>
+            +15%
+        </div>
+    </div>
+</div>
+
+<!-- Panel de Gestión Rápida -->
+<div class="row">
+    <div class="col-lg-8">
+        <div class="system-card">
+            <div class="system-card-header">
+                <h3 class="system-card-title">
+                    <i class="fas fa-chart-line"></i>
+                    Resumen de Actividad
+                </h3>
+                <span class="system-card-badge">Tiempo Real</span>
+            </div>
+            <div class="system-card-content">
+                <div class="activity-summary">
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                        <div class="activity-content">
+                            <h4>Nuevos Conductores</h4>
+                            <p>3 conductores registrados hoy</p>
+                            <small>Último: hace 2 horas</small>
+                        </div>
+                        <div class="activity-action">
+                            <a href="/admin/conductores" class="btn-outline btn-sm">Ver Todos</a>
+                        </div>
+                    </div>
+
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="activity-content">
+                            <h4>Alertas Pendientes</h4>
+                            <p>5 vehículos requieren mantenimiento</p>
+                            <small>Urgente: 2 casos</small>
+                        </div>
+                        <div class="activity-action">
+                            <a href="/admin/mantenimiento" class="btn-danger btn-sm">Revisar</a>
+                        </div>
+                    </div>
+
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <div class="activity-content">
+                            <h4>Reporte Diario</h4>
+                            <p>87 viajes completados hoy</p>
+                            <small>Eficiencia: 94%</small>
+                        </div>
+                        <div class="activity-action">
+                            <a href="/admin/reportes" class="btn-primary btn-sm">Ver Reporte</a>
+                        </div>
+                    </div>
                 </div>
-                <div class="stat-item">
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="system-card">
+            <div class="system-card-header">
+                <h3 class="system-card-title">
                     <i class="fas fa-clock"></i>
-                    <span id="current-time"><?= date('H:i:s') ?></span>
+                    Acciones Rápidas
+                </h3>
+            </div>
+            <div class="system-card-content">
+                <div class="quick-actions">
+                    <a href="/admin/usuarios/nuevo" class="quick-action-btn">
+                        <i class="fas fa-user-plus"></i>
+                        <span>Nuevo Usuario</span>
+                    </a>
+                    
+                    <a href="/admin/conductores/nuevo" class="quick-action-btn">
+                        <i class="fas fa-id-card"></i>
+                        <span>Registrar Conductor</span>
+                    </a>
+                    
+                    <a href="/admin/vehiculos/nuevo" class="quick-action-btn">
+                        <i class="fas fa-motorcycle"></i>
+                        <span>Nuevo Vehículo</span>
+                    </a>
+                    
+                    <a href="/admin/tarifas" class="quick-action-btn">
+                        <i class="fas fa-tags"></i>
+                        <span>Gestionar Tarifas</span>
+                    </a>
+                    
+                    <a href="/admin/configuracion" class="quick-action-btn">
+                        <i class="fas fa-cog"></i>
+                        <span>Configuración</span>
+                    </a>
+                    
+                    <a href="/admin/reportes/generar" class="quick-action-btn">
+                        <i class="fas fa-file-download"></i>
+                        <span>Generar Reporte</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="system-card">
+            <div class="system-card-header">
+                <h3 class="system-card-title">
+                    <i class="fas fa-bell"></i>
+                    Notificaciones
+                </h3>
+                <span class="system-card-badge">5 Nuevas</span>
+            </div>
+            <div class="system-card-content">
+                <div class="notifications-list">
+                    <div class="notification-item">
+                        <div class="notification-icon success">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="notification-content">
+                            <p>Pago procesado exitosamente</p>
+                            <small>hace 10 minutos</small>
+                        </div>
+                    </div>
+                    
+                    <div class="notification-item">
+                        <div class="notification-icon warning">
+                            <i class="fas fa-exclamation"></i>
+                        </div>
+                        <div class="notification-content">
+                            <p>Vehículo requiere mantenimiento</p>
+                            <small>hace 1 hora</small>
+                        </div>
+                    </div>
+                    
+                    <div class="notification-item">
+                        <div class="notification-icon info">
+                            <i class="fas fa-info"></i>
+                        </div>
+                        <div class="notification-content">
+                            <p>Nuevo conductor registrado</p>
+                            <small>hace 2 horas</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="notifications-footer">
+                    <a href="/admin/notificaciones" class="btn-outline btn-sm btn-block">
+                        Ver Todas las Notificaciones
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Quick Actions -->
-<div class="quick-actions-section">
-    <h3 class="section-title">
-        <i class="fas fa-bolt"></i>
-        Acciones Rápidas
-    </h3>
-    <div class="quick-actions">
-        <a href="/system/app/views/admin/conductores.php" class="quick-action-card">
-            <div class="action-icon">
-                <i class="fas fa-user-plus"></i>
+<!-- Información del Sistema -->
+<div class="row">
+    <div class="col-12">
+        <div class="system-card">
+            <div class="system-card-header">
+                <h3 class="system-card-title">
+                    <i class="fas fa-info-circle"></i>
+                    Estado del Sistema
+                </h3>
+                <span class="system-card-badge">Online</span>
             </div>
-            <div class="action-content">
-                <h4>Nuevo Conductor</h4>
-                <p>Registrar conductor</p>
-            </div>
-        </a>
-        
-        <a href="/system/app/views/admin/vehiculos.php" class="quick-action-card">
-            <div class="action-icon">
-                <i class="fas fa-motorcycle"></i>
-            </div>
-            <div class="action-content">
-                <h4>Nuevo Vehículo</h4>
-                <p>Registrar vehículo</p>
-            </div>
-        </a>
-        
-        <a href="/system/app/views/admin/usuarios.php" class="quick-action-card">
-            <div class="action-icon">
-                <i class="fas fa-users"></i>
-            </div>
-            <div class="action-content">
-                <h4>Gestionar Usuarios</h4>
-                <p>Administrar usuarios</p>
-            </div>
-        </a>
-        
-        <a href="/system/app/views/admin/reportes.php" class="quick-action-card">
-            <div class="action-icon">
-                <i class="fas fa-chart-bar"></i>
-            </div>
-            <div class="action-content">
-                <h4>Ver Reportes</h4>
-                <p>Estadísticas y reportes</p>
-            </div>
-        </a>
-    </div>
-</div>
-
-<!-- Statistics Cards -->
-<div class="stats-section">
-    <h3 class="section-title">
-        <i class="fas fa-chart-line"></i>
-        Estadísticas Generales
-    </h3>
-    <div class="stats-grid">
-        <div class="stat-card primary">
-            <div class="stat-icon">
-                <i class="fas fa-users"></i>
-            </div>
-            <div class="stat-content">
-                <div class="stat-number" data-target="45">0</div>
-                <div class="stat-label">Total Conductores</div>
-                <div class="stat-change positive">
-                    <i class="fas fa-arrow-up"></i>
-                    +5 este mes
-                </div>
-            </div>
-        </div>
-        
-        <div class="stat-card success">
-            <div class="stat-icon">
-                <i class="fas fa-motorcycle"></i>
-            </div>
-            <div class="stat-content">
-                <div class="stat-number" data-target="38">0</div>
-                <div class="stat-label">Vehículos Activos</div>
-                <div class="stat-change positive">
-                    <i class="fas fa-arrow-up"></i>
-                    +3 este mes
-                </div>
-            </div>
-        </div>
-        
-        <div class="stat-card warning">
-            <div class="stat-icon">
-                <i class="fas fa-route"></i>
-            </div>
-            <div class="stat-content">
-                <div class="stat-number" data-target="156">0</div>
-                <div class="stat-label">Viajes Hoy</div>
-                <div class="stat-change positive">
-                    <i class="fas fa-arrow-up"></i>
-                    +12% vs ayer
-                </div>
-            </div>
-        </div>
-        
-        <div class="stat-card info">
-            <div class="stat-icon">
-                <i class="fas fa-money-bill-wave"></i>
-            </div>
-            <div class="stat-content">
-                <div class="stat-number" data-target="2850000">0</div>
-                <div class="stat-label">Ingresos Mes</div>
-                <div class="stat-change positive">
-                    <i class="fas fa-arrow-up"></i>
-                    +8.5%
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Dashboard Content Grid -->
-<div class="dashboard-grid">
-    <!-- Viajes Recientes -->
-    <div class="dashboard-card">
-        <div class="card-header">
-            <h4 class="card-title">
-                <i class="fas fa-clock"></i>
-                Viajes Recientes
-            </h4>
-            <a href="/system/app/views/admin/reportes.php" class="btn btn-sm btn-outline">Ver Todos</a>
-        </div>
-        <div class="card-content">
-            <div class="trips-list">
-                <div class="trip-item">
-                    <div class="trip-info">
-                        <div class="trip-route">
-                            <i class="fas fa-map-marker-alt text-success"></i>
-                            Centro → La Macarena
-                        </div>
-                        <div class="trip-details">
-                            <span class="trip-conductor">Juan Pérez</span>
-                            <span class="trip-time">hace 5 min</span>
-                        </div>
+            <div class="system-card-content">
+                <div class="system-status-grid">
+                    <div class="status-item">
+                        <div class="status-indicator online"></div>
+                        <span class="status-label">Base de Datos</span>
+                        <span class="status-value">Conectada</span>
                     </div>
-                    <div class="trip-status">
-                        <span class="status-badge completed">Completado</span>
-                        <span class="trip-amount">$8,500</span>
+                    
+                    <div class="status-item">
+                        <div class="status-indicator online"></div>
+                        <span class="status-label">Servidor</span>
+                        <span class="status-value">Funcionando</span>
                     </div>
-                </div>
-                
-                <div class="trip-item">
-                    <div class="trip-info">
-                        <div class="trip-route">
-                            <i class="fas fa-map-marker-alt text-warning"></i>
-                            Terminal → Universidad
-                        </div>
-                        <div class="trip-details">
-                            <span class="trip-conductor">María García</span>
-                            <span class="trip-time">hace 12 min</span>
-                        </div>
+                    
+                    <div class="status-item">
+                        <div class="status-indicator online"></div>
+                        <span class="status-label">API</span>
+                        <span class="status-value">Disponible</span>
                     </div>
-                    <div class="trip-status">
-                        <span class="status-badge active">En Curso</span>
-                        <span class="trip-amount">$12,000</span>
-                    </div>
-                </div>
-                
-                <div class="trip-item">
-                    <div class="trip-info">
-                        <div class="trip-route">
-                            <i class="fas fa-map-marker-alt text-info"></i>
-                            Aeropuerto → Centro
-                        </div>
-                        <div class="trip-details">
-                            <span class="trip-conductor">Carlos López</span>
-                            <span class="trip-time">hace 18 min</span>
-                        </div>
-                    </div>
-                    <div class="trip-status">
-                        <span class="status-badge completed">Completado</span>
-                        <span class="trip-amount">$25,000</span>
+                    
+                    <div class="status-item">
+                        <div class="status-indicator warning"></div>
+                        <span class="status-label">Backups</span>
+                        <span class="status-value">Pendiente</span>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <!-- Conductores del Día -->
-    <div class="dashboard-card">
-        <div class="card-header">
-            <h4 class="card-title">
-                <i class="fas fa-star"></i>
-                Top Conductores del Día
-            </h4>
-            <a href="/system/app/views/admin/conductores.php" class="btn btn-sm btn-outline">Ver Todos</a>
-        </div>
-        <div class="card-content">
-            <div class="drivers-ranking">
-                <div class="driver-item">
-                    <div class="driver-position">1</div>
-                    <div class="driver-info">
-                        <div class="driver-avatar">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <div class="driver-details">
-                            <div class="driver-name">Juan Pérez</div>
-                            <div class="driver-stats">8 viajes • $68,000</div>
-                        </div>
-                    </div>
-                    <div class="driver-rating">
-                        <span class="rating-value">4.9</span>
-                        <div class="rating-stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="driver-item">
-                    <div class="driver-position">2</div>
-                    <div class="driver-info">
-                        <div class="driver-avatar">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <div class="driver-details">
-                            <div class="driver-name">María García</div>
-                            <div class="driver-stats">6 viajes • $52,000</div>
-                        </div>
-                    </div>
-                    <div class="driver-rating">
-                        <span class="rating-value">4.8</span>
-                        <div class="rating-stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="driver-item">
-                    <div class="driver-position">3</div>
-                    <div class="driver-info">
-                        <div class="driver-avatar">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <div class="driver-details">
-                            <div class="driver-name">Carlos López</div>
-                            <div class="driver-stats">5 viajes • $45,000</div>
-                        </div>
-                    </div>
-                    <div class="driver-rating">
-                        <span class="rating-value">4.7</span>
-                        <div class="rating-stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Gráfico de Ingresos -->
-    <div class="dashboard-card full-width">
-        <div class="card-header">
-            <h4 class="card-title">
-                <i class="fas fa-chart-area"></i>
-                Ingresos de los Últimos 7 Días
-            </h4>
-            <div class="card-actions">
-                <select class="form-select sm">
-                    <option value="7">Últimos 7 días</option>
-                    <option value="30">Último mes</option>
-                    <option value="90">Últimos 3 meses</option>
-                </select>
-            </div>
-        </div>
-        <div class="card-content">
-            <div class="chart-container">
-                <canvas id="incomeChart" width="400" height="150"></canvas>
-            </div>
-        </div>
-    </div>
-
-    <!-- Alertas y Notificaciones -->
-    <div class="dashboard-card">
-        <div class="card-header">
-            <h4 class="card-title">
-                <i class="fas fa-bell"></i>
-                Alertas del Sistema
-            </h4>
-            <span class="notification-count">3</span>
-        </div>
-        <div class="card-content">
-            <div class="alerts-list">
-                <div class="alert-item warning">
-                    <div class="alert-icon">
-                        <i class="fas fa-exclamation-triangle"></i>
-                    </div>
-                    <div class="alert-content">
-                        <div class="alert-title">Vencimiento de Licencia</div>
-                        <div class="alert-text">2 conductores tienen licencias próximas a vencer</div>
-                        <div class="alert-time">hace 1 hora</div>
-                    </div>
-                </div>
-                
-                <div class="alert-item info">
-                    <div class="alert-icon">
-                        <i class="fas fa-info-circle"></i>
-                    </div>
-                    <div class="alert-content">
-                        <div class="alert-title">Mantenimiento Programado</div>
-                        <div class="alert-text">5 vehículos requieren mantenimiento esta semana</div>
-                        <div class="alert-time">hace 2 horas</div>
-                    </div>
-                </div>
-                
-                <div class="alert-item success">
-                    <div class="alert-icon">
-                        <i class="fas fa-check-circle"></i>
-                    </div>
-                    <div class="alert-content">
-                        <div class="alert-title">Meta Mensual Alcanzada</div>
-                        <div class="alert-text">Se superó la meta de viajes del mes</div>
-                        <div class="alert-time">hace 3 horas</div>
-                    </div>
-                </div>
+            <div class="system-card-footer">
+                <small class="text-muted">
+                    <i class="fas fa-clock"></i>
+                    Última actualización: <?= date('d/m/Y H:i:s') ?>
+                </small>
+                <a href="/admin/sistema/diagnostico" class="btn-outline btn-sm">
+                    Diagnóstico Completo
+                </a>
             </div>
         </div>
     </div>

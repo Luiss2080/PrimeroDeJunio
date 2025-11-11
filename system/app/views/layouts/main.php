@@ -14,6 +14,10 @@
     
     <!-- CSS Principal -->
     <link rel="stylesheet" href="/system/public/assets/css/main.css">
+    <link rel="stylesheet" href="/system/public/assets/css/header.css">
+    <link rel="stylesheet" href="/system/public/assets/css/sidebar.css">
+    <link rel="stylesheet" href="/system/public/assets/css/footer.css">
+    <link rel="stylesheet" href="/system/public/assets/css/components.css">
     
     <!-- Font Awesome para iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -70,7 +74,12 @@
     <?php include 'footer.php'; ?>
     
     <!-- JavaScript Principal -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="/system/public/assets/js/main.js"></script>
+    <script src="/system/public/assets/js/header.js"></script>
+    <script src="/system/public/assets/js/sidebar.js"></script>
+    <script src="/system/public/assets/js/footer.js"></script>
+    <script src="/system/public/assets/js/components.js"></script>
     
     <!-- JavaScript adicional por página -->
     <?php if (isset($additionalJS)): ?>
