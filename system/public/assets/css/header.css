@@ -31,7 +31,10 @@
 
 .header-container {
   display: grid;
-  grid-template-columns: minmax(280px, 1fr) auto minmax(200px, auto) minmax(300px, auto);
+  grid-template-columns: minmax(280px, 1fr) auto minmax(200px, auto) minmax(
+      300px,
+      auto
+    );
   grid-template-areas: "logo breadcrumb search actions";
   align-items: center;
   gap: 1rem;
@@ -450,7 +453,7 @@
 }
 
 .user-dropdown::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -596,7 +599,10 @@
 /* ===== RESPONSIVE DESIGN ===== */
 @media (min-width: 1600px) {
   .header-container {
-    grid-template-columns: minmax(300px, 1fr) auto minmax(280px, auto) minmax(350px, auto);
+    grid-template-columns: minmax(300px, 1fr) auto minmax(280px, auto) minmax(
+        350px,
+        auto
+      );
     gap: 2rem;
   }
 
@@ -631,7 +637,10 @@
 
   .header-container {
     gap: 1rem;
-    grid-template-columns: minmax(240px, 1fr) auto minmax(180px, auto) minmax(270px, auto);
+    grid-template-columns: minmax(240px, 1fr) auto minmax(180px, auto) minmax(
+        270px,
+        auto
+      );
   }
 
   .search-input {
@@ -651,7 +660,10 @@
 @media (max-width: 1024px) {
   .header-container {
     gap: 0.8rem;
-    grid-template-columns: minmax(220px, 1fr) auto minmax(160px, auto) minmax(250px, auto);
+    grid-template-columns: minmax(220px, 1fr) auto minmax(160px, auto) minmax(
+        250px,
+        auto
+      );
   }
 
   .logo-container {
@@ -774,7 +786,8 @@
 
 /* ===== ANIMACIONES ===== */
 @keyframes pulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
   }
   50% {
