@@ -38,13 +38,12 @@ class Configuracion extends Model
         $valorString = $this->convertirAString($valor, $tipo);
 
         if ($existe) {
-            return $this->db->update('configuraciones', [
+            return $this->update($existe['id'], [
                 'valor' => $valorString,
                 'tipo' => $tipo,
                 'descripcion' => $descripcion,
-                'categoria' => $categoria,
-                'updated_at' => date('Y-m-d H:i:s')
-            ], ['id' => $existe['id']]);
+                'categoria' => $categoria
+            ]);
         } else {
             return $this->create([
                 'clave' => $clave,
@@ -86,7 +85,7 @@ class Configuracion extends Model
 
     public function eliminar($clave)
     {
-        return $this->db->delete('configuraciones', ['clave' => $clave]);
+        return $this->db->execute('DELETE FROM configuraciones WHERE clave = ?', [$clave]);
     }
 
     private function convertirValor($valor, $tipo)
@@ -205,10 +204,9 @@ class Configuracion extends Model
 
                 if ($configExistente) {
                     $valorString = $this->convertirAString($valor, $configExistente['tipo']);
-                    $this->db->update('configuraciones', [
-                        'valor' => $valorString,
-                        'updated_at' => date('Y-m-d H:i:s')
-                    ], ['id' => $configExistente['id']]);
+                    $this->update($configExistente['id'], [
+                        'valor' => $valorString
+                    ]);
                 }
             }
             return true;
@@ -290,5 +288,29 @@ class Configuracion extends Model
              ORDER BY categoria, clave",
             ["%$termino%", "%$termino%", "%$termino%"]
         );
+    }
+
+    /**
+     * Alias para obtenerPorCategoria() para compatibilidad
+     */
+    public function obtenerTodas($categoria = null)
+    {
+        return $this->obtenerPorCategoria($categoria);
+    }
+
+    /**
+     * Alias para obtenerPorCategoria() para compatibilidad
+     */
+    public function obtenerTodos($categoria = null)
+    {
+        return $this->obtenerPorCategoria($categoria);
+    }
+
+    /**
+     * Sobrescribir getSearchableFields para búsquedas
+     */
+    protected function getSearchableFields()
+    {
+        return ['clave', 'valor', 'descripcion'];
     }
 }

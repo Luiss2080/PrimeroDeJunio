@@ -16,8 +16,12 @@ define('CONTROLLERS_PATH', APP_PATH . '/controllers');
 define('MODELS_PATH', APP_PATH . '/models');
 define('LOGS_PATH', ROOT_PATH . '/logs');
 
-// Cargar configuración
+// Cargar configuración temprana para SYSTEM_URL
 $config = require_once CONFIG_PATH . '/config.php';
+define('SYSTEM_URL', rtrim($config['app']['url'], '/') . '/system/public/');
+
+// Cargar configuración
+// Ya cargada arriba para SYSTEM_URL
 
 // Configurar zona horaria
 date_default_timezone_set($config['app']['timezone']);

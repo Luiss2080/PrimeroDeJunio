@@ -64,17 +64,17 @@ class Rol extends Model
 
     public function removerPermiso($rolId, $permisoId)
     {
-        return $this->db->delete('rol_permisos', [
-            'rol_id' => $rolId,
-            'permiso_id' => $permisoId
-        ]);
+        return $this->db->execute(
+            'DELETE FROM rol_permisos WHERE rol_id = ? AND permiso_id = ?',
+            [$rolId, $permisoId]
+        );
     }
 
     public function sincronizarPermisos($rolId, $permisosIds)
     {
         try {
             // Eliminar permisos actuales
-            $this->db->delete('rol_permisos', ['rol_id' => $rolId]);
+            $this->db->execute('DELETE FROM rol_permisos WHERE rol_id = ?', [$rolId]);
 
             // Asignar nuevos permisos
             foreach ($permisosIds as $permisoId) {
@@ -143,7 +143,7 @@ class Rol extends Model
         }
 
         // Eliminar relaciones con permisos
-        $this->db->delete('rol_permisos', ['rol_id' => $id]);
+        $this->db->execute('DELETE FROM rol_permisos WHERE rol_id = ?', [$id]);
 
         return parent::delete($id);
     }
@@ -264,5 +264,21 @@ class Rol extends Model
             "SELECT * FROM roles WHERE nombre = ? AND estado = 'activo'",
             [$nombre]
         );
+    }
+
+    /**
+     * Alias para all() para compatibilidad
+     */
+    public function obtenerTodos($orderBy = 'nombre ASC')
+    {
+        return $this->all($orderBy);
+    }
+
+    /**
+     * Sobrescribir getSearchableFields para búsquedas
+     */
+    protected function getSearchableFields()
+    {
+        return ['nombre', 'descripcion'];
     }
 }
