@@ -312,6 +312,28 @@ class Auth
     }
 
     /**
+     * Obtener URL de dashboard según el rol
+     */
+    public static function getDashboardUrl()
+    {
+        $usuario = self::user();
+        if (!$usuario) {
+            return '/login';
+        }
+
+        switch ($usuario['rol_nombre']) {
+            case 'administrador':
+                return '/admin/dashboard';
+            case 'operador':
+                return '/operador/dashboard';
+            case 'conductor':
+                return '/conductor/dashboard';
+            default:
+                return '/dashboard';
+        }
+    }
+
+    /**
      * Obtener permisos por defecto según el rol
      */
     public static function getDefaultPermissions($rolNombre)

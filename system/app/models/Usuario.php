@@ -28,12 +28,6 @@ class Usuario extends Model
         return $this->create($data);
     }
 
-    public function actualizarPassword($id, $newPassword)
-    {
-        $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-        return $this->update($id, ['password' => $hashedPassword]);
-    }
-
     public function buscarPorEmail($email)
     {
         return $this->findBy('email', $email);
@@ -206,14 +200,6 @@ class Usuario extends Model
     }
 
     /**
-     * Verificar contraseña
-     */
-    public function verificarPassword($password, $hashedPassword)
-    {
-        return password_verify($password, $hashedPassword);
-    }
-
-    /**
      * Verificar si se puede eliminar un usuario
      */
     public function puedeEliminar($id)
@@ -227,6 +213,53 @@ class Usuario extends Model
         );
         
         return $viajesConductor['count'] == 0;
+    }
+
+    /**
+     * Buscar usuario por nombre de usuario
+     */
+    public function buscarPorNombreUsuario($nombreUsuario)
+    {
+        $sql = "SELECT * FROM {$this->table} WHERE usuario = ?";
+        return $this->db->fetch($sql, [$nombreUsuario]);
+    }
+
+    /**
+     * Verificar contraseña
+     */
+    public function verificarPassword($usuarioId, $password)
+    {
+        $sql = "SELECT password FROM {$this->table} WHERE id = ?";
+        $result = $this->db->fetch($sql, [$usuarioId]);
+        
+        if (!$result) {
+            return false;
+        }
+
+        return password_verify($password, $result['password']);
+    }
+
+    /**
+     * Actualizar contraseña
+     */
+    public function actualizarPassword($usuarioId, $password)
+    {
+        $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+        
+        $sql = "UPDATE {$this->table} SET password = ?, updated_at = NOW() WHERE id = ?";
+        return $this->db->execute($sql, [$passwordHash, $usuarioId]);
+    }
+
+    /**
+     * Obtener usuarios recientes
+     */
+    public function obtenerRecientes($limite = 5)
+    {
+        $sql = "SELECT * FROM {$this->table} 
+                WHERE estado = 'activo' 
+                ORDER BY created_at DESC 
+                LIMIT ?";
+        return $this->db->fetchAll($sql, [$limite]);
     }
 
     /**

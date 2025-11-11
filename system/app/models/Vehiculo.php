@@ -549,4 +549,46 @@ class Vehiculo extends Model
             [$fechaInicio, $fechaFin]
         )['cantidad'];
     }
+
+    /**
+     * Obtener vehículos en uso actualmente
+     */
+    public function obtenerEnUso()
+    {
+        $sql = "SELECT v.*, c.nombre as conductor_nombre, c.apellido as conductor_apellido 
+                FROM {$this->table} v
+                INNER JOIN asignaciones_vehiculo av ON v.id = av.vehiculo_id 
+                INNER JOIN conductores c ON av.conductor_id = c.id
+                WHERE av.estado = 'activa' AND v.estado = 'activo'";
+        return $this->db->fetchAll($sql);
+    }
+
+    /**
+     * Obtener vehículos que necesitan atención
+     */
+    public function obtenerQueNecesitanAtencion($diasAnticipacion = 30)
+    {
+        $soatVence = $this->obtenerVencimientosSoat($diasAnticipacion);
+        $tecnicomecanicaVence = $this->obtenerVencimientosTecnicomecanica($diasAnticipacion);
+        $mantenimiento = $this->where(['estado' => 'mantenimiento']);
+
+        $atencion = [];
+
+        foreach ($soatVence as $vehiculo) {
+            $vehiculo['motivo'] = 'SOAT próximo a vencer';
+            $atencion[] = $vehiculo;
+        }
+
+        foreach ($tecnicomecanicaVence as $vehiculo) {
+            $vehiculo['motivo'] = 'Tecnomecánica próxima a vencer';
+            $atencion[] = $vehiculo;
+        }
+
+        foreach ($mantenimiento as $vehiculo) {
+            $vehiculo['motivo'] = 'En mantenimiento';
+            $atencion[] = $vehiculo;
+        }
+
+        return $atencion;
+    }
 }

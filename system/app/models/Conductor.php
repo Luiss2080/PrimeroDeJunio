@@ -423,4 +423,32 @@ class Conductor extends Model
             [$fechaInicio, $fechaFin]
         )['cantidad'];
     }
+
+    /**
+     * Obtener conductores recientes
+     */
+    public function obtenerRecientes($limite = 5)
+    {
+        $sql = "SELECT c.*, u.nombre, u.apellido 
+                FROM {$this->table} c
+                LEFT JOIN usuarios u ON c.usuario_id = u.id
+                WHERE c.estado = 'activo' 
+                ORDER BY c.created_at DESC 
+                LIMIT ?";
+        return $this->db->fetchAll($sql, [$limite]);
+    }
+
+    /**
+     * Obtener conductores sin viajes hoy
+     */
+    public function obtenerSinViajesHoy()
+    {
+        $hoy = date('Y-m-d');
+        $sql = "SELECT c.*, u.nombre, u.apellido 
+                FROM {$this->table} c
+                LEFT JOIN usuarios u ON c.usuario_id = u.id
+                LEFT JOIN viajes v ON c.id = v.conductor_id AND DATE(v.fecha_hora_inicio) = ?
+                WHERE c.estado = 'activo' AND v.id IS NULL";
+        return $this->db->fetchAll($sql, [$hoy]);
+    }
 }

@@ -318,4 +318,27 @@ class PagoTarifaDiaria extends Model
             ]
         ];
     }
+
+    /**
+     * Obtener pagos del día
+     */
+    public function obtenerPagosDelDia($fecha)
+    {
+        $sql = "SELECT ptd.*, c.nombre as conductor_nombre, c.apellido as conductor_apellido,
+                       u.nombre as registrado_por_nombre
+                FROM {$this->table} ptd
+                INNER JOIN conductores c ON ptd.conductor_id = c.id
+                LEFT JOIN usuarios u ON ptd.registrado_por = u.id
+                WHERE ptd.fecha_pago = ?
+                ORDER BY ptd.estado, c.nombre";
+        return $this->db->fetchAll($sql, [$fecha]);
+    }
+
+    /**
+     * Obtener estadísticas del día
+     */
+    public function obtenerEstadisticasDia($fecha)
+    {
+        return $this->obtenerResumenDiario($fecha);
+    }
 }
