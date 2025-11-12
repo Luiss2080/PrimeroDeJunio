@@ -1,0 +1,1 @@
+// Funcionalidades específicas del módulo Dashboard
