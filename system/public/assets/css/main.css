@@ -977,3 +977,552 @@ a:hover {
     grid-template-columns: 1fr;
   }
 }
+
+/* ===== VEHICLE MANAGEMENT STYLES ===== */
+/* Vehicle Profile Styles */
+.vehicle-profile {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+}
+
+.vehicle-status-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-right: 1rem;
+}
+
+.vehicle-status-badge.status-disponible {
+  background: rgba(34, 197, 94, 0.1);
+  color: var(--primary-green);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.vehicle-status-badge.status-ocupado {
+  background: rgba(59, 130, 246, 0.1);
+  color: #3b82f6;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.vehicle-status-badge.status-mantenimiento {
+  background: rgba(245, 158, 11, 0.1);
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.vehicle-status-badge.status-inactivo {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.vehicle-overview-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.vehicle-photo-card {
+  min-height: 400px;
+}
+
+.vehicle-photo-section {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.vehicle-main-photo {
+  flex: 1;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  min-height: 250px;
+  margin-bottom: 1.5rem;
+}
+
+.vehicle-main-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photo-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.vehicle-main-photo:hover .photo-overlay {
+  opacity: 1;
+}
+
+.vehicle-basic-info h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--white);
+  text-align: center;
+}
+
+.vehicle-details-grid {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.detail-label {
+  font-weight: 600;
+  color: var(--gray-light);
+}
+
+.detail-value {
+  color: var(--white);
+}
+
+/* Vehicle Index Styles */
+.vehicle-cell-modern {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.vehicle-image-modern {
+  position: relative;
+  width: 60px;
+  height: 45px;
+  flex-shrink: 0;
+  border-radius: 6px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.vehicle-image-modern img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.vehicle-placeholder-modern {
+  width: 100%;
+  height: 100%;
+  background: var(--gradient-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.vehicle-status-dot {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid var(--dark-bg);
+}
+
+.vehicle-status-dot.disponible {
+  background: var(--primary-green);
+}
+
+.vehicle-status-dot.ocupado {
+  background: #3b82f6;
+}
+
+.vehicle-status-dot.mantenimiento {
+  background: #f59e0b;
+}
+
+.vehicle-status-dot.inactivo {
+  background: #ef4444;
+}
+
+.vehicle-info-modern {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.vehicle-plate-modern {
+  font-weight: 700;
+  color: var(--white);
+  font-size: 1rem;
+}
+
+.vehicle-brand-modern {
+  font-size: 0.85rem;
+  color: var(--gray-light);
+}
+
+.spec-item-modern {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--gray-light);
+}
+
+.spec-item-modern i {
+  color: var(--primary-green);
+  width: 12px;
+}
+
+/* Cards view */
+.vehicles-cards-grid-modern {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.vehicle-card-modern {
+  position: relative;
+  height: 100%;
+}
+
+.vehicle-card-background {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(0, 255, 102, 0.1);
+  border-radius: 12px;
+  padding: 1.5rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.vehicle-card-modern:hover .vehicle-card-background {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 255, 102, 0.2);
+}
+
+/* ===== DRIVER MANAGEMENT STYLES ===== */
+.driver-cell-modern {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.driver-avatar-modern {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.driver-avatar-modern img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar-placeholder-modern {
+  width: 100%;
+  height: 100%;
+  background: var(--gradient-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.driver-status-dot {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--dark-bg);
+}
+
+.driver-status-dot.activo {
+  background: var(--primary-green);
+}
+
+.driver-status-dot.inactivo {
+  background: #ef4444;
+}
+
+.driver-status-dot.suspendido {
+  background: #f59e0b;
+}
+
+.driver-info-table {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.driver-name-table {
+  font-weight: 700;
+  color: var(--white);
+  font-size: 1rem;
+}
+
+.driver-email-table {
+  font-size: 0.85rem;
+  color: var(--gray-light);
+}
+
+/* ===== FORM COMPONENTS ===== */
+.form-actions-modern {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.quick-filters-modern {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.filter-btn-modern {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--gray-light);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.filter-btn-modern:hover {
+  border-color: var(--primary-green);
+  color: var(--primary-green);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 255, 102, 0.2);
+}
+
+.filter-btn-modern.active {
+  background: var(--primary-green);
+  border-color: var(--primary-green);
+  color: white;
+}
+
+.filter-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.5rem;
+  height: 1.5rem;
+  padding: 0 0.5rem;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.filter-btn-modern:not(.active) .filter-count {
+  background: var(--primary-green);
+  color: white;
+}
+
+.form-group-modern {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-label-modern {
+  font-weight: 600;
+  color: var(--gray-light);
+  font-size: 0.9rem;
+}
+
+.form-input-modern {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--white);
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.form-input-modern:focus {
+  outline: none;
+  border-color: var(--primary-green);
+  box-shadow: 0 0 0 3px rgba(0, 255, 102, 0.1);
+}
+
+.form-select-modern {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--white);
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.form-select-modern:focus {
+  outline: none;
+  border-color: var(--primary-green);
+  box-shadow: 0 0 0 3px rgba(0, 255, 102, 0.1);
+}
+
+/* ===== DOCUMENT & MAINTENANCE STYLES ===== */
+.document-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.doc-detail {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.doc-label {
+  font-weight: 600;
+  color: var(--gray-light);
+}
+
+.doc-value {
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.status-success {
+  color: var(--primary-green);
+}
+
+.status-warning {
+  color: #f59e0b;
+}
+
+.status-danger {
+  color: #ef4444;
+}
+
+.maintenance-info-modern {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.maintenance-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.maintenance-badge.urgent {
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+}
+
+.maintenance-badge.warning {
+  background: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+}
+
+.maintenance-badge.normal {
+  background: rgba(34, 197, 94, 0.15);
+  color: var(--primary-green);
+}
+
+/* ===== TABLE COMPONENTS ===== */
+.table-modern {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+.table-modern th,
+.table-modern td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.table-modern th {
+  background: rgba(0, 255, 102, 0.1);
+  color: var(--white);
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.table-modern tr:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.status-badge-modern {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.status-badge-modern.disponible {
+  background: rgba(34, 197, 94, 0.15);
+  color: var(--primary-green);
+}
+
+.status-badge-modern.ocupado {
+  background: rgba(59, 130, 246, 0.15);
+  color: #3b82f6;
+}
+
+.status-badge-modern.mantenimiento {
+  background: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+}
+
+.status-badge-modern.inactivo {
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+}

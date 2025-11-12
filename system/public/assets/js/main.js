@@ -839,6 +839,494 @@ dynamicStyles.textContent = `
 
 document.head.appendChild(dynamicStyles);
 
+// =============================================================================
+// VEHICLE MANAGEMENT MODULE
+// =============================================================================
+
+// Vehicle Profile Module
+const VehicleProfile = {
+  init() {
+    this.initializeTabs();
+    this.bindEvents();
+  },
+
+  initializeTabs() {
+    const tabButtons = document.querySelectorAll(".tab-button-modern");
+    const tabContents = document.querySelectorAll(".tab-content-modern");
+
+    tabButtons.forEach((button) => {
+      button.addEventListener("click", (e) => {
+        const targetTab = e.target
+          .closest(".tab-button-modern")
+          .getAttribute("data-tab");
+
+        // Remove active class from all buttons and contents
+        tabButtons.forEach((btn) => btn.classList.remove("active"));
+        tabContents.forEach((content) => content.classList.remove("active"));
+
+        // Activate target button and content
+        e.target.closest(".tab-button-modern").classList.add("active");
+        document
+          .querySelector(`[data-tab="${targetTab}"].tab-content-modern`)
+          .classList.add("active");
+      });
+    });
+  },
+
+  bindEvents() {
+    // Photo modal
+    const photoModal = document.querySelector(
+      ".vehicle-main-photo .photo-overlay"
+    );
+    if (photoModal) {
+      photoModal.addEventListener("click", this.openPhotoModal);
+    }
+
+    // Maintenance modal buttons
+    const maintenanceButtons = document.querySelectorAll(
+      '[onclick*="openMaintenanceModal"]'
+    );
+    maintenanceButtons.forEach((btn) => {
+      btn.addEventListener("click", this.openMaintenanceModal);
+    });
+  },
+
+  openPhotoModal() {
+    console.log("Open photo modal");
+  },
+
+  openMaintenanceModal() {
+    console.log("Open maintenance modal");
+  },
+};
+
+// Vehicle Index Module
+const VehicleIndex = {
+  init() {
+    this.initializeDropdowns();
+    this.initializeViewToggle();
+    this.initializeFilters();
+    this.initializeDataTable();
+    this.bindEvents();
+  },
+
+  initializeDropdowns() {
+    document.querySelectorAll("[data-dropdown]").forEach((trigger) => {
+      trigger.addEventListener("click", (e) => {
+        e.preventDefault();
+        const dropdownId = trigger.getAttribute("data-dropdown");
+        const dropdown = document.getElementById(dropdownId);
+        if (dropdown) {
+          dropdown.classList.toggle("active");
+        }
+      });
+    });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener("click", (e) => {
+      if (!e.target.closest(".dropdown-modern")) {
+        document.querySelectorAll(".dropdown-menu-modern").forEach((menu) => {
+          menu.classList.remove("active");
+        });
+      }
+    });
+  },
+
+  initializeViewToggle() {
+    document.querySelectorAll(".view-toggle").forEach((toggle) => {
+      toggle.addEventListener("click", (e) => {
+        const view = e.target.closest(".view-toggle").getAttribute("data-view");
+
+        // Update active toggle
+        document
+          .querySelectorAll(".view-toggle")
+          .forEach((t) => t.classList.remove("active"));
+        e.target.closest(".view-toggle").classList.add("active");
+
+        // Update views
+        const tableView = document.getElementById("tableView");
+        const cardsView = document.getElementById("cardsView");
+
+        if (tableView && cardsView) {
+          tableView.classList.toggle("active", view === "table");
+          cardsView.classList.toggle("active", view === "cards");
+        }
+      });
+    });
+  },
+
+  initializeFilters() {
+    // Clear filters
+    const clearFilters = document.getElementById("clearFilters");
+    if (clearFilters) {
+      clearFilters.addEventListener("click", () => {
+        const form = document.getElementById("filtersForm");
+        if (form) {
+          form.reset();
+          window.location.href = window.location.pathname;
+        }
+      });
+    }
+
+    // Auto-submit filters
+    document.querySelectorAll(".form-select-modern").forEach((select) => {
+      select.addEventListener("change", () => {
+        const form = document.getElementById("filtersForm");
+        if (form) {
+          form.submit();
+        }
+      });
+    });
+  },
+
+  initializeDataTable() {
+    if (typeof $ !== "undefined" && $.fn.DataTable) {
+      const table = document.getElementById("vehiculosTable");
+      if (table) {
+        $(table).DataTable({
+          language: {
+            url: "/assets/js/datatables-es.json",
+          },
+          pageLength: 25,
+          order: [[0, "asc"]],
+          columnDefs: [{ orderable: false, targets: [5, 6] }],
+        });
+      }
+    }
+  },
+
+  bindEvents() {
+    // Quick filters
+    document.querySelectorAll(".filter-btn-modern").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        const filter = e.target
+          .closest(".filter-btn-modern")
+          .getAttribute("data-filter");
+        this.filterVehiculos(filter);
+      });
+    });
+  },
+
+  filterVehiculos(filter) {
+    const rows = document.querySelectorAll(".vehiculo-row");
+    const cards = document.querySelectorAll(".vehicle-card-modern");
+
+    // Update active filter button
+    document
+      .querySelectorAll(".filter-btn-modern")
+      .forEach((btn) => btn.classList.remove("active"));
+    document
+      .querySelector(`[data-filter="${filter}"]`)
+      ?.classList.add("active");
+
+    // Filter logic
+    rows.forEach((row) => {
+      let show = true;
+
+      switch (filter) {
+        case "todos":
+          show = true;
+          break;
+        default:
+          show = row.getAttribute("data-estado") === filter;
+          break;
+      }
+
+      row.style.display = show ? "" : "none";
+    });
+
+    // Filter cards
+    cards.forEach((card) => {
+      let show = true;
+
+      switch (filter) {
+        case "todos":
+          show = true;
+          break;
+        default:
+          show = card.getAttribute("data-estado") === filter;
+          break;
+      }
+
+      card.style.display = show ? "" : "none";
+    });
+  },
+};
+
+// Vehicle Modals Module
+const VehicleModals = {
+  init() {
+    this.bindModalEvents();
+  },
+
+  bindModalEvents() {
+    // Assignment modal
+    document
+      .querySelectorAll('[onclick*="asignarConductor"]')
+      .forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          e.preventDefault();
+          const vehiculoId = this.extractVehicleId(btn.getAttribute("onclick"));
+          this.openAssignmentModal(vehiculoId);
+        });
+      });
+
+    // Maintenance modal
+    document
+      .querySelectorAll('[onclick*="programarMantenimiento"]')
+      .forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          e.preventDefault();
+          const vehiculoId = this.extractVehicleId(btn.getAttribute("onclick"));
+          this.openMaintenanceModal(vehiculoId);
+        });
+      });
+  },
+
+  extractVehicleId(onclickString) {
+    const match = onclickString.match(/\d+/);
+    return match ? match[0] : null;
+  },
+
+  openAssignmentModal(vehiculoId) {
+    const modalContent = `
+            <form class="form-modern" id="assignmentForm">
+                <div class="form-group-modern">
+                    <label class="form-label-modern">Seleccionar Conductor</label>
+                    <select class="form-select-modern" name="conductor_id" required>
+                        <option value="">Seleccionar conductor...</option>
+                    </select>
+                </div>
+                <div class="form-group-modern">
+                    <label class="form-label-modern">Fecha de Asignación</label>
+                    <input type="date" class="form-input-modern" name="fecha_asignacion" value="${
+                      new Date().toISOString().split("T")[0]
+                    }" required>
+                </div>
+                <div class="form-group-modern">
+                    <label class="form-label-modern">Observaciones</label>
+                    <textarea class="form-textarea-modern" name="observaciones" rows="3" placeholder="Notas adicionales..."></textarea>
+                </div>
+                <div class="form-actions-modern">
+                    <button type="button" class="btn-modern btn-outline" onclick="VehicleModals.closeAssignmentModal()">Cancelar</button>
+                    <button type="submit" class="btn-modern btn-primary">Asignar</button>
+                </div>
+            </form>
+        `;
+
+    const assignmentContent = document.getElementById("assignmentContent");
+    const assignmentModal = document.getElementById("assignmentModal");
+
+    if (assignmentContent && assignmentModal) {
+      assignmentContent.innerHTML = modalContent;
+      assignmentModal.classList.add("active");
+    }
+  },
+
+  openMaintenanceModal(vehiculoId) {
+    const modalContent = `
+            <form class="form-modern" id="maintenanceForm">
+                <div class="form-group-modern">
+                    <label class="form-label-modern">Tipo de Mantenimiento</label>
+                    <select class="form-select-modern" name="tipo_mantenimiento" required>
+                        <option value="">Seleccionar tipo...</option>
+                        <option value="preventivo">Preventivo</option>
+                        <option value="correctivo">Correctivo</option>
+                        <option value="revision">Revisión General</option>
+                        <option value="cambio_aceite">Cambio de Aceite</option>
+                        <option value="cambio_llantas">Cambio de Llantas</option>
+                        <option value="otros">Otros</option>
+                    </select>
+                </div>
+                <div class="form-group-modern">
+                    <label class="form-label-modern">Fecha Programada</label>
+                    <input type="date" class="form-input-modern" name="fecha_programada" required>
+                </div>
+                <div class="form-group-modern">
+                    <label class="form-label-modern">Kilometraje Estimado</label>
+                    <input type="number" class="form-input-modern" name="kilometraje_estimado" placeholder="Km cuando se realizará">
+                </div>
+                <div class="form-group-modern">
+                    <label class="form-label-modern">Descripción</label>
+                    <textarea class="form-textarea-modern" name="descripcion" rows="3" placeholder="Detalles del mantenimiento..." required></textarea>
+                </div>
+                <div class="form-actions-modern">
+                    <button type="button" class="btn-modern btn-outline" onclick="VehicleModals.closeMaintenanceModal()">Cancelar</button>
+                    <button type="submit" class="btn-modern btn-primary">Programar</button>
+                </div>
+            </form>
+        `;
+
+    const maintenanceContent = document.getElementById("maintenanceContent");
+    const maintenanceModal = document.getElementById("maintenanceModal");
+
+    if (maintenanceContent && maintenanceModal) {
+      maintenanceContent.innerHTML = modalContent;
+      maintenanceModal.classList.add("active");
+    }
+  },
+
+  closeAssignmentModal() {
+    const modal = document.getElementById("assignmentModal");
+    if (modal) {
+      modal.classList.remove("active");
+    }
+  },
+
+  closeMaintenanceModal() {
+    const modal = document.getElementById("maintenanceModal");
+    if (modal) {
+      modal.classList.remove("active");
+    }
+  },
+};
+
+// =============================================================================
+// GLOBAL FUNCTIONS FOR BACKWARD COMPATIBILITY
+// =============================================================================
+
+function filterVehiculos(filter) {
+  VehicleIndex.filterVehiculos(filter);
+}
+
+function asignarConductor(vehiculoId) {
+  VehicleModals.openAssignmentModal(vehiculoId);
+}
+
+function programarMantenimiento(vehiculoId) {
+  VehicleModals.openMaintenanceModal(vehiculoId);
+}
+
+function closeAssignmentModal() {
+  VehicleModals.closeAssignmentModal();
+}
+
+function closeMaintenanceModal() {
+  VehicleModals.closeMaintenanceModal();
+}
+
+function openPhotoModal() {
+  VehicleProfile.openPhotoModal();
+}
+
+function openMaintenanceModal() {
+  VehicleProfile.openMaintenanceModal();
+}
+
+// Filter function for drivers (conductores)
+function filterConductores(filter) {
+  const rows = document.querySelectorAll('.conductor-row');
+  const cards = document.querySelectorAll('.driver-card-modern');
+  
+  // Update active filter button
+  document.querySelectorAll('.filter-btn-modern').forEach(btn => btn.classList.remove('active'));
+  document.querySelector(`[data-filter="${filter}"]`)?.classList.add('active');
+  
+  // Filter logic for table rows
+  rows.forEach(row => {
+    let show = true;
+    const estado = row.getAttribute('data-estado');
+    
+    switch (filter) {
+      case 'todos':
+        show = true;
+        break;
+      case 'activos':
+        show = estado === 'activo';
+        break;
+      case 'inactivos':
+        show = estado === 'inactivo';
+        break;
+      case 'suspendidos':
+        show = estado === 'suspendido';
+        break;
+      case 'con_vehiculo':
+        show = row.getAttribute('data-vehiculo') === 'true';
+        break;
+      case 'sin_vehiculo':
+        show = row.getAttribute('data-vehiculo') === 'false';
+        break;
+    }
+    
+    row.style.display = show ? '' : 'none';
+  });
+  
+  // Filter logic for cards
+  cards.forEach(card => {
+    let show = true;
+    const estado = card.getAttribute('data-estado');
+    
+    switch (filter) {
+      case 'todos':
+        show = true;
+        break;
+      case 'activos':
+        show = estado === 'activo';
+        break;
+      case 'inactivos':
+        show = estado === 'inactivo';
+        break;
+      case 'suspendidos':
+        show = estado === 'suspendido';
+        break;
+      case 'con_vehiculo':
+        show = card.getAttribute('data-vehiculo') === 'true';
+        break;
+      case 'sin_vehiculo':
+        show = card.getAttribute('data-vehiculo') === 'false';
+        break;
+    }
+    
+    card.style.display = show ? '' : 'none';
+  });
+}
+
+// Initialize vehicle modules based on page content
+document.addEventListener("DOMContentLoaded", function () {
+  // Initialize AOS if available
+  if (typeof AOS !== "undefined") {
+    AOS.init({
+      duration: 800,
+      easing: "ease-out-cubic",
+      once: true,
+    });
+  }
+
+  // Initialize appropriate module based on page content
+  if (document.querySelector(".vehicle-profile")) {
+    VehicleProfile.init();
+    console.log("Vehicle profile initialized");
+  }
+
+  if (
+    document.querySelector("#vehiculosTable") ||
+    document.querySelector(".vehicles-cards-grid-modern")
+  ) {
+    VehicleIndex.init();
+    VehicleModals.init();
+    console.log("Vehicle index initialized");
+  }
+
+  // Initialize drivers table if present
+  if (document.getElementById("conductoresTable")) {
+    if (typeof $ !== "undefined" && $.fn.DataTable) {
+      $("#conductoresTable").DataTable({
+        language: {
+          url: "/assets/js/datatables-es.json",
+        },
+        pageLength: 25,
+        order: [[0, "asc"]],
+        columnDefs: [{ orderable: false, targets: [5, 6] }],
+      });
+    }
+  }
+});
+
+// Export modules for use in other files
+window.VehicleProfile = VehicleProfile;
+window.VehicleIndex = VehicleIndex;
+window.VehicleModals = VehicleModals;
+
 console.log(
   "✅ PRIMERO DE JUNIO: JavaScript del sistema cargado correctamente"
 );

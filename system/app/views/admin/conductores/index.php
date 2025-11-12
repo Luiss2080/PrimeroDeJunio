@@ -1247,9 +1247,6 @@ function activarConductor(conductorId) {
         flex-wrap: wrap;
         gap: 0.5rem;
     }
-}
-</style>
-
 <?php
 $content = ob_get_clean();
 include '../../layouts/main.php';
