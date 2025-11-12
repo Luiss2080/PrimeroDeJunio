@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Vista Index Conductores - Sistema PRIMERO DE JUNIO
  */
@@ -76,7 +77,7 @@ ob_start();
                 </div>
                 <div class="stats-card-glow primary"></div>
             </div>
-            
+
             <div class="stats-card-modern success" data-aos="fade-up" data-aos-delay="200">
                 <div class="stats-card-background">
                     <div class="stats-icon-modern">
@@ -93,7 +94,7 @@ ob_start();
                 </div>
                 <div class="stats-card-glow success"></div>
             </div>
-            
+
             <div class="stats-card-modern warning" data-aos="fade-up" data-aos-delay="300">
                 <div class="stats-card-background">
                     <div class="stats-icon-modern">
@@ -110,7 +111,7 @@ ob_start();
                 </div>
                 <div class="stats-card-glow warning"></div>
             </div>
-            
+
             <div class="stats-card-modern info" data-aos="fade-up" data-aos-delay="400">
                 <div class="stats-card-background">
                     <div class="stats-icon-modern">
@@ -142,25 +143,25 @@ ob_start();
                         <span>Todos</span>
                         <span class="filter-count"><?= $estadisticas['total'] ?? 0 ?></span>
                     </button>
-                    
+
                     <button class="filter-btn-modern" data-filter="activos" onclick="filterConductores('activos')">
                         <i class="fas fa-user-check"></i>
                         <span>Activos</span>
                         <span class="filter-count"><?= $estadisticas['activos'] ?? 0 ?></span>
                     </button>
-                    
+
                     <button class="filter-btn-modern" data-filter="novatos" onclick="filterConductores('novatos')">
                         <i class="fas fa-star"></i>
                         <span>Novatos</span>
                         <span class="filter-count"><?= $estadisticas['por_experiencia']['novatos'] ?? 0 ?></span>
                     </button>
-                    
+
                     <button class="filter-btn-modern" data-filter="experimentados" onclick="filterConductores('experimentados')">
                         <i class="fas fa-award"></i>
                         <span>Experimentados</span>
                         <span class="filter-count"><?= $estadisticas['por_experiencia']['experimentados'] ?? 0 ?></span>
                     </button>
-                    
+
                     <button class="filter-btn-modern" data-filter="veteranos" onclick="filterConductores('veteranos')">
                         <i class="fas fa-medal"></i>
                         <span>Veteranos</span>
@@ -187,7 +188,7 @@ ob_start();
                     <span class="btn-text">Limpiar</span>
                 </button>
             </div>
-            
+
             <div class="card-content-modern">
                 <form class="filters-form-modern" method="GET" id="filtersForm">
                     <div class="filters-grid-modern">
@@ -197,14 +198,14 @@ ob_start();
                                 <div class="input-icon-modern">
                                     <i class="fas fa-search"></i>
                                 </div>
-                                <input type="text" 
-                                       class="form-input-modern" 
-                                       name="buscar" 
-                                       value="<?= htmlspecialchars($filtros['buscar'] ?? '') ?>"
-                                       placeholder="Nombre, cédula, licencia...">
+                                <input type="text"
+                                    class="form-input-modern"
+                                    name="buscar"
+                                    value="<?= htmlspecialchars($filtros['buscar'] ?? '') ?>"
+                                    placeholder="Nombre, cédula, licencia...">
                             </div>
                         </div>
-                        
+
                         <div class="form-group-modern">
                             <label class="form-label-modern">Estado</label>
                             <select class="form-select-modern" name="estado">
@@ -214,7 +215,7 @@ ob_start();
                                 <option value="suspendido" <?= ($filtros['estado'] ?? '') === 'suspendido' ? 'selected' : '' ?>>Suspendido</option>
                             </select>
                         </div>
-                        
+
                         <div class="form-group-modern">
                             <label class="form-label-modern">Categoría de Licencia</label>
                             <select class="form-select-modern" name="licencia_categoria">
@@ -226,7 +227,7 @@ ob_start();
                                 <option value="C1" <?= ($filtros['licencia_categoria'] ?? '') === 'C1' ? 'selected' : '' ?>>C1</option>
                             </select>
                         </div>
-                        
+
                         <div class="form-group-modern">
                             <label class="form-label-modern">Experiencia</label>
                             <select class="form-select-modern" name="experiencia">
@@ -236,7 +237,7 @@ ob_start();
                                 <option value="veterano" <?= ($filtros['experiencia'] ?? '') === 'veterano' ? 'selected' : '' ?>>Veterano (8+ años)</option>
                             </select>
                         </div>
-                        
+
                         <div class="form-group-modern">
                             <label class="form-label-modern">&nbsp;</label>
                             <button type="submit" class="btn-modern btn-primary btn-sm">
@@ -272,7 +273,7 @@ ob_start();
                     </div>
                 </div>
             </div>
-            
+
             <div class="card-content-modern">
                 <!-- Table View -->
                 <div class="table-view-modern active" id="tableView">
@@ -320,7 +321,7 @@ ob_start();
                             </thead>
                             <tbody>
                                 <?php foreach ($conductores as $conductor): ?>
-                                    <tr class="table-row-modern conductor-row" 
+                                    <tr class="table-row-modern conductor-row"
                                         data-conductor-id="<?= $conductor['id'] ?>"
                                         data-estado="<?= $conductor['estado'] ?>"
                                         data-experiencia="<?= $conductor['experiencia_anos'] ?>">
@@ -328,8 +329,8 @@ ob_start();
                                             <div class="driver-cell-modern">
                                                 <div class="driver-avatar-modern">
                                                     <?php if (!empty($conductor['foto'])): ?>
-                                                        <img src="<?= htmlspecialchars($conductor['foto']) ?>" 
-                                                             alt="Foto">
+                                                        <img src="<?= htmlspecialchars($conductor['foto']) ?>"
+                                                            alt="Foto">
                                                     <?php else: ?>
                                                         <div class="avatar-placeholder-modern">
                                                             <?= strtoupper(substr($conductor['nombre'], 0, 1) . substr($conductor['apellido'], 0, 1)) ?>
@@ -394,10 +395,9 @@ ob_start();
                                                 <span class="experience-years">
                                                     <?= $conductor['experiencia_anos'] ?> años
                                                 </span>
-                                                <span class="experience-level <?= 
-                                                    $conductor['experiencia_anos'] <= 2 ? 'novato' : 
-                                                    ($conductor['experiencia_anos'] <= 7 ? 'experimentado' : 'veterano') 
-                                                ?>">
+                                                <span class="experience-level <?=
+                                                                                $conductor['experiencia_anos'] <= 2 ? 'novato' : ($conductor['experiencia_anos'] <= 7 ? 'experimentado' : 'veterano')
+                                                                                ?>">
                                                     <?php
                                                     if ($conductor['experiencia_anos'] <= 2) {
                                                         echo '<i class="fas fa-star"></i> Novato';
@@ -432,39 +432,39 @@ ob_start();
                                         </td>
                                         <td>
                                             <div class="actions-modern">
-                                                <a href="/admin/conductores/ver/<?= $conductor['id'] ?>" 
-                                                   class="btn-modern btn-sm btn-outline" 
-                                                   title="Ver Perfil">
+                                                <a href="/admin/conductores/ver/<?= $conductor['id'] ?>"
+                                                    class="btn-modern btn-sm btn-outline"
+                                                    title="Ver Perfil">
                                                     <i class="fas fa-eye"></i>
                                                 </a>
-                                                <a href="/admin/conductores/editar/<?= $conductor['id'] ?>" 
-                                                   class="btn-modern btn-sm btn-primary" 
-                                                   title="Editar">
+                                                <a href="/admin/conductores/editar/<?= $conductor['id'] ?>"
+                                                    class="btn-modern btn-sm btn-primary"
+                                                    title="Editar">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
                                                 <?php if (empty($conductor['vehiculo_placa'])): ?>
-                                                    <button class="btn-modern btn-sm btn-info" 
-                                                            onclick="asignarVehiculo(<?= $conductor['id'] ?>)"
-                                                            title="Asignar Vehículo">
+                                                    <button class="btn-modern btn-sm btn-info"
+                                                        onclick="asignarVehiculo(<?= $conductor['id'] ?>)"
+                                                        title="Asignar Vehículo">
                                                         <i class="fas fa-motorcycle"></i>
                                                     </button>
                                                 <?php else: ?>
-                                                    <button class="btn-modern btn-sm btn-warning" 
-                                                            onclick="desasignarVehiculo(<?= $conductor['id'] ?>)"
-                                                            title="Desasignar Vehículo">
+                                                    <button class="btn-modern btn-sm btn-warning"
+                                                        onclick="desasignarVehiculo(<?= $conductor['id'] ?>)"
+                                                        title="Desasignar Vehículo">
                                                         <i class="fas fa-times"></i>
                                                     </button>
                                                 <?php endif; ?>
                                                 <?php if ($conductor['estado'] === 'activo'): ?>
-                                                    <button class="btn-modern btn-sm btn-warning" 
-                                                            onclick="suspenderConductor(<?= $conductor['id'] ?>)"
-                                                            title="Suspender">
+                                                    <button class="btn-modern btn-sm btn-warning"
+                                                        onclick="suspenderConductor(<?= $conductor['id'] ?>)"
+                                                        title="Suspender">
                                                         <i class="fas fa-pause"></i>
                                                     </button>
                                                 <?php else: ?>
-                                                    <button class="btn-modern btn-sm btn-success" 
-                                                            onclick="activarConductor(<?= $conductor['id'] ?>)"
-                                                            title="Activar">
+                                                    <button class="btn-modern btn-sm btn-success"
+                                                        onclick="activarConductor(<?= $conductor['id'] ?>)"
+                                                        title="Activar">
                                                         <i class="fas fa-play"></i>
                                                     </button>
                                                 <?php endif; ?>
@@ -481,17 +481,17 @@ ob_start();
                 <div class="cards-view-modern" id="cardsView">
                     <div class="drivers-cards-grid-modern">
                         <?php foreach ($conductores as $conductor): ?>
-                            <div class="driver-card-modern" 
-                                 data-aos="fade-up" 
-                                 data-aos-delay="100"
-                                 data-estado="<?= $conductor['estado'] ?>"
-                                 data-experiencia="<?= $conductor['experiencia_anos'] ?>">
+                            <div class="driver-card-modern"
+                                data-aos="fade-up"
+                                data-aos-delay="100"
+                                data-estado="<?= $conductor['estado'] ?>"
+                                data-experiencia="<?= $conductor['experiencia_anos'] ?>">
                                 <div class="driver-card-background">
                                     <div class="driver-card-header">
                                         <div class="driver-avatar-large-modern">
                                             <?php if (!empty($conductor['foto'])): ?>
-                                                <img src="<?= htmlspecialchars($conductor['foto']) ?>" 
-                                                     alt="Foto">
+                                                <img src="<?= htmlspecialchars($conductor['foto']) ?>"
+                                                    alt="Foto">
                                             <?php else: ?>
                                                 <div class="avatar-placeholder-large-modern">
                                                     <?= strtoupper(substr($conductor['nombre'], 0, 1) . substr($conductor['apellido'], 0, 1)) ?>
@@ -503,12 +503,12 @@ ob_start();
                                             <?= ucfirst($conductor['estado']) ?>
                                         </span>
                                     </div>
-                                    
+
                                     <div class="driver-card-content">
                                         <h3 class="driver-card-name">
                                             <?= htmlspecialchars($conductor['nombre'] . ' ' . $conductor['apellido']) ?>
                                         </h3>
-                                        
+
                                         <div class="driver-card-info">
                                             <div class="info-row">
                                                 <i class="fas fa-id-card"></i>
@@ -527,7 +527,7 @@ ob_start();
                                                 <span><?= $conductor['experiencia_anos'] ?> años de experiencia</span>
                                             </div>
                                         </div>
-                                        
+
                                         <?php if (!empty($conductor['vehiculo_placa'])): ?>
                                             <div class="vehicle-assigned-card">
                                                 <i class="fas fa-motorcycle"></i>
@@ -535,15 +535,15 @@ ob_start();
                                             </div>
                                         <?php endif; ?>
                                     </div>
-                                    
+
                                     <div class="driver-card-actions">
-                                        <a href="/admin/conductores/ver/<?= $conductor['id'] ?>" 
-                                           class="btn-modern btn-sm btn-outline">
+                                        <a href="/admin/conductores/ver/<?= $conductor['id'] ?>"
+                                            class="btn-modern btn-sm btn-outline">
                                             <span class="btn-icon"><i class="fas fa-eye"></i></span>
                                             <span class="btn-text">Ver</span>
                                         </a>
-                                        <a href="/admin/conductores/editar/<?= $conductor['id'] ?>" 
-                                           class="btn-modern btn-sm btn-primary">
+                                        <a href="/admin/conductores/editar/<?= $conductor['id'] ?>"
+                                            class="btn-modern btn-sm btn-primary">
                                             <span class="btn-icon"><i class="fas fa-edit"></i></span>
                                             <span class="btn-text">Editar</span>
                                         </a>
@@ -561,692 +561,263 @@ ob_start();
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Inicializar AOS
-    if (typeof AOS !== 'undefined') {
-        AOS.init({
-            duration: 800,
-            easing: 'ease-out-cubic',
-            once: true
-        });
-    }
-
-    // Dropdown functionality
-    document.querySelectorAll('[data-dropdown]').forEach(trigger => {
-        trigger.addEventListener('click', function(e) {
-            e.preventDefault();
-            const dropdownId = this.getAttribute('data-dropdown');
-            const dropdown = document.getElementById(dropdownId);
-            dropdown.classList.toggle('active');
-        });
-    });
-
-    // Close dropdowns when clicking outside
-    document.addEventListener('click', function(e) {
-        if (!e.target.closest('.dropdown-modern')) {
-            document.querySelectorAll('.dropdown-menu-modern').forEach(menu => {
-                menu.classList.remove('active');
+    document.addEventListener('DOMContentLoaded', function() {
+        // Inicializar AOS
+        if (typeof AOS !== 'undefined') {
+            AOS.init({
+                duration: 800,
+                easing: 'ease-out-cubic',
+                once: true
             });
         }
-    });
 
-    // View toggle functionality
-    document.querySelectorAll('.view-toggle').forEach(toggle => {
-        toggle.addEventListener('click', function() {
-            const view = this.getAttribute('data-view');
-            
-            // Update active toggle
-            document.querySelectorAll('.view-toggle').forEach(t => t.classList.remove('active'));
-            this.classList.add('active');
-            
-            // Update views
-            document.getElementById('tableView').classList.toggle('active', view === 'table');
-            document.getElementById('cardsView').classList.toggle('active', view === 'cards');
+        // Dropdown functionality
+        document.querySelectorAll('[data-dropdown]').forEach(trigger => {
+            trigger.addEventListener('click', function(e) {
+                e.preventDefault();
+                const dropdownId = this.getAttribute('data-dropdown');
+                const dropdown = document.getElementById(dropdownId);
+                dropdown.classList.toggle('active');
+            });
         });
-    });
 
-    // Clear filters
-    document.getElementById('clearFilters').addEventListener('click', function() {
-        const form = document.getElementById('filtersForm');
-        form.reset();
-        window.location.href = '/admin/conductores';
-    });
-
-    // Auto-submit filters
-    document.querySelectorAll('.form-select-modern').forEach(select => {
-        select.addEventListener('change', function() {
-            document.getElementById('filtersForm').submit();
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.dropdown-modern')) {
+                document.querySelectorAll('.dropdown-menu-modern').forEach(menu => {
+                    menu.classList.remove('active');
+                });
+            }
         });
+
+        // View toggle functionality
+        document.querySelectorAll('.view-toggle').forEach(toggle => {
+            toggle.addEventListener('click', function() {
+                const view = this.getAttribute('data-view');
+
+                // Update active toggle
+                document.querySelectorAll('.view-toggle').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+
+                // Update views
+                document.getElementById('tableView').classList.toggle('active', view === 'table');
+                document.getElementById('cardsView').classList.toggle('active', view === 'cards');
+            });
+        });
+
+        // Clear filters
+        document.getElementById('clearFilters').addEventListener('click', function() {
+            const form = document.getElementById('filtersForm');
+            form.reset();
+            window.location.href = '/admin/conductores';
+        });
+
+        // Auto-submit filters
+        document.querySelectorAll('.form-select-modern').forEach(select => {
+            select.addEventListener('change', function() {
+                document.getElementById('filtersForm').submit();
+            });
+        });
+
+        // Table sorting with DataTables
+        if (typeof $ !== 'undefined' && $.fn.DataTable) {
+            $('#conductoresTable').DataTable({
+                language: {
+                    url: '/assets/js/datatables-es.json'
+                },
+                pageLength: 25,
+                order: [
+                    [0, 'asc']
+                ],
+                columnDefs: [{
+                    orderable: false,
+                    targets: [5, 6]
+                }]
+            });
+        }
+
+        console.log('Conductores index initialized');
     });
 
-    // Table sorting with DataTables
-    if (typeof $ !== 'undefined' && $.fn.DataTable) {
-        $('#conductoresTable').DataTable({
-            language: {
-                url: '/assets/js/datatables-es.json'
-            },
-            pageLength: 25,
-            order: [[0, 'asc']],
-            columnDefs: [
-                { orderable: false, targets: [5, 6] }
-            ]
+    // Filter functions
+    function filterConductores(filter) {
+        const rows = document.querySelectorAll('.conductor-row');
+        const cards = document.querySelectorAll('.driver-card-modern');
+
+        // Update active filter button
+        document.querySelectorAll('.filter-btn-modern').forEach(btn => btn.classList.remove('active'));
+        document.querySelector(`[data-filter="${filter}"]`).classList.add('active');
+
+        // Filter logic
+        rows.forEach(row => {
+            let show = true;
+
+            switch (filter) {
+                case 'todos':
+                    show = true;
+                    break;
+                case 'activos':
+                    show = row.getAttribute('data-estado') === 'activo';
+                    break;
+                case 'novatos':
+                    show = parseInt(row.getAttribute('data-experiencia')) <= 2;
+                    break;
+                case 'experimentados':
+                    const exp = parseInt(row.getAttribute('data-experiencia'));
+                    show = exp >= 3 && exp <= 7;
+                    break;
+                case 'veteranos':
+                    show = parseInt(row.getAttribute('data-experiencia')) > 7;
+                    break;
+            }
+
+            row.style.display = show ? '' : 'none';
+        });
+
+        // Filter cards
+        cards.forEach(card => {
+            let show = true;
+
+            switch (filter) {
+                case 'todos':
+                    show = true;
+                    break;
+                case 'activos':
+                    show = card.getAttribute('data-estado') === 'activo';
+                    break;
+                case 'novatos':
+                    show = parseInt(card.getAttribute('data-experiencia')) <= 2;
+                    break;
+                case 'experimentados':
+                    const exp = parseInt(card.getAttribute('data-experiencia'));
+                    show = exp >= 3 && exp <= 7;
+                    break;
+                case 'veteranos':
+                    show = parseInt(card.getAttribute('data-experiencia')) > 7;
+                    break;
+            }
+
+            card.style.display = show ? '' : 'none';
         });
     }
 
-    console.log('Conductores index initialized');
-});
-
-// Filter functions
-function filterConductores(filter) {
-    const rows = document.querySelectorAll('.conductor-row');
-    const cards = document.querySelectorAll('.driver-card-modern');
-    
-    // Update active filter button
-    document.querySelectorAll('.filter-btn-modern').forEach(btn => btn.classList.remove('active'));
-    document.querySelector(`[data-filter="${filter}"]`).classList.add('active');
-    
-    // Filter logic
-    rows.forEach(row => {
-        let show = true;
-        
-        switch (filter) {
-            case 'todos':
-                show = true;
-                break;
-            case 'activos':
-                show = row.getAttribute('data-estado') === 'activo';
-                break;
-            case 'novatos':
-                show = parseInt(row.getAttribute('data-experiencia')) <= 2;
-                break;
-            case 'experimentados':
-                const exp = parseInt(row.getAttribute('data-experiencia'));
-                show = exp >= 3 && exp <= 7;
-                break;
-            case 'veteranos':
-                show = parseInt(row.getAttribute('data-experiencia')) > 7;
-                break;
-        }
-        
-        row.style.display = show ? '' : 'none';
-    });
-    
-    // Filter cards
-    cards.forEach(card => {
-        let show = true;
-        
-        switch (filter) {
-            case 'todos':
-                show = true;
-                break;
-            case 'activos':
-                show = card.getAttribute('data-estado') === 'activo';
-                break;
-            case 'novatos':
-                show = parseInt(card.getAttribute('data-experiencia')) <= 2;
-                break;
-            case 'experimentados':
-                const exp = parseInt(card.getAttribute('data-experiencia'));
-                show = exp >= 3 && exp <= 7;
-                break;
-            case 'veteranos':
-                show = parseInt(card.getAttribute('data-experiencia')) > 7;
-                break;
-        }
-        
-        card.style.display = show ? '' : 'none';
-    });
-}
-
-// Action functions
-function asignarVehiculo(conductorId) {
-    if (typeof Swal !== 'undefined') {
-        Swal.fire({
-            title: 'Asignar Vehículo',
-            text: 'Redirigiendo a la página de asignación de vehículos...',
-            icon: 'info',
-            timer: 2000,
-            showConfirmButton: false
-        }).then(() => {
+    // Action functions
+    function asignarVehiculo(conductorId) {
+        if (typeof Swal !== 'undefined') {
+            Swal.fire({
+                title: 'Asignar Vehículo',
+                text: 'Redirigiendo a la página de asignación de vehículos...',
+                icon: 'info',
+                timer: 2000,
+                showConfirmButton: false
+            }).then(() => {
+                window.location.href = `/admin/asignaciones/crear?conductor_id=${conductorId}`;
+            });
+        } else {
             window.location.href = `/admin/asignaciones/crear?conductor_id=${conductorId}`;
-        });
-    } else {
-        window.location.href = `/admin/asignaciones/crear?conductor_id=${conductorId}`;
+        }
     }
-}
 
-function desasignarVehiculo(conductorId) {
-    if (typeof Swal !== 'undefined') {
-        Swal.fire({
-            title: '¿Desasignar vehículo?',
-            text: 'El conductor quedará sin vehículo asignado',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Desasignar',
-            cancelButtonText: 'Cancelar',
-            confirmButtonColor: '#f59e0b'
-        }).then((result) => {
-            if (result.isConfirmed) {
+    function desasignarVehiculo(conductorId) {
+        if (typeof Swal !== 'undefined') {
+            Swal.fire({
+                title: '¿Desasignar vehículo?',
+                text: 'El conductor quedará sin vehículo asignado',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Desasignar',
+                cancelButtonText: 'Cancelar',
+                confirmButtonColor: '#f59e0b'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = `/admin/conductores/desasignar-vehiculo/${conductorId}`;
+                }
+            });
+        } else {
+            if (confirm('¿Está seguro de desasignar el vehículo de este conductor?')) {
                 window.location.href = `/admin/conductores/desasignar-vehiculo/${conductorId}`;
             }
-        });
-    } else {
-        if (confirm('¿Está seguro de desasignar el vehículo de este conductor?')) {
-            window.location.href = `/admin/conductores/desasignar-vehiculo/${conductorId}`;
         }
     }
-}
 
-function suspenderConductor(conductorId) {
-    if (typeof Swal !== 'undefined') {
-        Swal.fire({
-            title: 'Suspender Conductor',
-            text: 'Ingrese el motivo de la suspensión:',
-            input: 'textarea',
-            inputAttributes: {
-                autocapitalize: 'off',
-                placeholder: 'Motivo de suspensión...'
-            },
-            showCancelButton: true,
-            confirmButtonText: 'Suspender',
-            cancelButtonText: 'Cancelar',
-            confirmButtonColor: '#f59e0b',
-            inputValidator: (value) => {
-                if (!value) {
-                    return 'Debe ingresar un motivo para la suspensión';
+    function suspenderConductor(conductorId) {
+        if (typeof Swal !== 'undefined') {
+            Swal.fire({
+                title: 'Suspender Conductor',
+                text: 'Ingrese el motivo de la suspensión:',
+                input: 'textarea',
+                inputAttributes: {
+                    autocapitalize: 'off',
+                    placeholder: 'Motivo de suspensión...'
+                },
+                showCancelButton: true,
+                confirmButtonText: 'Suspender',
+                cancelButtonText: 'Cancelar',
+                confirmButtonColor: '#f59e0b',
+                inputValidator: (value) => {
+                    if (!value) {
+                        return 'Debe ingresar un motivo para la suspensión';
+                    }
                 }
-            }
-        }).then((result) => {
-            if (result.isConfirmed) {
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const form = document.createElement('form');
+                    form.method = 'POST';
+                    form.action = `/admin/conductores/suspender/${conductorId}`;
+
+                    const input = document.createElement('input');
+                    input.type = 'hidden';
+                    input.name = 'motivo';
+                    input.value = result.value;
+                    form.appendChild(input);
+
+                    document.body.appendChild(form);
+                    form.submit();
+                }
+            });
+        } else {
+            const motivo = prompt('Ingrese el motivo de suspensión:');
+            if (motivo) {
                 const form = document.createElement('form');
                 form.method = 'POST';
                 form.action = `/admin/conductores/suspender/${conductorId}`;
-                
+
                 const input = document.createElement('input');
                 input.type = 'hidden';
                 input.name = 'motivo';
-                input.value = result.value;
+                input.value = motivo;
                 form.appendChild(input);
-                
+
                 document.body.appendChild(form);
                 form.submit();
             }
-        });
-    } else {
-        const motivo = prompt('Ingrese el motivo de suspensión:');
-        if (motivo) {
-            const form = document.createElement('form');
-            form.method = 'POST';
-            form.action = `/admin/conductores/suspender/${conductorId}`;
-            
-            const input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = 'motivo';
-            input.value = motivo;
-            form.appendChild(input);
-            
-            document.body.appendChild(form);
-            form.submit();
         }
     }
-}
 
-function activarConductor(conductorId) {
-    if (typeof Swal !== 'undefined') {
-        Swal.fire({
-            title: '¿Activar conductor?',
-            text: 'El conductor podrá volver a trabajar',
-            icon: 'success',
-            showCancelButton: true,
-            confirmButtonText: 'Activar',
-            cancelButtonText: 'Cancelar',
-            confirmButtonColor: '#22c55e'
-        }).then((result) => {
-            if (result.isConfirmed) {
+    function activarConductor(conductorId) {
+        if (typeof Swal !== 'undefined') {
+            Swal.fire({
+                title: '¿Activar conductor?',
+                text: 'El conductor podrá volver a trabajar',
+                icon: 'success',
+                showCancelButton: true,
+                confirmButtonText: 'Activar',
+                cancelButtonText: 'Cancelar',
+                confirmButtonColor: '#22c55e'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = `/admin/conductores/activar/${conductorId}`;
+                }
+            });
+        } else {
+            if (confirm('¿Está seguro de activar este conductor?')) {
                 window.location.href = `/admin/conductores/activar/${conductorId}`;
             }
-        });
-    } else {
-        if (confirm('¿Está seguro de activar este conductor?')) {
-            window.location.href = `/admin/conductores/activar/${conductorId}`;
         }
     }
-}
 </script>
 
-<style>
-/* Estilos específicos para la vista de conductores */
-.quick-filters-modern {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 0.5rem;
-}
 
-.filter-btn-modern {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 1rem 1.5rem;
-    background: var(--card-hover-bg);
-    border: 2px solid transparent;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    color: var(--text-secondary);
-    min-width: 120px;
-}
-
-.filter-btn-modern:hover {
-    border-color: var(--primary-green);
-    color: var(--primary-green);
-    transform: translateY(-2px);
-}
-
-.filter-btn-modern.active {
-    background: var(--primary-green);
-    color: white;
-    border-color: var(--primary-green);
-}
-
-.filter-btn-modern i {
-    font-size: 1.2rem;
-}
-
-.filter-count {
-    font-size: 0.8rem;
-    font-weight: 700;
-    padding: 0.2rem 0.5rem;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 10px;
-    min-width: 20px;
-    text-align: center;
-}
-
-.driver-cell-modern {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-}
-
-.driver-avatar-modern {
-    position: relative;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    overflow: hidden;
-    flex-shrink: 0;
-}
-
-.driver-avatar-modern img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.driver-status-dot {
-    position: absolute;
-    bottom: 2px;
-    right: 2px;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    border: 2px solid var(--card-bg);
-}
-
-.driver-status-dot.activo {
-    background: var(--success-color);
-}
-
-.driver-status-dot.inactivo {
-    background: var(--error-color);
-}
-
-.driver-status-dot.suspendido {
-    background: var(--warning-color);
-}
-
-.driver-info-modern {
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-}
-
-.driver-name-modern {
-    font-weight: 600;
-    color: var(--text-primary);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.driver-phone-modern {
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-}
-
-.document-info-modern {
-    display: flex;
-    flex-direction: column;
-}
-
-.cedula-modern {
-    font-weight: 600;
-    color: var(--text-primary);
-    margin-bottom: 0.25rem;
-}
-
-.email-modern {
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-}
-
-.license-info-modern {
-    display: flex;
-    flex-direction: column;
-}
-
-.license-number-modern {
-    font-weight: 600;
-    color: var(--text-primary);
-    margin-bottom: 0.25rem;
-}
-
-.license-details-modern {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-}
-
-.license-category-modern {
-    padding: 0.2rem 0.5rem;
-    border-radius: 4px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-align: center;
-    max-width: 60px;
-}
-
-.license-category-modern.a1 {
-    background: rgba(34, 197, 94, 0.15);
-    color: var(--success-color);
-}
-
-.license-category-modern.a2 {
-    background: rgba(59, 130, 246, 0.15);
-    color: var(--info-color);
-}
-
-.license-category-modern.b1,
-.license-category-modern.b2 {
-    background: rgba(249, 115, 22, 0.15);
-    color: var(--warning-color);
-}
-
-.license-expiry-modern {
-    font-size: 0.8rem;
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-}
-
-.license-expiry-modern.valid {
-    color: var(--success-color);
-}
-
-.license-expiry-modern.warning {
-    color: var(--warning-color);
-}
-
-.license-expiry-modern.expired {
-    color: var(--error-color);
-}
-
-.experience-modern {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.experience-years {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--text-primary);
-    margin-bottom: 0.25rem;
-}
-
-.experience-level {
-    padding: 0.2rem 0.5rem;
-    border-radius: 12px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-}
-
-.experience-level.novato {
-    background: rgba(239, 68, 68, 0.15);
-    color: var(--error-color);
-}
-
-.experience-level.experimentado {
-    background: rgba(59, 130, 246, 0.15);
-    color: var(--info-color);
-}
-
-.experience-level.veterano {
-    background: rgba(34, 197, 94, 0.15);
-    color: var(--success-color);
-}
-
-.vehicle-info-modern {
-    text-align: center;
-}
-
-.vehicle-assigned {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: var(--success-color);
-    font-weight: 600;
-}
-
-.no-vehicle {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: var(--text-secondary);
-    font-style: italic;
-}
-
-/* Cards view */
-.drivers-cards-grid-modern {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 1.5rem;
-}
-
-.driver-card-modern {
-    position: relative;
-    height: 100%;
-}
-
-.driver-card-background {
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    padding: 1.5rem;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.driver-card-modern:hover .driver-card-background {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-xl);
-}
-
-.driver-card-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 1rem;
-}
-
-.driver-avatar-large-modern {
-    position: relative;
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    overflow: hidden;
-}
-
-.driver-avatar-large-modern img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.avatar-placeholder-large-modern {
-    width: 100%;
-    height: 100%;
-    background: var(--gradient-primary);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    color: white;
-    font-size: 1.5rem;
-}
-
-.driver-status-large {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    border: 3px solid var(--card-bg);
-}
-
-.driver-status-large.activo {
-    background: var(--success-color);
-}
-
-.driver-status-large.inactivo {
-    background: var(--error-color);
-}
-
-.driver-status-large.suspendido {
-    background: var(--warning-color);
-}
-
-.driver-card-content {
-    flex: 1;
-    margin-bottom: 1rem;
-}
-
-.driver-card-name {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--text-primary);
-    margin-bottom: 1rem;
-}
-
-.driver-card-info {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-}
-
-.info-row {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-size: 0.9rem;
-    color: var(--text-secondary);
-}
-
-.info-row i {
-    color: var(--primary-green);
-    width: 16px;
-}
-
-.vehicle-assigned-card {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem;
-    background: rgba(34, 197, 94, 0.1);
-    border: 1px solid rgba(34, 197, 94, 0.3);
-    border-radius: 6px;
-    color: var(--success-color);
-    font-weight: 600;
-    margin-bottom: 1rem;
-}
-
-.driver-card-actions {
-    display: flex;
-    gap: 0.75rem;
-    justify-content: flex-end;
-}
-
-.driver-card-glow {
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    background: var(--gradient-primary);
-    border-radius: 12px;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: -1;
-    filter: blur(8px);
-}
-
-.driver-card-modern:hover .driver-card-glow {
-    opacity: 0.3;
-}
-
-/* Responsive design */
-@media (max-width: 1024px) {
-    .quick-filters-modern {
-        grid-template-columns: repeat(3, 1fr);
-    }
-    
-    .drivers-cards-grid-modern {
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    }
-}
-
-@media (max-width: 768px) {
-    .quick-filters-modern {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 0.75rem;
-    }
-    
-    .filter-btn-modern {
-        min-width: 100px;
-        padding: 0.75rem 1rem;
-    }
-    
-    .driver-card-actions {
-        flex-direction: column;
-    }
-    
-    .actions-modern {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-    }
 <?php
 $content = ob_get_clean();
 include '../../layouts/main.php';

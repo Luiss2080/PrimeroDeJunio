@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Vista Perfil Cliente - Sistema PRIMERO DE JUNIO
  */
@@ -73,7 +74,7 @@ ob_start();
                             <?= ucfirst($cliente['estado']) ?>
                         </div>
                     </div>
-                    
+
                     <div class="profile-info-modern">
                         <h2 class="profile-name-modern">
                             <?= htmlspecialchars($cliente['nombre'] . ' ' . $cliente['apellido']) ?>
@@ -82,7 +83,7 @@ ob_start();
                             <span class="profile-id">ID: #<?= str_pad($cliente['id'], 4, '0', STR_PAD_LEFT) ?></span>
                             <span class="type-badge-modern <?= $cliente['tipo_cliente'] ?>">
                                 <?php
-                                switch($cliente['tipo_cliente']) {
+                                switch ($cliente['tipo_cliente']) {
                                     case 'particular':
                                         echo '<i class="fas fa-user"></i> Particular';
                                         break;
@@ -120,7 +121,7 @@ ob_start();
                             <?php endif; ?>
                         </div>
                     </div>
-                    
+
                     <div class="profile-actions-modern">
                         <a href="/admin/clientes/editar/<?= $cliente['id'] ?>" class="btn-modern btn-primary">
                             <span class="btn-icon"><i class="fas fa-edit"></i></span>
@@ -165,7 +166,7 @@ ob_start();
             </div>
             <div class="stats-card-glow primary"></div>
         </div>
-        
+
         <div class="stats-card-modern success">
             <div class="stats-card-background">
                 <div class="stats-icon-modern">
@@ -181,7 +182,7 @@ ob_start();
             </div>
             <div class="stats-card-glow success"></div>
         </div>
-        
+
         <div class="stats-card-modern info">
             <div class="stats-card-background">
                 <div class="stats-icon-modern">
@@ -199,7 +200,7 @@ ob_start();
             </div>
             <div class="stats-card-glow info"></div>
         </div>
-        
+
         <div class="stats-card-modern warning">
             <div class="stats-card-background">
                 <div class="stats-icon-modern">
@@ -565,9 +566,9 @@ ob_start();
                                                 </td>
                                                 <td>
                                                     <div class="actions-modern">
-                                                        <a href="/admin/viajes/ver/<?= $viaje['id'] ?>" 
-                                                           class="btn-modern btn-sm btn-outline" 
-                                                           title="Ver Detalles">
+                                                        <a href="/admin/viajes/ver/<?= $viaje['id'] ?>"
+                                                            class="btn-modern btn-sm btn-outline"
+                                                            title="Ver Detalles">
                                                             <i class="fas fa-eye"></i>
                                                         </a>
                                                     </div>
@@ -653,7 +654,7 @@ ob_start();
                                     </span>
                                 </div>
                             </div>
-                            
+
                             <?php if ($cliente['updated_at'] && $cliente['updated_at'] !== $cliente['created_at']): ?>
                                 <div class="timeline-item-modern">
                                     <div class="timeline-marker-modern updated">
@@ -668,7 +669,7 @@ ob_start();
                                     </div>
                                 </div>
                             <?php endif; ?>
-                            
+
                             <?php if ($cliente['ultimo_viaje']): ?>
                                 <div class="timeline-item-modern">
                                     <div class="timeline-marker-modern trip">
@@ -693,620 +694,104 @@ ob_start();
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Inicializar AOS
-    if (typeof AOS !== 'undefined') {
-        AOS.init({
-            duration: 800,
-            easing: 'ease-out-cubic',
-            once: true
-        });
-    }
-
-    // Dropdown functionality
-    document.querySelectorAll('[data-dropdown]').forEach(trigger => {
-        trigger.addEventListener('click', function(e) {
-            e.preventDefault();
-            const dropdownId = this.getAttribute('data-dropdown');
-            const dropdown = document.getElementById(dropdownId);
-            dropdown.classList.toggle('active');
-        });
-    });
-
-    // Close dropdowns when clicking outside
-    document.addEventListener('click', function(e) {
-        if (!e.target.closest('.dropdown-modern')) {
-            document.querySelectorAll('.dropdown-menu-modern').forEach(menu => {
-                menu.classList.remove('active');
+    document.addEventListener('DOMContentLoaded', function() {
+        // Inicializar AOS
+        if (typeof AOS !== 'undefined') {
+            AOS.init({
+                duration: 800,
+                easing: 'ease-out-cubic',
+                once: true
             });
         }
-    });
 
-    // Tab functionality
-    document.querySelectorAll('.tab-button-modern').forEach(button => {
-        button.addEventListener('click', function() {
-            const tabName = this.getAttribute('data-tab');
-            
-            // Remove active class from all buttons and contents
-            document.querySelectorAll('.tab-button-modern').forEach(btn => btn.classList.remove('active'));
-            document.querySelectorAll('.tab-content-modern').forEach(content => content.classList.remove('active'));
-            
-            // Add active class to clicked button and corresponding content
-            this.classList.add('active');
-            document.getElementById(tabName).classList.add('active');
+        // Dropdown functionality
+        document.querySelectorAll('[data-dropdown]').forEach(trigger => {
+            trigger.addEventListener('click', function(e) {
+                e.preventDefault();
+                const dropdownId = this.getAttribute('data-dropdown');
+                const dropdown = document.getElementById(dropdownId);
+                dropdown.classList.toggle('active');
+            });
         });
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.dropdown-modern')) {
+                document.querySelectorAll('.dropdown-menu-modern').forEach(menu => {
+                    menu.classList.remove('active');
+                });
+            }
+        });
+
+        // Tab functionality
+        document.querySelectorAll('.tab-button-modern').forEach(button => {
+            button.addEventListener('click', function() {
+                const tabName = this.getAttribute('data-tab');
+
+                // Remove active class from all buttons and contents
+                document.querySelectorAll('.tab-button-modern').forEach(btn => btn.classList.remove('active'));
+                document.querySelectorAll('.tab-content-modern').forEach(content => content.classList.remove('active'));
+
+                // Add active class to clicked button and corresponding content
+                this.classList.add('active');
+                document.getElementById(tabName).classList.add('active');
+            });
+        });
+
+        console.log('Cliente perfil initialized');
     });
 
-    console.log('Cliente perfil initialized');
-});
+    // Action functions
+    function nuevoViaje() {
+        window.location.href = `/admin/viajes/crear?cliente_id=<?= $cliente['id'] ?>`;
+    }
 
-// Action functions
-function nuevoViaje() {
-    window.location.href = `/admin/viajes/crear?cliente_id=<?= $cliente['id'] ?>`;
-}
-
-function desactivarCliente() {
-    if (typeof Swal !== 'undefined') {
-        Swal.fire({
-            title: '¿Desactivar cliente?',
-            text: 'El cliente no podrá solicitar servicios',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Desactivar',
-            cancelButtonText: 'Cancelar',
-            confirmButtonColor: '#f59e0b'
-        }).then((result) => {
-            if (result.isConfirmed) {
+    function desactivarCliente() {
+        if (typeof Swal !== 'undefined') {
+            Swal.fire({
+                title: '¿Desactivar cliente?',
+                text: 'El cliente no podrá solicitar servicios',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Desactivar',
+                cancelButtonText: 'Cancelar',
+                confirmButtonColor: '#f59e0b'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = `/admin/clientes/desactivar/<?= $cliente['id'] ?>`;
+                }
+            });
+        } else {
+            if (confirm('¿Está seguro de desactivar este cliente?')) {
                 window.location.href = `/admin/clientes/desactivar/<?= $cliente['id'] ?>`;
             }
-        });
-    } else {
-        if (confirm('¿Está seguro de desactivar este cliente?')) {
-            window.location.href = `/admin/clientes/desactivar/<?= $cliente['id'] ?>`;
         }
     }
-}
 
-function activarCliente() {
-    if (typeof Swal !== 'undefined') {
-        Swal.fire({
-            title: '¿Activar cliente?',
-            text: 'El cliente podrá volver a solicitar servicios',
-            icon: 'success',
-            showCancelButton: true,
-            confirmButtonText: 'Activar',
-            cancelButtonText: 'Cancelar',
-            confirmButtonColor: '#22c55e'
-        }).then((result) => {
-            if (result.isConfirmed) {
+    function activarCliente() {
+        if (typeof Swal !== 'undefined') {
+            Swal.fire({
+                title: '¿Activar cliente?',
+                text: 'El cliente podrá volver a solicitar servicios',
+                icon: 'success',
+                showCancelButton: true,
+                confirmButtonText: 'Activar',
+                cancelButtonText: 'Cancelar',
+                confirmButtonColor: '#22c55e'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = `/admin/clientes/activar/<?= $cliente['id'] ?>`;
+                }
+            });
+        } else {
+            if (confirm('¿Está seguro de activar este cliente?')) {
                 window.location.href = `/admin/clientes/activar/<?= $cliente['id'] ?>`;
             }
-        });
-    } else {
-        if (confirm('¿Está seguro de activar este cliente?')) {
-            window.location.href = `/admin/clientes/activar/<?= $cliente['id'] ?>`;
         }
     }
-}
 </script>
 
-<style>
-/* Estilos específicos para el perfil de cliente */
-.profile-header-modern {
-    margin-bottom: 2rem;
-}
 
-.profile-content-modern {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    padding: 2rem;
-}
-
-.profile-avatar-modern {
-    position: relative;
-    width: 120px;
-    height: 120px;
-    flex-shrink: 0;
-}
-
-.profile-avatar-modern img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
-}
-
-.avatar-placeholder-large-modern {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background: var(--gradient-primary);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    color: white;
-    font-size: 2rem;
-}
-
-.profile-status-modern {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    padding: 0.25rem 0.75rem;
-    border-radius: 12px;
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    border: 2px solid var(--card-bg);
-}
-
-.profile-status-modern.activo {
-    background: var(--success-color);
-    color: white;
-}
-
-.profile-status-modern.inactivo {
-    background: var(--error-color);
-    color: white;
-}
-
-.profile-info-modern {
-    flex: 1;
-}
-
-.profile-name-modern {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--text-primary);
-    margin: 0 0 0.5rem 0;
-}
-
-.profile-meta-modern {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1rem;
-    flex-wrap: wrap;
-}
-
-.profile-id {
-    font-size: 0.9rem;
-    color: var(--text-secondary);
-    font-weight: 600;
-}
-
-.discount-badge-modern {
-    padding: 0.25rem 0.75rem;
-    border-radius: 12px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    background: rgba(34, 197, 94, 0.15);
-    color: var(--success-color);
-    display: inline-flex;
-    align-items: center;
-    gap: 0.25rem;
-}
-
-.profile-contact-modern {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.contact-item-modern {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: var(--text-secondary);
-}
-
-.contact-item-modern i {
-    color: var(--primary-green);
-    width: 16px;
-}
-
-.contact-link-modern {
-    color: var(--text-secondary);
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: color 0.3s ease;
-}
-
-.contact-link-modern:hover {
-    color: var(--primary-green);
-}
-
-.profile-actions-modern {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    align-self: flex-start;
-}
-
-.info-sections-modern {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 1.5rem;
-}
-
-.info-section {
-    height: fit-content;
-}
-
-.info-grid-modern {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-}
-
-.info-item-modern {
-    padding: 0.75rem;
-    background: var(--card-hover-bg);
-    border-radius: 6px;
-    border-left: 3px solid var(--primary-green);
-}
-
-.info-item-modern.full-width {
-    grid-column: 1 / -1;
-}
-
-.info-item-modern label {
-    display: block;
-    font-size: 0.8rem;
-    color: var(--text-secondary);
-    margin-bottom: 0.25rem;
-    font-weight: 600;
-}
-
-.info-item-modern span {
-    font-size: 0.9rem;
-    color: var(--text-primary);
-}
-
-.priority-badge-modern {
-    padding: 0.25rem 0.75rem;
-    border-radius: 12px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-}
-
-.priority-badge-modern.normal {
-    background: rgba(107, 114, 128, 0.15);
-    color: var(--text-secondary);
-}
-
-.priority-badge-modern.alta {
-    background: rgba(245, 158, 11, 0.15);
-    color: var(--warning-color);
-}
-
-.priority-badge-modern.vip {
-    background: rgba(168, 85, 247, 0.15);
-    color: #a855f7;
-}
-
-.notification-status {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.85rem;
-    font-weight: 600;
-}
-
-.notification-status.enabled {
-    color: var(--success-color);
-}
-
-.notification-status.disabled {
-    color: var(--error-color);
-}
-
-.discount-info-modern {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: var(--success-color);
-    font-weight: 600;
-}
-
-.discount-reason {
-    font-weight: 400;
-    font-style: italic;
-    color: var(--text-secondary);
-}
-
-.no-discount {
-    color: var(--text-secondary);
-    font-style: italic;
-}
-
-.tabs-modern {
-    margin-top: 2rem;
-}
-
-.tabs-header-modern {
-    display: flex;
-    gap: 0.5rem;
-    margin-bottom: 1.5rem;
-    border-bottom: 1px solid var(--border-color);
-    overflow-x: auto;
-}
-
-.tab-button-modern {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1.5rem;
-    border: none;
-    background: none;
-    color: var(--text-secondary);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border-bottom: 2px solid transparent;
-    white-space: nowrap;
-    font-weight: 600;
-}
-
-.tab-button-modern:hover {
-    color: var(--primary-green);
-    background: rgba(var(--primary-green-rgb), 0.05);
-}
-
-.tab-button-modern.active {
-    color: var(--primary-green);
-    border-bottom-color: var(--primary-green);
-}
-
-.tab-content-modern {
-    display: none;
-}
-
-.tab-content-modern.active {
-    display: block;
-}
-
-.route-info-modern {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.85rem;
-}
-
-.route-from, .route-to {
-    color: var(--text-secondary);
-}
-
-.route-arrow {
-    color: var(--primary-green);
-}
-
-.conductor-info-modern {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-}
-
-.conductor-name {
-    color: var(--text-primary);
-    font-weight: 600;
-}
-
-.vehicle-plate {
-    font-size: 0.8rem;
-    color: var(--text-secondary);
-    background: var(--card-hover-bg);
-    padding: 0.125rem 0.5rem;
-    border-radius: 4px;
-    width: fit-content;
-}
-
-.date-info-modern {
-    display: flex;
-    flex-direction: column;
-    gap: 0.125rem;
-}
-
-.date {
-    color: var(--text-primary);
-    font-weight: 600;
-}
-
-.time {
-    font-size: 0.8rem;
-    color: var(--text-secondary);
-}
-
-.price-modern {
-    font-weight: 700;
-    color: var(--success-color);
-}
-
-.table-footer-modern {
-    padding: 1rem;
-    text-align: center;
-    border-top: 1px solid var(--border-color);
-}
-
-.empty-state-modern {
-    text-align: center;
-    padding: 3rem 1rem;
-}
-
-.empty-icon-modern {
-    font-size: 3rem;
-    color: var(--text-secondary);
-    margin-bottom: 1rem;
-}
-
-.empty-state-modern h3 {
-    font-size: 1.2rem;
-    color: var(--text-primary);
-    margin-bottom: 0.5rem;
-}
-
-.empty-state-modern p {
-    color: var(--text-secondary);
-    margin-bottom: 1.5rem;
-}
-
-.timeline-modern {
-    position: relative;
-    padding-left: 2rem;
-}
-
-.timeline-modern::before {
-    content: '';
-    position: absolute;
-    left: 1rem;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: var(--border-color);
-}
-
-.timeline-item-modern {
-    position: relative;
-    margin-bottom: 2rem;
-}
-
-.timeline-marker-modern {
-    position: absolute;
-    left: -2rem;
-    top: 0;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 0.8rem;
-    border: 2px solid var(--card-bg);
-}
-
-.timeline-marker-modern.created {
-    background: var(--success-color);
-}
-
-.timeline-marker-modern.updated {
-    background: var(--primary-green);
-}
-
-.timeline-marker-modern.trip {
-    background: var(--info-color);
-}
-
-.timeline-content-modern {
-    background: var(--card-hover-bg);
-    padding: 1rem;
-    border-radius: 8px;
-    border-left: 3px solid var(--primary-green);
-}
-
-.timeline-content-modern h4 {
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--text-primary);
-    margin: 0 0 0.25rem 0;
-}
-
-.timeline-content-modern p {
-    color: var(--text-secondary);
-    margin: 0 0 0.5rem 0;
-}
-
-.timeline-date-modern {
-    font-size: 0.8rem;
-    color: var(--text-secondary);
-    font-weight: 600;
-}
-
-.rating-stars-modern {
-    display: flex;
-    gap: 0.125rem;
-}
-
-.rating-stars-modern i {
-    color: #fbbf24;
-    font-size: 0.8rem;
-}
-
-/* Responsive design */
-@media (max-width: 1024px) {
-    .info-sections-modern {
-        grid-template-columns: 1fr;
-    }
-    
-    .profile-content-modern {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .profile-actions-modern {
-        flex-direction: row;
-        justify-content: center;
-        align-self: center;
-    }
-}
-
-@media (max-width: 768px) {
-    .profile-content-modern {
-        padding: 1.5rem;
-        gap: 1.5rem;
-    }
-    
-    .profile-avatar-modern {
-        width: 100px;
-        height: 100px;
-    }
-    
-    .avatar-placeholder-large-modern {
-        font-size: 1.5rem;
-    }
-    
-    .profile-name-modern {
-        font-size: 1.5rem;
-    }
-    
-    .profile-meta-modern {
-        justify-content: center;
-    }
-    
-    .profile-actions-modern {
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-    
-    .tabs-header-modern {
-        gap: 0.25rem;
-    }
-    
-    .tab-button-modern {
-        padding: 0.5rem 1rem;
-        font-size: 0.85rem;
-    }
-    
-    .info-grid-modern {
-        grid-template-columns: 1fr;
-    }
-    
-    .timeline-modern {
-        padding-left: 1.5rem;
-    }
-    
-    .timeline-marker-modern {
-        left: -1.5rem;
-        width: 24px;
-        height: 24px;
-        font-size: 0.7rem;
-    }
-}
-</style>
 
 <?php
 $content = ob_get_clean();

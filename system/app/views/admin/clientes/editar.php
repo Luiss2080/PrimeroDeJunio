@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Vista Editar Cliente - Sistema PRIMERO DE JUNIO
  */
@@ -83,7 +84,7 @@ ob_start();
                             <span class="client-id-edit">ID: #<?= str_pad($cliente['id'], 4, '0', STR_PAD_LEFT) ?></span>
                             <span class="type-badge-modern <?= $cliente['tipo_cliente'] ?>">
                                 <?php
-                                switch($cliente['tipo_cliente']) {
+                                switch ($cliente['tipo_cliente']) {
                                     case 'particular':
                                         echo '<i class="fas fa-user"></i> Particular';
                                         break;
@@ -134,7 +135,7 @@ ob_start();
                             </button>
                         </div>
                     </div>
-                    
+
                     <div class="card-content-modern">
                         <!-- Photo Upload -->
                         <div class="form-group-modern full-width">
@@ -161,7 +162,7 @@ ob_start();
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="form-grid-modern">
                             <div class="form-group-modern">
                                 <label class="form-label-modern required">Nombre</label>
@@ -169,97 +170,97 @@ ob_start();
                                     <div class="input-icon-modern">
                                         <i class="fas fa-user"></i>
                                     </div>
-                                    <input type="text" 
-                                           class="form-input-modern" 
-                                           name="nombre" 
-                                           id="nombre"
-                                           value="<?= htmlspecialchars($cliente['nombre']) ?>"
-                                           placeholder="Ingrese el nombre"
-                                           required>
+                                    <input type="text"
+                                        class="form-input-modern"
+                                        name="nombre"
+                                        id="nombre"
+                                        value="<?= htmlspecialchars($cliente['nombre']) ?>"
+                                        placeholder="Ingrese el nombre"
+                                        required>
                                 </div>
                                 <div class="form-error-modern" id="error-nombre"></div>
                             </div>
-                            
+
                             <div class="form-group-modern">
                                 <label class="form-label-modern required">Apellido</label>
                                 <div class="input-group-modern">
                                     <div class="input-icon-modern">
                                         <i class="fas fa-user"></i>
                                     </div>
-                                    <input type="text" 
-                                           class="form-input-modern" 
-                                           name="apellido" 
-                                           id="apellido"
-                                           value="<?= htmlspecialchars($cliente['apellido']) ?>"
-                                           placeholder="Ingrese el apellido"
-                                           required>
+                                    <input type="text"
+                                        class="form-input-modern"
+                                        name="apellido"
+                                        id="apellido"
+                                        value="<?= htmlspecialchars($cliente['apellido']) ?>"
+                                        placeholder="Ingrese el apellido"
+                                        required>
                                 </div>
                                 <div class="form-error-modern" id="error-apellido"></div>
                             </div>
-                            
+
                             <div class="form-group-modern">
                                 <label class="form-label-modern">Documento</label>
                                 <div class="input-group-modern">
                                     <div class="input-icon-modern">
                                         <i class="fas fa-id-card"></i>
                                     </div>
-                                    <input type="text" 
-                                           class="form-input-modern" 
-                                           name="documento" 
-                                           id="documento"
-                                           value="<?= htmlspecialchars($cliente['documento'] ?? '') ?>"
-                                           placeholder="Número de documento">
+                                    <input type="text"
+                                        class="form-input-modern"
+                                        name="documento"
+                                        id="documento"
+                                        value="<?= htmlspecialchars($cliente['documento'] ?? '') ?>"
+                                        placeholder="Número de documento">
                                 </div>
                                 <div class="form-error-modern" id="error-documento"></div>
                             </div>
-                            
+
                             <div class="form-group-modern">
                                 <label class="form-label-modern">Fecha de Nacimiento</label>
                                 <div class="input-group-modern">
                                     <div class="input-icon-modern">
                                         <i class="fas fa-calendar"></i>
                                     </div>
-                                    <input type="date" 
-                                           class="form-input-modern" 
-                                           name="fecha_nacimiento" 
-                                           id="fecha_nacimiento"
-                                           value="<?= htmlspecialchars($cliente['fecha_nacimiento'] ?? '') ?>">
+                                    <input type="date"
+                                        class="form-input-modern"
+                                        name="fecha_nacimiento"
+                                        id="fecha_nacimiento"
+                                        value="<?= htmlspecialchars($cliente['fecha_nacimiento'] ?? '') ?>">
                                 </div>
                                 <div class="form-error-modern" id="error-fecha_nacimiento"></div>
                             </div>
-                            
+
                             <div class="form-group-modern">
                                 <label class="form-label-modern required">Tipo de Cliente</label>
                                 <div class="radio-group-modern">
                                     <label class="radio-modern">
-                                        <input type="radio" 
-                                               name="tipo_cliente" 
-                                               value="particular"
-                                               <?= $cliente['tipo_cliente'] === 'particular' ? 'checked' : '' ?>>
+                                        <input type="radio"
+                                            name="tipo_cliente"
+                                            value="particular"
+                                            <?= $cliente['tipo_cliente'] === 'particular' ? 'checked' : '' ?>>
                                         <span class="radio-check-modern"></span>
                                         <div class="radio-content-modern">
                                             <i class="fas fa-user"></i>
                                             <span>Particular</span>
                                         </div>
                                     </label>
-                                    
+
                                     <label class="radio-modern">
-                                        <input type="radio" 
-                                               name="tipo_cliente" 
-                                               value="corporativo"
-                                               <?= $cliente['tipo_cliente'] === 'corporativo' ? 'checked' : '' ?>>
+                                        <input type="radio"
+                                            name="tipo_cliente"
+                                            value="corporativo"
+                                            <?= $cliente['tipo_cliente'] === 'corporativo' ? 'checked' : '' ?>>
                                         <span class="radio-check-modern"></span>
                                         <div class="radio-content-modern">
                                             <i class="fas fa-building"></i>
                                             <span>Corporativo</span>
                                         </div>
                                     </label>
-                                    
+
                                     <label class="radio-modern">
-                                        <input type="radio" 
-                                               name="tipo_cliente" 
-                                               value="frecuente"
-                                               <?= $cliente['tipo_cliente'] === 'frecuente' ? 'checked' : '' ?>>
+                                        <input type="radio"
+                                            name="tipo_cliente"
+                                            value="frecuente"
+                                            <?= $cliente['tipo_cliente'] === 'frecuente' ? 'checked' : '' ?>>
                                         <span class="radio-check-modern"></span>
                                         <div class="radio-content-modern">
                                             <i class="fas fa-star"></i>
@@ -269,7 +270,7 @@ ob_start();
                                 </div>
                                 <div class="form-error-modern" id="error-tipo_cliente"></div>
                             </div>
-                            
+
                             <!-- Campos específicos para cliente corporativo -->
                             <div class="form-group-modern full-width" id="campos-corporativo" style="<?= $cliente['tipo_cliente'] === 'corporativo' ? '' : 'display: none;' ?>">
                                 <div class="form-subgrid-modern">
@@ -279,33 +280,33 @@ ob_start();
                                             <div class="input-icon-modern">
                                                 <i class="fas fa-building"></i>
                                             </div>
-                                            <input type="text" 
-                                                   class="form-input-modern" 
-                                                   name="empresa" 
-                                                   id="empresa"
-                                                   value="<?= htmlspecialchars($cliente['empresa'] ?? '') ?>"
-                                                   placeholder="Nombre de la empresa">
+                                            <input type="text"
+                                                class="form-input-modern"
+                                                name="empresa"
+                                                id="empresa"
+                                                value="<?= htmlspecialchars($cliente['empresa'] ?? '') ?>"
+                                                placeholder="Nombre de la empresa">
                                         </div>
                                     </div>
-                                    
+
                                     <div class="form-group-modern">
                                         <label class="form-label-modern">RUC/NIT</label>
                                         <div class="input-group-modern">
                                             <div class="input-icon-modern">
                                                 <i class="fas fa-file-alt"></i>
                                             </div>
-                                            <input type="text" 
-                                                   class="form-input-modern" 
-                                                   name="ruc" 
-                                                   id="ruc"
-                                                   value="<?= htmlspecialchars($cliente['ruc'] ?? '') ?>"
-                                                   placeholder="RUC o NIT de la empresa">
+                                            <input type="text"
+                                                class="form-input-modern"
+                                                name="ruc"
+                                                id="ruc"
+                                                value="<?= htmlspecialchars($cliente['ruc'] ?? '') ?>"
+                                                placeholder="RUC o NIT de la empresa">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="form-step-actions-modern">
                             <button type="button" class="btn-modern btn-primary btn-next" data-next="2">
                                 <span class="btn-text">Siguiente</span>
@@ -330,7 +331,7 @@ ob_start();
                             <span>Contacto y Ubicación</span>
                         </div>
                     </div>
-                    
+
                     <div class="card-content-modern">
                         <div class="form-grid-modern">
                             <div class="form-group-modern">
@@ -339,49 +340,49 @@ ob_start();
                                     <div class="input-icon-modern">
                                         <i class="fas fa-phone"></i>
                                     </div>
-                                    <input type="tel" 
-                                           class="form-input-modern" 
-                                           name="telefono" 
-                                           id="telefono"
-                                           value="<?= htmlspecialchars($cliente['telefono']) ?>"
-                                           placeholder="+591 7XXXXXXX"
-                                           required>
+                                    <input type="tel"
+                                        class="form-input-modern"
+                                        name="telefono"
+                                        id="telefono"
+                                        value="<?= htmlspecialchars($cliente['telefono']) ?>"
+                                        placeholder="+591 7XXXXXXX"
+                                        required>
                                 </div>
                                 <div class="form-error-modern" id="error-telefono"></div>
                             </div>
-                            
+
                             <div class="form-group-modern">
                                 <label class="form-label-modern">Teléfono Alternativo</label>
                                 <div class="input-group-modern">
                                     <div class="input-icon-modern">
                                         <i class="fas fa-phone-alt"></i>
                                     </div>
-                                    <input type="tel" 
-                                           class="form-input-modern" 
-                                           name="telefono_secundario" 
-                                           id="telefono_secundario"
-                                           value="<?= htmlspecialchars($cliente['telefono_secundario'] ?? '') ?>"
-                                           placeholder="+591 7XXXXXXX (opcional)">
+                                    <input type="tel"
+                                        class="form-input-modern"
+                                        name="telefono_secundario"
+                                        id="telefono_secundario"
+                                        value="<?= htmlspecialchars($cliente['telefono_secundario'] ?? '') ?>"
+                                        placeholder="+591 7XXXXXXX (opcional)">
                                 </div>
                                 <div class="form-error-modern" id="error-telefono_secundario"></div>
                             </div>
-                            
+
                             <div class="form-group-modern">
                                 <label class="form-label-modern">Email</label>
                                 <div class="input-group-modern">
                                     <div class="input-icon-modern">
                                         <i class="fas fa-envelope"></i>
                                     </div>
-                                    <input type="email" 
-                                           class="form-input-modern" 
-                                           name="email" 
-                                           id="email"
-                                           value="<?= htmlspecialchars($cliente['email'] ?? '') ?>"
-                                           placeholder="cliente@ejemplo.com">
+                                    <input type="email"
+                                        class="form-input-modern"
+                                        name="email"
+                                        id="email"
+                                        value="<?= htmlspecialchars($cliente['email'] ?? '') ?>"
+                                        placeholder="cliente@ejemplo.com">
                                 </div>
                                 <div class="form-error-modern" id="error-email"></div>
                             </div>
-                            
+
                             <div class="form-group-modern">
                                 <label class="form-label-modern">Género</label>
                                 <select class="form-select-modern" name="genero" id="genero">
@@ -393,7 +394,7 @@ ob_start();
                                 <div class="form-error-modern" id="error-genero"></div>
                             </div>
                         </div>
-                        
+
                         <!-- Dirección -->
                         <div class="form-group-modern full-width">
                             <label class="form-label-modern">Dirección Completa</label>
@@ -401,11 +402,11 @@ ob_start();
                                 <div class="input-icon-modern">
                                     <i class="fas fa-map-marker-alt"></i>
                                 </div>
-                                <textarea class="form-textarea-modern" 
-                                          name="direccion" 
-                                          id="direccion" 
-                                          rows="3"
-                                          placeholder="Calle, número, zona, ciudad..."><?= htmlspecialchars($cliente['direccion'] ?? '') ?></textarea>
+                                <textarea class="form-textarea-modern"
+                                    name="direccion"
+                                    id="direccion"
+                                    rows="3"
+                                    placeholder="Calle, número, zona, ciudad..."><?= htmlspecialchars($cliente['direccion'] ?? '') ?></textarea>
                             </div>
                             <div class="form-error-modern" id="error-direccion"></div>
                         </div>
@@ -417,15 +418,15 @@ ob_start();
                                 <div class="input-icon-modern">
                                     <i class="fas fa-info-circle"></i>
                                 </div>
-                                <textarea class="form-textarea-modern" 
-                                          name="referencias" 
-                                          id="referencias" 
-                                          rows="2"
-                                          placeholder="Cerca de..., frente a..., al lado de..."><?= htmlspecialchars($cliente['referencias'] ?? '') ?></textarea>
+                                <textarea class="form-textarea-modern"
+                                    name="referencias"
+                                    id="referencias"
+                                    rows="2"
+                                    placeholder="Cerca de..., frente a..., al lado de..."><?= htmlspecialchars($cliente['referencias'] ?? '') ?></textarea>
                             </div>
                             <div class="form-error-modern" id="error-referencias"></div>
                         </div>
-                        
+
                         <div class="form-step-actions-modern">
                             <button type="button" class="btn-modern btn-outline btn-back" data-back="1">
                                 <span class="btn-icon"><i class="fas fa-arrow-left"></i></span>
@@ -454,7 +455,7 @@ ob_start();
                             <span>Configuraciones y Estado</span>
                         </div>
                     </div>
-                    
+
                     <div class="card-content-modern">
                         <!-- Descuentos y Promociones -->
                         <div class="form-section-modern">
@@ -462,16 +463,16 @@ ob_start();
                                 <i class="fas fa-tag"></i>
                                 Descuentos y Promociones
                             </h3>
-                            
+
                             <div class="form-grid-modern">
                                 <div class="form-group-modern">
                                     <div class="checkbox-group-modern">
                                         <label class="checkbox-modern">
-                                            <input type="checkbox" 
-                                                   name="tiene_descuento" 
-                                                   id="tiene_descuento"
-                                                   value="1"
-                                                   <?= ($cliente['descuento_porcentaje'] > 0) ? 'checked' : '' ?>>
+                                            <input type="checkbox"
+                                                name="tiene_descuento"
+                                                id="tiene_descuento"
+                                                value="1"
+                                                <?= ($cliente['descuento_porcentaje'] > 0) ? 'checked' : '' ?>>
                                             <span class="checkbox-check-modern">
                                                 <i class="fas fa-check"></i>
                                             </span>
@@ -482,38 +483,38 @@ ob_start();
                                         </label>
                                     </div>
                                 </div>
-                                
+
                                 <div class="form-group-modern" id="grupo-descuento" style="<?= ($cliente['descuento_porcentaje'] > 0) ? '' : 'display: none;' ?>">
                                     <label class="form-label-modern">Porcentaje de Descuento</label>
                                     <div class="input-group-modern">
                                         <div class="input-icon-modern">
                                             <i class="fas fa-percentage"></i>
                                         </div>
-                                        <input type="number" 
-                                               class="form-input-modern" 
-                                               name="descuento_porcentaje" 
-                                               id="descuento_porcentaje"
-                                               value="<?= htmlspecialchars($cliente['descuento_porcentaje'] ?? '') ?>"
-                                               min="0"
-                                               max="50"
-                                               placeholder="0">
+                                        <input type="number"
+                                            class="form-input-modern"
+                                            name="descuento_porcentaje"
+                                            id="descuento_porcentaje"
+                                            value="<?= htmlspecialchars($cliente['descuento_porcentaje'] ?? '') ?>"
+                                            min="0"
+                                            max="50"
+                                            placeholder="0">
                                     </div>
                                     <div class="form-help-modern">Máximo 50%</div>
                                 </div>
                             </div>
-                            
+
                             <div class="form-group-modern full-width" id="grupo-motivo-descuento" style="<?= ($cliente['descuento_porcentaje'] > 0) ? '' : 'display: none;' ?>">
                                 <label class="form-label-modern">Motivo del Descuento</label>
                                 <div class="input-group-modern">
                                     <div class="input-icon-modern">
                                         <i class="fas fa-comment"></i>
                                     </div>
-                                    <input type="text" 
-                                           class="form-input-modern" 
-                                           name="motivo_descuento" 
-                                           id="motivo_descuento"
-                                           value="<?= htmlspecialchars($cliente['motivo_descuento'] ?? '') ?>"
-                                           placeholder="Ej: Cliente frecuente, promoción especial...">
+                                    <input type="text"
+                                        class="form-input-modern"
+                                        name="motivo_descuento"
+                                        id="motivo_descuento"
+                                        value="<?= htmlspecialchars($cliente['motivo_descuento'] ?? '') ?>"
+                                        placeholder="Ej: Cliente frecuente, promoción especial...">
                                 </div>
                             </div>
                         </div>
@@ -524,13 +525,13 @@ ob_start();
                                 <i class="fas fa-star"></i>
                                 Preferencias de Servicio
                             </h3>
-                            
+
                             <div class="checkbox-group-modern">
                                 <label class="checkbox-modern">
-                                    <input type="checkbox" 
-                                           name="notificaciones_sms" 
-                                           value="1"
-                                           <?= ($cliente['notificaciones_sms'] ?? true) ? 'checked' : '' ?>>
+                                    <input type="checkbox"
+                                        name="notificaciones_sms"
+                                        value="1"
+                                        <?= ($cliente['notificaciones_sms'] ?? true) ? 'checked' : '' ?>>
                                     <span class="checkbox-check-modern">
                                         <i class="fas fa-check"></i>
                                     </span>
@@ -539,12 +540,12 @@ ob_start();
                                         <span class="checkbox-description">Recibir mensajes sobre el estado del servicio</span>
                                     </div>
                                 </label>
-                                
+
                                 <label class="checkbox-modern">
-                                    <input type="checkbox" 
-                                           name="notificaciones_email" 
-                                           value="1"
-                                           <?= ($cliente['notificaciones_email'] ?? false) ? 'checked' : '' ?>>
+                                    <input type="checkbox"
+                                        name="notificaciones_email"
+                                        value="1"
+                                        <?= ($cliente['notificaciones_email'] ?? false) ? 'checked' : '' ?>>
                                     <span class="checkbox-check-modern">
                                         <i class="fas fa-check"></i>
                                     </span>
@@ -562,7 +563,7 @@ ob_start();
                                 <i class="fas fa-info-circle"></i>
                                 Estado y Observaciones
                             </h3>
-                            
+
                             <div class="form-grid-modern">
                                 <div class="form-group-modern">
                                     <label class="form-label-modern">Estado del Cliente</label>
@@ -571,7 +572,7 @@ ob_start();
                                         <option value="inactivo" <?= $cliente['estado'] === 'inactivo' ? 'selected' : '' ?>>Inactivo</option>
                                     </select>
                                 </div>
-                                
+
                                 <div class="form-group-modern">
                                     <label class="form-label-modern">Prioridad</label>
                                     <select class="form-select-modern" name="prioridad" id="prioridad">
@@ -581,18 +582,18 @@ ob_start();
                                     </select>
                                 </div>
                             </div>
-                            
+
                             <div class="form-group-modern full-width">
                                 <label class="form-label-modern">Observaciones</label>
                                 <div class="input-group-modern">
                                     <div class="input-icon-modern">
                                         <i class="fas fa-comment-alt"></i>
                                     </div>
-                                    <textarea class="form-textarea-modern" 
-                                              name="observaciones" 
-                                              id="observaciones" 
-                                              rows="3"
-                                              placeholder="Notas adicionales sobre el cliente..."><?= htmlspecialchars($cliente['observaciones'] ?? '') ?></textarea>
+                                    <textarea class="form-textarea-modern"
+                                        name="observaciones"
+                                        id="observaciones"
+                                        rows="3"
+                                        placeholder="Notas adicionales sobre el cliente..."><?= htmlspecialchars($cliente['observaciones'] ?? '') ?></textarea>
                                 </div>
                             </div>
                         </div>
@@ -603,7 +604,7 @@ ob_start();
                                 <i class="fas fa-clock"></i>
                                 Información de Registro
                             </h3>
-                            
+
                             <div class="info-grid-modern">
                                 <div class="info-item-modern">
                                     <label>Fecha de Registro:</label>
@@ -623,7 +624,7 @@ ob_start();
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="form-step-actions-modern">
                             <button type="button" class="btn-modern btn-outline btn-back" data-back="2">
                                 <span class="btn-icon"><i class="fas fa-arrow-left"></i></span>
@@ -662,498 +663,370 @@ ob_start();
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Inicializar AOS
-    if (typeof AOS !== 'undefined') {
-        AOS.init({
-            duration: 800,
-            easing: 'ease-out-cubic',
-            once: true
-        });
-    }
-
-    // Referencias a elementos
-    const form = document.getElementById('formEditarCliente');
-    const steps = document.querySelectorAll('.form-step-modern');
-    const progressSteps = document.querySelectorAll('.progress-step-modern');
-    const nextButtons = document.querySelectorAll('.btn-next');
-    const backButtons = document.querySelectorAll('.btn-back');
-    const submitBtn = document.getElementById('submitBtn');
-
-    // Guardar valores originales para resetear
-    const originalValues = {};
-    form.querySelectorAll('input, select, textarea').forEach(field => {
-        if (field.type === 'checkbox' || field.type === 'radio') {
-            originalValues[field.name] = field.checked;
-        } else {
-            originalValues[field.name] = field.value;
+    document.addEventListener('DOMContentLoaded', function() {
+        // Inicializar AOS
+        if (typeof AOS !== 'undefined') {
+            AOS.init({
+                duration: 800,
+                easing: 'ease-out-cubic',
+                once: true
+            });
         }
-    });
 
-    // Eventos de navegación
-    nextButtons.forEach(btn => {
-        btn.addEventListener('click', function() {
-            const nextStep = parseInt(this.getAttribute('data-next'));
-            if (validateCurrentStep()) {
-                showStep(nextStep);
-            }
-        });
-    });
+        // Referencias a elementos
+        const form = document.getElementById('formEditarCliente');
+        const steps = document.querySelectorAll('.form-step-modern');
+        const progressSteps = document.querySelectorAll('.progress-step-modern');
+        const nextButtons = document.querySelectorAll('.btn-next');
+        const backButtons = document.querySelectorAll('.btn-back');
+        const submitBtn = document.getElementById('submitBtn');
 
-    backButtons.forEach(btn => {
-        btn.addEventListener('click', function() {
-            const prevStep = parseInt(this.getAttribute('data-back'));
-            showStep(prevStep);
-        });
-    });
-
-    // Mostrar/ocultar campos según tipo de cliente
-    const tipoClienteInputs = document.querySelectorAll('input[name="tipo_cliente"]');
-    tipoClienteInputs.forEach(input => {
-        input.addEventListener('change', function() {
-            const camposCorporativo = document.getElementById('campos-corporativo');
-            if (this.value === 'corporativo') {
-                camposCorporativo.style.display = 'block';
-                document.getElementById('empresa').required = true;
+        // Guardar valores originales para resetear
+        const originalValues = {};
+        form.querySelectorAll('input, select, textarea').forEach(field => {
+            if (field.type === 'checkbox' || field.type === 'radio') {
+                originalValues[field.name] = field.checked;
             } else {
-                camposCorporativo.style.display = 'none';
-                document.getElementById('empresa').required = false;
+                originalValues[field.name] = field.value;
             }
         });
-    });
 
-    // Mostrar/ocultar campos de descuento
-    const tieneDescuento = document.getElementById('tiene_descuento');
-    tieneDescuento.addEventListener('change', function() {
-        const grupoDescuento = document.getElementById('grupo-descuento');
-        const grupoMotivo = document.getElementById('grupo-motivo-descuento');
-        
-        if (this.checked) {
-            grupoDescuento.style.display = 'block';
-            grupoMotivo.style.display = 'block';
-        } else {
-            grupoDescuento.style.display = 'none';
-            grupoMotivo.style.display = 'none';
-            document.getElementById('descuento_porcentaje').value = '';
-            document.getElementById('motivo_descuento').value = '';
-        }
-    });
+        // Eventos de navegación
+        nextButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const nextStep = parseInt(this.getAttribute('data-next'));
+                if (validateCurrentStep()) {
+                    showStep(nextStep);
+                }
+            });
+        });
 
-    // Preview de foto
-    document.getElementById('foto').addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                document.getElementById('avatarPreview').src = e.target.result;
-            };
-            reader.readAsDataURL(file);
-        }
-    });
+        backButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const prevStep = parseInt(this.getAttribute('data-back'));
+                showStep(prevStep);
+            });
+        });
 
-    // Validación en tiempo real
-    setupRealTimeValidation();
+        // Mostrar/ocultar campos según tipo de cliente
+        const tipoClienteInputs = document.querySelectorAll('input[name="tipo_cliente"]');
+        tipoClienteInputs.forEach(input => {
+            input.addEventListener('change', function() {
+                const camposCorporativo = document.getElementById('campos-corporativo');
+                if (this.value === 'corporativo') {
+                    camposCorporativo.style.display = 'block';
+                    document.getElementById('empresa').required = true;
+                } else {
+                    camposCorporativo.style.display = 'none';
+                    document.getElementById('empresa').required = false;
+                }
+            });
+        });
 
-    // Detectar cambios en el formulario
-    let formChanged = false;
-    form.addEventListener('input', function() {
-        formChanged = true;
-    });
+        // Mostrar/ocultar campos de descuento
+        const tieneDescuento = document.getElementById('tiene_descuento');
+        tieneDescuento.addEventListener('change', function() {
+            const grupoDescuento = document.getElementById('grupo-descuento');
+            const grupoMotivo = document.getElementById('grupo-motivo-descuento');
 
-    form.addEventListener('change', function() {
-        formChanged = true;
-    });
+            if (this.checked) {
+                grupoDescuento.style.display = 'block';
+                grupoMotivo.style.display = 'block';
+            } else {
+                grupoDescuento.style.display = 'none';
+                grupoMotivo.style.display = 'none';
+                document.getElementById('descuento_porcentaje').value = '';
+                document.getElementById('motivo_descuento').value = '';
+            }
+        });
 
-    // Advertencia antes de salir
-    window.addEventListener('beforeunload', function(e) {
-        if (formChanged) {
+        // Preview de foto
+        document.getElementById('foto').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('avatarPreview').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Validación en tiempo real
+        setupRealTimeValidation();
+
+        // Detectar cambios en el formulario
+        let formChanged = false;
+        form.addEventListener('input', function() {
+            formChanged = true;
+        });
+
+        form.addEventListener('change', function() {
+            formChanged = true;
+        });
+
+        // Advertencia antes de salir
+        window.addEventListener('beforeunload', function(e) {
+            if (formChanged) {
+                e.preventDefault();
+                e.returnValue = '¿Está seguro de salir? Los cambios no guardados se perderán.';
+                return e.returnValue;
+            }
+        });
+
+        // Submit del formulario
+        form.addEventListener('submit', function(e) {
             e.preventDefault();
-            e.returnValue = '¿Está seguro de salir? Los cambios no guardados se perderán.';
-            return e.returnValue;
-        }
+
+            if (validateForm()) {
+                submitBtn.classList.add('loading');
+
+                // Simular delay y enviar
+                setTimeout(() => {
+                    formChanged = false; // Resetear flag de cambios
+                    this.submit();
+                }, 1000);
+            }
+        });
+
+        console.log('Cliente editar form initialized');
     });
 
-    // Submit del formulario
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        if (validateForm()) {
-            submitBtn.classList.add('loading');
-            
-            // Simular delay y enviar
-            setTimeout(() => {
-                formChanged = false; // Resetear flag de cambios
-                this.submit();
-            }, 1000);
-        }
-    });
+    function showStep(stepNumber) {
+        // Ocultar todos los pasos
+        document.querySelectorAll('.form-step-modern').forEach(step => {
+            step.classList.remove('active');
+        });
 
-    console.log('Cliente editar form initialized');
-});
+        // Mostrar paso actual
+        document.querySelector(`.form-step-modern[data-step="${stepNumber}"]`).classList.add('active');
 
-function showStep(stepNumber) {
-    // Ocultar todos los pasos
-    document.querySelectorAll('.form-step-modern').forEach(step => {
-        step.classList.remove('active');
-    });
-    
-    // Mostrar paso actual
-    document.querySelector(`.form-step-modern[data-step="${stepNumber}"]`).classList.add('active');
-    
-    // Actualizar indicador de progreso
-    document.querySelectorAll('.progress-step-modern').forEach((step, index) => {
-        step.classList.remove('active', 'completed');
-        if (index + 1 === stepNumber) {
-            step.classList.add('active');
-        } else if (index + 1 < stepNumber) {
-            step.classList.add('completed');
-        }
-    });
-    
-    // Scroll al inicio del formulario
-    document.querySelector('.form-modern').scrollIntoView({ behavior: 'smooth' });
-}
+        // Actualizar indicador de progreso
+        document.querySelectorAll('.progress-step-modern').forEach((step, index) => {
+            step.classList.remove('active', 'completed');
+            if (index + 1 === stepNumber) {
+                step.classList.add('active');
+            } else if (index + 1 < stepNumber) {
+                step.classList.add('completed');
+            }
+        });
 
-function validateCurrentStep() {
-    const activeStep = document.querySelector('.form-step-modern.active');
-    const stepNumber = parseInt(activeStep.getAttribute('data-step'));
-    
-    let isValid = true;
-    const requiredFields = activeStep.querySelectorAll('input[required], select[required]');
-    
-    requiredFields.forEach(field => {
-        if (!field.value.trim()) {
-            showFieldError(field, 'Este campo es requerido');
-            isValid = false;
-        } else {
-            clearFieldError(field);
-        }
-    });
-    
-    // Validaciones específicas por paso
-    switch (stepNumber) {
-        case 1:
-            isValid = validateStep1() && isValid;
-            break;
-        case 2:
-            isValid = validateStep2() && isValid;
-            break;
-        case 3:
-            isValid = validateStep3() && isValid;
-            break;
+        // Scroll al inicio del formulario
+        document.querySelector('.form-modern').scrollIntoView({
+            behavior: 'smooth'
+        });
     }
-    
-    return isValid;
-}
 
-function validateStep1() {
-    let isValid = true;
-    
-    // Validar nombre y apellido
-    const nombre = document.getElementById('nombre');
-    const apellido = document.getElementById('apellido');
-    
-    if (nombre.value.length < 2) {
-        showFieldError(nombre, 'El nombre debe tener al menos 2 caracteres');
-        isValid = false;
-    }
-    
-    if (apellido.value.length < 2) {
-        showFieldError(apellido, 'El apellido debe tener al menos 2 caracteres');
-        isValid = false;
-    }
-    
-    // Validar campos corporativos si es necesario
-    const tipoCliente = document.querySelector('input[name="tipo_cliente"]:checked');
-    if (tipoCliente && tipoCliente.value === 'corporativo') {
-        const empresa = document.getElementById('empresa');
-        if (!empresa.value.trim()) {
-            showFieldError(empresa, 'El nombre de la empresa es requerido');
-            isValid = false;
-        }
-    }
-    
-    return isValid;
-}
+    function validateCurrentStep() {
+        const activeStep = document.querySelector('.form-step-modern.active');
+        const stepNumber = parseInt(activeStep.getAttribute('data-step'));
 
-function validateStep2() {
-    let isValid = true;
-    
-    // Validar teléfono
-    const telefono = document.getElementById('telefono');
-    const telefonoRegex = /^[0-9+\-\s()]{7,15}$/;
-    
-    if (!telefonoRegex.test(telefono.value)) {
-        showFieldError(telefono, 'Formato de teléfono inválido');
-        isValid = false;
-    }
-    
-    // Validar email si está presente
-    const email = document.getElementById('email');
-    if (email.value && !isValidEmail(email.value)) {
-        showFieldError(email, 'Formato de email inválido');
-        isValid = false;
-    }
-    
-    return isValid;
-}
+        let isValid = true;
+        const requiredFields = activeStep.querySelectorAll('input[required], select[required]');
 
-function validateStep3() {
-    let isValid = true;
-    
-    // Validar descuento si está marcado
-    const tieneDescuento = document.getElementById('tiene_descuento');
-    if (tieneDescuento.checked) {
-        const descuentoPorcentaje = document.getElementById('descuento_porcentaje');
-        const porcentaje = parseFloat(descuentoPorcentaje.value);
-        
-        if (isNaN(porcentaje) || porcentaje < 0 || porcentaje > 50) {
-            showFieldError(descuentoPorcentaje, 'El descuento debe ser entre 0% y 50%');
-            isValid = false;
-        }
-    }
-    
-    return isValid;
-}
-
-function validateForm() {
-    let isValid = true;
-    
-    // Validar todos los pasos
-    for (let i = 1; i <= 3; i++) {
-        const step = document.querySelector(`.form-step-modern[data-step="${i}"]`);
-        const requiredFields = step.querySelectorAll('input[required], select[required]');
-        
         requiredFields.forEach(field => {
             if (!field.value.trim()) {
+                showFieldError(field, 'Este campo es requerido');
+                isValid = false;
+            } else {
+                clearFieldError(field);
+            }
+        });
+
+        // Validaciones específicas por paso
+        switch (stepNumber) {
+            case 1:
+                isValid = validateStep1() && isValid;
+                break;
+            case 2:
+                isValid = validateStep2() && isValid;
+                break;
+            case 3:
+                isValid = validateStep3() && isValid;
+                break;
+        }
+
+        return isValid;
+    }
+
+    function validateStep1() {
+        let isValid = true;
+
+        // Validar nombre y apellido
+        const nombre = document.getElementById('nombre');
+        const apellido = document.getElementById('apellido');
+
+        if (nombre.value.length < 2) {
+            showFieldError(nombre, 'El nombre debe tener al menos 2 caracteres');
+            isValid = false;
+        }
+
+        if (apellido.value.length < 2) {
+            showFieldError(apellido, 'El apellido debe tener al menos 2 caracteres');
+            isValid = false;
+        }
+
+        // Validar campos corporativos si es necesario
+        const tipoCliente = document.querySelector('input[name="tipo_cliente"]:checked');
+        if (tipoCliente && tipoCliente.value === 'corporativo') {
+            const empresa = document.getElementById('empresa');
+            if (!empresa.value.trim()) {
+                showFieldError(empresa, 'El nombre de la empresa es requerido');
                 isValid = false;
             }
-        });
+        }
+
+        return isValid;
     }
-    
-    return isValid;
-}
 
-function showFieldError(field, message) {
-    field.classList.add('error');
-    const errorElement = document.getElementById(`error-${field.id}`);
-    if (errorElement) {
-        errorElement.textContent = message;
-        errorElement.style.display = 'block';
+    function validateStep2() {
+        let isValid = true;
+
+        // Validar teléfono
+        const telefono = document.getElementById('telefono');
+        const telefonoRegex = /^[0-9+\-\s()]{7,15}$/;
+
+        if (!telefonoRegex.test(telefono.value)) {
+            showFieldError(telefono, 'Formato de teléfono inválido');
+            isValid = false;
+        }
+
+        // Validar email si está presente
+        const email = document.getElementById('email');
+        if (email.value && !isValidEmail(email.value)) {
+            showFieldError(email, 'Formato de email inválido');
+            isValid = false;
+        }
+
+        return isValid;
     }
-}
 
-function clearFieldError(field) {
-    field.classList.remove('error');
-    const errorElement = document.getElementById(`error-${field.id}`);
-    if (errorElement) {
-        errorElement.textContent = '';
-        errorElement.style.display = 'none';
-    }
-}
+    function validateStep3() {
+        let isValid = true;
 
-function isValidEmail(email) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-}
+        // Validar descuento si está marcado
+        const tieneDescuento = document.getElementById('tiene_descuento');
+        if (tieneDescuento.checked) {
+            const descuentoPorcentaje = document.getElementById('descuento_porcentaje');
+            const porcentaje = parseFloat(descuentoPorcentaje.value);
 
-function setupRealTimeValidation() {
-    // Limpiar errores al escribir
-    document.querySelectorAll('.form-input-modern, .form-select-modern, .form-textarea-modern').forEach(field => {
-        field.addEventListener('input', function() {
-            if (this.classList.contains('error')) {
-                clearFieldError(this);
+            if (isNaN(porcentaje) || porcentaje < 0 || porcentaje > 50) {
+                showFieldError(descuentoPorcentaje, 'El descuento debe ser entre 0% y 50%');
+                isValid = false;
             }
-        });
-    });
-}
+        }
 
-function resetForm() {
-    if (typeof Swal !== 'undefined') {
-        Swal.fire({
-            title: '¿Restaurar valores originales?',
-            text: 'Se perderán todos los cambios realizados',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Restaurar',
-            cancelButtonText: 'Cancelar',
-            confirmButtonColor: '#f59e0b'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                location.reload();
-            }
-        });
-    } else {
-        if (confirm('¿Está seguro de restaurar los valores originales? Se perderán todos los cambios.')) {
-            location.reload();
+        return isValid;
+    }
+
+    function validateForm() {
+        let isValid = true;
+
+        // Validar todos los pasos
+        for (let i = 1; i <= 3; i++) {
+            const step = document.querySelector(`.form-step-modern[data-step="${i}"]`);
+            const requiredFields = step.querySelectorAll('input[required], select[required]');
+
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    isValid = false;
+                }
+            });
+        }
+
+        return isValid;
+    }
+
+    function showFieldError(field, message) {
+        field.classList.add('error');
+        const errorElement = document.getElementById(`error-${field.id}`);
+        if (errorElement) {
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
         }
     }
-}
 
-function removePhoto() {
-    if (typeof Swal !== 'undefined') {
-        Swal.fire({
-            title: '¿Eliminar foto?',
-            text: 'La foto actual se eliminará',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Eliminar',
-            cancelButtonText: 'Cancelar',
-            confirmButtonColor: '#ef4444'
-        }).then((result) => {
-            if (result.isConfirmed) {
+    function clearFieldError(field) {
+        field.classList.remove('error');
+        const errorElement = document.getElementById(`error-${field.id}`);
+        if (errorElement) {
+            errorElement.textContent = '';
+            errorElement.style.display = 'none';
+        }
+    }
+
+    function isValidEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+
+    function setupRealTimeValidation() {
+        // Limpiar errores al escribir
+        document.querySelectorAll('.form-input-modern, .form-select-modern, .form-textarea-modern').forEach(field => {
+            field.addEventListener('input', function() {
+                if (this.classList.contains('error')) {
+                    clearFieldError(this);
+                }
+            });
+        });
+    }
+
+    function resetForm() {
+        if (typeof Swal !== 'undefined') {
+            Swal.fire({
+                title: '¿Restaurar valores originales?',
+                text: 'Se perderán todos los cambios realizados',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Restaurar',
+                cancelButtonText: 'Cancelar',
+                confirmButtonColor: '#f59e0b'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    location.reload();
+                }
+            });
+        } else {
+            if (confirm('¿Está seguro de restaurar los valores originales? Se perderán todos los cambios.')) {
+                location.reload();
+            }
+        }
+    }
+
+    function removePhoto() {
+        if (typeof Swal !== 'undefined') {
+            Swal.fire({
+                title: '¿Eliminar foto?',
+                text: 'La foto actual se eliminará',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Eliminar',
+                cancelButtonText: 'Cancelar',
+                confirmButtonColor: '#ef4444'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('avatarPreview').src = '/assets/images/default-avatar.png';
+                    document.getElementById('remove_photo').value = '1';
+                }
+            });
+        } else {
+            if (confirm('¿Está seguro de eliminar la foto actual?')) {
                 document.getElementById('avatarPreview').src = '/assets/images/default-avatar.png';
                 document.getElementById('remove_photo').value = '1';
             }
-        });
-    } else {
-        if (confirm('¿Está seguro de eliminar la foto actual?')) {
-            document.getElementById('avatarPreview').src = '/assets/images/default-avatar.png';
-            document.getElementById('remove_photo').value = '1';
         }
     }
-}
 
-function showHistory() {
-    // Cargar historial de cambios (implementar según necesidad)
-    document.getElementById('historyModal').classList.add('active');
-}
+    function showHistory() {
+        // Cargar historial de cambios (implementar según necesidad)
+        document.getElementById('historyModal').classList.add('active');
+    }
 
-function closeHistory() {
-    document.getElementById('historyModal').classList.remove('active');
-}
+    function closeHistory() {
+        document.getElementById('historyModal').classList.remove('active');
+    }
 </script>
 
-<style>
-/* Estilos específicos para editar cliente */
-.client-info-header-modern {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1rem;
-}
-
-.client-avatar-edit-modern {
-    position: relative;
-    width: 80px;
-    height: 80px;
-    flex-shrink: 0;
-}
-
-.client-avatar-edit-modern img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
-}
-
-.avatar-placeholder-edit-modern {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background: var(--gradient-primary);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    color: white;
-    font-size: 1.5rem;
-}
-
-.client-details-modern {
-    flex: 1;
-}
-
-.client-name-edit {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--text-primary);
-    margin: 0 0 0.5rem 0;
-}
-
-.client-meta-modern {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 0.75rem;
-    flex-wrap: wrap;
-}
-
-.client-id-edit {
-    font-size: 0.9rem;
-    color: var(--text-secondary);
-    font-weight: 600;
-}
-
-.client-stats-modern {
-    display: flex;
-    gap: 2rem;
-}
-
-.stat-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.stat-value {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--primary-green);
-}
-
-.stat-label {
-    font-size: 0.8rem;
-    color: var(--text-secondary);
-}
-
-.info-grid-modern {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-}
-
-.info-item-modern {
-    padding: 0.75rem;
-    background: var(--card-hover-bg);
-    border-radius: 6px;
-    border-left: 3px solid var(--primary-green);
-}
-
-.info-item-modern label {
-    display: block;
-    font-size: 0.8rem;
-    color: var(--text-secondary);
-    margin-bottom: 0.25rem;
-    font-weight: 600;
-}
-
-.info-item-modern span {
-    font-size: 0.9rem;
-    color: var(--text-primary);
-}
-
-/* Responsive design */
-@media (max-width: 768px) {
-    .client-info-header-modern {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .client-meta-modern {
-        justify-content: center;
-    }
-    
-    .client-stats-modern {
-        justify-content: center;
-        gap: 1.5rem;
-    }
-    
-    .info-grid-modern {
-        grid-template-columns: 1fr;
-    }
-}
-</style>
 
 <?php
 $content = ob_get_clean();
