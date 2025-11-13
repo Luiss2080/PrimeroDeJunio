@@ -2,6 +2,9 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
     <link rel="icon" type="image/png" href="/images/logoMoto.jpg" />
     <link rel="apple-touch-icon" href="/images/logoMoto.jpg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -112,10 +115,6 @@
         animation: glow 2s ease-in-out infinite alternate;
       }
 
-      .loading-spinner {
-        display: none;
-      }
-
       .loading-text {
         color: #ffffff;
         font-family: "Inter", sans-serif;
@@ -130,44 +129,6 @@
         }
         100% {
           transform: rotate(360deg);
-        }
-      }
-
-      @keyframes subtle-pulse {
-        0%,
-        100% {
-          transform: scale(1);
-          opacity: 0.3;
-        }
-        50% {
-          transform: scale(1.05);
-          opacity: 0.6;
-        }
-      }
-
-      @keyframes gentle-rotate {
-        0% {
-          transform: rotate(0deg);
-          opacity: 0.2;
-        }
-        50% {
-          opacity: 0.4;
-        }
-        100% {
-          transform: rotate(360deg);
-          opacity: 0.2;
-        }
-      }
-
-      @keyframes soft-glow {
-        0%,
-        100% {
-          transform: translate(-50%, -50%) scale(1);
-          opacity: 0.4;
-        }
-        50% {
-          transform: translate(-50%, -50%) scale(1.2);
-          opacity: 0.8;
         }
       }
 
@@ -195,7 +156,6 @@
     <!-- Loading Screen -->
     <div id="loading-screen">
       <div class="loading-logo">PRIMERO DE JUNIO</div>
-      <div class="loading-spinner"></div>
       <div class="loading-text">Cargando página...</div>
     </div>
 
@@ -222,17 +182,17 @@
         }
       }
 
-      // Ocultar loading screen cuando la app esté lista - simplificado
+      // Ocultar loading screen cuando la app esté lista - MUY RÁPIDO
       window.addEventListener("DOMContentLoaded", function () {
         console.log("📦 PRIMERO DE JUNIO: DOM Content Loaded");
-        setTimeout(hideLoadingScreen, 1000);
+        setTimeout(hideLoadingScreen, 100);
       });
 
-      // Fallback más rápido
+      // Fallback aún más rápido
       setTimeout(() => {
         console.log("⏰ PRIMERO DE JUNIO: Timeout fallback activado");
         hideLoadingScreen();
-      }, 1500);
+      }, 200);
     </script>
 
     <!-- JavaScript principal -->

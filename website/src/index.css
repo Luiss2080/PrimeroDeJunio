@@ -172,16 +172,14 @@ body {
   transform: translateY(0);
 }
 
-/* Loading spinner */
+/* Loading spinner - DISABLED */
 .loading-spinner {
-  width: 20px;
-  height: 20px;
-  border: 2px solid rgba(255, 255, 255, 0.25);
-  border-top: 2px solid #ffffff;
-  border-radius: 50%;
-  display: inline-block;
-  animation: spin 1s linear infinite;
-  margin-right: 8px;
+  display: none !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  border: none !important;
+  opacity: 0 !important;
 }
 
 @keyframes spin {
