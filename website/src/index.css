@@ -1,12 +1,30 @@
 /* PRIMERO DE JUNIO - INDEX CSS */
-/* IMPORTACIONES CENTRALIZADAS - SOLO AQUÍ PARA EVITAR DUPLICACIONES */
+/* Estilos básicos globales para React */
 
-/* Importar TODOS los estilos desde aquí */
-@import url("../public/css/main.css");
-@import url("../public/css/header.css");
-@import url("../public/css/footer.css");
-@import url("../public/css/pages.css");
-@import url("../public/css/contacto.css");
+/* Reset y variables */
+:root {
+  --primary-green: rgba(0, 255, 136, 0.2);
+  --primary-green-solid: #00ff88;
+  --bg-dark: #000000;
+  --bg-dark-secondary: #001a0a;
+  --text-light: #ffffff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--bg-dark);
+  color: var(--text-light);
+  line-height: 1.6;
+}
 
 /* Solo estilos específicos para React */
 #root {
