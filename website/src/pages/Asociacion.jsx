@@ -8,7 +8,7 @@ const Asociacion = () => {
     { id: "metodologia", name: "Metodología", icon: "🛵" },
     { id: "certificaciones", name: "Certificaciones", icon: "🏆" },
     { id: "profesores", name: "Instructores", icon: "👨‍🏫" },
-    { id: "servicios", name: "Servicios", icon: "⚙️" }
+    { id: "servicios", name: "Servicios", icon: "⚙️" },
   ];
 
   const testimonials = [
@@ -18,24 +18,24 @@ const Asociacion = () => {
       image: "👩‍💼",
       text: "Gracias a PRIMERO DE JUNIO logré tener mi propio mototaxi.",
       profit: "+150%",
-      country: "🇧🇴 Santa Cruz, Bolivia"
+      country: "🇧🇴 Santa Cruz, Bolivia",
     },
     {
-      name: "Roberto Silva", 
+      name: "Roberto Silva",
       position: "Ex-Obrero de Construcción",
       image: "👨‍💻",
       text: "Cambié la construcción por el mototaxi. Ahora tengo horarios flexibles.",
       profit: "+200%",
-      country: "🇧🇴 La Paz, Bolivia"
+      country: "🇧🇴 La Paz, Bolivia",
     },
     {
       name: "Carmen López",
       position: "Madre de Familia",
-      image: "👩‍🚀", 
+      image: "👩‍🚀",
       text: "Como madre soltera, el mototaxi me permitió trabajar y cuidar a mis hijos.",
       profit: "+180%",
-      country: "🇧🇴 Cochabamba, Bolivia"
-    }
+      country: "🇧🇴 Cochabamba, Bolivia",
+    },
   ];
 
   useEffect(() => {
@@ -46,8 +46,8 @@ const Asociacion = () => {
   }, [testimonials.length]);
 
   useEffect(() => {
-    const event = new CustomEvent('pageChanged', { 
-      detail: { page: 'asociacion' }
+    const event = new CustomEvent("pageChanged", {
+      detail: { page: "asociacion" },
     });
     window.dispatchEvent(event);
   }, []);
@@ -60,8 +60,8 @@ const Asociacion = () => {
             La Asociación Más <span>Confiable</span> de Mototaxis
           </h1>
           <p className="asociacion-subtitle">
-            Metodología probada de capacitación, instructores especializados 
-            y servicios integrales para formar conductores exitosos.
+            Metodología probada de capacitación, instructores especializados y
+            servicios integrales para formar conductores exitosos.
           </p>
         </div>
       </section>
@@ -99,7 +99,7 @@ const Asociacion = () => {
           </div>
 
           <div className="testimonials-carousel">
-            <div 
+            <div
               className="testimonials-track"
               style={{ transform: `translateX(-${currentTestimonial * 100}%)` }}
             >
@@ -109,9 +109,18 @@ const Asociacion = () => {
                   <p className="testimonial-text">"{testimonial.text}"</p>
                   <div className="testimonial-author">
                     <h4 className="testimonial-name">{testimonial.name}</h4>
-                    <p className="testimonial-position">{testimonial.position}</p>
-                    <div className="testimonial-profit">{testimonial.profit}</div>
-                    <p style={{ color: "rgba(255, 255, 255, 0.7)", marginTop: "0.5rem" }}>
+                    <p className="testimonial-position">
+                      {testimonial.position}
+                    </p>
+                    <div className="testimonial-profit">
+                      {testimonial.profit}
+                    </div>
+                    <p
+                      style={{
+                        color: "rgba(255, 255, 255, 0.7)",
+                        marginTop: "0.5rem",
+                      }}
+                    >
                       {testimonial.country}
                     </p>
                   </div>
@@ -122,7 +131,9 @@ const Asociacion = () => {
               {testimonials.map((_, index) => (
                 <button
                   key={index}
-                  className={`dot ${index === currentTestimonial ? "active" : ""}`}
+                  className={`dot ${
+                    index === currentTestimonial ? "active" : ""
+                  }`}
                   onClick={() => setCurrentTestimonial(index)}
                 />
               ))}
@@ -136,8 +147,8 @@ const Asociacion = () => {
           <div className="cta-content">
             <h2>¿Listo para Unirte a Nuestra Asociación?</h2>
             <p>
-              Únete a los miles de conductores que ya han transformado 
-              sus vidas con nuestra capacitación integral.
+              Únete a los miles de conductores que ya han transformado sus vidas
+              con nuestra capacitación integral.
             </p>
             <div className="cta-actions">
               <button className="btn btn-primary cta-btn">

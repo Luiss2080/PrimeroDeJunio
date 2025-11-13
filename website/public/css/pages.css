@@ -959,7 +959,7 @@
 }
 
 .asociacion-hero::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -1179,7 +1179,7 @@
 }
 
 .phase-topics li::before {
-  content: '✓';
+  content: "✓";
   color: #00ff88;
   font-weight: bold;
   position: absolute;
@@ -1295,14 +1295,14 @@
 }
 
 .certification-requirements li::before {
-  content: '📋';
+  content: "📋";
   position: absolute;
   left: 0;
   top: 0.5rem;
 }
 
 .certification-benefits li::before {
-  content: '🎁';
+  content: "🎁";
   position: absolute;
   left: 0;
   top: 0.5rem;
@@ -1423,7 +1423,7 @@
 }
 
 .professor-achievements li::before {
-  content: '🏆';
+  content: "🏆";
   position: absolute;
   left: 0;
   top: 0.5rem;
@@ -1666,7 +1666,7 @@
   .asociacion-title {
     font-size: 2.5rem;
   }
-  
+
   .asociacion-subtitle {
     font-size: 1.1rem;
   }

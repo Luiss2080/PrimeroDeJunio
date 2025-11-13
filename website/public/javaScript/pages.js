@@ -647,10 +647,10 @@ class AsociacionPageController {
         description: "Construimos las bases sólidas de conducción segura",
         topics: [
           "Reglas de tránsito",
-          "Conducción defensiva", 
+          "Conducción defensiva",
           "Mantenimiento básico del vehículo",
-          "Primeros auxilios básicos"
-        ]
+          "Primeros auxilios básicos",
+        ],
       },
       {
         phase: "Fase 2",
@@ -662,8 +662,8 @@ class AsociacionPageController {
           "Técnicas de comunicación",
           "Resolución de conflictos",
           "Atención al usuario",
-          "Imagen profesional"
-        ]
+          "Imagen profesional",
+        ],
       },
       {
         phase: "Fase 3",
@@ -675,9 +675,9 @@ class AsociacionPageController {
           "Rutas urbanas principales",
           "Manejo en situaciones complejas",
           "Uso de tecnología GPS",
-          "Evaluación continua"
-        ]
-      }
+          "Evaluación continua",
+        ],
+      },
     ];
 
     // Datos para testimonios
@@ -689,26 +689,26 @@ class AsociacionPageController {
         text: "Gracias a PRIMERO DE JUNIO logré tener mi propio mototaxi y ahora mantengo a mi familia dignamente. La capacitación fue excelente.",
         profit: "+150%",
         country: "🇧🇴 Santa Cruz, Bolivia",
-        certification: "Master Conductor"
+        certification: "Master Conductor",
       },
       {
-        name: "Roberto Silva", 
+        name: "Roberto Silva",
         position: "Ex-Obrero de Construcción",
         image: "👨‍💻",
         text: "Cambié la construcción por el mototaxi. Ahora tengo horarios flexibles y gano más que antes. La asociación me apoyó en todo.",
         profit: "+200%",
         country: "🇧🇴 La Paz, Bolivia",
-        certification: "Conductor Profesional"
+        certification: "Conductor Profesional",
       },
       {
         name: "Carmen López",
-        position: "Madre de Familia", 
+        position: "Madre de Familia",
         image: "👩‍🚀",
         text: "Como madre soltera, el mototaxi me permitió trabajar y cuidar a mis hijos. La flexibilidad horaria es increíble.",
         profit: "+180%",
         country: "🇧🇴 Cochabamba, Bolivia",
-        certification: "Master Conductor"
-      }
+        certification: "Master Conductor",
+      },
     ];
 
     // Inicializar cuando el DOM esté listo
@@ -720,7 +720,9 @@ class AsociacionPageController {
   }
 
   init() {
-    console.log("🏢 PRIMERO DE JUNIO: Asociación page JavaScript inicializado...");
+    console.log(
+      "🏢 PRIMERO DE JUNIO: Asociación page JavaScript inicializado..."
+    );
     this.setupTabs();
     this.setupIntersectionObserver();
     this.setupTestimonialCarousel();
@@ -730,7 +732,7 @@ class AsociacionPageController {
   // Configurar sistema de tabs
   setupTabs() {
     const tabButtons = document.querySelectorAll(".tab-button");
-    tabButtons.forEach(button => {
+    tabButtons.forEach((button) => {
       button.addEventListener("click", (e) => {
         const tabId = button.dataset.tab;
         if (tabId && tabId !== this.activeTab) {
@@ -743,12 +745,12 @@ class AsociacionPageController {
   setActiveTab(tabId) {
     // Actualizar estado activo
     this.activeTab = tabId;
-    
+
     // Actualizar botones
-    document.querySelectorAll(".tab-button").forEach(btn => {
+    document.querySelectorAll(".tab-button").forEach((btn) => {
       btn.classList.remove("active");
     });
-    
+
     const activeButton = document.querySelector(`[data-tab="${tabId}"]`);
     if (activeButton) {
       activeButton.classList.add("active");
@@ -799,7 +801,9 @@ class AsociacionPageController {
           </p>
         </div>
         <div class="methodology-phases">
-          ${this.methodology.map((phase, index) => `
+          ${this.methodology
+            .map(
+              (phase, index) => `
             <div class="methodology-phase" data-section-id="phase-${index}">
               <div class="phase-icon">${phase.icon}</div>
               <div class="phase-header">
@@ -809,10 +813,12 @@ class AsociacionPageController {
               <h4 class="phase-title">${phase.title}</h4>
               <p class="phase-description">${phase.description}</p>
               <ul class="phase-topics">
-                ${phase.topics.map(topic => `<li>${topic}</li>`).join("")}
+                ${phase.topics.map((topic) => `<li>${topic}</li>`).join("")}
               </ul>
             </div>
-          `).join("")}
+          `
+            )
+            .join("")}
         </div>
       </div>
     `;
@@ -828,51 +834,51 @@ class AsociacionPageController {
         icon: "🥉",
         requirements: [
           "Completar curso de conducción defensiva",
-          "Aprobar examen teórico vial", 
-          "Demostrar manejo seguro en prueba práctica"
+          "Aprobar examen teórico vial",
+          "Demostrar manejo seguro en prueba práctica",
         ],
         benefits: [
           "Certificado digital",
           "Acceso a rutas básicas",
-          "Descuento en mantenimiento"
-        ]
+          "Descuento en mantenimiento",
+        ],
       },
       {
         id: 2,
         name: "Conductor Profesional PRIMERO DE JUNIO",
-        level: "Intermedio", 
+        level: "Intermedio",
         duration: "4 meses",
         icon: "🥈",
         requirements: [
           "Certificación básica",
           "500+ viajes completados",
-          "Curso de atención al cliente"
+          "Curso de atención al cliente",
         ],
         benefits: [
           "Certificado físico",
           "Acceso a rutas premium",
           "Seguro de vida extendido",
-          "Tarifas preferenciales"
-        ]
+          "Tarifas preferenciales",
+        ],
       },
       {
         id: 3,
         name: "Master Conductor PRIMERO DE JUNIO",
         level: "Avanzado",
-        duration: "6 meses", 
+        duration: "6 meses",
         icon: "🥇",
         requirements: [
           "Certificación profesional",
           "Capacitación como instructor",
-          "1000+ viajes sin incidentes"
+          "1000+ viajes sin incidentes",
         ],
         benefits: [
           "Certificado especializado",
           "Participación en ganancias",
           "Programa de referidos",
-          "Financiamiento de vehículo"
-        ]
-      }
+          "Financiamiento de vehículo",
+        ],
+      },
     ];
 
     return `
@@ -886,28 +892,36 @@ class AsociacionPageController {
           </p>
         </div>
         <div class="certifications-grid">
-          ${certifications.map(cert => `
+          ${certifications
+            .map(
+              (cert) => `
             <div class="certification-card">
               <div class="certification-icon">${cert.icon}</div>
               <h4 class="certification-name">${cert.name}</h4>
               <div class="certification-level">${cert.level}</div>
-              <div class="certification-duration">Duración: ${cert.duration}</div>
+              <div class="certification-duration">Duración: ${
+                cert.duration
+              }</div>
               
               <div class="certification-requirements">
                 <h4>Requisitos:</h4>
                 <ul>
-                  ${cert.requirements.map(req => `<li>${req}</li>`).join("")}
+                  ${cert.requirements.map((req) => `<li>${req}</li>`).join("")}
                 </ul>
               </div>
               
               <div class="certification-benefits">
                 <h4>Beneficios:</h4>
                 <ul>
-                  ${cert.benefits.map(benefit => `<li>${benefit}</li>`).join("")}
+                  ${cert.benefits
+                    .map((benefit) => `<li>${benefit}</li>`)
+                    .join("")}
                 </ul>
               </div>
             </div>
-          `).join("")}
+          `
+            )
+            .join("")}
         </div>
       </div>
     `;
@@ -926,9 +940,9 @@ class AsociacionPageController {
           "Ex-Instructor de Policía Nacional",
           "Especialista en Transporte Urbano",
           "+5000 conductores capacitados",
-          "Certificación Internacional en Seguridad Vial"
+          "Certificación Internacional en Seguridad Vial",
         ],
-        rating: 4.9
+        rating: 4.9,
       },
       {
         id: 2,
@@ -941,9 +955,9 @@ class AsociacionPageController {
           "Ex-Gerente de Servicio Uber",
           "Especialista en Experiencia del Usuario",
           "Certificada en Comunicación Asertiva",
-          "Líder en Programas de Calidad"
+          "Líder en Programas de Calidad",
         ],
-        rating: 4.8
+        rating: 4.8,
       },
       {
         id: 3,
@@ -956,10 +970,10 @@ class AsociacionPageController {
           "Desarrollador de Apps de Transporte",
           "Especialista en Sistemas GPS",
           "Capacitador en Herramientas Digitales",
-          "Certificado en Innovación Tecnológica"
+          "Certificado en Innovación Tecnológica",
         ],
-        rating: 4.7
-      }
+        rating: 4.7,
+      },
     ];
 
     return `
@@ -973,7 +987,9 @@ class AsociacionPageController {
           </p>
         </div>
         <div class="professors-grid">
-          ${professors.map(prof => `
+          ${professors
+            .map(
+              (prof) => `
             <div class="professor-card">
               <div class="professor-image">${prof.image}</div>
               <h4 class="professor-name">${prof.name}</h4>
@@ -984,7 +1000,9 @@ class AsociacionPageController {
               <div class="professor-achievements">
                 <h4>Logros destacados:</h4>
                 <ul>
-                  ${prof.achievements.map(achievement => `<li>${achievement}</li>`).join("")}
+                  ${prof.achievements
+                    .map((achievement) => `<li>${achievement}</li>`)
+                    .join("")}
                 </ul>
               </div>
               
@@ -993,7 +1011,9 @@ class AsociacionPageController {
                 <span class="professor-rating-stars">⭐⭐⭐⭐⭐</span>
               </div>
             </div>
-          `).join("")}
+          `
+            )
+            .join("")}
         </div>
       </div>
     `;
@@ -1055,7 +1075,8 @@ class AsociacionPageController {
   setupTestimonialCarousel() {
     // Auto-rotate testimonials
     this.testimonialInterval = setInterval(() => {
-      this.currentTestimonial = (this.currentTestimonial + 1) % this.testimonials.length;
+      this.currentTestimonial =
+        (this.currentTestimonial + 1) % this.testimonials.length;
       this.updateTestimonialCarousel();
     }, 5000);
 
@@ -1066,10 +1087,15 @@ class AsociacionPageController {
   setupTestimonialDots() {
     const dotsContainer = document.querySelector(".testimonials-dots");
     if (dotsContainer) {
-      dotsContainer.innerHTML = this.testimonials.map((_, index) => 
-        `<button class="dot ${index === this.currentTestimonial ? "active" : ""}" 
+      dotsContainer.innerHTML = this.testimonials
+        .map(
+          (_, index) =>
+            `<button class="dot ${
+              index === this.currentTestimonial ? "active" : ""
+            }" 
                  onclick="window.asociacionController.setTestimonial(${index})"></button>`
-      ).join("");
+        )
+        .join("");
     }
   }
 
@@ -1094,21 +1120,24 @@ class AsociacionPageController {
       this.observerRef.disconnect();
     }
 
-    this.observerRef = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const sectionId = entry.target.dataset.sectionId;
-          if (sectionId) {
-            this.visibleSections.add(sectionId);
-            entry.target.classList.add("visible");
+    this.observerRef = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const sectionId = entry.target.dataset.sectionId;
+            if (sectionId) {
+              this.visibleSections.add(sectionId);
+              entry.target.classList.add("visible");
+            }
           }
-        }
-      });
-    }, { threshold: 0.1, rootMargin: "50px" });
+        });
+      },
+      { threshold: 0.1, rootMargin: "50px" }
+    );
 
     // Observar secciones con animaciones
     const sections = document.querySelectorAll("[data-section-id]");
-    sections.forEach(section => {
+    sections.forEach((section) => {
       this.observerRef.observe(section);
     });
   }
@@ -1125,14 +1154,16 @@ function initPageControllers() {
   const currentPath = window.location.pathname;
   const currentPage = getCurrentPageFromPath();
 
-  console.log(`🎯 PRIMERO DE JUNIO: Inicializando controladores para página: ${currentPage}`);
+  console.log(
+    `🎯 PRIMERO DE JUNIO: Inicializando controladores para página: ${currentPage}`
+  );
 
   // Limpiar controladores existentes
   if (window.homePageController) {
     window.homePageController.destroy();
     window.homePageController = null;
   }
-  
+
   if (window.asociacionController) {
     window.asociacionController.destroy();
     window.asociacionController = null;
@@ -1149,7 +1180,9 @@ function initPageControllers() {
       break;
     // Agregar más casos según se necesiten otras páginas
     default:
-      console.log("🏠 PRIMERO DE JUNIO: Página sin controlador específico, usando Home por defecto");
+      console.log(
+        "🏠 PRIMERO DE JUNIO: Página sin controlador específico, usando Home por defecto"
+      );
       window.homePageController = new HomePageController();
   }
 }
@@ -1159,11 +1192,11 @@ function getCurrentPageFromPath() {
   // Si es una SPA React, detectar por el hash o estado
   const hash = window.location.hash;
   const path = window.location.pathname;
-  
+
   // Detectar por elementos en la página
   if (document.querySelector(".asociacion-container")) return "asociacion";
   if (document.querySelector(".home-container")) return "inicio";
-  
+
   // Fallback a home
   return "inicio";
 }
@@ -1181,22 +1214,24 @@ window.addEventListener("popstate", initPageControllers);
 // Detectar cambios en el DOM para reinicializar (útil para SPAs)
 const pageObserver = new MutationObserver((mutations) => {
   let shouldReinit = false;
-  mutations.forEach(mutation => {
+  mutations.forEach((mutation) => {
     if (mutation.type === "childList") {
       // Detectar si se agregó un contenedor de página
-      mutation.addedNodes.forEach(node => {
-        if (node.nodeType === 1) { // Element node
-          if (node.classList && (
-            node.classList.contains("asociacion-container") ||
-            node.classList.contains("home-container")
-          )) {
+      mutation.addedNodes.forEach((node) => {
+        if (node.nodeType === 1) {
+          // Element node
+          if (
+            node.classList &&
+            (node.classList.contains("asociacion-container") ||
+              node.classList.contains("home-container"))
+          ) {
             shouldReinit = true;
           }
         }
       });
     }
   });
-  
+
   if (shouldReinit) {
     setTimeout(initPageControllers, 100);
   }
@@ -1205,22 +1240,25 @@ const pageObserver = new MutationObserver((mutations) => {
 // Observar cambios en el body
 pageObserver.observe(document.body, {
   childList: true,
-  subtree: true
+  subtree: true,
 });
 
 // Escuchar eventos personalizados de React
-window.addEventListener('pageChanged', (event) => {
-  console.log("🎯 PRIMERO DE JUNIO: Página cambió via evento:", event.detail.page);
+window.addEventListener("pageChanged", (event) => {
+  console.log(
+    "🎯 PRIMERO DE JUNIO: Página cambió via evento:",
+    event.detail.page
+  );
   setTimeout(initPageControllers, 150);
 });
 
 // Re-check cada pocos segundos para asegurar inicialización
 setInterval(() => {
   const currentPageDetected = getCurrentPageFromPath();
-  const hasCorrectController = 
+  const hasCorrectController =
     (currentPageDetected === "asociacion" && window.asociacionController) ||
     (currentPageDetected === "inicio" && window.homePageController);
-  
+
   if (!hasCorrectController) {
     console.log("🔄 PRIMERO DE JUNIO: Re-inicializando controladores...");
     initPageControllers();
