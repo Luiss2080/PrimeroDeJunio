@@ -181,8 +181,8 @@ const Home = () => {
             </h2>
 
             <p className="why-choose-description">
-              La diferencia entre un buen servicio de transporte y el mejor está en
-              la
+              La diferencia entre un buen servicio de transporte y el mejor está
+              en la
               <strong className="hero-subtitle-highlight">
                 {" "}
                 experiencia, seguridad y compromiso
@@ -322,8 +322,8 @@ const Home = () => {
           <div className="cta-final">
             <h3 className="cta-title">¿Listo para unirte a nuestra familia?</h3>
             <p className="cta-description">
-              Más de 100 conductores ya forman parte de nuestra asociación.
-              Tu turno de ser parte de la familia PRIMERO DE JUNIO.
+              Más de 100 conductores ya forman parte de nuestra asociación. Tu
+              turno de ser parte de la familia PRIMERO DE JUNIO.
             </p>
             <button className="cta-button hover-card">
               🏍️ ÚNETE A LA ASOCIACIÓN
