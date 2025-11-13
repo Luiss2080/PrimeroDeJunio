@@ -55,6 +55,7 @@ const Asociacion = () => {
   return (
     <div className="asociacion-container">
       <section className="asociacion-hero">
+        <div className="asociacion-particles"></div>
         <div className="container">
           <h1 className="asociacion-title">
             La Asociación Más <span>Confiable</span> de Mototaxis
@@ -143,6 +144,7 @@ const Asociacion = () => {
       </section>
 
       <section className="asociacion-cta">
+        <div className="cta-particles"></div>
         <div className="container">
           <div className="cta-content">
             <h2>¿Listo para Unirte a Nuestra Asociación?</h2>

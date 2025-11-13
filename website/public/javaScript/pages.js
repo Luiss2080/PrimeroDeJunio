@@ -315,9 +315,10 @@ class HomePageController {
     const updateScrollEffects = () => {
       const scrollY = window.scrollY;
       const heroSection = document.querySelector(".hero-section");
+      const asociacionSection = document.querySelector(".asociacion-hero");
 
       if (heroSection) {
-        // Parallax effect
+        // Parallax effect para hero
         const parallaxElements = document.querySelectorAll(
           ".hero-background-overlay, .hero-particles"
         );
@@ -325,6 +326,17 @@ class HomePageController {
           const speed = element.classList.contains("hero-particles")
             ? 0.3
             : 0.5;
+          element.style.transform = `translateY(${scrollY * speed}px)`;
+        });
+      }
+
+      if (asociacionSection) {
+        // Parallax effect para asociación
+        const asociacionParallax = document.querySelectorAll(
+          ".asociacion-particles, .cta-particles"
+        );
+        asociacionParallax.forEach((element) => {
+          const speed = 0.2;
           element.style.transform = `translateY(${scrollY * speed}px)`;
         });
       }
@@ -726,7 +738,24 @@ class AsociacionPageController {
     this.setupTabs();
     this.setupIntersectionObserver();
     this.setupTestimonialCarousel();
+    this.setupParticleEffects();
     this.renderTabContent();
+  }
+
+  // Configurar efectos de partículas
+  setupParticleEffects() {
+    const particles = document.querySelectorAll('.asociacion-particles, .cta-particles');
+    particles.forEach(particle => {
+      if (particle) {
+        // Añadir efecto de movimiento sutil
+        particle.style.opacity = '0';
+        particle.style.transition = 'opacity 1s ease-in-out';
+        
+        setTimeout(() => {
+          particle.style.opacity = '1';
+        }, 300);
+      }
+    });
   }
 
   // Configurar sistema de tabs
