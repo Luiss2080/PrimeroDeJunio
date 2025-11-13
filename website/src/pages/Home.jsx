@@ -696,11 +696,13 @@ const Home = () => {
                 }}
                 onMouseEnter={(e) => {
                   e.target.style.transform = "translateY(-3px) scale(1.02)";
-                  e.target.style.boxShadow = "0 20px 40px rgba(0, 255, 136, 0.6)";
+                  e.target.style.boxShadow =
+                    "0 20px 40px rgba(0, 255, 136, 0.6)";
                 }}
                 onMouseLeave={(e) => {
                   e.target.style.transform = "translateY(0) scale(1)";
-                  e.target.style.boxShadow = "0 15px 35px rgba(0, 255, 136, 0.4)";
+                  e.target.style.boxShadow =
+                    "0 15px 35px rgba(0, 255, 136, 0.4)";
                 }}
               >
                 <span style={{ position: "relative", zIndex: 2 }}>
