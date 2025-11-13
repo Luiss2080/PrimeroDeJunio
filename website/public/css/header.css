@@ -111,7 +111,7 @@
 }
 
 .logo-container:hover .logo-tagline {
-  color: var(--primary-orange);
+  color: var(--primary-green);
   opacity: 1;
 }
 

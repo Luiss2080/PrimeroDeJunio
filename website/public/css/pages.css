@@ -122,8 +122,8 @@
 }
 
 .action.sell {
-  background: rgba(255, 71, 87, 0.2);
-  color: #ff4757;
+  background: rgba(0, 255, 136, 0.2);
+  color: #00ff88;
 }
 
 .entry {
@@ -283,7 +283,7 @@
 }
 
 .target .value.danger {
-  color: #ff4757;
+  color: #00ff88;
 }
 
 .signal-analysis {
@@ -347,8 +347,8 @@
 }
 
 .profit-badge.danger {
-  background: #ff4757;
-  color: var(--white);
+  background: rgba(0, 255, 136, 0.8);
+  color: var(--dark-bg);
 }
 
 /* Historial de Performance */
@@ -415,7 +415,7 @@
 
 .profit.loss,
 .roi.loss {
-  color: #ff4757;
+  color: #00ff88;
   font-weight: 700;
 }
 
@@ -437,8 +437,8 @@
 }
 
 .status-badge.loss {
-  background: rgba(255, 71, 87, 0.2);
-  color: #ff4757;
+  background: rgba(0, 255, 136, 0.2);
+  color: #00ff88;
 }
 
 /* Planes de Señales */
@@ -532,8 +532,8 @@
 }
 
 .discount-badge {
-  background: #ff4757;
-  color: var(--white);
+  background: rgba(0, 255, 136, 0.8);
+  color: var(--dark-bg);
   padding: 4px 12px;
   border-radius: 12px;
   font-size: 0.8rem;
@@ -785,7 +785,7 @@
   background: linear-gradient(
     180deg,
     var(--primary-green),
-    var(--primary-orange)
+    var(--primary-green-dark)
   );
 }
 
