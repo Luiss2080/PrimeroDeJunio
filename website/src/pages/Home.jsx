@@ -10,7 +10,7 @@ const Home = () => {
 
   const texts = [
     "Conductor Profesional",
-    "Especialista en Rutas", 
+    "Especialista en Rutas",
     "Servicio Confiable",
     "Transporte Seguro",
   ];
