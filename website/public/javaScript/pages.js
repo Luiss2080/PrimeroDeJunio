@@ -341,6 +341,18 @@ class HomePageController {
         });
       }
 
+      // Parallax effect para servicios
+      const serviciosSection = document.querySelector(".Servicios-hero");
+      if (serviciosSection) {
+        const serviciosParallax = document.querySelectorAll(
+          ".hero-particles, .why-choose-background"
+        );
+        serviciosParallax.forEach((element) => {
+          const speed = element.classList.contains("hero-particles") ? 0.3 : 0.25;
+          element.style.transform = `translateY(${scrollY * speed}px)`;
+        });
+      }
+
       ticking = false;
     };
 
@@ -1180,6 +1192,112 @@ class AsociacionPageController {
   }
 }
 
+// === SERVICIOS PAGE CONTROLLER ===
+class ServiciosPageController {
+  constructor() {
+    this.selectedCategory = "todos";
+    this.visibleCourses = new Set();
+    this.observerRef = null;
+
+    // Inicializar cuando el DOM esté listo
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", () => this.init());
+    } else {
+      this.init();
+    }
+  }
+
+  init() {
+    console.log("🎓 PRIMERO DE JUNIO: Servicios page JavaScript inicializado...");
+    this.setupCategoryFilters();
+    this.setupIntersectionObserver();
+    this.setupParticleEffects();
+  }
+
+  // Configurar filtros de categorías
+  setupCategoryFilters() {
+    const filterTabs = document.querySelectorAll(".filter-tab");
+    filterTabs.forEach((tab) => {
+      tab.addEventListener("click", (e) => {
+        const category = tab.dataset.category || "todos";
+        this.setActiveCategory(category);
+      });
+    });
+  }
+
+  setActiveCategory(category) {
+    this.selectedCategory = category;
+    
+    // Actualizar tabs activos
+    document.querySelectorAll(".filter-tab").forEach((tab) => {
+      tab.classList.remove("active");
+    });
+    
+    document.querySelector(`[data-category="${category}"]`)?.classList.add("active");
+    
+    // Filtrar servicios (esto se puede expandir según necesidad)
+    this.filterCourses(category);
+  }
+
+  filterCourses(category) {
+    const courseCards = document.querySelectorAll(".course-card");
+    courseCards.forEach((card) => {
+      const courseCategory = card.dataset.category;
+      if (category === "todos" || courseCategory === category) {
+        card.style.display = "block";
+        card.classList.add("fade-in");
+      } else {
+        card.style.display = "none";
+        card.classList.remove("fade-in");
+      }
+    });
+  }
+
+  // Configurar efectos de partículas
+  setupParticleEffects() {
+    const particles = document.querySelectorAll('.hero-particles, .why-choose-background');
+    particles.forEach(particle => {
+      if (particle) {
+        particle.style.opacity = '0';
+        particle.style.transition = 'opacity 1s ease-in-out';
+        
+        setTimeout(() => {
+          particle.style.opacity = '1';
+        }, 300);
+      }
+    });
+  }
+
+  // Configurar Intersection Observer
+  setupIntersectionObserver() {
+    this.observerRef = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const courseId = entry.target.dataset.courseId;
+            if (courseId) {
+              this.visibleCourses.add(courseId);
+              entry.target.classList.add("visible");
+            }
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: "50px" }
+    );
+
+    // Observar tarjetas de servicios
+    const courseCards = document.querySelectorAll(".course-card");
+    courseCards.forEach((card) => {
+      this.observerRef.observe(card);
+    });
+  }
+
+  // Destruir listeners al salir de la página
+  destroy() {
+    if (this.observerRef) this.observerRef.disconnect();
+  }
+}
+
 // Inicializar controladores según la página actual
 function initPageControllers() {
   const currentPath = window.location.pathname;
@@ -1200,6 +1318,11 @@ function initPageControllers() {
     window.asociacionController = null;
   }
 
+  if (window.serviciosController) {
+    window.serviciosController.destroy();
+    window.serviciosController = null;
+  }
+
   // Inicializar controlador apropiado
   switch (currentPage) {
     case "inicio":
@@ -1208,6 +1331,9 @@ function initPageControllers() {
       break;
     case "asociacion":
       window.asociacionController = new AsociacionPageController();
+      break;
+    case "servicios":
+      window.serviciosController = new ServiciosPageController();
       break;
     // Agregar más casos según se necesiten otras páginas
     default:
@@ -1226,6 +1352,7 @@ function getCurrentPageFromPath() {
 
   // Detectar por elementos en la página
   if (document.querySelector(".asociacion-container")) return "asociacion";
+  if (document.querySelector(".Servicios-page")) return "servicios";
   if (document.querySelector(".home-container")) return "inicio";
 
   // Fallback a home

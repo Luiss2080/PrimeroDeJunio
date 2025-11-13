@@ -993,6 +993,42 @@
   pointer-events: none;
 }
 
+/* Formas geométricas flotantes para Asociación */
+.asociacion-shapes {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.asociacion-shapes::before {
+  content: "";
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 255, 102, 0.05));
+  border-radius: 50%;
+  top: 10%;
+  right: 15%;
+  animation: floatShape1 20s ease-in-out infinite;
+  filter: blur(40px);
+}
+
+.asociacion-shapes::after {
+  content: "";
+  position: absolute;
+  width: 200px;
+  height: 100px;
+  background: linear-gradient(45deg, rgba(0, 255, 136, 0.08), rgba(0, 255, 102, 0.03));
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  bottom: 20%;
+  left: 10%;
+  animation: floatShape2 25s ease-in-out infinite reverse;
+  filter: blur(30px);
+}
+
 .asociacion-hero .container {
   max-width: 1400px;
   margin: 0 auto;
@@ -1033,6 +1069,8 @@
 .asociacion-tabs {
   padding: 6rem 2rem;
   background: rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
 }
 
 .tabs-navigation {
@@ -1041,6 +1079,8 @@
   gap: 1rem;
   margin-bottom: 4rem;
   flex-wrap: wrap;
+  position: relative;
+  z-index: 2;
 }
 
 .tab-button {
@@ -1081,6 +1121,8 @@
 .tab-content {
   max-width: 1400px;
   margin: 0 auto;
+  position: relative;
+  z-index: 2;
 }
 
 /* === METHODOLOGY CONTENT === */
@@ -1744,8 +1786,528 @@
     width: 100%;
     max-width: 300px;
   }
+}
 
-  .testimonial-text {
-    font-size: 1.1rem;
+/* ===================================== */
+/* ========= SERVICIOS PAGE STYLES ========= */
+/* ===================================== */
+
+.Servicios-page {
+  background: linear-gradient(135deg, #000000 0%, #001a0a 100%);
+  color: #ffffff;
+  min-height: 100vh;
+}
+
+/* ===== HERO SECTION ===== */
+.Servicios-hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(
+      135deg,
+      rgba(0, 0, 0, 0.95) 0%,
+      rgba(0, 10, 0, 0.98) 50%,
+      rgba(0, 0, 0, 0.95) 100%
+    ),
+    url("./images/hero/servicios-bg.jpg") center/cover no-repeat;
+}
+
+/* --- Hero Container & Layout --- */
+.Servicios-hero .container {
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 4rem;
+}
+
+.Servicios-hero .hero-content {
+  text-align: left;
+}
+
+/* --- Hero Badge --- */
+.Servicios-hero .hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 255, 136, 0.15) 0%,
+    rgba(0, 255, 102, 0.15) 100%
+  );
+  border: 1px solid rgba(0, 255, 136, 0.3);
+  border-radius: 50px;
+  padding: 0.7rem 1.5rem;
+  margin-bottom: 2rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #00ff88;
+}
+
+/* --- Hero Title & Text --- */
+.Servicios-hero .hero-title {
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-weight: 900;
+  margin-bottom: 1.5rem;
+  font-family: "Montserrat", sans-serif;
+  letter-spacing: -1px;
+  line-height: 1.1;
+  color: #ffffff;
+}
+
+.Servicios-hero .gradient-text {
+  background: linear-gradient(135deg, #00ff88 0%, #00ff66 50%, #00ff88 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% 200%;
+  animation: gradientShift 3s ease-in-out infinite;
+}
+
+.Servicios-hero .hero-description {
+  font-size: 1.4rem;
+  margin-bottom: 3rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 600px;
+}
+
+/* --- Hero Stats --- */
+.Servicios-hero .hero-stats {
+  display: flex;
+  gap: 3rem;
+  margin-bottom: 2rem;
+}
+
+.Servicios-hero .stat {
+  text-align: center;
+}
+
+.Servicios-hero .stat-number {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #00ff88;
+  margin-bottom: 0.5rem;
+}
+
+.Servicios-hero .stat-label {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ===== FILTROS DE CATEGORÍAS ===== */
+.courses-filters {
+  padding: 4rem 2rem;
+  background: rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.courses-filters .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* --- Filter Tabs --- */
+.filter-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.filter-tab {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1rem 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 255, 136, 0.2);
+  border-radius: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.filter-tab:hover {
+  background: rgba(0, 255, 136, 0.1);
+  border-color: rgba(0, 255, 136, 0.4);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.filter-tab.active {
+  background: linear-gradient(135deg, rgba(0, 255, 136, 0.2), rgba(0, 255, 102, 0.2));
+  border-color: #00ff88;
+  color: #00ff88;
+  transform: translateY(-2px);
+}
+
+.tab-icon {
+  font-size: 1.2rem;
+}
+
+/* === GRID DE SERVICIOS === */
+.courses-grid-section {
+  padding: 6rem 2rem;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* === TARJETAS DE CURSOS/SERVICIOS === */
+.course-card {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 26, 10, 0.9) 100%);
+  border: 1px solid rgba(0, 255, 136, 0.1);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(50px);
+  position: relative;
+  backdrop-filter: blur(10px);
+}
+
+.course-card:hover {
+  transform: translateY(-10px);
+  border-color: rgba(0, 255, 136, 0.3);
+  box-shadow: 0 20px 40px rgba(0, 255, 136, 0.1);
+}
+
+.course-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.course-card-inner {
+  padding: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* === IMAGEN/HEADER DE TARJETA === */
+.course-image {
+  position: relative;
+  padding: 2rem;
+  background: linear-gradient(135deg, rgba(0, 255, 136, 0.1) 0%, rgba(0, 255, 102, 0.05) 100%);
+  text-align: center;
+  border-bottom: 1px solid rgba(0, 255, 136, 0.1);
+}
+
+.course-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.course-badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: rgba(0, 255, 136, 0.2);
+  color: #00ff88;
+  padding: 0.3rem 0.8rem;
+  border-radius: 15px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  border: 1px solid rgba(0, 255, 136, 0.3);
+}
+
+.discount-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: linear-gradient(135deg, #ff4444 0%, #cc0000 100%);
+  color: #ffffff;
+  padding: 0.3rem 0.8rem;
+  border-radius: 15px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  box-shadow: 0 4px 12px rgba(255, 68, 68, 0.3);
+}
+
+/* === CONTENIDO DE TARJETA === */
+.course-content {
+  padding: 2rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.course-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.course-students {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.course-rating {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: #00ff88;
+  font-weight: 600;
+}
+
+.course-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  line-height: 1.3;
+  font-family: "Montserrat", sans-serif;
+}
+
+.course-description {
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  flex: 1;
+}
+
+/* === HIGHLIGHTS/CARACTERÍSTICAS === */
+.course-highlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.highlight-tag {
+  background: rgba(0, 255, 136, 0.1);
+  color: #00ff88;
+  padding: 0.3rem 0.8rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border: 1px solid rgba(0, 255, 136, 0.2);
+}
+
+/* === INFORMACIÓN DEL CURSO === */
+.course-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background: rgba(0, 255, 136, 0.05);
+  border-radius: 12px;
+  border: 1px solid rgba(0, 255, 136, 0.1);
+}
+
+.course-duration,
+.course-lessons,
+.course-certificate {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.course-certificate {
+  color: #00ff88;
+  font-weight: 600;
+}
+
+/* === FOOTER DE TARJETA === */
+.course-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(0, 255, 136, 0.1);
+  margin-top: auto;
+}
+
+.course-pricing {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.current-price {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #00ff88;
+  font-family: "Montserrat", sans-serif;
+}
+
+.original-price {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: line-through;
+}
+
+.course-btn {
+  padding: 0.8rem 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.course-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 255, 136, 0.3);
+}
+
+/* === SECCIÓN DE GARANTÍA === */
+.guarantee-section {
+  padding: 4rem 2rem;
+  background: linear-gradient(135deg, rgba(0, 255, 136, 0.05) 0%, rgba(0, 255, 102, 0.02) 100%);
+  border-top: 1px solid rgba(0, 255, 136, 0.1);
+  border-bottom: 1px solid rgba(0, 255, 136, 0.1);
+}
+
+.guarantee-content {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.guarantee-icon {
+  font-size: 4rem;
+  margin-bottom: 1.5rem;
+  display: block;
+}
+
+.guarantee-content h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  font-family: "Montserrat", sans-serif;
+}
+
+.guarantee-content p {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+}
+
+/* === RESPONSIVE SERVICIOS === */
+@media (max-width: 1024px) {
+  .Servicios-hero .container {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    text-align: center;
+  }
+
+  .Servicios-hero .hero-stats {
+    justify-content: center;
+  }
+
+  .courses-grid {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  }
+
+  .course-footer {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+
+  .course-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .Servicios-hero {
+    padding: 1rem;
+  }
+
+  .Servicios-hero .hero-stats {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .filter-tabs {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .filter-tab {
+    width: 100%;
+    max-width: 300px;
+    justify-content: center;
+  }
+
+  .courses-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .course-card {
+    margin: 0 1rem;
+  }
+
+  .course-image {
+    padding: 1.5rem;
+  }
+
+  .course-content {
+    padding: 1.5rem;
+  }
+
+  .course-info {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .course-title {
+    font-size: 1.2rem;
+  }
+
+  .current-price {
+    font-size: 1.7rem;
+  }
+}
+
+/* ===== ANIMACIONES ESPECÍFICAS ===== */
+.fade-in {
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

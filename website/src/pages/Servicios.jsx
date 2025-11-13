@@ -186,8 +186,9 @@ const Servicios = () => {
 
   return (
     <div className="Servicios-page">
-      {/* Hero Section */}
+      {/* ===== HERO SECTION ===== */}
       <section className="Servicios-hero">
+        <div className="hero-particles"></div>
         <div className="container">
           <div className="hero-content">
             <div className="hero-badge">
@@ -243,8 +244,9 @@ const Servicios = () => {
         </div>
       </section>
 
-      {/* Filtros de Categorías */}
+      {/* ===== FILTROS DE CATEGORÍAS ===== */}
       <section className="courses-filters">
+        <div className="why-choose-background"></div>
         <div className="container">
           <div className="filter-tabs">
             {categories.map((category) => (
@@ -254,6 +256,7 @@ const Servicios = () => {
                   selectedCategory === category.id ? "active" : ""
                 }`}
                 onClick={() => setSelectedCategory(category.id)}
+                data-category={category.id}
               >
                 <span className="tab-icon">{category.icon}</span>
                 <span className="tab-name">{category.name}</span>
@@ -263,7 +266,7 @@ const Servicios = () => {
         </div>
       </section>
 
-      {/* Grid de Servicios */}
+      {/* ===== GRID DE SERVICIOS/CURSOS ===== */}
       <section className="courses-grid-section">
         <div className="container">
           <div className="courses-grid">
@@ -274,6 +277,7 @@ const Servicios = () => {
                   visibleCourses.has(course.id) ? "visible" : ""
                 }`}
                 data-course-id={course.id}
+                data-category={course.level}
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <div className="course-card-inner">
@@ -425,7 +429,7 @@ const Servicios = () => {
         </div>
       )}
 
-      {/* Sección de Garantía */}
+      {/* ===== SECCIÓN DE GARANTÍA ===== */}
       <section className="guarantee-section">
         <div className="container">
           <div className="guarantee-content">

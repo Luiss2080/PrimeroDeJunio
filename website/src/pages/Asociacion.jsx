@@ -68,6 +68,7 @@ const Asociacion = () => {
       </section>
 
       <section className="asociacion-tabs">
+        <div className="why-choose-background"></div>
         <div className="container">
           <div className="tabs-navigation">
             {tabs.map((tab) => (
