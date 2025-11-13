@@ -121,32 +121,32 @@
 
       // Simular progreso de carga
       function simulateLoading() {
-        const progressFill = document.querySelector('.progress-fill');
-        const percentageElement = document.querySelector('.loading-percentage');
-        const loadingText = document.querySelector('.loading-text');
-        
+        const progressFill = document.querySelector(".progress-fill");
+        const percentageElement = document.querySelector(".loading-percentage");
+        const loadingText = document.querySelector(".loading-text");
+
         const messages = [
           "Iniciando sistema de transporte...",
           "Cargando rutas disponibles...",
           "Conectando con conductores...",
           "Preparando interfaz...",
-          "Finalizando carga..."
+          "Finalizando carga...",
         ];
-        
+
         let progress = 0;
         let messageIndex = 0;
-        
+
         const interval = setInterval(() => {
           progress += Math.random() * 15 + 5; // Incremento aleatorio entre 5-20%
-          
+
           if (progress > 100) {
             progress = 100;
             clearInterval(interval);
           }
-          
-          progressFill.style.width = progress + '%';
-          percentageElement.textContent = Math.floor(progress) + '%';
-          
+
+          progressFill.style.width = progress + "%";
+          percentageElement.textContent = Math.floor(progress) + "%";
+
           // Cambiar mensaje según progreso
           if (progress > 20 && messageIndex === 0) {
             messageIndex = 1;
@@ -161,7 +161,6 @@
             messageIndex = 4;
             loadingText.textContent = messages[messageIndex];
           }
-          
         }, 200); // Actualizar cada 200ms
       }
 
