@@ -468,14 +468,14 @@ const Home = () => {
                 alignItems: "center",
                 gap: "0.5rem",
                 background:
-                  "linear-gradient(135deg, rgba(255,0,0,0.15) 0%, rgba(255,102,0,0.15) 100%)",
-                border: "1px solid rgba(255,0,0,0.3)",
+                  "linear-gradient(135deg, rgba(0,255,136,0.15) 0%, rgba(0,255,102,0.15) 100%)",
+                border: "1px solid rgba(0,255,136,0.3)",
                 borderRadius: "50px",
                 padding: "0.8rem 1.8rem",
                 marginBottom: "2.5rem",
                 fontSize: "0.9rem",
                 fontWeight: "600",
-                color: "#FF6600",
+                color: "#00ff88",
                 backdropFilter: "blur(10px)",
                 animation: "glow 3s ease-in-out infinite",
               }}
@@ -484,8 +484,8 @@ const Home = () => {
               <span>Academia #1 de Desarrollo en Latinoamérica</span>
               <span
                 style={{
-                  background: "#FF0000",
-                  color: "white",
+                  background: "#00ff88",
+                  color: "#000000",
                   padding: "0.2rem 0.6rem",
                   borderRadius: "20px",
                   fontSize: "0.7rem",
@@ -512,7 +512,7 @@ const Home = () => {
               <span
                 style={{
                   background:
-                    "linear-gradient(135deg, #FF0000 0%, #FF6600 50%, #FF0000 100%)",
+                    "linear-gradient(135deg, #00ff88 0%, #00ff66 50%, #00ff88 100%)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   backgroundClip: "text",
@@ -541,10 +541,10 @@ const Home = () => {
               metodología
               <span
                 style={{
-                  color: "#FF6600",
+                  color: "#00ff88",
                   fontWeight: "600",
                   background:
-                    "linear-gradient(135deg, #FF6600 0%, #FF0000 100%)",
+                    "linear-gradient(135deg, #00ff88 0%, #00ff66 100%)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                 }}
@@ -592,7 +592,7 @@ const Home = () => {
                     padding: "1rem 1.5rem",
                     background: "rgba(255,255,255,0.05)",
                     borderRadius: "12px",
-                    border: "1px solid rgba(255,0,0,0.2)",
+                    border: "1px solid rgba(0,255,136,0.2)",
                     backdropFilter: "blur(10px)",
                     animation: `fadeInUp 0.6s ease-out ${
                       0.3 + index * 0.2
@@ -603,7 +603,7 @@ const Home = () => {
                   <div>
                     <div
                       style={{
-                        color: "#FF0000",
+                        color: "#00ff88",
                         fontWeight: "700",
                         fontSize: "0.95rem",
                       }}
@@ -651,7 +651,7 @@ const Home = () => {
                       fontSize: "2.5rem",
                       fontWeight: "800",
                       background:
-                        "linear-gradient(135deg, #FF0000 0%, #FF6600 100%)",
+                        "linear-gradient(135deg, #00ff88 0%, #00ff66 100%)",
                       WebkitBackgroundClip: "text",
                       WebkitTextFillColor: "transparent",
                       backgroundClip: "text",
@@ -678,7 +678,7 @@ const Home = () => {
                 className="hover-card"
                 style={{
                   background:
-                    "linear-gradient(135deg, #FF0000 0%, #FF6600 50%, #FF0000 100%)",
+                    "linear-gradient(135deg, #00ff88 0%, #00ff66 50%, #00ff88 100%)",
                   color: "#ffffff",
                   border: "none",
                   borderRadius: "16px",
@@ -712,8 +712,8 @@ const Home = () => {
                 className="hover-card"
                 style={{
                   background: "rgba(255, 255, 255, 0.1)",
-                  color: "#FF0000",
-                  border: "2px solid #FF0000",
+                  color: "#00ff88",
+                  border: "2px solid #00ff88",
                   borderRadius: "16px",
                   padding: "1.5rem 3rem",
                   fontSize: "1.2rem",
@@ -726,14 +726,14 @@ const Home = () => {
                   transition: "all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
                 }}
                 onMouseEnter={(e) => {
-                  e.target.style.background = "rgba(255, 0, 0, 0.1)";
+                  e.target.style.background = "rgba(0, 255, 136, 0.1)";
                   e.target.style.transform = "translateY(-3px)";
-                  e.target.style.borderColor = "#FF6600";
+                  e.target.style.borderColor = "#00ff66";
                 }}
                 onMouseLeave={(e) => {
                   e.target.style.background = "rgba(255, 255, 255, 0.1)";
                   e.target.style.transform = "translateY(0)";
-                  e.target.style.borderColor = "#FF0000";
+                  e.target.style.borderColor = "#00ff88";
                 }}
               >
                 📹 DEMO EN VIVO
@@ -937,14 +937,14 @@ const Home = () => {
                 alignItems: "center",
                 gap: "0.8rem",
                 background:
-                  "linear-gradient(135deg, rgba(255,0,0,0.15) 0%, rgba(255,102,0,0.15) 100%)",
-                border: "1px solid rgba(255,0,0,0.3)",
+                  "linear-gradient(135deg, rgba(0,255,136,0.15) 0%, rgba(0,255,102,0.15) 100%)",
+                border: "1px solid rgba(0,255,136,0.3)",
                 borderRadius: "50px",
                 padding: "1rem 2.5rem",
                 marginBottom: "2.5rem",
                 fontSize: "1rem",
                 fontWeight: "700",
-                color: "#FF6600",
+                color: "#00ff88",
                 backdropFilter: "blur(15px)",
                 textTransform: "uppercase",
                 letterSpacing: "1px",
@@ -969,7 +969,7 @@ const Home = () => {
               <span
                 style={{
                   background:
-                    "linear-gradient(135deg, #FF0000 0%, #FF6600 50%, #FF0000 100%)",
+                    "linear-gradient(135deg, #00ff88 0%, #00ff66 50%, #00ff88 100%)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   backgroundSize: "200% 200%",
@@ -992,7 +992,7 @@ const Home = () => {
             >
               La diferencia entre el éxito y el fracaso en el Desarrollo está en
               la
-              <strong style={{ color: "#FF6600" }}>
+              <strong style={{ color: "#00ff88" }}>
                 {" "}
                 metodología, el mentorship y la comunidad
               </strong>
@@ -1021,7 +1021,7 @@ const Home = () => {
                 image: "./images/features/professional-Desarrollo.jpg",
                 stats: { value: "500M+", label: "Gestionados" },
                 badge: "EXCLUSIVO",
-                color: "#FF0000",
+                color: "#00ff88",
               },
               {
                 id: 2,
@@ -1044,7 +1044,7 @@ const Home = () => {
                 image: "./images/features/international-certification.jpg",
                 stats: { value: "ISO 9001", label: "Certificación" },
                 badge: "OFICIAL",
-                color: "#FFD700",
+                color: "#00ff88",
               },
               {
                 id: 4,
@@ -1080,7 +1080,7 @@ const Home = () => {
                 image: "./images/features/institutional-support.jpg",
                 stats: { value: "24/7", label: "Soporte Live" },
                 badge: "PREMIUM",
-                color: "#ff6b35",
+                color: "#00ff88",
               },
             ].map((feature, index) => (
               <div
@@ -1138,7 +1138,7 @@ const Home = () => {
                       position: "absolute",
                       top: "1rem",
                       right: "1rem",
-                      background: feature.color || "#FF0000",
+                      background: feature.color || "#00ff88",
                       color: "white",
                       padding: "0.5rem 1.2rem",
                       borderRadius: "20px",
@@ -1166,7 +1166,7 @@ const Home = () => {
                       style={{
                         fontSize: "1.5rem",
                         fontWeight: "900",
-                        color: feature.color || "#FF0000",
+                        color: feature.color || "#00ff88",
                         marginBottom: "0.2rem",
                       }}
                     >
@@ -1201,10 +1201,10 @@ const Home = () => {
                           fontSize: "2.5rem",
                           padding: "0.8rem",
                           background: `linear-gradient(135deg, ${
-                            feature.color || "#FF0000"
-                          }20 0%, ${feature.color || "#FF0000"}10 100%)`,
+                            feature.color || "#00ff88"
+                          }20 0%, ${feature.color || "#00ff88"}10 100%)`,
                           borderRadius: "16px",
-                          border: `1px solid ${feature.color || "#FF0000"}30`,
+                          border: `1px solid ${feature.color || "#00ff88"}30`,
                         }}
                       >
                         {feature.icon}
@@ -1225,7 +1225,7 @@ const Home = () => {
                       <p
                         style={{
                           fontSize: "0.9rem",
-                          color: feature.color || "#FF6600",
+                          color: feature.color || "#00ff88",
                           fontWeight: "600",
                           textTransform: "uppercase",
                           letterSpacing: "0.5px",
@@ -1253,8 +1253,8 @@ const Home = () => {
                     style={{
                       width: "100%",
                       background: `linear-gradient(135deg, ${
-                        feature.color || "#FF0000"
-                      } 0%, ${feature.color || "#FF6600"} 100%)`,
+                        feature.color || "#00ff88"
+                      } 0%, ${feature.color || "#00ff66"} 100%)`,
                       color: "white",
                       border: "none",
                       borderRadius: "12px",
@@ -1265,7 +1265,7 @@ const Home = () => {
                       textTransform: "uppercase",
                       letterSpacing: "0.5px",
                       transition: "all 0.3s ease",
-                      boxShadow: `0 8px 25px ${feature.color || "#FF0000"}30`,
+                      boxShadow: `0 8px 25px ${feature.color || "#00ff88"}30`,
                     }}
                     onMouseEnter={(e) => {
                       e.target.style.transform = "scale(1.02)";
@@ -1341,7 +1341,7 @@ const Home = () => {
             <button
               className="hover-card"
               style={{
-                background: "linear-gradient(135deg, #FF0000 0%, #FF6600 100%)",
+                background: "linear-gradient(135deg, #00ff88 0%, #00ff66 100%)",
                 color: "white",
                 border: "none",
                 borderRadius: "16px",
@@ -1351,7 +1351,7 @@ const Home = () => {
                 cursor: "pointer",
                 textTransform: "uppercase",
                 letterSpacing: "1px",
-                boxShadow: "0 15px 35px rgba(255,0,0,0.4)",
+                boxShadow: "0 15px 35px rgba(0,255,136,0.4)",
                 position: "relative",
               }}
             >
@@ -1384,7 +1384,7 @@ const Home = () => {
                 marginBottom: "2rem",
                 fontSize: "0.9rem",
                 fontWeight: "600",
-                color: "#FF6600",
+                color: "#00ff88",
                 backdropFilter: "blur(10px)",
               }}
             >

@@ -181,7 +181,7 @@
   background: linear-gradient(
     135deg,
     rgba(0, 255, 102, 0.8) 0%,
-    rgba(255, 102, 0, 0.8) 50%,
+    rgba(0, 255, 136, 0.8) 50%,
     rgba(0, 255, 102, 0.8) 100%
   );
   border-radius: 20px;
@@ -295,10 +295,10 @@
 }
 
 .search-container:hover {
-  border-color: rgba(255, 83, 73, 0.4);
-  background: rgba(255, 83, 73, 0.1);
+  border-color: rgba(0, 255, 136, 0.4);
+  background: rgba(0, 255, 136, 0.1);
   transform: translateY(-1px) scale(1.02);
-  box-shadow: 0 6px 20px rgba(255, 83, 73, 0.2),
+  box-shadow: 0 6px 20px rgba(0, 255, 136, 0.2),
     inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
@@ -482,7 +482,7 @@
   background: linear-gradient(
     135deg,
     rgba(0, 255, 102, 0.8) 0%,
-    rgba(255, 102, 0, 0.8) 50%,
+    rgba(0, 255, 136, 0.8) 50%,
     rgba(0, 255, 102, 0.8) 100%
   );
   border-radius: 20px;

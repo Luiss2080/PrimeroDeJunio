@@ -148,7 +148,7 @@ const Nosotros = () => {
       description:
         "Buscamos la perfección en cada curso, cada señal, cada interacción con nuestros estudiantes.",
       icon: "⭐",
-      color: "#ff4757",
+      color: "#00ff88",
     },
     {
       title: "Transparencia",
@@ -169,14 +169,14 @@ const Nosotros = () => {
       description:
         "Actuamos con honestidad y ética en cada decisión, priorizando el éxito de nuestros estudiantes.",
       icon: "🛡️",
-      color: "#ff6348",
+      color: "#00ff88",
     },
     {
       title: "Comunidad",
       description:
         "Creamos una red global de Conductors exitosos que se apoyan mutuamente para crecer juntos.",
       icon: "🤝",
-      color: "#ffa502",
+      color: "#00ff88",
     },
     {
       title: "Resultado",
