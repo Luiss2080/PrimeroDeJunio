@@ -207,9 +207,9 @@ const Footer = () => {
               <h3 className="footer-title">PRIMERO DE JUNIO</h3>
               <div className="nexorium-content">
                 <p className="nexorium-description">
-                  Proyecto de innovación y desarrollo tecnológico. Creamos
-                  soluciones digitales para impulsar el crecimiento y la
-                  transformación digital de nuestros clientes.
+                  Asociación de transporte en mototaxis "PRIMERO DE JUNIO". 
+                  Brindamos servicios de transporte seguros, confiables y 
+                  comprometidos con la comunidad de Santa Cruz, Bolivia.
                 </p>
 
                 <div className="nexorium-features">
@@ -277,7 +277,7 @@ const Footer = () => {
               <div className="footer-logo-text">
                 <span className="footer-logo-name">PRIMERO DE JUNIO</span>
                 <span className="footer-logo-tagline">
-                  Innovación y Desarrollo
+                  PRIMERO DE JUNIO
                 </span>
               </div>
             </div>

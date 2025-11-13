@@ -6,15 +6,7 @@
 @import url("/css/footer.css");
 @import url("/css/pages.css");
 
-/* Reset y variables */
-:root {
-  --primary-green: rgba(0, 255, 136, 0.2);
-  --primary-green-solid: #00ff88;
-  --bg-dark: #000000;
-  --bg-dark-secondary: #001a0a;
-  --text-light: #ffffff;
-}
-
+/* Reset básico */
 * {
   margin: 0;
   padding: 0;
@@ -27,8 +19,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: var(--bg-dark);
-  color: var(--text-light);
+  background: #000000;
+  color: #ffffff;
   line-height: 1.6;
 }
 
