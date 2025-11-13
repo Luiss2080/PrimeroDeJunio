@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 
 const Servicios = () => {
   const [selectedCategory, setSelectedCategory] = useState("todos");
-  const [selectedCourse, setSelectedCourse] = useState(null);
   const [visibleCourses, setVisibleCourses] = useState(new Set());
   const observerRef = useRef();
 
@@ -111,20 +110,20 @@ const Servicios = () => {
       duration: "24 semanas",
       students: "156",
       rating: 5.0,
-      lessons: "Ilimitado",
+      lessons: 999, // Ilimitado
       certificate: true,
       highlights: [
         "Mentoría 1:1",
         "Señales premium",
-        "Room Desarrollo privado",
-        "Capital funding",
+        "Acceso directo",
+        "Soporte 24/7",
       ],
     },
     {
       id: 6,
       title: "Criptomonedas & DeFi",
       description:
-        "Desarrollo profesional de criptomonedas y finanzas descentralizadas. Del spot al futuro.",
+        "Desarrollo profesional de criptodivisas descentralizadas. Del spot al futuro.",
       price: 399,
       originalPrice: 549,
       image: "₿",
@@ -137,35 +136,36 @@ const Servicios = () => {
       highlights: [
         "DeFi Desarrollo",
         "NFT flipping",
+        "Análisis on-chain",
         "Yield farming",
-        "Arbitraje cripto",
       ],
     },
   ];
 
-  const filteredCourses =
-    selectedCategory === "todos"
-      ? courses
-      : courses.filter((course) => course.level === selectedCategory);
+  // Filter courses based on selected category
+  const filteredCourses = courses.filter((course) => {
+    if (selectedCategory === "todos") return true;
+    return course.level === selectedCategory;
+  });
 
-  // Intersection Observer para animaciones
+  // Setup intersection observer for course cards
   useEffect(() => {
     observerRef.current = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            const courseId = parseInt(entry.target.dataset.courseId);
-            setVisibleCourses((prev) => new Set([...prev, courseId]));
+            const courseId = entry.target.dataset.courseId;
+            if (courseId) {
+              setVisibleCourses((prev) => new Set([...prev, courseId]));
+            }
           }
         });
       },
       { threshold: 0.1, rootMargin: "50px" }
     );
 
-    const courseElements = document.querySelectorAll(".course-card");
-    courseElements.forEach((el) => {
-      observerRef.current.observe(el);
-    });
+    const cards = document.querySelectorAll(".course-card");
+    cards.forEach((card) => observerRef.current.observe(card));
 
     return () => {
       if (observerRef.current) {
@@ -174,15 +174,13 @@ const Servicios = () => {
     };
   }, [filteredCourses]);
 
-  const openCourseModal = (course) => {
-    setSelectedCourse(course);
-    document.body.style.overflow = "hidden";
-  };
-
-  const closeCourseModal = () => {
-    setSelectedCourse(null);
-    document.body.style.overflow = "";
-  };
+  // Dispatch page change event
+  useEffect(() => {
+    const event = new CustomEvent("pageChanged", {
+      detail: { page: "servicios" },
+    });
+    window.dispatchEvent(event);
+  }, []);
 
   return (
     <div className="Servicios-page">
@@ -200,9 +198,8 @@ const Servicios = () => {
               <span className="gradient-text"> Servicios de Desarrollo</span>
             </h1>
             <p className="hero-description">
-              Desde principiante hasta desarrollador profesional. Metodología
-              probada que ha generado +$50M en ganancias para nuestros
-              estudiantes.
+              Desde principiante hasta desarrollador profesional. Metodología probada
+              que ha generado +$50M en ganancias para nuestros estudiantes.
             </p>
             <div className="hero-stats">
               <div className="stat">
@@ -220,27 +217,7 @@ const Servicios = () => {
             </div>
           </div>
           <div className="hero-visual">
-            <div className="floating-card profit-card">
-              <div className="card-header">
-                <span className="card-icon">💰</span>
-                <span className="card-title">Profit Today</span>
-              </div>
-              <div className="card-value success">+$24,750</div>
-            </div>
-            <div className="floating-card students-card">
-              <div className="card-header">
-                <span className="card-icon">👥</span>
-                <span className="card-title">Estudiantes Activos</span>
-              </div>
-              <div className="card-value">15,247</div>
-            </div>
-            <div className="floating-card success-card">
-              <div className="card-header">
-                <span className="card-icon">📊</span>
-                <span className="card-title">Tasa de Éxito</span>
-              </div>
-              <div className="card-value success">96.8%</div>
-            </div>
+            {/* Aquí irían elementos visuales opcionales */}
           </div>
         </div>
       </section>
@@ -275,7 +252,7 @@ const Servicios = () => {
               <div
                 key={course.id}
                 className={`course-card ${
-                  visibleCourses.has(course.id) ? "visible" : ""
+                  visibleCourses.has(course.id.toString()) ? "visible" : ""
                 }`}
                 data-course-id={course.id}
                 data-category={course.level}
@@ -339,10 +316,7 @@ const Servicios = () => {
                         )}
                       </div>
 
-                      <button
-                        className="btn btn-primary course-btn"
-                        onClick={() => openCourseModal(course)}
-                      >
+                      <button className="btn btn-primary course-btn">
                         Ver Detalles
                       </button>
                     </div>
@@ -350,110 +324,6 @@ const Servicios = () => {
                 </div>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Modal de Curso */}
-      {selectedCourse && (
-        <div className="course-modal-overlay" onClick={closeCourseModal}>
-          <div className="course-modal" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close" onClick={closeCourseModal}>
-              ✕
-            </button>
-
-            <div className="modal-header">
-              <div className="modal-icon">{selectedCourse.image}</div>
-              <div className="modal-title-area">
-                <h2>{selectedCourse.title}</h2>
-                <div className="modal-meta">
-                  <span className="modal-rating">
-                    ⭐ {selectedCourse.rating}
-                  </span>
-                  <span className="modal-students">
-                    👥 {selectedCourse.students} estudiantes
-                  </span>
-                  <span className="modal-level">{selectedCourse.level}</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="modal-body">
-              <p className="modal-description">{selectedCourse.description}</p>
-
-              <div className="modal-highlights">
-                <h4>Lo que aprenderás:</h4>
-                <div className="highlights-grid">
-                  {selectedCourse.highlights.map((highlight, idx) => (
-                    <div key={idx} className="highlight-item">
-                      <span className="highlight-check">✓</span>
-                      <span>{highlight}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="modal-details">
-                <div className="detail-item">
-                  <span className="detail-icon">⏱</span>
-                  <span>{selectedCourse.duration}</span>
-                </div>
-                <div className="detail-item">
-                  <span className="detail-icon">📚</span>
-                  <span>{selectedCourse.lessons} lecciones</span>
-                </div>
-                {selectedCourse.certificate && (
-                  <div className="detail-item">
-                    <span className="detail-icon">🏆</span>
-                    <span>Certificado incluido</span>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            <div className="modal-footer">
-              <div className="modal-pricing">
-                <span className="modal-current-price">
-                  ${selectedCourse.price}
-                </span>
-                {selectedCourse.originalPrice > selectedCourse.price && (
-                  <span className="modal-original-price">
-                    ${selectedCourse.originalPrice}
-                  </span>
-                )}
-              </div>
-              <button className="btn btn-primary modal-enroll-btn">
-                Inscribirse Ahora
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* ===== SECCIÓN DE GARANTÍA ===== */}
-      <section className="guarantee-section">
-        <div className="container">
-          <div className="guarantee-content">
-            <div className="guarantee-icon">🛡️</div>
-            <h2>Garantía de 30 Días</h2>
-            <p>
-              Si no estás 100% satisfecho con tu curso, te devolvemos tu dinero
-              sin preguntas.
-            </p>
-            <div className="guarantee-features">
-              <div className="feature">
-                <span className="feature-icon">✓</span>
-                <span>Reembolso completo</span>
-              </div>
-              <div className="feature">
-                <span className="feature-icon">✓</span>
-                <span>Sin preguntas</span>
-              </div>
-              <div className="feature">
-                <span className="feature-icon">✓</span>
-                <span>Proceso rápido</span>
-              </div>
-            </div>
           </div>
         </div>
       </section>
