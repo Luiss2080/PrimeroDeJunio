@@ -283,13 +283,13 @@
 }
 
 .hero-feature-item:nth-child(1) {
-  animation: fadeInUp 0.6s ease-out 0.3s backwards;
+  animation: fadeInUp 0.6s ease-out 0.3s both;
 }
 .hero-feature-item:nth-child(2) {
-  animation: fadeInUp 0.6s ease-out 0.5s backwards;
+  animation: fadeInUp 0.6s ease-out 0.5s both;
 }
 .hero-feature-item:nth-child(3) {
-  animation: fadeInUp 0.6s ease-out 0.7s backwards;
+  animation: fadeInUp 0.6s ease-out 0.7s both;
 }
 
 .hero-feature-icon {
@@ -320,13 +320,13 @@
   text-align: center;
 }
 .hero-stat-item:nth-child(1) {
-  animation: fadeInUp 0.8s ease-out 0.4s backwards;
+  animation: fadeInUp 0.8s ease-out 0.4s both;
 }
 .hero-stat-item:nth-child(2) {
-  animation: fadeInUp 0.8s ease-out 0.6s backwards;
+  animation: fadeInUp 0.8s ease-out 0.6s both;
 }
 .hero-stat-item:nth-child(3) {
-  animation: fadeInUp 0.8s ease-out 0.8s backwards;
+  animation: fadeInUp 0.8s ease-out 0.8s both;
 }
 
 .hero-stat-value {
@@ -347,7 +347,7 @@
   display: flex;
   gap: 1.5rem;
   flex-wrap: wrap;
-  animation: fadeInUp 0.8s ease-out 0.8s backwards;
+  animation: fadeInUp 0.8s ease-out 0.8s both;
 }
 
 .hero-btn-primary {
@@ -641,22 +641,22 @@
 }
 
 .feature-card:nth-child(1) {
-  animation: fadeInUp 0.8s ease-out 0s backwards;
+  animation: fadeInUp 0.8s ease-out 0s both;
 }
 .feature-card:nth-child(2) {
-  animation: fadeInUp 0.8s ease-out 0.1s backwards;
+  animation: fadeInUp 0.8s ease-out 0.1s both;
 }
 .feature-card:nth-child(3) {
-  animation: fadeInUp 0.8s ease-out 0.2s backwards;
+  animation: fadeInUp 0.8s ease-out 0.2s both;
 }
 .feature-card:nth-child(4) {
-  animation: fadeInUp 0.8s ease-out 0.3s backwards;
+  animation: fadeInUp 0.8s ease-out 0.3s both;
 }
 .feature-card:nth-child(5) {
-  animation: fadeInUp 0.8s ease-out 0.4s backwards;
+  animation: fadeInUp 0.8s ease-out 0.4s both;
 }
 .feature-card:nth-child(6) {
-  animation: fadeInUp 0.8s ease-out 0.5s backwards;
+  animation: fadeInUp 0.8s ease-out 0.5s both;
 }
 
 .feature-card-image {
@@ -847,13 +847,6 @@
 }
 
 /* === UTILITY CLASSES === */
-.card-visible {
-  animation: fadeInUp 0.6s ease-out forwards;
-}
-.card-hidden {
-  opacity: 0;
-  transform: translateY(50px);
-}
 .hover-card {
   transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   cursor: pointer;

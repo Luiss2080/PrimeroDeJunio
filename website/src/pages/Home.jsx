@@ -7,15 +7,10 @@ const Home = () => {
   // Estados para animaciones y carruseles
   const [currentText, setCurrentText] = useState("");
   const [textIndex, setTextIndex] = useState(0);
-  const [currentCourseSlide, setCurrentCourseSlide] = useState(0);
-  const [currentTestimonial, setCurrentTestimonial] = useState(0);
-  const [currentSignal, setCurrentSignal] = useState(0);
-  const [visibleCards, setVisibleCards] = useState(new Set());
-  const observerRef = useRef();
 
   const texts = [
     "Conductor Profesional",
-    "Especialista en Rutas",
+    "Especialista en Rutas", 
     "Servicio Confiable",
     "Transporte Seguro",
   ];
@@ -32,27 +27,9 @@ const Home = () => {
     setCurrentText(texts[textIndex]);
   }, [textIndex]);
 
-  // Intersection Observer para animaciones
-  useEffect(() => {
-    observerRef.current = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setVisibleCards((prev) => new Set([...prev, entry.target.id]));
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    return () => observerRef.current?.disconnect();
-  }, []);
-
-  // Función para registrar elementos observables
+  // Función para registrar elementos observables (simplificada)
   const observeElement = (element) => {
-    if (element && observerRef.current) {
-      observerRef.current.observe(element);
-    }
+    // Función vacía para mantener compatibilidad
   };
 
   return (
