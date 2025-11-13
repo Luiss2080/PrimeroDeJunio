@@ -200,8 +200,9 @@ const Servicios = () => {
               <span className="gradient-text"> Servicios de Desarrollo</span>
             </h1>
             <p className="hero-description">
-              Desde principiante hasta desarrollador profesional. Metodología probada
-              que ha generado +$50M en ganancias para nuestros estudiantes.
+              Desde principiante hasta desarrollador profesional. Metodología
+              probada que ha generado +$50M en ganancias para nuestros
+              estudiantes.
             </p>
             <div className="hero-stats">
               <div className="stat">

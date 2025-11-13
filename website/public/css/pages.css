@@ -1008,7 +1008,11 @@
   position: absolute;
   width: 150px;
   height: 150px;
-  background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 255, 102, 0.05));
+  background: linear-gradient(
+    135deg,
+    rgba(0, 255, 136, 0.1),
+    rgba(0, 255, 102, 0.05)
+  );
   border-radius: 50%;
   top: 10%;
   right: 15%;
@@ -1021,7 +1025,11 @@
   position: absolute;
   width: 200px;
   height: 100px;
-  background: linear-gradient(45deg, rgba(0, 255, 136, 0.08), rgba(0, 255, 102, 0.03));
+  background: linear-gradient(
+    45deg,
+    rgba(0, 255, 136, 0.08),
+    rgba(0, 255, 102, 0.03)
+  );
   border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
   bottom: 20%;
   left: 10%;
@@ -1951,7 +1959,11 @@
 }
 
 .filter-tab.active {
-  background: linear-gradient(135deg, rgba(0, 255, 136, 0.2), rgba(0, 255, 102, 0.2));
+  background: linear-gradient(
+    135deg,
+    rgba(0, 255, 136, 0.2),
+    rgba(0, 255, 102, 0.2)
+  );
   border-color: #00ff88;
   color: #00ff88;
   transform: translateY(-2px);
@@ -1977,7 +1989,11 @@
 
 /* === TARJETAS DE CURSOS/SERVICIOS === */
 .course-card {
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 26, 10, 0.9) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.8) 0%,
+    rgba(0, 26, 10, 0.9) 100%
+  );
   border: 1px solid rgba(0, 255, 136, 0.1);
   border-radius: 20px;
   overflow: hidden;
@@ -2010,7 +2026,11 @@
 .course-image {
   position: relative;
   padding: 2rem;
-  background: linear-gradient(135deg, rgba(0, 255, 136, 0.1) 0%, rgba(0, 255, 102, 0.05) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(0, 255, 136, 0.1) 0%,
+    rgba(0, 255, 102, 0.05) 100%
+  );
   text-align: center;
   border-bottom: 1px solid rgba(0, 255, 136, 0.1);
 }
@@ -2186,7 +2206,11 @@
 /* === SECCIÓN DE GARANTÍA === */
 .guarantee-section {
   padding: 4rem 2rem;
-  background: linear-gradient(135deg, rgba(0, 255, 136, 0.05) 0%, rgba(0, 255, 102, 0.02) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(0, 255, 136, 0.05) 0%,
+    rgba(0, 255, 102, 0.02) 100%
+  );
   border-top: 1px solid rgba(0, 255, 136, 0.1);
   border-bottom: 1px solid rgba(0, 255, 136, 0.1);
 }

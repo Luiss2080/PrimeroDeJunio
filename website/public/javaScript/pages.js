@@ -348,7 +348,9 @@ class HomePageController {
           ".hero-particles, .why-choose-background"
         );
         serviciosParallax.forEach((element) => {
-          const speed = element.classList.contains("hero-particles") ? 0.3 : 0.25;
+          const speed = element.classList.contains("hero-particles")
+            ? 0.3
+            : 0.25;
           element.style.transform = `translateY(${scrollY * speed}px)`;
         });
       }
@@ -1208,7 +1210,9 @@ class ServiciosPageController {
   }
 
   init() {
-    console.log("🎓 PRIMERO DE JUNIO: Servicios page JavaScript inicializado...");
+    console.log(
+      "🎓 PRIMERO DE JUNIO: Servicios page JavaScript inicializado..."
+    );
     this.setupCategoryFilters();
     this.setupIntersectionObserver();
     this.setupParticleEffects();
@@ -1227,14 +1231,16 @@ class ServiciosPageController {
 
   setActiveCategory(category) {
     this.selectedCategory = category;
-    
+
     // Actualizar tabs activos
     document.querySelectorAll(".filter-tab").forEach((tab) => {
       tab.classList.remove("active");
     });
-    
-    document.querySelector(`[data-category="${category}"]`)?.classList.add("active");
-    
+
+    document
+      .querySelector(`[data-category="${category}"]`)
+      ?.classList.add("active");
+
     // Filtrar servicios (esto se puede expandir según necesidad)
     this.filterCourses(category);
   }
@@ -1255,14 +1261,16 @@ class ServiciosPageController {
 
   // Configurar efectos de partículas
   setupParticleEffects() {
-    const particles = document.querySelectorAll('.hero-particles, .why-choose-background');
-    particles.forEach(particle => {
+    const particles = document.querySelectorAll(
+      ".hero-particles, .why-choose-background"
+    );
+    particles.forEach((particle) => {
       if (particle) {
-        particle.style.opacity = '0';
-        particle.style.transition = 'opacity 1s ease-in-out';
-        
+        particle.style.opacity = "0";
+        particle.style.transition = "opacity 1s ease-in-out";
+
         setTimeout(() => {
-          particle.style.opacity = '1';
+          particle.style.opacity = "1";
         }, 300);
       }
     });
