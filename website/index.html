@@ -30,7 +30,7 @@
 
     <!-- CSS LOADING - PRIORIDAD MÁXIMA -->
     <link rel="stylesheet" href="/css/loading.css" />
-    
+
     <!-- Cargar estilos CSS -->
     <link rel="stylesheet" href="/css/pages.css" />
     <link rel="stylesheet" href="/css/header.css" />
@@ -108,12 +108,16 @@
       function hideLoadingScreen() {
         const loadingScreen = document.getElementById("loading-screen");
         if (loadingScreen) {
-          console.log("🎯 PRIMERO DE JUNIO: Ocultando loading screen después de 3 segundos");
+          console.log(
+            "🎯 PRIMERO DE JUNIO: Ocultando loading screen después de 3 segundos"
+          );
           loadingScreen.style.opacity = "0";
           setTimeout(() => {
             loadingScreen.style.display = "none";
             loadingScreen.remove(); // ELIMINAR completamente del DOM
-            console.log("✅ PRIMERO DE JUNIO: Loading screen eliminado del DOM");
+            console.log(
+              "✅ PRIMERO DE JUNIO: Loading screen eliminado del DOM"
+            );
           }, 500); // Transición más larga
         }
       }
