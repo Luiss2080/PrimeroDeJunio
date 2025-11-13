@@ -207,8 +207,8 @@ const Footer = () => {
               <h3 className="footer-title">PRIMERO DE JUNIO</h3>
               <div className="nexorium-content">
                 <p className="nexorium-description">
-                  Asociación de transporte en mototaxis "PRIMERO DE JUNIO". 
-                  Brindamos servicios de transporte seguros, confiables y 
+                  Asociación de transporte en mototaxis "PRIMERO DE JUNIO".
+                  Brindamos servicios de transporte seguros, confiables y
                   comprometidos con la comunidad de Santa Cruz, Bolivia.
                 </p>
 
@@ -276,9 +276,7 @@ const Footer = () => {
               />
               <div className="footer-logo-text">
                 <span className="footer-logo-name">PRIMERO DE JUNIO</span>
-                <span className="footer-logo-tagline">
-                  PRIMERO DE JUNIO
-                </span>
+                <span className="footer-logo-tagline">PRIMERO DE JUNIO</span>
               </div>
             </div>
 
