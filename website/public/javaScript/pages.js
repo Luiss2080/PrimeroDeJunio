@@ -744,15 +744,17 @@ class AsociacionPageController {
 
   // Configurar efectos de partículas
   setupParticleEffects() {
-    const particles = document.querySelectorAll('.asociacion-particles, .cta-particles');
-    particles.forEach(particle => {
+    const particles = document.querySelectorAll(
+      ".asociacion-particles, .cta-particles"
+    );
+    particles.forEach((particle) => {
       if (particle) {
         // Añadir efecto de movimiento sutil
-        particle.style.opacity = '0';
-        particle.style.transition = 'opacity 1s ease-in-out';
-        
+        particle.style.opacity = "0";
+        particle.style.transition = "opacity 1s ease-in-out";
+
         setTimeout(() => {
-          particle.style.opacity = '1';
+          particle.style.opacity = "1";
         }, 300);
       }
     });

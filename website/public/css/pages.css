@@ -1609,7 +1609,11 @@
       transparent
     ),
     radial-gradient(1px 1px at 85% 75%, rgba(0, 255, 136, 0.3), transparent),
-    radial-gradient(0.8px 0.8px at 50% 15%, rgba(0, 255, 102, 0.25), transparent);
+    radial-gradient(
+      0.8px 0.8px at 50% 15%,
+      rgba(0, 255, 102, 0.25),
+      transparent
+    );
   background-size: 180px 180px, 120px 120px, 80px 80px;
   animation: float 18s ease-in-out infinite reverse;
   z-index: 1;
