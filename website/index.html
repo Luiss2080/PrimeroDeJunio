@@ -91,9 +91,22 @@
     <!-- Loading Screen -->
     <div id="loading-screen">
       <div class="loading-logo">
-        Bienvenido a la asociación Primero de Junio
+        <div class="logo-line-1">Bienvenido a la asociación</div>
+        <div class="logo-line-2">Primero de Junio</div>
       </div>
-      <div class="loading-text">Preparando experiencia...</div>
+      <div class="loading-spinner"></div>
+      <div class="loading-progress">
+        <div class="progress-bar">
+          <div class="progress-fill"></div>
+        </div>
+        <div class="loading-percentage">0%</div>
+      </div>
+      <div class="loading-text">Iniciando sistema de transporte...</div>
+      <div class="loading-dots">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
     </div>
 
     <!-- React App Root -->
@@ -105,6 +118,52 @@
     <!-- Loading Screen Script -->
     <script>
       console.log("🔄 PRIMERO DE JUNIO: Loading screen inicializado");
+
+      // Simular progreso de carga
+      function simulateLoading() {
+        const progressFill = document.querySelector('.progress-fill');
+        const percentageElement = document.querySelector('.loading-percentage');
+        const loadingText = document.querySelector('.loading-text');
+        
+        const messages = [
+          "Iniciando sistema de transporte...",
+          "Cargando rutas disponibles...",
+          "Conectando con conductores...",
+          "Preparando interfaz...",
+          "Finalizando carga..."
+        ];
+        
+        let progress = 0;
+        let messageIndex = 0;
+        
+        const interval = setInterval(() => {
+          progress += Math.random() * 15 + 5; // Incremento aleatorio entre 5-20%
+          
+          if (progress > 100) {
+            progress = 100;
+            clearInterval(interval);
+          }
+          
+          progressFill.style.width = progress + '%';
+          percentageElement.textContent = Math.floor(progress) + '%';
+          
+          // Cambiar mensaje según progreso
+          if (progress > 20 && messageIndex === 0) {
+            messageIndex = 1;
+            loadingText.textContent = messages[messageIndex];
+          } else if (progress > 40 && messageIndex === 1) {
+            messageIndex = 2;
+            loadingText.textContent = messages[messageIndex];
+          } else if (progress > 60 && messageIndex === 2) {
+            messageIndex = 3;
+            loadingText.textContent = messages[messageIndex];
+          } else if (progress > 80 && messageIndex === 3) {
+            messageIndex = 4;
+            loadingText.textContent = messages[messageIndex];
+          }
+          
+        }, 200); // Actualizar cada 200ms
+      }
 
       // Función para ocultar loading screen
       function hideLoadingScreen() {
@@ -127,6 +186,7 @@
       // Ocultar loading screen después de MÍNIMO 3 segundos
       window.addEventListener("DOMContentLoaded", function () {
         console.log("📦 PRIMERO DE JUNIO: DOM Content Loaded");
+        simulateLoading(); // Iniciar simulación de carga
         setTimeout(hideLoadingScreen, 3000);
       });
 
