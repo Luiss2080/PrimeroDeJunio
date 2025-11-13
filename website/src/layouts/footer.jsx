@@ -4,37 +4,9 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   useEffect(() => {
-    // TEMPORALMENTE DESHABILITADO - Script del footer causa errores
     console.log(
       "Footer component montado - script deshabilitado temporalmente"
     );
-    /*
-    // Importar el script del footer cuando el componente se monta
-    const script = document.createElement("script");
-    script.src = "/javaScript/footer.js";
-    script.async = true;
-
-    // Verificar si el script existe antes de agregarlo
-    script.onload = () => {
-      console.log("Footer script cargado correctamente");
-    };
-
-    script.onerror = () => {
-      console.log("Footer script no encontrado, continuando sin él");
-    };
-
-    document.body.appendChild(script);
-
-    // Cleanup: remover el script cuando el componente se desmonta
-    return () => {
-      const existingScript = document.querySelector(
-        'script[src="/javaScript/footer.js"]'
-      );
-      if (existingScript) {
-        document.body.removeChild(existingScript);
-      }
-    };
-    */
   }, []);
 
   return (
@@ -212,9 +184,9 @@ const Footer = () => {
                   comprometidos con la comunidad de Santa Cruz, Bolivia.
                 </p>
 
-                <div className="nexorium-features">
-                  <div className="feature-item">
-                    <div className="feature-icon">
+                <div className="system-links">
+                  <div className="system-link">
+                    <div className="system-icon">
                       <svg
                         width="16"
                         height="16"
@@ -224,11 +196,11 @@ const Footer = () => {
                         <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
                     </div>
-                    <span>Confiable</span>
+                    Confiable
                   </div>
 
-                  <div className="feature-item">
-                    <div className="feature-icon">
+                  <div className="system-link">
+                    <div className="system-icon">
                       <svg
                         width="16"
                         height="16"
@@ -238,11 +210,11 @@ const Footer = () => {
                         <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                       </svg>
                     </div>
-                    <span>Innovador</span>
+                    Innovador
                   </div>
 
-                  <div className="feature-item">
-                    <div className="feature-icon">
+                  <div className="system-link">
+                    <div className="system-icon">
                       <svg
                         width="16"
                         height="16"
@@ -252,7 +224,7 @@ const Footer = () => {
                         <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
                       </svg>
                     </div>
-                    <span>Eficiente</span>
+                    Eficiente
                   </div>
                 </div>
 
@@ -276,7 +248,7 @@ const Footer = () => {
               />
               <div className="footer-logo-text">
                 <span className="footer-logo-name">PRIMERO DE JUNIO</span>
-                <span className="footer-logo-tagline">PRIMERO DE JUNIO</span>
+                <span className="footer-logo-tagline">Asociacion</span>
               </div>
             </div>
 

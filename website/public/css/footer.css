@@ -235,32 +235,6 @@
   margin-bottom: 0;
 }
 
-.nexorium-features {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.feature-item {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.5rem 0;
-  color: var(--white);
-  font-size: 0.9rem;
-  font-weight: 500;
-}
-
-.feature-icon {
-  flex-shrink: 0;
-  width: 16px;
-  height: 16px;
-  color: var(--primary-green);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .version-info {
   display: flex;
   align-items: center;
@@ -624,15 +598,15 @@
 
 /* Transición suave para iconos */
 .contact-icon svg,
-.system-icon svg,
-.feature-icon svg {
+.system-icon svg {
   transition: transform 0.3s ease;
+  width: 16px;
+  height: 16px;
 }
 
 .contact-icon svg:hover,
-.system-icon svg:hover,
-.feature-icon svg:hover {
-  transform: translateY(-2px);
+.system-icon svg:hover {
+  transform: translateY(-1px) scale(1.05);
 }
 
 /* Efecto de escritura para el texto */
@@ -650,31 +624,6 @@
   100% {
     border-color: transparent;
   }
-}
-
-/* Efecto de partículas en hover de las características */
-.feature-item {
-  position: relative;
-  overflow: hidden;
-}
-
-.feature-item::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  background: radial-gradient(circle, var(--primary-green) 0%, transparent 70%);
-  transition: all 0.3s ease;
-  transform: translate(-50%, -50%);
-  opacity: 0;
-}
-
-.feature-item:hover::before {
-  width: 100px;
-  height: 100px;
-  opacity: 0.1;
 }
 
 /* Efecto de ondas en las redes sociales */

@@ -6,7 +6,6 @@ const Home = () => {
   // Estados para animaciones y carruseles
   const [currentText, setCurrentText] = useState("");
   const [textIndex, setTextIndex] = useState(0);
-  const [visibleCards, setVisibleCards] = useState(new Set());
 
   const texts = [
     "Conductor Profesional",
@@ -26,22 +25,6 @@ const Home = () => {
   useEffect(() => {
     setCurrentText(texts[textIndex]);
   }, [textIndex]);
-
-  // Función para registrar elementos observables (simplificada)
-  const observeElement = useCallback((element) => {
-    if (element) {
-      const id = element.id;
-      if (id) {
-        setVisibleCards((prev) => {
-          // Solo actualizar si el ID no está ya en el set
-          if (!prev.has(id)) {
-            return new Set([...prev, id]);
-          }
-          return prev;
-        });
-      }
-    }
-  }, []);
 
   return (
     <div className="home-container">
@@ -198,13 +181,13 @@ const Home = () => {
             </h2>
 
             <p className="why-choose-description">
-              La diferencia entre el éxito y el fracaso en el Desarrollo está en
+              La diferencia entre un buen servicio de transporte y el mejor está en
               la
               <strong className="hero-subtitle-highlight">
                 {" "}
-                metodología, el mentorship y la comunidad
+                experiencia, seguridad y compromiso
               </strong>
-              . Descubre por qué somos la opción #1 en Latinoamérica.
+              . Descubre por qué somos la asociación #1 en Santa Cruz.
             </p>
           </div>
 
@@ -213,78 +196,74 @@ const Home = () => {
             {[
               {
                 id: 1,
-                icon: "🚀",
-                title: "Desarrollo Profesional de Élite",
-                subtitle: "Metodología Institucional",
+                icon: "🏍️",
+                title: "Servicio de Transporte Seguro",
+                subtitle: "Conductores Certificados",
                 description:
-                  "Estrategias exclusivas utilizadas por hedge funds y bancos de inversión. Aprende de conductors que han gestionado más de $500M.",
-                stats: { value: "500M+", label: "Gestionados" },
-                badge: "EXCLUSIVO",
+                  "Todos nuestros conductores están certificados y tienen amplia experiencia en las rutas de Santa Cruz. Garantizamos un servicio confiable y seguro.",
+                stats: { value: "100+", label: "Conductores" },
+                badge: "CERTIFICADO",
                 color: "#00ff88",
               },
               {
                 id: 2,
-                title: "Resultados Garantizados",
-                subtitle: "96.8% Tasa de Éxito",
+                icon: "🛡️",
+                title: "Seguridad Garantizada",
+                subtitle: "95% Satisfacción del Cliente",
                 description:
-                  "Nuestra metodología probada garantiza resultados. Si no ves mejoras en 30 días, te devolvemos el 100% de tu inversión.",
-                stats: { value: "96.8%", label: "Éxito Comprobado" },
-                badge: "GARANTÍA",
+                  "Nuestro compromiso con la seguridad es inquebrantable. Mantenemos los más altos estándares de seguridad en cada viaje que realizamos.",
+                stats: { value: "95%", label: "Satisfacción" },
+                badge: "SEGURO",
                 color: "#00ff88",
               },
               {
                 id: 3,
                 icon: "🏅",
-                title: "Certificación Internacional",
-                subtitle: "Reconocimiento Global",
+                title: "Reconocimiento Municipal",
+                subtitle: "Asociación Oficial",
                 description:
-                  "Certificados avalados por la Financial Desarrollo Association y reconocidos por las principales instituciones financieras.",
-                stats: { value: "ISO 9001", label: "Certificación" },
+                  "Estamos oficialmente reconocidos por las autoridades municipales de Santa Cruz como una asociación legalmente constituida.",
+                stats: { value: "Legal", label: "Reconocimiento" },
                 badge: "OFICIAL",
                 color: "#00ff88",
               },
               {
                 id: 4,
-                icon: "👑",
-                title: "Comunidad VIP Exclusiva",
-                subtitle: "Network de Élite",
+                icon: "🌟",
+                title: "Comunidad Unida",
+                subtitle: "Red de Apoyo",
                 description:
-                  "Acceso directo a nuestra comunidad privada de 15,000+ conductors profesionales. Networking, señales premium y mentoría 24/7.",
-                stats: { value: "15K+", label: "Miembros VIP" },
-                badge: "PREMIUM",
+                  "Somos más que una asociación, somos una familia. Brindamos apoyo mutuo y trabajamos juntos por el bienestar de todos nuestros miembros.",
+                stats: { value: "Unidos", label: "Como Familia" },
+                badge: "COMUNIDAD",
                 color: "#9d4edd",
               },
               {
                 id: 5,
-                icon: "🤖",
-                title: "Tecnología de Vanguardia",
-                subtitle: "AI & Machine Learning",
+                icon: "⚡",
+                title: "Servicio Rápido y Eficiente",
+                subtitle: "Rutas Optimizadas",
                 description:
-                  "Plataforma potenciada por inteligencia artificial que analiza mercados en tiempo real y genera señales con 89% de precisión.",
-                stats: { value: "89%", label: "Precisión IA" },
-                badge: "INNOVACIÓN",
+                  "Conocemos Santa Cruz como la palma de nuestras manos. Utilizamos las rutas más eficientes para llevarte a tu destino rápidamente.",
+                stats: { value: "24/7", label: "Disponible" },
+                badge: "RÁPIDO",
                 color: "#00bfff",
               },
               {
                 id: 6,
-                icon: "📊",
-                title: "Soporte Institucional",
-                subtitle: "Mentoría 24/7/365",
+                icon: "�",
+                title: "Compromiso Social",
+                subtitle: "Responsabilidad Comunitaria",
                 description:
-                  "Soporte premium con conductors certificados disponibles 24/7. Análisis personalizado de tu portfolio y estrategias individualizadas.",
-                stats: { value: "24/7", label: "Soporte Live" },
-                badge: "PREMIUM",
+                  "Estamos comprometidos con el desarrollo de nuestra comunidad. Participamos activamente en programas sociales y de ayuda mutua.",
+                stats: { value: "Social", label: "Compromiso" },
+                badge: "SOCIAL",
                 color: "#00ff88",
               },
             ].map((feature, index) => (
               <div
                 key={feature.id}
-                className={`feature-card hover-card ${
-                  visibleCards.has(`feature-${index}`)
-                    ? "card-visible"
-                    : "card-hidden"
-                }`}
-                ref={(el) => observeElement(el)}
+                className="feature-card hover-card card-visible"
                 id={`feature-${index}`}
               >
                 {/* Feature image */}
@@ -341,13 +320,13 @@ const Home = () => {
 
           {/* CTA Final */}
           <div className="cta-final">
-            <h3 className="cta-title">¿Listo para unirte a la élite?</h3>
+            <h3 className="cta-title">¿Listo para unirte a nuestra familia?</h3>
             <p className="cta-description">
-              Más de 15,000 conductors ya han transformado su futuro financiero.
-              Tu turno de ser el siguiente success story.
+              Más de 100 conductores ya forman parte de nuestra asociación.
+              Tu turno de ser parte de la familia PRIMERO DE JUNIO.
             </p>
             <button className="cta-button hover-card">
-              🚀 COMENZAR TRANSFORMACIÓN
+              🏍️ ÚNETE A LA ASOCIACIÓN
             </button>
           </div>
         </div>

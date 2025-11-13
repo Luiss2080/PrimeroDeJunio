@@ -457,6 +457,7 @@
   text-transform: capitalize;
   letter-spacing: 0.3px;
   white-space: nowrap;
+  text-decoration: none; /* quitar subrayado en botones */
 }
 
 .btn::before {
@@ -555,6 +556,33 @@
 .btn-primary:hover::after {
   opacity: 1;
   transform: scale(1) rotate(0deg);
+}
+
+/* Efectos verdes en hover / active para los botones del header */
+.btn-ghost:hover,
+.btn-ghost:focus,
+.btn-ghost:active {
+  color: var(--primary-green);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 6px 18px rgba(0, 255, 102, 0.22), inset 0 0 12px rgba(0, 255, 102, 0.04);
+  text-decoration: none;
+}
+
+.btn-ghost:active {
+  transform: translateY(0) scale(0.995);
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+  background: var(--gradient-hover);
+  box-shadow: 0 10px 40px rgba(0, 255, 102, 0.45), 0 0 0 2px rgba(0, 255, 102, 0.06);
+  transform: translateY(-2px) scale(1.03);
+  text-decoration: none;
+}
+
+.btn-primary:active {
+  transform: translateY(0) scale(0.99);
 }
 
 /* ===== MENÚ MÓVIL ===== */
