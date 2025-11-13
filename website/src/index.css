@@ -1,6 +1,11 @@
 /* PRIMERO DE JUNIO - INDEX CSS */
 /* Estilos básicos globales para React */
 
+/* Importar CSS de componentes compartidos */
+@import url("/css/header.css");
+@import url("/css/footer.css");
+@import url("/css/pages.css");
+
 /* Reset y variables */
 :root {
   --primary-green: rgba(0, 255, 136, 0.2);

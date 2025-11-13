@@ -4,6 +4,27 @@
 document.addEventListener("DOMContentLoaded", function () {
   // ===== ELEMENTOS DEL DOM =====
   const footer = document.querySelector(".footer");
+
+  // Verificar que el footer existe antes de continuar
+  if (!footer) {
+    console.log("Footer no encontrado, reintentando...");
+    setTimeout(() => {
+      // Reintentar después de que React se monte
+      initFooter();
+    }, 1000);
+    return;
+  }
+
+  initFooter();
+});
+
+function initFooter() {
+  const footer = document.querySelector(".footer");
+  if (!footer) {
+    console.log("Footer aún no disponible");
+    return;
+  }
+
   const footerSections = document.querySelectorAll(".footer-section");
   const contactItems = document.querySelectorAll(".contact-item");
   const systemLinks = document.querySelectorAll(".system-link");
@@ -529,4 +550,4 @@ document.addEventListener("DOMContentLoaded", function () {
     `;
     document.head.appendChild(style);
   }
-});
+} // Fin de initFooter

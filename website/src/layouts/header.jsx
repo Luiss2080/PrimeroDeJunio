@@ -49,7 +49,7 @@ const Header = ({ currentView, changeView }) => {
           {/* Logo Profesional */}
           <div className="logo-container">
             <img
-              src="/images/LogoPrimeroDeJunio.png"
+              src="/images/logoMoto.jpg"
               alt="Primero de Junio"
               className="logo-image"
             />

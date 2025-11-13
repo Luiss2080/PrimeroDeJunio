@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
-import "../public/css/pages.css";
 
 console.log("🚀 PRIMERO DE JUNIO: main.jsx cargando...");
 

@@ -2,8 +2,8 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/images/LogoPrimeroDeJunio.png" />
-    <link rel="apple-touch-icon" href="/images/LogoPrimeroDeJunio.png" />
+    <link rel="icon" type="image/png" href="/images/logoMoto.jpg" />
+    <link rel="apple-touch-icon" href="/images/logoMoto.jpg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Primero de Junio - Página Oficial</title>
     <meta
@@ -17,7 +17,7 @@
     <meta name="author" content="Primero de Junio" />
 
     <!-- Precargar estilos CSS críticos -->
-    <link rel="preload" href="/css/main.css" as="style" />
+    <link rel="preload" href="/css/pages.css" as="style" />
     <link rel="preload" href="/css/header.css" as="style" />
     <link rel="preload" href="/css/footer.css" as="style" />
 
@@ -88,6 +88,9 @@
         justify-content: center;
         z-index: 9999;
         transition: opacity 0.5s ease;
+        border: none;
+        outline: none;
+        box-shadow: none;
       }
 
       .loading-logo {
@@ -111,6 +114,8 @@
         border-top: 3px solid #00ff66;
         border-radius: 50%;
         animation: spin 1s linear infinite;
+        box-shadow: none;
+        outline: none;
       }
 
       .loading-text {
@@ -181,36 +186,23 @@
         }
       }
 
-      // Ocultar loading screen cuando la app esté lista
-      window.addEventListener("load", function () {
-        console.log("📦 PRIMERO DE JUNIO: Window load event");
-        setTimeout(hideLoadingScreen, 500);
+      // Ocultar loading screen cuando la app esté lista - simplificado
+      window.addEventListener("DOMContentLoaded", function () {
+        console.log("📦 PRIMERO DE JUNIO: DOM Content Loaded");
+        setTimeout(hideLoadingScreen, 1000);
       });
 
-      // Ocultar cuando React se monte (detectar cambios en #root)
-      const observer = new MutationObserver(function (mutations) {
-        const root = document.getElementById("root");
-        if (root && root.children.length > 0) {
-          console.log("⚛️ PRIMERO DE JUNIO: React detectado en #root");
-          hideLoadingScreen();
-          observer.disconnect();
-        }
-      });
-
-      // Observar cambios en el DOM
-      observer.observe(document.body, { childList: true, subtree: true });
-
-      // Fallback: ocultar después de 3 segundos máximo
+      // Fallback más rápido
       setTimeout(() => {
         console.log("⏰ PRIMERO DE JUNIO: Timeout fallback activado");
         hideLoadingScreen();
-      }, 3000);
+      }, 1500);
     </script>
 
     <!-- JavaScript principal -->
-    <script src="/javaScript/main.js"></script>
+    <script src="/javaScript/pages.js"></script>
 
     <!-- Footer JavaScript -->
-    <script src="/javaScript/footer.js"></script>
+    <!-- <script src="/javaScript/footer.js"></script> -->
   </body>
 </html>

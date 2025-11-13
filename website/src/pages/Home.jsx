@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
-import "./Home.css";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 
 const Home = () => {
   console.log("🏠 PRIMERO DE JUNIO: Home component renderizando...");
@@ -7,6 +6,7 @@ const Home = () => {
   // Estados para animaciones y carruseles
   const [currentText, setCurrentText] = useState("");
   const [textIndex, setTextIndex] = useState(0);
+  const [visibleCards, setVisibleCards] = useState(new Set());
 
   const texts = [
     "Conductor Profesional",
@@ -28,9 +28,20 @@ const Home = () => {
   }, [textIndex]);
 
   // Función para registrar elementos observables (simplificada)
-  const observeElement = (element) => {
-    // Función vacía para mantener compatibilidad
-  };
+  const observeElement = useCallback((element) => {
+    if (element) {
+      const id = element.id;
+      if (id) {
+        setVisibleCards((prev) => {
+          // Solo actualizar si el ID no está ya en el set
+          if (!prev.has(id)) {
+            return new Set([...prev, id]);
+          }
+          return prev;
+        });
+      }
+    }
+  }, []);
 
   return (
     <div className="home-container">

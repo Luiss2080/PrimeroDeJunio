@@ -4,10 +4,25 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   useEffect(() => {
+    // TEMPORALMENTE DESHABILITADO - Script del footer causa errores
+    console.log(
+      "Footer component montado - script deshabilitado temporalmente"
+    );
+    /*
     // Importar el script del footer cuando el componente se monta
     const script = document.createElement("script");
     script.src = "/javaScript/footer.js";
     script.async = true;
+
+    // Verificar si el script existe antes de agregarlo
+    script.onload = () => {
+      console.log("Footer script cargado correctamente");
+    };
+
+    script.onerror = () => {
+      console.log("Footer script no encontrado, continuando sin él");
+    };
+
     document.body.appendChild(script);
 
     // Cleanup: remover el script cuando el componente se desmonta
@@ -19,6 +34,7 @@ const Footer = () => {
         document.body.removeChild(existingScript);
       }
     };
+    */
   }, []);
 
   return (
@@ -254,7 +270,7 @@ const Footer = () => {
           <div className="footer-brand-container">
             <div className="footer-logo">
               <img
-                src="/images/LogoPrimeroDeJunio.png"
+                src="/images/logoMoto.jpg"
                 alt="Primero de Junio"
                 className="footer-logo-image"
               />
