@@ -18,7 +18,7 @@
 
 .loading-logo {
   font-family: "Montserrat", sans-serif;
-  font-size: 3rem;
+  font-size: 2.2rem;
   font-weight: 800;
   background: linear-gradient(135deg, #00ff66 0%, #22c55e 100%);
   -webkit-background-clip: text;
@@ -26,9 +26,11 @@
   background-clip: text;
   color: #00ff66; /* Fallback color */
   text-transform: none; /* ELIMINAR uppercase para evitar cambios */
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   margin-bottom: 2rem;
   animation: text-glow 2s ease-in-out infinite alternate;
+  text-align: center;
+  line-height: 1.2;
 }
 
 .loading-text {
