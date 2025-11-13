@@ -210,7 +210,7 @@ const Home = () => {
     <div
       style={{
         minHeight: "100vh",
-        background: "linear-gradient(135deg, #000000 0%, #1a0000 100%)",
+        background: "linear-gradient(135deg, #000000 0%, #001a0a 100%)",
         color: "#ffffff",
         fontFamily: "'Inter', sans-serif",
       }}
@@ -263,10 +263,10 @@ const Home = () => {
         @keyframes glow {
           0%,
           100% {
-            box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
           }
           50% {
-            box-shadow: 0 0 40px rgba(255, 0, 0, 0.6);
+            box-shadow: 0 0 40px rgba(0, 255, 136, 0.6);
           }
         }
 
@@ -319,7 +319,7 @@ const Home = () => {
 
         .hover-card:hover {
           transform: translateY(-8px) scale(1.02);
-          box-shadow: 0 25px 50px rgba(255, 0, 0, 0.25);
+          box-shadow: 0 25px 50px rgba(0, 255, 136, 0.25);
         }
 
         .carousel-container {
@@ -406,7 +406,7 @@ const Home = () => {
           position: "relative",
           overflow: "hidden",
           background: `
-            linear-gradient(135deg, rgba(0,0,0,0.95) 0%, rgba(10,0,0,0.98) 50%, rgba(0,0,0,0.95) 100%),
+            linear-gradient(135deg, rgba(0,0,0,0.95) 0%, rgba(0,10,0,0.98) 50%, rgba(0,0,0,0.95) 100%),
             url('./images/hero/Desarrollo-bg.jpg') center/cover no-repeat
           `,
         }}
@@ -420,9 +420,9 @@ const Home = () => {
             right: 0,
             bottom: 0,
             background: `
-              radial-gradient(ellipse at center, rgba(255,0,0,0.03) 0%, transparent 70%),
-              linear-gradient(45deg, rgba(255,102,0,0.02) 0%, transparent 50%),
-              conic-gradient(from 0deg at 50% 50%, rgba(255,0,0,0.01) 0deg, transparent 90deg, rgba(255,102,0,0.01) 180deg, transparent 270deg)
+              radial-gradient(ellipse at center, rgba(0,255,136,0.03) 0%, transparent 70%),
+              linear-gradient(45deg, rgba(0,255,102,0.02) 0%, transparent 50%),
+              conic-gradient(from 0deg at 50% 50%, rgba(0,255,136,0.01) 0deg, transparent 90deg, rgba(0,255,102,0.01) 180deg, transparent 270deg)
             `,
             animation: "pulse 6s ease-in-out infinite",
             zIndex: 1,
@@ -437,8 +437,8 @@ const Home = () => {
             height: "100%",
             background: `
             radial-gradient(2px 2px at 20% 30%, rgba(255,255,255,0.3), transparent),
-            radial-gradient(1px 1px at 80% 70%, rgba(255,0,0,0.4), transparent),
-            radial-gradient(1px 1px at 60% 20%, rgba(255,102,0,0.3), transparent)
+            radial-gradient(1px 1px at 80% 70%, rgba(0,255,136,0.4), transparent),
+            radial-gradient(1px 1px at 60% 20%, rgba(0,255,102,0.3), transparent)
           `,
             backgroundSize: "200px 200px, 150px 150px, 100px 100px",
             animation: "float 15s ease-in-out infinite",
@@ -690,17 +690,17 @@ const Home = () => {
                   textTransform: "uppercase",
                   letterSpacing: "0.5px",
                   boxShadow:
-                    "0 15px 35px rgba(255, 0, 0, 0.4), inset 0 1px 0 rgba(255,255,255,0.2)",
+                    "0 15px 35px rgba(0, 255, 136, 0.4), inset 0 1px 0 rgba(255,255,255,0.2)",
                   position: "relative",
                   overflow: "hidden",
                 }}
                 onMouseEnter={(e) => {
                   e.target.style.transform = "translateY(-3px) scale(1.02)";
-                  e.target.style.boxShadow = "0 20px 40px rgba(255, 0, 0, 0.6)";
+                  e.target.style.boxShadow = "0 20px 40px rgba(0, 255, 136, 0.6)";
                 }}
                 onMouseLeave={(e) => {
                   e.target.style.transform = "translateY(0) scale(1)";
-                  e.target.style.boxShadow = "0 15px 35px rgba(255, 0, 0, 0.4)";
+                  e.target.style.boxShadow = "0 15px 35px rgba(0, 255, 136, 0.4)";
                 }}
               >
                 <span style={{ position: "relative", zIndex: 2 }}>
@@ -789,10 +789,10 @@ const Home = () => {
                 height: "100%",
                 borderRadius: "24px",
                 background: `
-                linear-gradient(135deg, rgba(255,0,0,0.1) 0%, rgba(255,102,0,0.1) 100%),
+                linear-gradient(135deg, rgba(0,255,136,0.1) 0%, rgba(0,255,102,0.1) 100%),
                 url('./images/hero/Desarrollo-dashboard.jpg') center/cover no-repeat
               `,
-                border: "1px solid rgba(255,0,0,0.2)",
+                border: "1px solid rgba(0,255,136,0.2)",
                 backdropFilter: "blur(10px)",
                 position: "relative",
                 overflow: "hidden",
@@ -809,7 +809,7 @@ const Home = () => {
                   borderRadius: "12px",
                   padding: "1rem 1.5rem",
                   backdropFilter: "blur(10px)",
-                  border: "1px solid rgba(255,0,0,0.3)",
+                  border: "1px solid rgba(0,255,136,0.3)",
                 }}
               >
                 <div
@@ -841,7 +841,7 @@ const Home = () => {
                   borderRadius: "12px",
                   padding: "1rem 1.5rem",
                   backdropFilter: "blur(10px)",
-                  border: "1px solid rgba(255,0,0,0.3)",
+                  border: "1px solid rgba(0,255,136,0.3)",
                 }}
               >
                 <div
@@ -874,7 +874,7 @@ const Home = () => {
                   width: "80px",
                   height: "80px",
                   borderRadius: "50%",
-                  background: "rgba(255,0,0,0.9)",
+                  background: "rgba(0,255,136,0.9)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -896,7 +896,7 @@ const Home = () => {
         style={{
           padding: "8rem 2rem",
           background: `
-            linear-gradient(135deg, rgba(0,0,0,0.95) 0%, rgba(26,0,0,0.98) 50%, rgba(0,0,0,0.95) 100%),
+            linear-gradient(135deg, rgba(0,0,0,0.95) 0%, rgba(0,26,0,0.98) 50%, rgba(0,0,0,0.95) 100%),
             url('./images/backgrounds/why-choose-bg.jpg') center/cover no-repeat
           `,
           position: "relative",
@@ -912,9 +912,9 @@ const Home = () => {
             right: 0,
             bottom: 0,
             background: `
-            radial-gradient(circle at 20% 20%, rgba(255,0,0,0.05) 0%, transparent 50%),
-            radial-gradient(circle at 80% 80%, rgba(255,102,0,0.05) 0%, transparent 50%),
-            conic-gradient(from 45deg at 50% 50%, rgba(255,0,0,0.02) 0deg, transparent 120deg, rgba(255,102,0,0.02) 240deg, transparent 360deg)
+            radial-gradient(circle at 20% 20%, rgba(0,255,136,0.05) 0%, transparent 50%),
+            radial-gradient(circle at 80% 80%, rgba(0,255,102,0.05) 0%, transparent 50%),
+            conic-gradient(from 45deg at 50% 50%, rgba(0,255,136,0.02) 0deg, transparent 120deg, rgba(0,255,102,0.02) 240deg, transparent 360deg)
           `,
             animation: "morphing 8s ease-in-out infinite",
             zIndex: 1,
@@ -1094,9 +1094,9 @@ const Home = () => {
                 id={`feature-${index}`}
                 style={{
                   background: `
-                    linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,0,0,0.05) 50%, rgba(255,102,0,0.08) 100%)
+                    linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(0,255,136,0.05) 50%, rgba(0,255,102,0.08) 100%)
                   `,
-                  border: "1px solid rgba(255,0,0,0.2)",
+                  border: "1px solid rgba(0,255,136,0.2)",
                   borderRadius: "24px",
                   padding: "0",
                   overflow: "hidden",
@@ -1123,7 +1123,7 @@ const Home = () => {
                   style={{
                     height: "200px",
                     background: `
-                    linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(255,0,0,0.2) 50%, rgba(0,0,0,0.6) 100%),
+                    linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(0,255,136,0.2) 50%, rgba(0,0,0,0.6) 100%),
                     url('${feature.image}') center/cover no-repeat
                   `,
                     position: "relative",
