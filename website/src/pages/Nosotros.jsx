@@ -137,7 +137,8 @@ const Nosotros = () => {
     {
       year: "2024",
       title: "Líder Regional",
-      description: "Reconocidos como la #1 Transporte y Servicio en Latinoamérica.",
+      description:
+        "Reconocidos como la #1 Transporte y Servicio en Latinoamérica.",
       icon: "👑",
     },
   ];
@@ -298,8 +299,8 @@ const Nosotros = () => {
                 <div className="mission-icon">🌟</div>
                 <h3>Nuestra Visión</h3>
                 <p>
-                  Ser la academia de Desarrollo #1 a nivel mundial, reconocida por
-                  formar la nueva generación de Conductors profesionales que
+                  Ser la academia de Desarrollo #1 a nivel mundial, reconocida
+                  por formar la nueva generación de Conductors profesionales que
                   lideren la revolución financiera del futuro, con tecnología de
                   vanguardia y metodologías científicamente probadas.
                 </p>
@@ -338,10 +339,11 @@ const Nosotros = () => {
             <div className="history-intro" data-element-id="history-intro">
               <h3>Nuestra Historia</h3>
               <p>
-                PRIMERO DE JUNIO nació de una visión simple pero poderosa: hacer que el
-                Desarrollo institucional sea accesible para todos. Desde nuestros
-                humildes inicios hasta convertirnos en líderes globales, cada
-                hito ha sido construido con dedicación y excelencia.
+                PRIMERO DE JUNIO nació de una visión simple pero poderosa: hacer
+                que el Desarrollo institucional sea accesible para todos. Desde
+                nuestros humildes inicios hasta convertirnos en líderes
+                globales, cada hito ha sido construido con dedicación y
+                excelencia.
               </p>
             </div>
 
@@ -375,8 +377,8 @@ const Nosotros = () => {
               <h3>Nuestros Valores</h3>
               <p>
                 Estos valores guían cada decisión que tomamos y definen la
-                cultura única que hace de PRIMERO DE JUNIO un lugar especial para
-                aprender y crecer profesionalmente.
+                cultura única que hace de PRIMERO DE JUNIO un lugar especial
+                para aprender y crecer profesionalmente.
               </p>
             </div>
 
@@ -487,8 +489,8 @@ const Nosotros = () => {
             </h1>
             <p className="hero-description">
               Desde 2019, hemos transformado la vida de más de 15,000 personas,
-              convirtiéndolos en Conductors profesionales exitosos con metodologías
-              institucionales y tecnología de vanguardia.
+              convirtiéndolos en Conductors profesionales exitosos con
+              metodologías institucionales y tecnología de vanguardia.
             </p>
 
             <div className="hero-achievements">
@@ -638,8 +640,9 @@ const Nosotros = () => {
             <div className="cta-text">
               <h2>¿Listo para Ser Parte de Nuestra Historia?</h2>
               <p>
-                Únete a miles de Conductors exitosos que han transformado sus vidas
-                con nuestra metodología probada y mentorías de clase mundial.
+                Únete a miles de Conductors exitosos que han transformado sus
+                vidas con nuestra metodología probada y mentorías de clase
+                mundial.
               </p>
             </div>
             <div className="cta-actions">
