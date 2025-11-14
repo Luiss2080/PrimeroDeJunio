@@ -1,9 +1,82 @@
 import React, { useState, useEffect, useRef } from "react";
+import "../styles/Servicios.css";
 
 const Servicios = () => {
+  console.log("🎓 SERVICIOS: Servicios component renderizando...");
+
   const [selectedCategory, setSelectedCategory] = useState("todos");
   const [visibleCourses, setVisibleCourses] = useState(new Set());
   const observerRef = useRef();
+
+  // Inicializar el controlador de JavaScript cuando se monte el componente
+  useEffect(() => {
+    console.log("🔧 Inicializando ServiciosPageController...");
+
+    // Función para cargar el script de JavaScript de Servicios
+    const loadServiciosScript = () => {
+      return new Promise((resolve, reject) => {
+        // Verificar si el script ya está cargado
+        const existingScript = document.querySelector('script[src="/javaScript/servicios.js"]');
+        if (existingScript) {
+          if (window.ServiciosPageController) {
+            resolve();
+          } else {
+            existingScript.addEventListener('load', resolve);
+            existingScript.addEventListener('error', reject);
+          }
+          return;
+        }
+
+        // Crear y cargar el script
+        const script = document.createElement('script');
+        script.src = '/javaScript/servicios.js';
+        script.async = true;
+        script.addEventListener('load', () => {
+          console.log("✅ Script servicios.js cargado correctamente");
+          resolve();
+        });
+        script.addEventListener('error', (err) => {
+          console.error("❌ Error cargando servicios.js:", err);
+          reject(err);
+        });
+        document.head.appendChild(script);
+      });
+    };
+
+    // Función para inicializar el controlador
+    const initController = () => {
+      if (window.ServiciosPageController) {
+        // Destruir instancia anterior si existe
+        if (window.serviciosPageController) {
+          window.serviciosPageController.destroy();
+        }
+        // Crear nueva instancia
+        window.serviciosPageController = new window.ServiciosPageController();
+        console.log("✅ ServiciosPageController inicializado correctamente");
+      } else {
+        console.warn("⚠️ ServiciosPageController no está disponible");
+      }
+    };
+
+    // Cargar el script y luego inicializar el controlador
+    loadServiciosScript()
+      .then(() => {
+        // Esperar un poco para que se inicialice completamente
+        setTimeout(initController, 100);
+      })
+      .catch((error) => {
+        console.error("❌ Error inicializando Servicios:", error);
+      });
+
+    return () => {
+      // Cleanup: destruir el controlador cuando se desmonte el componente
+      if (window.serviciosPageController) {
+        window.serviciosPageController.destroy();
+        window.serviciosPageController = null;
+        console.log("🧹 ServiciosPageController destruido");
+      }
+    };
+  }, []);
 
   const categories = [
     { id: "todos", name: "Todos los Servicios", icon: "🎯" },
