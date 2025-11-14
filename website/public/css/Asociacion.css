@@ -85,11 +85,11 @@
 .asociacion-hero {
   padding: 8rem 2rem 4rem;
   background: linear-gradient(
-      135deg,
-      rgba(0, 0, 0, 0.95) 0%,
-      rgba(0, 10, 0, 0.98) 50%,
-      rgba(0, 0, 0, 0.95) 100%
-    );
+    135deg,
+    rgba(0, 0, 0, 0.95) 0%,
+    rgba(0, 10, 0, 0.98) 50%,
+    rgba(0, 0, 0, 0.95) 100%
+  );
   text-align: center;
   position: relative;
   overflow: hidden;

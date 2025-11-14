@@ -162,11 +162,11 @@
   position: relative;
   overflow: hidden;
   background: linear-gradient(
-      135deg,
-      rgba(0, 0, 0, 0.95) 0%,
-      rgba(0, 10, 0, 0.98) 50%,
-      rgba(0, 0, 0, 0.95) 100%
-    );
+    135deg,
+    rgba(0, 0, 0, 0.95) 0%,
+    rgba(0, 10, 0, 0.98) 50%,
+    rgba(0, 0, 0, 0.95) 100%
+  );
 }
 
 .hero-background-overlay {
@@ -432,10 +432,10 @@
   width: 100%;
   height: 500px;
   background: linear-gradient(
-      135deg,
-      rgba(0, 255, 136, 0.1) 0%,
-      rgba(0, 255, 102, 0.05) 100%
-    );
+    135deg,
+    rgba(0, 255, 136, 0.1) 0%,
+    rgba(0, 255, 102, 0.05) 100%
+  );
   border-radius: 25px;
   border: 1px solid rgba(0, 255, 136, 0.2);
   overflow: hidden;
@@ -517,11 +517,11 @@
 .why-choose-section {
   padding: 8rem 2rem;
   background: linear-gradient(
-      135deg,
-      rgba(0, 0, 0, 0.95) 0%,
-      rgba(0, 26, 0, 0.98) 50%,
-      rgba(0, 0, 0, 0.95) 100%
-    );
+    135deg,
+    rgba(0, 0, 0, 0.95) 0%,
+    rgba(0, 26, 0, 0.98) 50%,
+    rgba(0, 0, 0, 0.95) 100%
+  );
   position: relative;
   overflow: hidden;
 }
