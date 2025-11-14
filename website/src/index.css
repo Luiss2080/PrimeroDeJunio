@@ -1,10 +1,7 @@
 /* PRIMERO DE JUNIO - INDEX CSS */
 /* Estilos básicos globales para React */
 
-/* Importar CSS de componentes compartidos */
-@import url("/css/header.css");
-@import url("/css/footer.css");
-@import url("/css/home.css");
+/* Los CSS de componentes se cargan desde index.html para mejor rendimiento */
 
 /* Reset básico */
 * {

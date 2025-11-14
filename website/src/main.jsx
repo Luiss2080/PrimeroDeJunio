@@ -5,10 +5,6 @@ import "./index.css";
 
 console.log("🚀 PRIMERO DE JUNIO: main.jsx cargando...");
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
 
 console.log("✅ PRIMERO DE JUNIO: React montado correctamente");

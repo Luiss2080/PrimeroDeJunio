@@ -1,115 +1,10 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 
-const Home = () => {
-  console.log("🏠 PRIMERO DE JUNIO: Home component renderizando...");
-
-  // Inicializar el controlador de JavaScript cuando se monte el componente
-  useEffect(() => {
-    console.log("🔧 Inicializando HomePageController...");
-
-    // Función para cargar el CSS de Home
-    const loadHomeCSS = () => {
-      return new Promise((resolve, reject) => {
-        // Verificar si el CSS ya está cargado
-        const existingLink = document.querySelector(
-          'link[href="css/home.css"]'
-        );
-        if (existingLink) {
-          resolve();
-          return;
-        }
-
-        // Crear y cargar el CSS
-        const link = document.createElement("link");
-        link.rel = "stylesheet";
-        link.href = "css/home.css";
-        link.addEventListener("load", () => {
-          console.log("✅ CSS home.css cargado correctamente");
-          resolve();
-        });
-        link.addEventListener("error", (err) => {
-          console.error("❌ Error cargando home.css:", err);
-          reject(err);
-        });
-        document.head.appendChild(link);
-      });
-    };
-    // Función para cargar el script de JavaScript de Home
-    const loadHomeScript = () => {
-      return new Promise((resolve, reject) => {
-        // Verificar si el script ya está cargado
-        const existingScript = document.querySelector(
-          'script[src="javaScript/home.js"]'
-        );
-        if (existingScript) {
-          if (window.HomePageController) {
-            resolve();
-          } else {
-            existingScript.addEventListener("load", resolve);
-            existingScript.addEventListener("error", reject);
-          }
-          return;
-        }
-
-        // Crear y cargar el script
-        const script = document.createElement("script");
-        script.src = "javaScript/home.js";
-        script.async = true;
-        script.addEventListener("load", () => {
-          console.log("✅ Script home.js cargado correctamente");
-          resolve();
-        });
-        script.addEventListener("error", (err) => {
-          console.error("❌ Error cargando home.js:", err);
-          reject(err);
-        });
-        document.head.appendChild(script);
-      });
-    };
-
-    // Función para inicializar el controlador
-    const initController = () => {
-      if (window.HomePageController) {
-        // Destruir instancia anterior si existe
-        if (window.homePageController) {
-          window.homePageController.destroy();
-        }
-        // Crear nueva instancia
-        window.homePageController = new window.HomePageController();
-        console.log("✅ HomePageController inicializado correctamente");
-      } else {
-        console.warn("⚠️ HomePageController no está disponible");
-      }
-    };
-
-    // Cargar primero el CSS, luego el JavaScript y finalmente inicializar
-    loadHomeCSS()
-      .then(() => {
-        console.log("✅ CSS cargado, procediendo a cargar JavaScript...");
-        return loadHomeScript();
-      })
-      .then(() => {
-        console.log("✅ JavaScript cargado, inicializando controlador...");
-        // Esperar un poco para que se inicialice completamente
-        setTimeout(initController, 100);
-      })
-      .catch((error) => {
-        console.error("❌ Error cargando recursos de Home:", error);
-      });
-
-    return () => {
-      // Cleanup: destruir el controlador cuando se desmonte el componente
-      if (window.homePageController) {
-        window.homePageController.destroy();
-        window.homePageController = null;
-        console.log("🧹 HomePageController destruido");
-      }
-    };
-  }, []);
-
+const Home = React.memo(() => {
   // Estados para animaciones y carruseles
-  const [currentText, setCurrentText] = useState("");
+  const [currentText, setCurrentText] = useState("Conductor Profesional");
   const [textIndex, setTextIndex] = useState(0);
+  const initialized = useRef(false);
 
   const texts = [
     "Conductor Profesional",
@@ -118,26 +13,45 @@ const Home = () => {
     "Transporte Seguro",
   ];
 
-  // Efectos para carruseles y animaciones
+  // Efecto único para inicializar todo
   useEffect(() => {
-    const interval = setInterval(() => {
-      setTextIndex((prevIndex) => (prevIndex + 1) % texts.length);
+    if (initialized.current) return; // Evitar múltiples inicializaciones
+    initialized.current = true;
+
+    console.log("🏠 PRIMERO DE JUNIO: Home component montado");
+
+    // Inicializar carrusel de texto
+    const textInterval = setInterval(() => {
+      setTextIndex((prevIndex) => {
+        const newIndex = (prevIndex + 1) % texts.length;
+        setCurrentText(texts[newIndex]);
+        return newIndex;
+      });
     }, 3000);
-    return () => clearInterval(interval);
-  }, []);
 
-  useEffect(() => {
-    setCurrentText(texts[textIndex]);
-  }, [textIndex]);
+    // Inicializar controlador JavaScript (una sola vez)
+    const initController = () => {
+      if (window.HomePageController && !window.homePageController) {
+        window.homePageController = new window.HomePageController();
+        console.log("✅ HomePageController inicializado");
+      }
+    };
 
-  // Notificar que la página Home está activa para inicializar controladores
-  useEffect(() => {
-    console.log("🏠 Home component montado, notificando cambio de página");
-    const event = new CustomEvent("pageChanged", {
+    // Notificar cambio de página
+    const pageEvent = new CustomEvent("pageChanged", {
       detail: { page: "inicio" },
     });
-    window.dispatchEvent(event);
-  }, []);
+    window.dispatchEvent(pageEvent);
+
+    // Intentar inicializar controlador
+    setTimeout(initController, 100);
+
+    // Cleanup
+    return () => {
+      clearInterval(textInterval);
+      initialized.current = false;
+    };
+  }, []); // Solo se ejecuta una vez
 
   return (
     <div className="home-container">
@@ -446,6 +360,6 @@ const Home = () => {
       </section>
     </div>
   );
-};
+});
 
 export default Home;
