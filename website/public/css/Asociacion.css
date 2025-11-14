@@ -89,8 +89,7 @@
       rgba(0, 0, 0, 0.95) 0%,
       rgba(0, 10, 0, 0.98) 50%,
       rgba(0, 0, 0, 0.95) 100%
-    ),
-    url("/images/hero/asociacion-bg.jpg") center/cover no-repeat;
+    );
   text-align: center;
   position: relative;
   overflow: hidden;

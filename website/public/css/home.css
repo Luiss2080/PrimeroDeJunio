@@ -166,8 +166,7 @@
       rgba(0, 0, 0, 0.95) 0%,
       rgba(0, 10, 0, 0.98) 50%,
       rgba(0, 0, 0, 0.95) 100%
-    ),
-    url("/images/hero/Desarrollo-bg.jpg") center/cover no-repeat;
+    );
 }
 
 .hero-background-overlay {
@@ -436,8 +435,7 @@
       135deg,
       rgba(0, 255, 136, 0.1) 0%,
       rgba(0, 255, 102, 0.05) 100%
-    ),
-    url("/images/hero/conductor-hero.jpg") center/cover no-repeat;
+    );
   border-radius: 25px;
   border: 1px solid rgba(0, 255, 136, 0.2);
   overflow: hidden;
@@ -523,8 +521,7 @@
       rgba(0, 0, 0, 0.95) 0%,
       rgba(0, 26, 0, 0.98) 50%,
       rgba(0, 0, 0, 0.95) 100%
-    ),
-    url("/images/backgrounds/why-choose-bg.jpg") center/cover no-repeat;
+    );
   position: relative;
   overflow: hidden;
 }

@@ -137,8 +137,7 @@
       rgba(0, 0, 0, 0.95) 0%,
       rgba(0, 10, 0, 0.98) 50%,
       rgba(0, 0, 0, 0.95) 100%
-    ),
-    url("/images/hero/servicios-bg.jpg") center/cover no-repeat;
+    );
 }
 
 .hero-particles {
@@ -261,8 +260,7 @@
       135deg,
       rgba(0, 255, 136, 0.1) 0%,
       rgba(0, 255, 102, 0.05) 100%
-    ),
-    url("/images/hero/servicios-visual.jpg") center/cover no-repeat;
+    );
   border-radius: 25px;
   border: 1px solid rgba(0, 255, 136, 0.2);
   backdrop-filter: blur(10px);
