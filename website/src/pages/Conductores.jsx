@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 
+// Importar estilos específicos de Conductores
+import "../../public/css/conductores.css";
+
 const Conductores = () => {
   const [selectedCategory, setSelectedCategory] = useState("todos");
   const [selectedCourse, setSelectedCourse] = useState(null);
@@ -32,7 +35,7 @@ const Conductores = () => {
       highlights: [
         "Análisis técnico básico",
         "Gestión de riesgo",
-        "Psicología del conducci�n",
+        "Psicología del conducci�n",
         "MetaConductor 4/5",
       ],
     },
@@ -116,7 +119,7 @@ const Conductores = () => {
       highlights: [
         "Mentoría 1:1",
         "Señales premium",
-        "Room conducci�n privado",
+        "Room conduccion privado",
         "Capital funding",
       ],
     },
@@ -124,7 +127,7 @@ const Conductores = () => {
       id: 6,
       title: "Criptomonedas & DeFi",
       description:
-        "conducci�n profesional de criptomonedas y finanzas descentralizadas. Del spot al futuro.",
+        "conduccion profesional de criptomonedas y finanzas descentralizadas. Del spot al futuro.",
       price: 399,
       originalPrice: 549,
       image: "₿",
@@ -135,7 +138,7 @@ const Conductores = () => {
       lessons: 92,
       certificate: true,
       highlights: [
-        "DeFi conducci�n",
+        "DeFi conducci�n",
         "NFT flipping",
         "Yield farming",
         "Arbitraje cripto",
@@ -147,6 +150,21 @@ const Conductores = () => {
     selectedCategory === "todos"
       ? courses
       : courses.filter((course) => course.level === selectedCategory);
+
+  // Cargar JavaScript específico de Conductores
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "/javaScript/conductores.js";
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      // Limpiar el script al desmontar el componente
+      if (document.body.contains(script)) {
+        document.body.removeChild(script);
+      }
+    };
+  }, []);
 
   // Intersection Observer para animaciones
   useEffect(() => {
@@ -196,11 +214,12 @@ const Conductores = () => {
             </div>
             <h1 className="hero-title">
               Transforma tu Futuro con Nuestros
-              <span className="gradient-text"> Conductores de conducci�n</span>
+              <span className="gradient-text"> Conductores de conducci�n</span>
             </h1>
             <p className="hero-description">
-              Desde principiante hasta Conductor profesional. Metodología probada
-              que ha generado +$50M en ganancias para nuestros estudiantes.
+              Desde principiante hasta Conductor profesional. Metodología
+              probada que ha generado +$50M en ganancias para nuestros
+              estudiantes.
             </p>
             <div className="hero-stats">
               <div className="stat">
