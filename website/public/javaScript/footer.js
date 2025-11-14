@@ -128,24 +128,10 @@ function initFooter() {
     }, index * 150);
   });
 
-  // ===== ANIMACIONES AVANZADAS PARA REDES SOCIALES =====
+  // ===== REDES SOCIALES SIMPLIFICADAS =====
+  // Se eliminaron las animaciones complejas, solo se usa CSS hover
   socialLinks.forEach((link, index) => {
-    link.addEventListener("mouseenter", () => {
-      // Efecto de elevación sutil
-      link.style.transform = "translateY(-5px) scale(1.1)";
-      link.style.boxShadow = "0 8px 20px rgba(0, 255, 102, 0.3)";
-
-      // Efecto de pulso suave
-      link.classList.add("social-pulse");
-    });
-
-    link.addEventListener("mouseleave", () => {
-      link.style.transform = "translateY(0) scale(1)";
-      link.style.boxShadow = "";
-      link.classList.remove("social-pulse");
-    });
-
-    // Animación de entrada con delay
+    // Animación de entrada simple con delay
     setTimeout(() => {
       link.classList.add("social-animate-in");
     }, index * 100 + 500);
@@ -415,9 +401,7 @@ function initFooter() {
         animation: zoomIn 0.5s ease-out forwards;
       }
       
-      .social-pulse {
-        animation: pulse 0.8s ease-in-out infinite;
-      }
+      /* .social-pulse eliminado - se usa CSS simple */
       
       .version-pulse {
         animation: versionPulse 1s ease-in-out;
@@ -504,14 +488,7 @@ function initFooter() {
         }
       }
       
-      @keyframes pulse {
-        0%, 100% {
-          transform: scale(1);
-        }
-        50% {
-          transform: scale(1.1);
-        }
-      }
+      /* @keyframes pulse eliminado - no se usa */
       
       @keyframes versionPulse {
         0% {
