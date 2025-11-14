@@ -48,7 +48,7 @@ const Nosotros = () => {
   useEffect(() => {
     // Actualizar título de la página
     document.title = "Nosotros - Primero de Junio";
-    
+
     // Asegurar que el favicon esté presente
     let favicon = document.querySelector('link[rel="icon"]');
     if (!favicon) {
