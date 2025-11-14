@@ -15,21 +15,23 @@ const Servicios = () => {
     const loadServiciosCSS = () => {
       return new Promise((resolve, reject) => {
         // Verificar si el CSS ya está cargado
-        const existingLink = document.querySelector('link[href="/css/servicios.css"]');
+        const existingLink = document.querySelector(
+          'link[href="/css/servicios.css"]'
+        );
         if (existingLink) {
           resolve();
           return;
         }
 
         // Crear y cargar el CSS
-        const link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.href = '/css/servicios.css';
-        link.addEventListener('load', () => {
+        const link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = "/css/servicios.css";
+        link.addEventListener("load", () => {
           console.log("✅ CSS servicios.css cargado correctamente");
           resolve();
         });
-        link.addEventListener('error', (err) => {
+        link.addEventListener("error", (err) => {
           console.error("❌ Error cargando servicios.css:", err);
           reject(err);
         });

@@ -11,21 +11,23 @@ const Home = () => {
     const loadHomeCSS = () => {
       return new Promise((resolve, reject) => {
         // Verificar si el CSS ya está cargado
-        const existingLink = document.querySelector('link[href="/css/home.css"]');
+        const existingLink = document.querySelector(
+          'link[href="/css/home.css"]'
+        );
         if (existingLink) {
           resolve();
           return;
         }
 
         // Crear y cargar el CSS
-        const link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.href = '/css/home.css';
-        link.addEventListener('load', () => {
+        const link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = "/css/home.css";
+        link.addEventListener("load", () => {
           console.log("✅ CSS home.css cargado correctamente");
           resolve();
         });
-        link.addEventListener('error', (err) => {
+        link.addEventListener("error", (err) => {
           console.error("❌ Error cargando home.css:", err);
           reject(err);
         });
