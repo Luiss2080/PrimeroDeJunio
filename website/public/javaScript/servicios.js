@@ -4,12 +4,12 @@
 class ServiciosPageController {
   constructor() {
     console.log("🎓 SERVICIOS: ServiciosPageController inicializando...");
-    
+
     // Estados para filtros y animaciones
     this.selectedCategory = "todos";
     this.visibleCourses = new Set();
     this.observerRef = null;
-    
+
     // Datos de categorías
     this.categories = [
       { id: "todos", name: "Todos los Servicios", icon: "🎯" },
@@ -24,7 +24,8 @@ class ServiciosPageController {
       {
         id: 1,
         title: "Desarrollo Web para Principiantes",
-        description: "Aprende los fundamentos del servicio de mototaxi desde cero. Curso completo con estrategias probadas.",
+        description:
+          "Aprende los fundamentos del servicio de mototaxi desde cero. Curso completo con estrategias probadas.",
         price: 199,
         originalPrice: 299,
         image: "📊",
@@ -44,7 +45,8 @@ class ServiciosPageController {
       {
         id: 2,
         title: "Desarrollo Avanzado Pro",
-        description: "Estrategias profesionales para desarrolladors experimentados. Técnicas institucionales y algoritmos avanzados.",
+        description:
+          "Estrategias profesionales para desarrolladors experimentados. Técnicas institucionales y algoritmos avanzados.",
         price: 499,
         originalPrice: 699,
         image: "🚀",
@@ -64,7 +66,8 @@ class ServiciosPageController {
       {
         id: 3,
         title: "Índices Sintéticos Master",
-        description: "Domina los mercados sintéticos de alta volatilidad. Estrategias exclusivas para índices artificiales.",
+        description:
+          "Domina los mercados sintéticos de alta volatilidad. Estrategias exclusivas para índices artificiales.",
         price: 349,
         originalPrice: 449,
         image: "⚡",
@@ -84,7 +87,8 @@ class ServiciosPageController {
       {
         id: 4,
         title: "Análisis Técnico Profesional",
-        description: "Interpreta gráficos como un experto institucional. Patrones avanzados y confluencias técnicas.",
+        description:
+          "Interpreta gráficos como un experto institucional. Patrones avanzados y confluencias técnicas.",
         price: 299,
         originalPrice: 399,
         image: "📉",
@@ -104,7 +108,8 @@ class ServiciosPageController {
       {
         id: 5,
         title: "Elite VIP Mentorship",
-        description: "Mentoría personalizada 1:1 con desarrolladors institucionales. Acceso exclusivo a señales premium.",
+        description:
+          "Mentoría personalizada 1:1 con desarrolladors institucionales. Acceso exclusivo a señales premium.",
         price: 1999,
         originalPrice: 2999,
         image: "👑",
@@ -124,7 +129,8 @@ class ServiciosPageController {
       {
         id: 6,
         title: "Criptomonedas & DeFi",
-        description: "Desarrollo profesional de criptodivisas descentralizadas. Del spot al futuro.",
+        description:
+          "Desarrollo profesional de criptodivisas descentralizadas. Del spot al futuro.",
         price: 399,
         originalPrice: 549,
         image: "₿",
@@ -162,10 +168,10 @@ class ServiciosPageController {
 
   // Configurar tabs de filtro
   setupFilterTabs() {
-    const filterTabs = document.querySelectorAll('.filter-tab');
-    
-    filterTabs.forEach(tab => {
-      tab.addEventListener('click', (e) => {
+    const filterTabs = document.querySelectorAll(".filter-tab");
+
+    filterTabs.forEach((tab) => {
+      tab.addEventListener("click", (e) => {
         const category = e.currentTarget.dataset.category;
         if (category) {
           this.setActiveCategory(category);
@@ -173,17 +179,17 @@ class ServiciosPageController {
       });
 
       // Efectos hover adicionales
-      tab.addEventListener('mouseenter', (e) => {
-        if (!e.target.classList.contains('active')) {
-          e.target.style.transform = 'translateY(-3px) scale(1.02)';
-          e.target.style.boxShadow = '0 8px 25px rgba(0, 255, 136, 0.3)';
+      tab.addEventListener("mouseenter", (e) => {
+        if (!e.target.classList.contains("active")) {
+          e.target.style.transform = "translateY(-3px) scale(1.02)";
+          e.target.style.boxShadow = "0 8px 25px rgba(0, 255, 136, 0.3)";
         }
       });
 
-      tab.addEventListener('mouseleave', (e) => {
-        if (!e.target.classList.contains('active')) {
-          e.target.style.transform = 'translateY(0) scale(1)';
-          e.target.style.boxShadow = 'none';
+      tab.addEventListener("mouseleave", (e) => {
+        if (!e.target.classList.contains("active")) {
+          e.target.style.transform = "translateY(0) scale(1)";
+          e.target.style.boxShadow = "none";
         }
       });
     });
@@ -192,17 +198,17 @@ class ServiciosPageController {
   // Cambiar categoría activa
   setActiveCategory(category) {
     this.selectedCategory = category;
-    
+
     // Actualizar tabs visuales
-    document.querySelectorAll('.filter-tab').forEach(tab => {
-      tab.classList.remove('active');
-      tab.style.transform = 'translateY(0) scale(1)';
-      tab.style.boxShadow = 'none';
+    document.querySelectorAll(".filter-tab").forEach((tab) => {
+      tab.classList.remove("active");
+      tab.style.transform = "translateY(0) scale(1)";
+      tab.style.boxShadow = "none";
     });
-    
+
     const activeTab = document.querySelector(`[data-category="${category}"]`);
     if (activeTab) {
-      activeTab.classList.add('active');
+      activeTab.classList.add("active");
     }
 
     // Filtrar y renderizar cursos
@@ -212,13 +218,13 @@ class ServiciosPageController {
   // Renderizar cursos filtrados
   renderCourses() {
     const filteredCourses = this.getFilteredCourses();
-    const coursesGrid = document.querySelector('.courses-grid');
-    
+    const coursesGrid = document.querySelector(".courses-grid");
+
     if (!coursesGrid) return;
 
     // Limpiar grid actual
-    coursesGrid.innerHTML = '';
-    
+    coursesGrid.innerHTML = "";
+
     // Renderizar cursos filtrados
     filteredCourses.forEach((course, index) => {
       const courseElement = this.createCourseCard(course, index);
@@ -236,27 +242,36 @@ class ServiciosPageController {
     if (this.selectedCategory === "todos") {
       return this.courses;
     }
-    return this.courses.filter(course => course.level === this.selectedCategory);
+    return this.courses.filter(
+      (course) => course.level === this.selectedCategory
+    );
   }
 
   // Crear tarjeta de curso
   createCourseCard(course, index) {
-    const card = document.createElement('div');
-    card.className = 'course-card';
-    card.setAttribute('data-course-id', course.id);
-    card.setAttribute('data-category', course.level);
+    const card = document.createElement("div");
+    card.className = "course-card";
+    card.setAttribute("data-course-id", course.id);
+    card.setAttribute("data-category", course.level);
     card.style.animationDelay = `${index * 0.1}s`;
 
-    const discountPercentage = course.originalPrice > course.price 
-      ? Math.round(((course.originalPrice - course.price) / course.originalPrice) * 100)
-      : 0;
+    const discountPercentage =
+      course.originalPrice > course.price
+        ? Math.round(
+            ((course.originalPrice - course.price) / course.originalPrice) * 100
+          )
+        : 0;
 
     card.innerHTML = `
       <div class="course-card-inner">
         <div class="course-image">
           <div class="course-icon">${course.image}</div>
           <div class="course-badge">${course.level}</div>
-          ${discountPercentage > 0 ? `<div class="discount-badge">${discountPercentage}% OFF</div>` : ''}
+          ${
+            discountPercentage > 0
+              ? `<div class="discount-badge">${discountPercentage}% OFF</div>`
+              : ""
+          }
         </div>
 
         <div class="course-content">
@@ -272,25 +287,37 @@ class ServiciosPageController {
           <p class="course-description">${course.description}</p>
 
           <div class="course-highlights">
-            ${course.highlights.slice(0, 2).map(highlight => 
-              `<span class="highlight-tag">✓ ${highlight}</span>`
-            ).join('')}
+            ${course.highlights
+              .slice(0, 2)
+              .map(
+                (highlight) =>
+                  `<span class="highlight-tag">✓ ${highlight}</span>`
+              )
+              .join("")}
           </div>
 
           <div class="course-info">
             <div class="course-duration">⏱ ${course.duration}</div>
             <div class="course-lessons">📚 ${course.lessons} lecciones</div>
-            ${course.certificate ? '<div class="course-certificate">🏆 Certificado</div>' : ''}
+            ${
+              course.certificate
+                ? '<div class="course-certificate">🏆 Certificado</div>'
+                : ""
+            }
           </div>
 
           <div class="course-footer">
             <div class="course-pricing">
               <span class="current-price">$${course.price}</span>
-              ${course.originalPrice > course.price ? 
-                `<span class="original-price">$${course.originalPrice}</span>` : ''
+              ${
+                course.originalPrice > course.price
+                  ? `<span class="original-price">$${course.originalPrice}</span>`
+                  : ""
               }
             </div>
-            <button class="btn btn-primary course-btn" data-course-id="${course.id}">
+            <button class="btn btn-primary course-btn" data-course-id="${
+              course.id
+            }">
               Ver Detalles
             </button>
           </div>
@@ -315,16 +342,16 @@ class ServiciosPageController {
             const courseId = entry.target.dataset.courseId;
             if (courseId) {
               this.visibleCourses.add(courseId);
-              entry.target.classList.add('visible');
+              entry.target.classList.add("visible");
             }
           }
         });
       },
-      { threshold: 0.1, rootMargin: '50px' }
+      { threshold: 0.1, rootMargin: "50px" }
     );
 
     // Observar todas las tarjetas de curso
-    const courseCards = document.querySelectorAll('.course-card');
+    const courseCards = document.querySelectorAll(".course-card");
     courseCards.forEach((card) => {
       this.observerRef.observe(card);
     });
@@ -333,30 +360,38 @@ class ServiciosPageController {
   // Event listeners generales
   setupEventListeners() {
     // Botones de cursos
-    document.addEventListener('click', (e) => {
-      if (e.target.classList.contains('course-btn')) {
+    document.addEventListener("click", (e) => {
+      if (e.target.classList.contains("course-btn")) {
         const courseId = e.target.dataset.courseId;
         this.handleCourseButtonClick(courseId);
       }
     });
 
     // Efectos hover para tarjetas
-    document.addEventListener('mouseenter', (e) => {
-      if (e.target.classList.contains('course-card')) {
-        this.handleCardHoverEnter(e.target);
-      }
-    }, true);
+    document.addEventListener(
+      "mouseenter",
+      (e) => {
+        if (e.target.classList.contains("course-card")) {
+          this.handleCardHoverEnter(e.target);
+        }
+      },
+      true
+    );
 
-    document.addEventListener('mouseleave', (e) => {
-      if (e.target.classList.contains('course-card')) {
-        this.handleCardHoverLeave(e.target);
-      }
-    }, true);
+    document.addEventListener(
+      "mouseleave",
+      (e) => {
+        if (e.target.classList.contains("course-card")) {
+          this.handleCardHoverLeave(e.target);
+        }
+      },
+      true
+    );
   }
 
   // Manejar click en botón de curso
   handleCourseButtonClick(courseId) {
-    const course = this.courses.find(c => c.id == courseId);
+    const course = this.courses.find((c) => c.id == courseId);
     if (course) {
       console.log(`🎓 Ver detalles del curso: ${course.title}`);
       // Aquí puedes agregar lógica para mostrar detalles del curso
@@ -366,8 +401,8 @@ class ServiciosPageController {
 
   // Mostrar modal de curso
   showCourseModal(course) {
-    const modal = document.createElement('div');
-    modal.className = 'course-modal';
+    const modal = document.createElement("div");
+    modal.className = "course-modal";
     modal.innerHTML = `
       <div class="course-modal-overlay">
         <div class="course-modal-content">
@@ -399,13 +434,17 @@ class ServiciosPageController {
             <div class="course-modal-highlights">
               <h3>Lo que aprenderás:</h3>
               <ul>
-                ${course.highlights.map(highlight => `<li>✓ ${highlight}</li>`).join('')}
+                ${course.highlights
+                  .map((highlight) => `<li>✓ ${highlight}</li>`)
+                  .join("")}
               </ul>
             </div>
             <div class="course-modal-pricing">
               <span class="modal-price">$${course.price}</span>
-              ${course.originalPrice > course.price ? 
-                `<span class="modal-original-price">$${course.originalPrice}</span>` : ''
+              ${
+                course.originalPrice > course.price
+                  ? `<span class="modal-original-price">$${course.originalPrice}</span>`
+                  : ""
               }
             </div>
             <button class="btn btn-primary modal-enroll-btn">
@@ -419,11 +458,11 @@ class ServiciosPageController {
     document.body.appendChild(modal);
 
     // Event listener para cerrar modal
-    const closeBtn = modal.querySelector('.course-modal-close');
-    const overlay = modal.querySelector('.course-modal-overlay');
-    
-    closeBtn.addEventListener('click', () => this.closeCourseModal(modal));
-    overlay.addEventListener('click', (e) => {
+    const closeBtn = modal.querySelector(".course-modal-close");
+    const overlay = modal.querySelector(".course-modal-overlay");
+
+    closeBtn.addEventListener("click", () => this.closeCourseModal(modal));
+    overlay.addEventListener("click", (e) => {
       if (e.target === overlay) {
         this.closeCourseModal(modal);
       }
@@ -431,16 +470,18 @@ class ServiciosPageController {
 
     // Animación de entrada
     setTimeout(() => {
-      modal.style.opacity = '1';
-      modal.querySelector('.course-modal-content').style.transform = 'translateY(0) scale(1)';
+      modal.style.opacity = "1";
+      modal.querySelector(".course-modal-content").style.transform =
+        "translateY(0) scale(1)";
     }, 10);
   }
 
   // Cerrar modal de curso
   closeCourseModal(modal) {
-    modal.style.opacity = '0';
-    modal.querySelector('.course-modal-content').style.transform = 'translateY(50px) scale(0.9)';
-    
+    modal.style.opacity = "0";
+    modal.querySelector(".course-modal-content").style.transform =
+      "translateY(50px) scale(0.9)";
+
     setTimeout(() => {
       document.body.removeChild(modal);
     }, 300);
@@ -448,15 +489,15 @@ class ServiciosPageController {
 
   // Efectos hover para tarjetas
   handleCardHoverEnter(card) {
-    card.style.transform = 'translateY(-15px) scale(1.02)';
-    card.style.boxShadow = '0 25px 50px rgba(0, 255, 136, 0.2)';
-    card.style.borderColor = 'rgba(0, 255, 136, 0.4)';
+    card.style.transform = "translateY(-15px) scale(1.02)";
+    card.style.boxShadow = "0 25px 50px rgba(0, 255, 136, 0.2)";
+    card.style.borderColor = "rgba(0, 255, 136, 0.4)";
   }
 
   handleCardHoverLeave(card) {
-    card.style.transform = 'translateY(0) scale(1)';
-    card.style.boxShadow = '0 10px 30px rgba(0, 255, 136, 0.1)';
-    card.style.borderColor = 'rgba(0, 255, 136, 0.1)';
+    card.style.transform = "translateY(0) scale(1)";
+    card.style.boxShadow = "0 10px 30px rgba(0, 255, 136, 0.1)";
+    card.style.borderColor = "rgba(0, 255, 136, 0.1)";
   }
 
   // Efectos de scroll
@@ -468,11 +509,11 @@ class ServiciosPageController {
 
       // Parallax para elementos de fondo
       const parallaxElements = document.querySelectorAll(
-        '.hero-particles, .why-choose-background'
+        ".hero-particles, .why-choose-background"
       );
-      
+
       parallaxElements.forEach((element) => {
-        const speed = element.classList.contains('hero-particles') ? 0.3 : 0.25;
+        const speed = element.classList.contains("hero-particles") ? 0.3 : 0.25;
         element.style.transform = `translateY(${scrollY * speed}px)`;
       });
 
@@ -486,21 +527,21 @@ class ServiciosPageController {
       }
     };
 
-    window.addEventListener('scroll', requestScrollUpdate);
+    window.addEventListener("scroll", requestScrollUpdate);
   }
 
   // Destruir controlador
   destroy() {
     console.log("🧹 ServiciosPageController destruido");
-    
+
     // Limpiar intervals
     if (this.observerRef) {
       this.observerRef.disconnect();
     }
 
     // Remover event listeners
-    document.removeEventListener('click', this.handleCourseButtonClick);
-    window.removeEventListener('scroll', this.requestScrollUpdate);
+    document.removeEventListener("click", this.handleCourseButtonClick);
+    window.removeEventListener("scroll", this.requestScrollUpdate);
   }
 }
 
