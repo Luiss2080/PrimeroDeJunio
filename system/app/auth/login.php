@@ -7,10 +7,19 @@
 
 session_start();
 
-// Verificar si ya está logueado
-if (isset($_SESSION['user_id'])) {
-    header('Location: http://localhost/PrimeroDeJunio/system/app/views/dashboard/');
+// Verificar si hay una solicitud de logout
+if (isset($_GET['logout'])) {
+    session_destroy();
+    header('Location: ' . $_SERVER['PHP_SELF']);
     exit;
+}
+
+// Verificar si ya está logueado (solo redirigir si no viene del website)
+if (isset($_SESSION['user_id']) && !isset($_GET['force'])) {
+    // Si ya está logueado, mostrar opción para ir al dashboard o cerrar sesión
+    $already_logged = true;
+} else {
+    $already_logged = false;
 }
 
 // Variables para el formulario
@@ -186,6 +195,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <div class="alert alert-success">
                             <div class="alert-icon">✅</div>
                             <div class="alert-message"><?php echo htmlspecialchars($success_message); ?></div>
+                        </div>
+                    <?php endif; ?>
+
+                    <!-- Mensaje si ya hay sesión activa -->
+                    <?php if ($already_logged): ?>
+                        <div class="alert alert-info" style="background: rgba(0, 255, 102, 0.1); border: 1px solid rgba(0, 255, 102, 0.3); color: #00ff66;">
+                            <div class="alert-icon">ℹ️</div>
+                            <div class="alert-message">
+                                Ya tienes una sesión activa como <strong><?php echo htmlspecialchars($_SESSION['user_name'] ?? 'Usuario'); ?></strong>
+                                <br>
+                                <a href="http://localhost/PrimeroDeJunio/system/app/views/dashboard/" style="color: #00ff66; text-decoration: underline; margin-right: 15px;">Ir al Dashboard</a>
+                                <a href="?logout=1" style="color: #ff6b6b; text-decoration: underline;">Cerrar Sesión</a>
+                            </div>
                         </div>
                     <?php endif; ?>
 

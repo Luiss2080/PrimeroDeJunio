@@ -1,0 +1,15 @@
+DirectoryIndex index.php
+RewriteEngine On
+
+# Redirigir acceso directo al directorio hacia index.php
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^$ index.php [L]
+
+# Seguridad adicional
+
+<Files "\*.log">
+Order allow,deny
+Deny from all
+</Files>
