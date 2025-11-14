@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import "../styles/Home.css";
 
 const Home = () => {
   console.log("🏠 PRIMERO DE JUNIO: Home component renderizando...");
@@ -8,6 +7,31 @@ const Home = () => {
   useEffect(() => {
     console.log("🔧 Inicializando HomePageController...");
 
+    // Función para cargar el CSS de Home
+    const loadHomeCSS = () => {
+      return new Promise((resolve, reject) => {
+        // Verificar si el CSS ya está cargado
+        const existingLink = document.querySelector('link[href="/css/home.css"]');
+        if (existingLink) {
+          resolve();
+          return;
+        }
+
+        // Crear y cargar el CSS
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = '/css/home.css';
+        link.addEventListener('load', () => {
+          console.log("✅ CSS home.css cargado correctamente");
+          resolve();
+        });
+        link.addEventListener('error', (err) => {
+          console.error("❌ Error cargando home.css:", err);
+          reject(err);
+        });
+        document.head.appendChild(link);
+      });
+    };
     // Función para cargar el script de JavaScript de Home
     const loadHomeScript = () => {
       return new Promise((resolve, reject) => {
@@ -56,14 +80,19 @@ const Home = () => {
       }
     };
 
-    // Cargar el script y luego inicializar el controlador
-    loadHomeScript()
+    // Cargar primero el CSS, luego el JavaScript y finalmente inicializar
+    loadHomeCSS()
       .then(() => {
+        console.log("✅ CSS cargado, procediendo a cargar JavaScript...");
+        return loadHomeScript();
+      })
+      .then(() => {
+        console.log("✅ JavaScript cargado, inicializando controlador...");
         // Esperar un poco para que se inicialice completamente
         setTimeout(initController, 100);
       })
       .catch((error) => {
-        console.error("❌ Error inicializando Home:", error);
+        console.error("❌ Error cargando recursos de Home:", error);
       });
 
     return () => {

@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import "../styles/Servicios.css";
 
 const Servicios = () => {
   console.log("🎓 SERVICIOS: Servicios component renderizando...");
@@ -11,6 +10,32 @@ const Servicios = () => {
   // Inicializar el controlador de JavaScript cuando se monte el componente
   useEffect(() => {
     console.log("🔧 Inicializando ServiciosPageController...");
+
+    // Función para cargar el CSS de Servicios
+    const loadServiciosCSS = () => {
+      return new Promise((resolve, reject) => {
+        // Verificar si el CSS ya está cargado
+        const existingLink = document.querySelector('link[href="/css/servicios.css"]');
+        if (existingLink) {
+          resolve();
+          return;
+        }
+
+        // Crear y cargar el CSS
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = '/css/servicios.css';
+        link.addEventListener('load', () => {
+          console.log("✅ CSS servicios.css cargado correctamente");
+          resolve();
+        });
+        link.addEventListener('error', (err) => {
+          console.error("❌ Error cargando servicios.css:", err);
+          reject(err);
+        });
+        document.head.appendChild(link);
+      });
+    };
 
     // Función para cargar el script de JavaScript de Servicios
     const loadServiciosScript = () => {
@@ -60,14 +85,19 @@ const Servicios = () => {
       }
     };
 
-    // Cargar el script y luego inicializar el controlador
-    loadServiciosScript()
+    // Cargar primero el CSS, luego el JavaScript y finalmente inicializar
+    loadServiciosCSS()
       .then(() => {
+        console.log("✅ CSS cargado, procediendo a cargar JavaScript...");
+        return loadServiciosScript();
+      })
+      .then(() => {
+        console.log("✅ JavaScript cargado, inicializando controlador...");
         // Esperar un poco para que se inicialice completamente
         setTimeout(initController, 100);
       })
       .catch((error) => {
-        console.error("❌ Error inicializando Servicios:", error);
+        console.error("❌ Error cargando recursos de Servicios:", error);
       });
 
     return () => {
