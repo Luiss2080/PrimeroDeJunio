@@ -17,6 +17,38 @@ const Contacto = () => {
   const [activeMap, setActiveMap] = useState("bolivia");
   const observerRef = useRef();
 
+  // Cargar el CSS y JS de Contacto cuando se monte el componente
+  useEffect(() => {
+    // Cargar CSS
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = "/css/contacto.css";
+    document.head.appendChild(link);
+
+    // Cargar JavaScript
+    const script = document.createElement("script");
+    script.src = "/javaScript/contacto.js";
+    script.async = true;
+    document.head.appendChild(script);
+
+    return () => {
+      // Cleanup: remover CSS y JS cuando se desmonte el componente
+      const existingLink = document.querySelector(
+        'link[href="/css/contacto.css"]'
+      );
+      const existingScript = document.querySelector(
+        'script[src="/javaScript/contacto.js"]'
+      );
+
+      if (existingLink) {
+        document.head.removeChild(existingLink);
+      }
+      if (existingScript) {
+        document.head.removeChild(existingScript);
+      }
+    };
+  }, []);
+
   const contactMethods = [
     {
       id: 1,

@@ -1,13 +1,42 @@
 import React, { useState, useEffect, useRef } from "react";
 
-// Importar estilos específicos de Conductores
-import "../../public/css/conductores.css";
-
 const Conductores = () => {
   const [selectedCategory, setSelectedCategory] = useState("todos");
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [visibleCourses, setVisibleCourses] = useState(new Set());
   const observerRef = useRef();
+
+  // Cargar el CSS y JS de Conductores cuando se monte el componente
+  useEffect(() => {
+    // Cargar CSS
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = "/css/conductores.css";
+    document.head.appendChild(link);
+
+    // Cargar JavaScript
+    const script = document.createElement("script");
+    script.src = "/javaScript/conductores.js";
+    script.async = true;
+    document.head.appendChild(script);
+
+    return () => {
+      // Cleanup: remover CSS y JS cuando se desmonte el componente
+      const existingLink = document.querySelector(
+        'link[href="/css/conductores.css"]'
+      );
+      const existingScript = document.querySelector(
+        'script[src="/javaScript/conductores.js"]'
+      );
+
+      if (existingLink) {
+        document.head.removeChild(existingLink);
+      }
+      if (existingScript) {
+        document.head.removeChild(existingScript);
+      }
+    };
+  }, []);
 
   const categories = [
     { id: "todos", name: "Todos los Conductores", icon: "🎯" },
@@ -151,20 +180,7 @@ const Conductores = () => {
       ? courses
       : courses.filter((course) => course.level === selectedCategory);
 
-  // Cargar JavaScript específico de Conductores
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "/javaScript/conductores.js";
-    script.async = true;
-    document.body.appendChild(script);
 
-    return () => {
-      // Limpiar el script al desmontar el componente
-      if (document.body.contains(script)) {
-        document.body.removeChild(script);
-      }
-    };
-  }, []);
 
   // Intersection Observer para animaciones
   useEffect(() => {

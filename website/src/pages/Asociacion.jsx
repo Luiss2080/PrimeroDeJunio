@@ -6,22 +6,22 @@ const Asociacion = () => {
     // Cargar CSS
     const link = document.createElement("link");
     link.rel = "stylesheet";
-    link.href = "/css/Asociacion.css";
+    link.href = "/css/asociacion.css";
     document.head.appendChild(link);
 
     // Cargar JavaScript
     const script = document.createElement("script");
-    script.src = "/javaScript/Asociacion.js";
+    script.src = "/javaScript/asociacion.js";
     script.async = true;
     document.head.appendChild(script);
 
     return () => {
       // Cleanup: remover CSS y JS cuando se desmonte el componente
       const existingLink = document.querySelector(
-        'link[href="/css/Asociacion.css"]'
+        'link[href="/css/asociacion.css"]'
       );
       const existingScript = document.querySelector(
-        'script[src="/javaScript/Asociacion.js"]'
+        'script[src="/javaScript/asociacion.js"]'
       );
 
       if (existingLink) {
@@ -77,6 +77,19 @@ const Asociacion = () => {
   }, [testimonials.length]);
 
   useEffect(() => {
+    // Actualizar título de la página
+    document.title = "Asociación - Primero de Junio";
+    
+    // Asegurar que el favicon esté presente
+    let favicon = document.querySelector('link[rel="icon"]');
+    if (!favicon) {
+      favicon = document.createElement("link");
+      favicon.rel = "icon";
+      favicon.type = "image/jpeg";
+      favicon.href = "/images/logoMoto.jpg";
+      document.head.appendChild(favicon);
+    }
+
     const event = new CustomEvent("pageChanged", {
       detail: { page: "asociacion" },
     });

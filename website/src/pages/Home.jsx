@@ -13,6 +13,38 @@ const Home = React.memo(() => {
     "Transporte Seguro",
   ];
 
+  // Cargar el CSS y JS de Home cuando se monte el componente
+  useEffect(() => {
+    // Cargar CSS
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = "/css/home.css";
+    document.head.appendChild(link);
+
+    // Cargar JavaScript
+    const script = document.createElement("script");
+    script.src = "/javaScript/home.js";
+    script.async = true;
+    document.head.appendChild(script);
+
+    return () => {
+      // Cleanup: remover CSS y JS cuando se desmonte el componente
+      const existingLink = document.querySelector(
+        'link[href="/css/home.css"]'
+      );
+      const existingScript = document.querySelector(
+        'script[src="/javaScript/home.js"]'
+      );
+
+      if (existingLink) {
+        document.head.removeChild(existingLink);
+      }
+      if (existingScript) {
+        document.head.removeChild(existingScript);
+      }
+    };
+  }, []);
+
   // Efecto único para inicializar todo
   useEffect(() => {
     if (initialized.current) return; // Evitar múltiples inicializaciones
@@ -36,6 +68,19 @@ const Home = React.memo(() => {
         console.log("✅ HomePageController inicializado");
       }
     };
+
+    // Actualizar título de la página
+    document.title = "Inicio - Primero de Junio";
+    
+    // Asegurar que el favicon esté presente
+    let favicon = document.querySelector('link[rel="icon"]');
+    if (!favicon) {
+      favicon = document.createElement("link");
+      favicon.rel = "icon";
+      favicon.type = "image/jpeg";
+      favicon.href = "/images/logoMoto.jpg";
+      document.head.appendChild(favicon);
+    }
 
     // Notificar cambio de página
     const pageEvent = new CustomEvent("pageChanged", {
