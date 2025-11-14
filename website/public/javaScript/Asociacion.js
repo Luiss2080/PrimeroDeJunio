@@ -539,6 +539,6 @@ class AsociacionPageController {
 }
 
 // Exponer la clase para que pueda ser usada por otros scripts o por el sistema de controllers
-if (typeof window !== 'undefined') {
+if (typeof window !== "undefined") {
   window.AsociacionPageController = AsociacionPageController;
 }
