@@ -12,26 +12,28 @@ const Home = () => {
     const loadHomeScript = () => {
       return new Promise((resolve, reject) => {
         // Verificar si el script ya está cargado
-        const existingScript = document.querySelector('script[src="/javaScript/home.js"]');
+        const existingScript = document.querySelector(
+          'script[src="/javaScript/home.js"]'
+        );
         if (existingScript) {
           if (window.HomePageController) {
             resolve();
           } else {
-            existingScript.addEventListener('load', resolve);
-            existingScript.addEventListener('error', reject);
+            existingScript.addEventListener("load", resolve);
+            existingScript.addEventListener("error", reject);
           }
           return;
         }
 
         // Crear y cargar el script
-        const script = document.createElement('script');
-        script.src = '/javaScript/home.js';
+        const script = document.createElement("script");
+        script.src = "/javaScript/home.js";
         script.async = true;
-        script.addEventListener('load', () => {
+        script.addEventListener("load", () => {
           console.log("✅ Script home.js cargado correctamente");
           resolve();
         });
-        script.addEventListener('error', (err) => {
+        script.addEventListener("error", (err) => {
           console.error("❌ Error cargando home.js:", err);
           reject(err);
         });
