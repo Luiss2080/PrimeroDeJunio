@@ -49,6 +49,27 @@ const Contacto = () => {
     };
   }, []);
 
+  // Efecto para actualizar título y favicon
+  useEffect(() => {
+    // Actualizar título de la página
+    document.title = "Contacto - Primero de Junio";
+    
+    // Asegurar que el favicon esté presente
+    let favicon = document.querySelector('link[rel="icon"]');
+    if (!favicon) {
+      favicon = document.createElement("link");
+      favicon.rel = "icon";
+      favicon.type = "image/jpeg";
+      favicon.href = "/images/logoMoto.jpg";
+      document.head.appendChild(favicon);
+    }
+
+    const event = new CustomEvent("pageChanged", {
+      detail: { page: "contacto" },
+    });
+    window.dispatchEvent(event);
+  }, []);
+
   const contactMethods = [
     {
       id: 1,
@@ -300,7 +321,8 @@ const Contacto = () => {
               <div className="preview-messages">
                 <div className="message received">
                   <div className="message-content">
-                    ¡Hola! 👋 Bienvenido a PRIMERO DE JUNIO. ¿En qué puedo ayudarte hoy?
+                    ¡Hola! 👋 Bienvenido a PRIMERO DE JUNIO. ¿En qué puedo
+                    ayudarte hoy?
                   </div>
                   <div className="message-time">Ahora</div>
                 </div>
@@ -444,7 +466,9 @@ const Contacto = () => {
 
                 <div className="form-row">
                   <div className="form-group">
-                    <label htmlFor="experience">Experiencia en Desarrollo</label>
+                    <label htmlFor="experience">
+                      Experiencia en Desarrollo
+                    </label>
                     <select
                       id="experience"
                       name="experience"
@@ -501,7 +525,8 @@ const Contacto = () => {
                       onChange={handleInputChange}
                     />
                     <span className="checkbox-custom"></span>
-                    Quiero recibir noticias y ofertas exclusivas de PRIMERO DE JUNIO
+                    Quiero recibir noticias y ofertas exclusivas de PRIMERO DE
+                    JUNIO
                   </label>
                 </div>
 
@@ -565,8 +590,8 @@ const Contacto = () => {
                 <div className="card-icon">💬</div>
                 <h3>Comunidad Telegram</h3>
                 <p>
-                  Únete a más de 25,000 desarrolladors en nuestra comunidad oficial de
-                  Telegram.
+                  Únete a más de 25,000 desarrolladors en nuestra comunidad
+                  oficial de Telegram.
                 </p>
                 <button className="btn btn-ghost sidebar-btn">
                   Unirse Gratis

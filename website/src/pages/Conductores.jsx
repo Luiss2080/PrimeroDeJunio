@@ -38,6 +38,27 @@ const Conductores = () => {
     };
   }, []);
 
+  // Efecto para actualizar título y favicon
+  useEffect(() => {
+    // Actualizar título de la página
+    document.title = "Conductores - Primero de Junio";
+    
+    // Asegurar que el favicon esté presente
+    let favicon = document.querySelector('link[rel="icon"]');
+    if (!favicon) {
+      favicon = document.createElement("link");
+      favicon.rel = "icon";
+      favicon.type = "image/jpeg";
+      favicon.href = "/images/logoMoto.jpg";
+      document.head.appendChild(favicon);
+    }
+
+    const event = new CustomEvent("pageChanged", {
+      detail: { page: "conductores" },
+    });
+    window.dispatchEvent(event);
+  }, []);
+
   const categories = [
     { id: "todos", name: "Todos los Conductores", icon: "🎯" },
     { id: "principiante", name: "Principiante", icon: "🌟" },
@@ -179,8 +200,6 @@ const Conductores = () => {
     selectedCategory === "todos"
       ? courses
       : courses.filter((course) => course.level === selectedCategory);
-
-
 
   // Intersection Observer para animaciones
   useEffect(() => {

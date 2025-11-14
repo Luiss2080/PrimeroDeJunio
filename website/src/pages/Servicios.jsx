@@ -285,7 +285,7 @@ const Servicios = () => {
   useEffect(() => {
     // Actualizar título de la página
     document.title = "Servicios - Primero de Junio";
-    
+
     // Asegurar que el favicon esté presente
     let favicon = document.querySelector('link[rel="icon"]');
     if (!favicon) {

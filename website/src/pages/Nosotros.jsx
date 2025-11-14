@@ -44,6 +44,27 @@ const Nosotros = () => {
     };
   }, []);
 
+  // Efecto para actualizar título y favicon
+  useEffect(() => {
+    // Actualizar título de la página
+    document.title = "Nosotros - Primero de Junio";
+    
+    // Asegurar que el favicon esté presente
+    let favicon = document.querySelector('link[rel="icon"]');
+    if (!favicon) {
+      favicon = document.createElement("link");
+      favicon.rel = "icon";
+      favicon.type = "image/jpeg";
+      favicon.href = "/images/logoMoto.jpg";
+      document.head.appendChild(favicon);
+    }
+
+    const event = new CustomEvent("pageChanged", {
+      detail: { page: "nosotros" },
+    });
+    window.dispatchEvent(event);
+  }, []);
+
   const sections = [
     { id: "mision", name: "Misión & Visión", icon: "🎯" },
     { id: "historia", name: "Historia", icon: "📈" },

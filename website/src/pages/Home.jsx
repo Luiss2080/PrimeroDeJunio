@@ -29,9 +29,7 @@ const Home = React.memo(() => {
 
     return () => {
       // Cleanup: remover CSS y JS cuando se desmonte el componente
-      const existingLink = document.querySelector(
-        'link[href="/css/home.css"]'
-      );
+      const existingLink = document.querySelector('link[href="/css/home.css"]');
       const existingScript = document.querySelector(
         'script[src="/javaScript/home.js"]'
       );
@@ -71,7 +69,7 @@ const Home = React.memo(() => {
 
     // Actualizar título de la página
     document.title = "Inicio - Primero de Junio";
-    
+
     // Asegurar que el favicon esté presente
     let favicon = document.querySelector('link[rel="icon"]');
     if (!favicon) {
