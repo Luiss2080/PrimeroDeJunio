@@ -1,17 +1,35 @@
 import React, { useState, useEffect } from "react";
-import "../../public/css/Asociacion.css";
 
 const Asociacion = () => {
-  // Cargar el script de Asociacion cuando se monte el componente
+  // Cargar el CSS y JS de Asociación cuando se monte el componente
   useEffect(() => {
+    // Cargar CSS
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = "/css/Asociacion.css";
+    document.head.appendChild(link);
+
+    // Cargar JavaScript
     const script = document.createElement("script");
     script.src = "/javaScript/Asociacion.js";
     script.async = true;
     document.head.appendChild(script);
 
     return () => {
-      // Cleanup: remover el script cuando se desmonte el componente
-      document.head.removeChild(script);
+      // Cleanup: remover CSS y JS cuando se desmonte el componente
+      const existingLink = document.querySelector(
+        'link[href="/css/Asociacion.css"]'
+      );
+      const existingScript = document.querySelector(
+        'script[src="/javaScript/Asociacion.js"]'
+      );
+
+      if (existingLink) {
+        document.head.removeChild(existingLink);
+      }
+      if (existingScript) {
+        document.head.removeChild(existingScript);
+      }
     };
   }, []);
   const [activeTab, setActiveTab] = useState("metodologia");

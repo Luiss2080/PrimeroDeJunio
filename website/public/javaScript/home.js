@@ -1448,3 +1448,6 @@ window.addEventListener("beforeunload", () => {
 if (typeof module !== "undefined" && module.exports) {
   module.exports = HomePageController;
 }
+
+// Hacer disponible la clase en el objeto global window para React
+window.HomePageController = HomePageController;

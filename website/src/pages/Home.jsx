@@ -1,7 +1,78 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
+import "../styles/Home.css";
 
 const Home = () => {
   console.log("🏠 PRIMERO DE JUNIO: Home component renderizando...");
+
+  // Inicializar el controlador de JavaScript cuando se monte el componente
+  useEffect(() => {
+    console.log("🔧 Inicializando HomePageController...");
+
+    // Función para cargar el script de JavaScript de Home
+    const loadHomeScript = () => {
+      return new Promise((resolve, reject) => {
+        // Verificar si el script ya está cargado
+        const existingScript = document.querySelector('script[src="/javaScript/home.js"]');
+        if (existingScript) {
+          if (window.HomePageController) {
+            resolve();
+          } else {
+            existingScript.addEventListener('load', resolve);
+            existingScript.addEventListener('error', reject);
+          }
+          return;
+        }
+
+        // Crear y cargar el script
+        const script = document.createElement('script');
+        script.src = '/javaScript/home.js';
+        script.async = true;
+        script.addEventListener('load', () => {
+          console.log("✅ Script home.js cargado correctamente");
+          resolve();
+        });
+        script.addEventListener('error', (err) => {
+          console.error("❌ Error cargando home.js:", err);
+          reject(err);
+        });
+        document.head.appendChild(script);
+      });
+    };
+
+    // Función para inicializar el controlador
+    const initController = () => {
+      if (window.HomePageController) {
+        // Destruir instancia anterior si existe
+        if (window.homePageController) {
+          window.homePageController.destroy();
+        }
+        // Crear nueva instancia
+        window.homePageController = new window.HomePageController();
+        console.log("✅ HomePageController inicializado correctamente");
+      } else {
+        console.warn("⚠️ HomePageController no está disponible");
+      }
+    };
+
+    // Cargar el script y luego inicializar el controlador
+    loadHomeScript()
+      .then(() => {
+        // Esperar un poco para que se inicialice completamente
+        setTimeout(initController, 100);
+      })
+      .catch((error) => {
+        console.error("❌ Error inicializando Home:", error);
+      });
+
+    return () => {
+      // Cleanup: destruir el controlador cuando se desmonte el componente
+      if (window.homePageController) {
+        window.homePageController.destroy();
+        window.homePageController = null;
+        console.log("🧹 HomePageController destruido");
+      }
+    };
+  }, []);
 
   // Estados para animaciones y carruseles
   const [currentText, setCurrentText] = useState("");
@@ -25,6 +96,15 @@ const Home = () => {
   useEffect(() => {
     setCurrentText(texts[textIndex]);
   }, [textIndex]);
+
+  // Notificar que la página Home está activa para inicializar controladores
+  useEffect(() => {
+    console.log("🏠 Home component montado, notificando cambio de página");
+    const event = new CustomEvent("pageChanged", {
+      detail: { page: "inicio" },
+    });
+    window.dispatchEvent(event);
+  }, []);
 
   return (
     <div className="home-container">
