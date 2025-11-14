@@ -241,6 +241,11 @@ const Footer = () => {
         <div className="footer-brand">
           <div className="footer-brand-container">
             <div className="footer-logo">
+              <img
+                src="/images/logoMoto.jpg"
+                alt="Primero de Junio"
+                className="footer-logo-image"
+              />
               <div className="footer-logo-text">
                 <span className="footer-logo-name">PRIMERO DE JUNIO</span>
                 <span className="footer-logo-tagline">Asociacion</span>
