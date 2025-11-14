@@ -12,7 +12,7 @@ const Home = () => {
       return new Promise((resolve, reject) => {
         // Verificar si el CSS ya está cargado
         const existingLink = document.querySelector(
-          'link[href="/css/home.css"]'
+          'link[href="css/home.css"]'
         );
         if (existingLink) {
           resolve();
@@ -22,7 +22,7 @@ const Home = () => {
         // Crear y cargar el CSS
         const link = document.createElement("link");
         link.rel = "stylesheet";
-        link.href = "/css/home.css";
+        link.href = "css/home.css";
         link.addEventListener("load", () => {
           console.log("✅ CSS home.css cargado correctamente");
           resolve();
@@ -39,7 +39,7 @@ const Home = () => {
       return new Promise((resolve, reject) => {
         // Verificar si el script ya está cargado
         const existingScript = document.querySelector(
-          'script[src="/javaScript/home.js"]'
+          'script[src="javaScript/home.js"]'
         );
         if (existingScript) {
           if (window.HomePageController) {
@@ -53,7 +53,7 @@ const Home = () => {
 
         // Crear y cargar el script
         const script = document.createElement("script");
-        script.src = "/javaScript/home.js";
+        script.src = "javaScript/home.js";
         script.async = true;
         script.addEventListener("load", () => {
           console.log("✅ Script home.js cargado correctamente");
