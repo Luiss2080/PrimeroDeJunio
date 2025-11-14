@@ -55,7 +55,7 @@ const Header = ({ currentView, changeView }) => {
             />
             <div className="logo-text-container">
               <span className="logo-text">PRIMERO DE JUNIO</span>
-              <span className="logo-tagline">PRIMERO DE JUNIO</span>
+              <span className="logo-tagline">Asociacion</span>
             </div>
           </div>
 
