@@ -1,0 +1,609 @@
+/* PRIMERO DE JUNIO - HOME PAGE STYLES (renombrado desde pages.css) */
+/* Contiene SOLO estilos para Home y elementos comunes, sin secciones de Asociación */
+
+/* === ANIMACIONES PRINCIPALES === */
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes glow {
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(0, 255, 136, 0.6);
+  }
+}
+
+@keyframes gradientShift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  33% {
+    transform: translate(30px, -30px) rotate(120deg);
+  }
+  66% {
+    transform: translate(-20px, 20px) rotate(240deg);
+  }
+}
+
+@keyframes morphing {
+  0%,
+  100% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+  50% {
+    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+  }
+}
+
+@keyframes floatShape1 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+  33% { transform: translate(20px, -30px) rotate(120deg) scale(1.1); }
+  66% { transform: translate(-15px, 25px) rotate(240deg) scale(0.9); }
+}
+
+@keyframes floatShape2 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+  25% { transform: translate(-25px, -20px) rotate(90deg) scale(1.2); }
+  50% { transform: translate(30px, 10px) rotate(180deg) scale(0.8); }
+  75% { transform: translate(-10px, 30px) rotate(270deg) scale(1.1); }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) translateY(50px);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05) translateY(-10px);
+  }
+  70% {
+    transform: scale(0.9) translateY(5px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* === PÁGINA HOME === */
+.home-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #000000 0%, #001a0a 100%);
+  color: #ffffff;
+  font-family: "Inter", sans-serif;
+}
+
+/* === HERO SECTION === */
+.hero-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(
+      135deg,
+      rgba(0, 0, 0, 0.95) 0%,
+      rgba(0, 10, 0, 0.98) 50%,
+      rgba(0, 0, 0, 0.95) 100%
+    ),
+    url("./images/hero/Desarrollo-bg.jpg") center/cover no-repeat;
+}
+
+.hero-background-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+      ellipse at center,
+      rgba(0, 255, 136, 0.03) 0%,
+      transparent 70%
+    ),
+    linear-gradient(45deg, rgba(0, 255, 102, 0.02) 0%, transparent 50%),
+    conic-gradient(
+      from 0deg at 50% 50%,
+      rgba(0, 255, 136, 0.01) 0deg,
+      transparent 90deg,
+      rgba(0, 255, 102, 0.01) 180deg,
+      transparent 270deg
+    );
+  animation: pulse 6s ease-in-out infinite;
+  z-index: 1;
+}
+
+.hero-particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+      2px 2px at 20% 30%,
+      rgba(255, 255, 255, 0.3),
+      transparent
+    ),
+    radial-gradient(1px 1px at 80% 70%, rgba(0, 255, 136, 0.4), transparent),
+    radial-gradient(1px 1px at 60% 20%, rgba(0, 255, 102, 0.3), transparent);
+  background-size: 200px 200px, 150px 150px, 100px 100px;
+  animation: float 15s ease-in-out infinite;
+  z-index: 1;
+}
+
+.hero-grid {
+  max-width: 1400px;
+  margin: 0 auto;
+  z-index: 10;
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 4rem;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 255, 136, 0.15) 0%,
+    rgba(0, 255, 102, 0.15) 100%
+  );
+  border: 1px solid rgba(0, 255, 136, 0.3);
+  border-radius: 50px;
+  padding: 0.8rem 1.8rem;
+  margin-bottom: 2.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #00ff88;
+  backdrop-filter: blur(10px);
+  animation: glow 3s ease-in-out infinite;
+}
+
+/* ===== SERVICIOS PAGE STYLES (comunes) ===== */
+.Servicios-page {
+  background: linear-gradient(135deg, #000000 0%, #001a0a 100%);
+  color: #ffffff;
+  min-height: 100vh;
+}
+
+/* ===== HERO SECTION SERVICIOS ===== */
+.Servicios-hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(
+      135deg,
+      rgba(0, 0, 0, 0.95) 0%,
+      rgba(0, 10, 0, 0.98) 50%,
+      rgba(0, 0, 0, 0.95) 100%
+    ),
+    url("./images/hero/servicios-bg.jpg") center/cover no-repeat;
+}
+
+.Servicios-hero .container {
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 4rem;
+}
+
+.Servicios-hero .hero-content {
+  text-align: left;
+}
+
+.Servicios-hero .hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 255, 136, 0.15) 0%,
+    rgba(0, 255, 102, 0.15) 100%
+  );
+  border: 1px solid rgba(0, 255, 136, 0.3);
+  border-radius: 50px;
+  padding: 0.7rem 1.5rem;
+  margin-bottom: 2rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #00ff88;
+}
+
+.Servicios-hero .hero-title {
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-weight: 900;
+  margin-bottom: 1.5rem;
+  font-family: "Montserrat", sans-serif;
+  letter-spacing: -1px;
+  line-height: 1.1;
+  color: #ffffff;
+}
+
+.Servicios-hero .gradient-text {
+  background: linear-gradient(135deg, #00ff88 0%, #00ff66 50%, #00ff88 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% 200%;
+  animation: gradientShift 3s ease-in-out infinite;
+}
+
+/* === FILTROS DE CATEGORÍAS === */
+.courses-filters {
+  padding: 4rem 2rem;
+  background: rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.courses-filters .container {
+  position: relative;
+  z-index: 2;
+}
+
+.filter-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.filter-tab {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1rem 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 255, 136, 0.2);
+  border-radius: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.filter-tab:hover {
+  background: rgba(0, 255, 136, 0.1);
+  border-color: rgba(0, 255, 136, 0.4);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.filter-tab.active {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 255, 136, 0.2),
+    rgba(0, 255, 102, 0.2)
+  );
+  border-color: #00ff88;
+  color: #00ff88;
+  transform: translateY(-2px);
+}
+
+/* === GRID DE SERVICIOS === */
+.courses-grid-section {
+  padding: 6rem 2rem;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* === TARJETAS DE SERVICIOS === */
+.course-card {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.8) 0%,
+    rgba(0, 26, 10, 0.9) 100%
+  );
+  border: 1px solid rgba(0, 255, 136, 0.1);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(50px);
+  position: relative;
+  backdrop-filter: blur(10px);
+}
+
+.course-card:hover {
+  transform: translateY(-10px);
+  border-color: rgba(0, 255, 136, 0.3);
+  box-shadow: 0 20px 40px rgba(0, 255, 136, 0.1);
+}
+
+.course-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.course-card-inner {
+  padding: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* === IMAGEN/HEADER DE TARJETA === */
+.course-image {
+  position: relative;
+  padding: 2rem;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 255, 136, 0.1) 0%,
+    rgba(0, 255, 102, 0.05) 100%
+  );
+  text-align: center;
+  border-bottom: 1px solid rgba(0, 255, 136, 0.1);
+}
+
+.course-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.course-badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: rgba(0, 255, 136, 0.2);
+  color: #00ff88;
+  padding: 0.3rem 0.8rem;
+  border-radius: 15px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  border: 1px solid rgba(0, 255, 136, 0.3);
+}
+
+/* === CONTENIDO DE TARJETA === */
+.course-content {
+  padding: 2rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.course-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.course-students {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.course-rating {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: #00ff88;
+  font-weight: 600;
+}
+
+.course-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  line-height: 1.3;
+  font-family: "Montserrat", sans-serif;
+}
+
+/* === UTILITY CLASSES === */
+.card-visible {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.card-hidden {
+  opacity: 0;
+  transform: translateY(50px);
+}
+
+.fade-in {
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
+/* === CONTAINER UTILITY === */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* === BOTONES COMUNES === */
+.btn-primary {
+  background: linear-gradient(135deg, #00ff88 0%, #00ff66 100%);
+  color: #ffffff;
+  border: none;
+  box-shadow: 0 8px 25px rgba(0, 255, 136, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0, 255, 136, 0.4);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: #00ff88;
+  border: 2px solid #00ff88;
+}
+
+.btn-ghost:hover {
+  background: rgba(0, 255, 136, 0.1);
+  transform: translateY(-3px);
+}
+
+/* === WHY CHOOSE SECTION === */
+.why-choose-section {
+  padding: 8rem 2rem;
+  background: linear-gradient(
+      135deg,
+      rgba(0, 0, 0, 0.95) 0%,
+      rgba(0, 26, 0, 0.98) 50%,
+      rgba(0, 0, 0, 0.95) 100%
+    ),
+    url("./images/backgrounds/why-choose-bg.jpg") center/cover no-repeat;
+  position: relative;
+  overflow: hidden;
+}
+
+.why-choose-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+      circle at 20% 20%,
+      rgba(0, 255, 136, 0.05) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 80%,
+      rgba(0, 255, 102, 0.05) 0%,
+      transparent 50%
+    ),
+    conic-gradient(
+      from 45deg at 50% 50%,
+      rgba(0, 255, 136, 0.02) 0deg,
+      transparent 120deg,
+      rgba(0, 255, 102, 0.02) 240deg,
+      transparent 360deg
+    );
+  animation: morphing 8s ease-in-out infinite;
+  z-index: 1;
+}
+
+/* === RESPONSIVE DESIGN === */
+@media (max-width: 1024px) {
+  .Servicios-hero .container {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    text-align: center;
+  }
+
+  .courses-grid {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+
+  .Servicios-hero {
+    padding: 1rem;
+  }
+
+  .filter-tabs {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .filter-tab {
+    width: 100%;
+    max-width: 300px;
+    justify-content: center;
+  }
+
+  .courses-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .course-card {
+    margin: 0 1rem;
+  }
+}

@@ -4,7 +4,7 @@
 /* Importar CSS de componentes compartidos */
 @import url("/css/header.css");
 @import url("/css/footer.css");
-@import url("/css/pages.css");
+@import url("/css/home.css");
 
 /* Reset básico */
 * {

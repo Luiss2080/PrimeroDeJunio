@@ -1,6 +1,19 @@
 import React, { useState, useEffect } from "react";
+import "../../public/css/Asociacion.css";
 
 const Asociacion = () => {
+  // Cargar el script de Asociacion cuando se monte el componente
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "/javaScript/Asociacion.js";
+    script.async = true;
+    document.head.appendChild(script);
+
+    return () => {
+      // Cleanup: remover el script cuando se desmonte el componente
+      document.head.removeChild(script);
+    };
+  }, []);
   const [activeTab, setActiveTab] = useState("metodologia");
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
 
