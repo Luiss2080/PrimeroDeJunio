@@ -54,7 +54,7 @@ const Header = ({ currentView, changeView }) => {
               className="logo-image"
             />
             <div className="logo-text-container">
-              <span className="logo-text">PRIMERO DE JUNIO</span>
+              <span className="logo-text">1RO. DE JUNIO</span>
               <span className="logo-tagline">Asociacion</span>
             </div>
           </div>
