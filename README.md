@@ -20,14 +20,14 @@
 
 ### 🌟 **Características Principales**
 
-| 🏢 **Sistema Administrativo** | 🌐 **Website Institucional** |
-|---|---|
-| ✅ Gestión completa de conductores | ✅ Página principal moderna y responsiva |
-| ✅ Control de vehículos y documentación | ✅ Sección de servicios interactiva |
-| ✅ Administración de viajes y tarifas | ✅ Información sobre conductores |
-| ✅ Sistema de pagos y facturación | ✅ Detalles de la asociación |
-| ✅ Dashboard con estadísticas en tiempo real | ✅ Formulario de contacto |
-| ✅ Control de roles y permisos | ✅ Animaciones y experiencia de usuario optimizada |
+| 🏢 **Sistema Administrativo**                | 🌐 **Website Institucional**                       |
+| -------------------------------------------- | -------------------------------------------------- |
+| ✅ Gestión completa de conductores           | ✅ Página principal moderna y responsiva           |
+| ✅ Control de vehículos y documentación      | ✅ Sección de servicios interactiva                |
+| ✅ Administración de viajes y tarifas        | ✅ Información sobre conductores                   |
+| ✅ Sistema de pagos y facturación            | ✅ Detalles de la asociación                       |
+| ✅ Dashboard con estadísticas en tiempo real | ✅ Formulario de contacto                          |
+| ✅ Control de roles y permisos               | ✅ Animaciones y experiencia de usuario optimizada |
 
 ---
 
@@ -58,6 +58,7 @@ cp -r . C:\xampp\htdocs\PrimeroDeJunio
 
 # Iniciar XAMPP (Apache y MySQL)
 ```
+
 </details>
 
 <details>
@@ -72,6 +73,7 @@ importar-seeds.bat
 ```
 
 **Credenciales de prueba incluidas:**
+
 - **Admin**: `admin@primero1dejunio.com` / `mototaxi123`
 - **Operador**: `operador@primero1dejunio.com` / `mototaxi123`
 - **Supervisor**: `supervisor@primero1dejunio.com` / `mototaxi123`
@@ -91,6 +93,7 @@ npm install
 # Iniciar servidor de desarrollo
 npm run dev
 ```
+
 </details>
 
 ### 🎉 **¡Listo!**
@@ -134,13 +137,13 @@ PrimeroDeJunio/
 
 ### 🔧 **Tecnologías Backend**
 
-| Tecnología | Versión | Propósito |
-|------------|---------|-----------|
-| **PHP** | 8.0+ | Lógica del servidor |
-| **MySQL** | 8.0+ | Base de datos |
-| **Apache** | 2.4+ | Servidor web |
-| **JavaScript** | ES6+ | Interactividad frontend |
-| **CSS3** | - | Estilos y animaciones |
+| Tecnología     | Versión | Propósito               |
+| -------------- | ------- | ----------------------- |
+| **PHP**        | 8.0+    | Lógica del servidor     |
+| **MySQL**      | 8.0+    | Base de datos           |
+| **Apache**     | 2.4+    | Servidor web            |
+| **JavaScript** | ES6+    | Interactividad frontend |
+| **CSS3**       | -       | Estilos y animaciones   |
 
 ### 📊 **Módulos del Sistema**
 
@@ -153,6 +156,7 @@ PrimeroDeJunio/
 - **Gestión de Perfiles**: Información completa de usuarios
 
 **Controladores:**
+
 - `UsuarioController.php` - CRUD de usuarios
 - `AuthController.php` - Autenticación y autorización
 - `PermisoController.php` - Gestión de permisos
@@ -167,6 +171,7 @@ PrimeroDeJunio/
 - **Asignaciones**: Vehículo-Conductor
 
 **Controladores:**
+
 - `VehiculoController.php` - Gestión de vehículos
 - **Modelos**: `Vehiculo.php`, `Mantenimiento.php`
 </details>
@@ -180,6 +185,7 @@ PrimeroDeJunio/
 - **Estados**: Activo, Inactivo, En entrenamiento
 
 **Controladores:**
+
 - `ConductorController.php` - Gestión de conductores
 - **Modelos**: `Conductor.php`, `Usuario.php`
 </details>
@@ -193,6 +199,7 @@ PrimeroDeJunio/
 - **Reportes**: Estadísticas detalladas
 
 **Controladores:**
+
 - `ViajeController.php` - Gestión de viajes
 - `PagoTarifaDiariaController.php` - Control de pagos
 - **Modelos**: `Viaje.php`, `Tarifa.php`, `PagoTarifaDiaria.php`
@@ -206,6 +213,7 @@ PrimeroDeJunio/
 - **Tipos**: Categorización por uso
 
 **Controladores:**
+
 - `ClienteController.php` - Gestión de clientes
 - **Modelos**: `Cliente.php`
 </details>
@@ -219,6 +227,7 @@ PrimeroDeJunio/
 - **Exportación**: PDF, Excel
 
 **Controladores:**
+
 - `DashboardController.php` - Métricas y estadísticas
 - `AdminController.php` - Funciones administrativas
 </details>
@@ -227,20 +236,20 @@ PrimeroDeJunio/
 
 **12 Tablas Principales con Seeds Completos:**
 
-| Tabla | Registros de Prueba | Descripción |
-|-------|---------------------|-------------|
-| `roles` | 4 roles | Sistema de permisos |
-| `usuarios` | 8 usuarios | Cuentas del sistema |
-| `conductores` | 10 conductores | Perfiles de conductores |
-| `vehiculos` | 13 vehículos | Flota de mototaxis |
-| `clientes` | 20+ clientes | Base de clientes |
-| `tarifas` | 15+ tarifas | Sistema de precios |
-| `viajes` | 50+ viajes | Historial de servicios |
-| `asignaciones_vehiculo` | 20+ asignaciones | Vehículo-Conductor |
-| `mantenimientos` | 25+ registros | Historial de mantenimiento |
-| `configuraciones` | 70+ configuraciones | Parámetros del sistema |
-| `logs` | 30+ logs | Registro de actividad |
-| `pagos_tarifa_diaria` | 35+ pagos | Control de pagos |
+| Tabla                   | Registros de Prueba | Descripción                |
+| ----------------------- | ------------------- | -------------------------- |
+| `roles`                 | 4 roles             | Sistema de permisos        |
+| `usuarios`              | 8 usuarios          | Cuentas del sistema        |
+| `conductores`           | 10 conductores      | Perfiles de conductores    |
+| `vehiculos`             | 13 vehículos        | Flota de mototaxis         |
+| `clientes`              | 20+ clientes        | Base de clientes           |
+| `tarifas`               | 15+ tarifas         | Sistema de precios         |
+| `viajes`                | 50+ viajes          | Historial de servicios     |
+| `asignaciones_vehiculo` | 20+ asignaciones    | Vehículo-Conductor         |
+| `mantenimientos`        | 25+ registros       | Historial de mantenimiento |
+| `configuraciones`       | 70+ configuraciones | Parámetros del sistema     |
+| `logs`                  | 30+ logs            | Registro de actividad      |
+| `pagos_tarifa_diaria`   | 35+ pagos           | Control de pagos           |
 
 ---
 
@@ -248,13 +257,13 @@ PrimeroDeJunio/
 
 ### ⚛️ **Tecnologías Frontend**
 
-| Tecnología | Versión | Propósito |
-|------------|---------|-----------|
-| **React** | 18.2.0 | Librería de componentes |
-| **Vite** | 4.4.5 | Build tool y dev server |
-| **React Router DOM** | 6.8.1 | Navegación SPA |
-| **Framer Motion** | 10.16.4 | Animaciones |
-| **Lucide React** | 0.263.1 | Iconografía |
+| Tecnología           | Versión | Propósito               |
+| -------------------- | ------- | ----------------------- |
+| **React**            | 18.2.0  | Librería de componentes |
+| **Vite**             | 4.4.5   | Build tool y dev server |
+| **React Router DOM** | 6.8.1   | Navegación SPA          |
+| **Framer Motion**    | 10.16.4 | Animaciones             |
+| **Lucide React**     | 0.263.1 | Iconografía             |
 
 ### 📄 **Páginas del Website**
 
@@ -262,6 +271,7 @@ PrimeroDeJunio/
 <summary><strong>🏠 Página Principal (Home)</strong></summary>
 
 **Características:**
+
 - Hero section con animaciones
 - Carrusel de texto dinámico
 - Estadísticas de la asociación
@@ -269,6 +279,7 @@ PrimeroDeJunio/
 - Call-to-action prominente
 
 **Archivos:**
+
 - `src/pages/Home.jsx`
 - `public/css/home.css`
 - `public/javaScript/home.js`
@@ -278,6 +289,7 @@ PrimeroDeJunio/
 <summary><strong>🛵 Servicios</strong></summary>
 
 **Características:**
+
 - Catálogo de servicios interactivo
 - Filtros por categoría
 - Cursos y capacitaciones
@@ -285,6 +297,7 @@ PrimeroDeJunio/
 - Sistema de inscripción
 
 **Archivos:**
+
 - `src/pages/Servicios.jsx`
 - `public/css/servicios.css`
 - `public/javaScript/servicios.js`
@@ -294,6 +307,7 @@ PrimeroDeJunio/
 <summary><strong>👨‍💼 Conductores</strong></summary>
 
 **Características:**
+
 - Información para aspirantes
 - Requisitos y beneficios
 - Proceso de afiliación
@@ -301,6 +315,7 @@ PrimeroDeJunio/
 - Formulario de contacto
 
 **Archivos:**
+
 - `src/pages/Conductores.jsx`
 - Assets específicos
 </details>
@@ -309,6 +324,7 @@ PrimeroDeJunio/
 <summary><strong>🏢 Asociación</strong></summary>
 
 **Características:**
+
 - Historia de la asociación
 - Misión y visión
 - Estructura organizacional
@@ -316,6 +332,7 @@ PrimeroDeJunio/
 - Instructores
 
 **Archivos:**
+
 - `src/pages/Asociacion.jsx`
 - Tabs interactivos
 - Carrusel de testimonios
@@ -325,12 +342,14 @@ PrimeroDeJunio/
 <summary><strong>ℹ️ Nosotros</strong></summary>
 
 **Características:**
+
 - Información institucional
 - Valores y principios
 - Equipo directivo
 - Logros y reconocimientos
 
 **Archivos:**
+
 - `src/pages/Nosotros.jsx`
 - Contenido dinámico
 </details>
@@ -339,6 +358,7 @@ PrimeroDeJunio/
 <summary><strong>📞 Contacto</strong></summary>
 
 **Características:**
+
 - Formulario de contacto funcional
 - Información de ubicación
 - Horarios de atención
@@ -346,6 +366,7 @@ PrimeroDeJunio/
 - Mapa interactivo
 
 **Archivos:**
+
 - `src/pages/Contacto.jsx`
 - Validación de formularios
 </details>
@@ -364,13 +385,13 @@ PrimeroDeJunio/
 
 ### 📦 **Scripts Disponibles**
 
-| Script | Plataforma | Función |
-|--------|------------|---------|
-| `importar-seeds.ps1` | PowerShell | Importar datos de prueba |
-| `importar-seeds.bat` | Windows Batch | Importar datos de prueba |
-| `iniciar-desarrollo.ps1` | PowerShell | Iniciar entorno completo |
-| `iniciar-desarrollo.bat` | Windows Batch | Iniciar entorno completo |
-| `crear-acceso-directo.ps1` | PowerShell | Crear shortcuts del proyecto |
+| Script                     | Plataforma    | Función                      |
+| -------------------------- | ------------- | ---------------------------- |
+| `importar-seeds.ps1`       | PowerShell    | Importar datos de prueba     |
+| `importar-seeds.bat`       | Windows Batch | Importar datos de prueba     |
+| `iniciar-desarrollo.ps1`   | PowerShell    | Iniciar entorno completo     |
+| `iniciar-desarrollo.bat`   | Windows Batch | Iniciar entorno completo     |
+| `crear-acceso-directo.ps1` | PowerShell    | Crear shortcuts del proyecto |
 
 ### 🎯 **Scripts del Website (NPM)**
 
@@ -387,17 +408,17 @@ npm run lint     # Validación de código
 
 ```css
 /* Colores Principales */
---primero-junio-primary: #FF6B35;    /* Naranja vibrante */
---primero-junio-secondary: #2E86AB;  /* Azul profesional */
---primero-junio-accent: #F18F01;     /* Amarillo/Naranja */
---primero-junio-dark: #1A1A1A;       /* Negro profundo */
---primero-junio-light: #F8F9FA;      /* Blanco suave */
+--primero-junio-primary: #ff6b35; /* Naranja vibrante */
+--primero-junio-secondary: #2e86ab; /* Azul profesional */
+--primero-junio-accent: #f18f01; /* Amarillo/Naranja */
+--primero-junio-dark: #1a1a1a; /* Negro profundo */
+--primero-junio-light: #f8f9fa; /* Blanco suave */
 
 /* Colores de Estado */
---success: #28A745;                   /* Verde éxito */
---warning: #FFC107;                   /* Amarillo advertencia */
---danger: #DC3545;                    /* Rojo peligro */
---info: #17A2B8;                      /* Azul información */
+--success: #28a745; /* Verde éxito */
+--warning: #ffc107; /* Amarillo advertencia */
+--danger: #dc3545; /* Rojo peligro */
+--info: #17a2b8; /* Azul información */
 ```
 
 ---
@@ -406,16 +427,16 @@ npm run lint     # Validación de código
 
 <div align="center">
 
-| 📈 **Estadística** | 📊 **Valor** |
-|---|---|
-| **Total de Archivos** | 100+ archivos |
-| **Líneas de Código** | 15,000+ líneas |
-| **Componentes React** | 25+ componentes |
-| **Controladores PHP** | 12 controladores |
-| **Modelos de Datos** | 11 modelos |
-| **Tablas de BD** | 12 tablas |
-| **Seeds de Prueba** | 300+ registros |
-| **Scripts Automatizados** | 5 scripts |
+| 📈 **Estadística**        | 📊 **Valor**     |
+| ------------------------- | ---------------- |
+| **Total de Archivos**     | 100+ archivos    |
+| **Líneas de Código**      | 15,000+ líneas   |
+| **Componentes React**     | 25+ componentes  |
+| **Controladores PHP**     | 12 controladores |
+| **Modelos de Datos**      | 11 modelos       |
+| **Tablas de BD**          | 12 tablas        |
+| **Seeds de Prueba**       | 300+ registros   |
+| **Scripts Automatizados** | 5 scripts        |
 
 </div>
 
@@ -424,6 +445,7 @@ npm run lint     # Validación de código
 ## 🚀 **Roadmap de Desarrollo**
 
 ### ✅ **Completado**
+
 - [x] Sistema de autenticación completo
 - [x] Gestión de usuarios y roles
 - [x] CRUD completo de todas las entidades
@@ -434,6 +456,7 @@ npm run lint     # Validación de código
 - [x] Scripts de automatización
 
 ### 🔄 **En Desarrollo**
+
 - [ ] Sistema de notificaciones push
 - [ ] Integración con APIs de pago
 - [ ] Módulo de reportes avanzados
@@ -441,6 +464,7 @@ npm run lint     # Validación de código
 - [ ] Sistema de GPS en tiempo real
 
 ### 📋 **Planificado**
+
 - [ ] Integración con WhatsApp Business API
 - [ ] Sistema de rating y reviews
 - [ ] Módulo de facturación electrónica
@@ -471,15 +495,18 @@ npm run lint     # Validación de código
 ## 🆘 **Soporte y Documentación**
 
 ### 📚 **Documentación Adicional**
+
 - [`DESARROLLO.md`](DESARROLLO.md) - Guía detallada de desarrollo
 - [`system/database/seeds/README_SEEDS.md`](system/database/seeds/README_SEEDS.md) - Documentación de datos de prueba
 
 ### 🐛 **Reportar Problemas**
+
 - **Issues**: [GitHub Issues](https://github.com/Luiss2080/PrimeroDeJunio/issues)
 - **Email**: soporte@primero1dejunio.com
 - **WhatsApp**: +591 XXXXXXXX
 
 ### 💬 **Comunidad**
+
 - **Discord**: [Servidor de Discord](https://discord.gg/primero1dejunio)
 - **Facebook**: [@PrimeroDeJunioBo](https://facebook.com/PrimeroDeJunioBo)
 - **Instagram**: [@primero1dejunio](https://instagram.com/primero1dejunio)
