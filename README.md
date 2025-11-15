@@ -22,6 +22,7 @@
 <div align="center">
 
 ### 🚀 **TRANSFORMACIÓN DIGITAL COMPLETA**
+
 **De una asociación tradicional a una empresa tecnológica líder**
 
 </div>
@@ -31,9 +32,11 @@
 <td width="33%" align="center">
 
 ### 🌐 **WEBSITE INSTITUCIONAL**
+
 ![Website](https://img.shields.io/badge/Frontend-React_18.2-61DAFB?style=flat-square&logo=react)
 
 **✨ Presencia Digital Premium**
+
 - 6 páginas profesionales
 - Diseño responsive total
 - Animaciones interactivas
@@ -44,9 +47,11 @@
 <td width="33%" align="center">
 
 ### 🔐 **SISTEMA DE AUTENTICACIÓN**
+
 ![Auth](https://img.shields.io/badge/Security-JWT_+_2FA-FF6B6B?style=flat-square&logo=shield)
 
 **🛡️ Seguridad Bancaria**
+
 - Autenticación multicapa
 - Roles granulares
 - Sesiones inteligentes
@@ -57,9 +62,11 @@
 <td width="33%" align="center">
 
 ### 🏢 **SISTEMA ADMINISTRATIVO**
+
 ![Backend](https://img.shields.io/badge/Backend-PHP_8.1_+_MySQL-4F5D95?style=flat-square&logo=php)
 
 **⚡ Gestión Inteligente**
+
 - 12 módulos integrados
 - Dashboard ejecutivo
 - Reportes automáticos
@@ -76,13 +83,13 @@
 
 <div align="center">
 
-| 🎯 | **OBJETIVO ESTRATÉGICO** | 📈 **IMPACTO MEDIBLE** | ⚡ **VELOCIDAD** | 🎉 **BENEFICIO** |
-|:---:|---|:---:|:---:|---|
-| 🌟 | **Modernizar Imagen Institucional** | **+300%** presencia digital | **15 días** | 🚀 Captación masiva de clientes |
-| 🤖 | **Automatizar Procesos Administrativos** | **-70%** tiempo gestión manual | **30 días** | ⏰ Eficiencia operativa total |
-| 📊 | **Centralizar Información Operativa** | **+100%** control de datos | **20 días** | 🎯 Decisiones basadas en datos |
-| 😊 | **Mejorar Experiencia del Cliente** | **+250%** satisfacción | **25 días** | 💎 Servicio premium diferenciado |
-| 📈 | **Incrementar Eficiencia Operativa** | **+150%** productividad | **30 días** | 💰 ROI inmediato y sostenible |
+| 🎯  | **OBJETIVO ESTRATÉGICO**                 |     📈 **IMPACTO MEDIBLE**     | ⚡ **VELOCIDAD** | 🎉 **BENEFICIO**                 |
+| :-: | ---------------------------------------- | :----------------------------: | :--------------: | -------------------------------- |
+| 🌟  | **Modernizar Imagen Institucional**      |  **+300%** presencia digital   |   **15 días**    | 🚀 Captación masiva de clientes  |
+| 🤖  | **Automatizar Procesos Administrativos** | **-70%** tiempo gestión manual |   **30 días**    | ⏰ Eficiencia operativa total    |
+| 📊  | **Centralizar Información Operativa**    |   **+100%** control de datos   |   **20 días**    | 🎯 Decisiones basadas en datos   |
+| 😊  | **Mejorar Experiencia del Cliente**      |     **+250%** satisfacción     |   **25 días**    | 💎 Servicio premium diferenciado |
+| 📈  | **Incrementar Eficiencia Operativa**     |    **+150%** productividad     |   **30 días**    | 💰 ROI inmediato y sostenible    |
 
 </div>
 
@@ -125,6 +132,7 @@ TECNOLOGÍA MODERNA + PROCESOS OPTIMIZADOS + EXPERIENCIA PREMIUM = LIDERAZGO DIG
 ![React](https://img.shields.io/badge/React-18.2-61DAFB?style=for-the-badge&logo=react&logoColor=white)
 
 **⚡ Frontend Moderno**
+
 - Componentes reutilizables
 - Virtual DOM optimizado
 - Hooks avanzados
@@ -136,6 +144,7 @@ TECNOLOGÍA MODERNA + PROCESOS OPTIMIZADOS + EXPERIENCIA PREMIUM = LIDERAZGO DIG
 ![Vite](https://img.shields.io/badge/Vite-4.4.5-646CFF?style=for-the-badge&logo=vite&logoColor=white)
 
 **🚀 Build Ultrarrápido**
+
 - Hot Module Replacement
 - Bundling optimizado
 - Tree-shaking automático
@@ -147,6 +156,7 @@ TECNOLOGÍA MODERNA + PROCESOS OPTIMIZADOS + EXPERIENCIA PREMIUM = LIDERAZGO DIG
 ![Framer](https://img.shields.io/badge/Framer_Motion-Professional-FF0055?style=for-the-badge&logo=framer&logoColor=white)
 
 **✨ Animaciones Premium**
+
 - 60fps garantizados
 - Transiciones suaves
 - Gestos táctiles
@@ -158,6 +168,7 @@ TECNOLOGÍA MODERNA + PROCESOS OPTIMIZADOS + EXPERIENCIA PREMIUM = LIDERAZGO DIG
 ![PWA](https://img.shields.io/badge/PWA-Ready-FF6F00?style=for-the-badge&logo=pwa&logoColor=white)
 
 **📱 App-Like Experience**
+
 - Instalable como app
 - Offline first
 - Push notifications
@@ -169,6 +180,7 @@ TECNOLOGÍA MODERNA + PROCESOS OPTIMIZADOS + EXPERIENCIA PREMIUM = LIDERAZGO DIG
 ![Responsive](https://img.shields.io/badge/Responsive-100%25-4CAF50?style=for-the-badge&logo=responsive&logoColor=white)
 
 **🎯 Multi-Dispositivo**
+
 - Mobile first design
 - Tablet optimized
 - Desktop enhanced
@@ -182,12 +194,12 @@ TECNOLOGÍA MODERNA + PROCESOS OPTIMIZADOS + EXPERIENCIA PREMIUM = LIDERAZGO DIG
 
 ### 📊 **MÉTRICAS DE RENDIMIENTO GARANTIZADAS**
 
-| 🎯 **Métrica** | 🏆 **Objetivo** | ⚡ **Resultado** | 🎉 **Beneficio** |
-|:---:|:---:|:---:|---|
-| **Lighthouse Score** | 90+ | **98/100** | 🚀 SEO premium + velocidad |
-| **First Paint** | <1.5s | **0.8s** | ⚡ Carga instantánea |
-| **Time to Interactive** | <3s | **1.2s** | 👆 Interacción inmediata |
-| **Mobile Performance** | 85+ | **95/100** | 📱 Experiencia móvil perfecta |
+|     🎯 **Métrica**      | 🏆 **Objetivo** | ⚡ **Resultado** | 🎉 **Beneficio**              |
+| :---------------------: | :-------------: | :--------------: | ----------------------------- |
+|  **Lighthouse Score**   |       90+       |    **98/100**    | 🚀 SEO premium + velocidad    |
+|     **First Paint**     |      <1.5s      |     **0.8s**     | ⚡ Carga instantánea          |
+| **Time to Interactive** |       <3s       |     **1.2s**     | 👆 Interacción inmediata      |
+| **Mobile Performance**  |       85+       |    **95/100**    | 📱 Experiencia móvil perfecta |
 
 [![Lighthouse](https://img.shields.io/badge/Lighthouse-98%2F100-brightgreen?style=flat)]()
 [![GTMetrix](https://img.shields.io/badge/GTMetrix-A-green?style=flat)]()
@@ -202,6 +214,7 @@ TECNOLOGÍA MODERNA + PROCESOS OPTIMIZADOS + EXPERIENCIA PREMIUM = LIDERAZGO DIG
 <div align="center">
 
 ### 🌟 **LA PRIMERA IMPRESIÓN QUE DEFINE EL ÉXITO**
+
 ![Home Performance](https://img.shields.io/badge/Conversion_Rate-85%25-success?style=flat-square) ![User Experience](https://img.shields.io/badge/UX_Score-Perfect-brightgreen?style=flat-square)
 
 </div>
@@ -211,15 +224,18 @@ TECNOLOGÍA MODERNA + PROCESOS OPTIMIZADOS + EXPERIENCIA PREMIUM = LIDERAZGO DIG
 <td width="25%" align="center">
 
 ### 🎯 **HERO SECTION**
+
 ![Hero](https://img.shields.io/badge/Impact-INMEDIATO-FF6B35?style=for-the-badge)
 
 🎬 **Slider HD Premium**
+
 - Imágenes 4K de mototaxis
-- Transiciones cinematográficas 
+- Transiciones cinematográficas
 - Videos promocionales
 - CTA animado prominente
 
 📊 **Contadores en Vivo**
+
 - 150+ Conductores
 - 5,000+ Viajes
 - 98% Satisfacción
@@ -229,9 +245,11 @@ TECNOLOGÍA MODERNA + PROCESOS OPTIMIZADOS + EXPERIENCIA PREMIUM = LIDERAZGO DIG
 <td width="25%" align="center">
 
 ### 🛵 **SERVICIOS GRID**
+
 ![Services](https://img.shields.io/badge/Servicios-6_PRINCIPALES-4CAF50?style=for-the-badge)
 
 🎪 **Tarjetas Interactivas**
+
 - 🚗 Transporte Urbano
 - 🏥 Servicio Médico
 - 📦 Delivery Express
@@ -240,6 +258,7 @@ TECNOLOGÍA MODERNA + PROCESOS OPTIMIZADOS + EXPERIENCIA PREMIUM = LIDERAZGO DIG
 - 🔧 Mantenimiento
 
 💫 **Efectos Premium**
+
 - Hover animations
 - Iconos animados
 - Precios dinámicos
@@ -248,15 +267,18 @@ TECNOLOGÍA MODERNA + PROCESOS OPTIMIZADOS + EXPERIENCIA PREMIUM = LIDERAZGO DIG
 <td width="25%" align="center">
 
 ### 📊 **ANALYTICS VIVO**
+
 ![Analytics](https://img.shields.io/badge/Data-TIEMPO_REAL-2196F3?style=for-the-badge)
 
 🗺️ **Mapas Interactivos**
+
 - Cobertura en tiempo real
 - Zonas de demanda
 - Rutas optimizadas
 - Tráfico integrado
 
 📈 **Gráficos Dinámicos**
+
 - Tiempos de respuesta
 - Horarios pico
 - Satisfacción trends
@@ -265,9 +287,11 @@ TECNOLOGÍA MODERNA + PROCESOS OPTIMIZADOS + EXPERIENCIA PREMIUM = LIDERAZGO DIG
 <td width="25%" align="center">
 
 ### 💬 **TESTIMONIOS**
+
 ![Testimonials](https://img.shields.io/badge/Rating-4.8%2F5-FFD700?style=for-the-badge)
 
 🎠 **Carrusel Premium**
+
 - Fotos reales HD
 - Historias de éxito
 - Incrementos de ingresos
@@ -275,6 +299,7 @@ TECNOLOGÍA MODERNA + PROCESOS OPTIMIZADOS + EXPERIENCIA PREMIUM = LIDERAZGO DIG
 - 5 ⭐ ratings
 
 👥 **Casos Reales**
+
 - María González - +150%
 - Roberto Silva - Flexibilidad
 - Carmen López - Independencia
@@ -288,6 +313,7 @@ TECNOLOGÍA MODERNA + PROCESOS OPTIMIZADOS + EXPERIENCIA PREMIUM = LIDERAZGO DIG
 <div align="center">
 
 ### 🎓 **CATÁLOGO COMPLETO DE SOLUCIONES**
+
 ![Total Services](https://img.shields.io/badge/Servicios_Totales-15+-success?style=flat-square) ![Satisfaction](https://img.shields.io/badge/Satisfacción-98%25-brightgreen?style=flat-square)
 
 </div>
@@ -297,23 +323,24 @@ TECNOLOGÍA MODERNA + PROCESOS OPTIMIZADOS + EXPERIENCIA PREMIUM = LIDERAZGO DIG
 <td width="50%">
 
 ### 👨‍🎓 **PARA CONDUCTORES**
+
 ![Drivers](https://img.shields.io/badge/Conductores-PROFESIONALES-FF6B35?style=for-the-badge)
 
 #### 🎓 **CAPACITACIÓN & CERTIFICACIÓN**
 
-| 📚 **Curso** | ⏱️ **Duración** | 💰 **Precio** | 🏆 **Certificación** |
-|---|:---:|:---:|---|
-| 🚗 **Conducción Básica** | 2 semanas | **$150** | ✅ Oficial |
-| 🛡️ **Manejo Defensivo** | 1 semana | **$100** | ✅ Avanzada |
-| ⛑️ **Primeros Auxilios** | 3 días | **$75** | ✅ Médica |
-| 😊 **Atención al Cliente** | 2 días | **$50** | ✅ Servicio |
-| 🔧 **Mecánica Básica** | 1 semana | **$120** | ✅ Técnica |
+| 📚 **Curso**               | ⏱️ **Duración** | 💰 **Precio** | 🏆 **Certificación** |
+| -------------------------- | :-------------: | :-----------: | -------------------- |
+| 🚗 **Conducción Básica**   |    2 semanas    |   **$150**    | ✅ Oficial           |
+| 🛡️ **Manejo Defensivo**    |    1 semana     |   **$100**    | ✅ Avanzada          |
+| ⛑️ **Primeros Auxilios**   |     3 días      |    **$75**    | ✅ Médica            |
+| 😊 **Atención al Cliente** |     2 días      |    **$50**    | ✅ Servicio          |
+| 🔧 **Mecánica Básica**     |    1 semana     |   **$120**    | ✅ Técnica           |
 
 #### 🛠️ **SERVICIOS DE APOYO**
 
 ```
 📄 GESTIÓN DOCUMENTOS     🛡️ SEGURO INTEGRAL
-💰 FINANCIAMIENTO         🔧 MANTENIMIENTO  
+💰 FINANCIAMIENTO         🔧 MANTENIMIENTO
 ⚖️ ASESORÍA LEGAL         📱 SOPORTE 24/7
 ```
 
@@ -321,25 +348,26 @@ TECNOLOGÍA MODERNA + PROCESOS OPTIMIZADOS + EXPERIENCIA PREMIUM = LIDERAZGO DIG
 <td width="50%">
 
 ### 👥 **PARA CLIENTES**
+
 ![Clients](https://img.shields.io/badge/Clientes-PREMIUM-4CAF50?style=for-the-badge)
 
 #### 🚗 **MODALIDADES DE TRANSPORTE**
 
-| 🎯 **Servicio** | ⚡ **Característica** | 💲 **Tarifa** |
-|---|---|:---:|
-| 🟢 **Regular** | Estándar confiable | Base |
-| ⚡ **Express** | +30% velocidad | +30% |
-| 🌙 **Nocturno** | 24/7 disponible | +15% |
-| 🏢 **Corporativo** | Empresas VIP | Especial |
-| 🎯 **Turístico** | Rutas especiales | Premium |
+| 🎯 **Servicio**    | ⚡ **Característica** | 💲 **Tarifa** |
+| ------------------ | --------------------- | :-----------: |
+| 🟢 **Regular**     | Estándar confiable    |     Base      |
+| ⚡ **Express**     | +30% velocidad        |     +30%      |
+| 🌙 **Nocturno**    | 24/7 disponible       |     +15%      |
+| 🏢 **Corporativo** | Empresas VIP          |   Especial    |
+| 🎯 **Turístico**   | Rutas especiales      |    Premium    |
 
 #### 🏥 **SERVICIOS ESPECIALIZADOS**
 
 <div align="center">
 
-🏥 **MÉDICO** | 💊 **FARMACIA** | 🎒 **ESCOLAR** | 📦 **MUDANZA** | 📄 **COURIER**
-:---:|:---:|:---:|:---:|:---:
-Personal capacitado | Urgencias 24h | Niños seguros | Objetos pequeños | Documentos express
+|    🏥 **MÉDICO**    | 💊 **FARMACIA** | 🎒 **ESCOLAR** |  📦 **MUDANZA**  |   📄 **COURIER**   |
+| :-----------------: | :-------------: | :------------: | :--------------: | :----------------: |
+| Personal capacitado |  Urgencias 24h  | Niños seguros  | Objetos pequeños | Documentos express |
 
 </div>
 
@@ -490,6 +518,7 @@ Personal capacitado | Urgencias 24h | Niños seguros | Objetos pequeños | Docum
 <div align="center">
 
 ### 🎯 **INFORMACIÓN INSTITUCIONAL & CORPORATIVA**
+
 ![Founded](https://img.shields.io/badge/Fundada-1_Junio_2018-blue?style=flat-square) ![Growth](https://img.shields.io/badge/Crecimiento-1,150%25-success?style=flat-square)
 
 </div>
@@ -499,9 +528,11 @@ Personal capacitado | Urgencias 24h | Niños seguros | Objetos pequeños | Docum
 <td width="33%" align="center">
 
 ### 📜 **NUESTRA HISTORIA**
+
 ![History](https://img.shields.io/badge/Trayectoria-7_AÑOS-FF6B35?style=for-the-badge)
 
 #### 🚀 **LÍNEA DE TIEMPO**
+
 ```
 2018 🎆 Fundación (12 visionarios)
 2019 🏆 Primera certificación
@@ -513,7 +544,8 @@ Personal capacitado | Urgencias 24h | Niños seguros | Objetos pequeños | Docum
 ```
 
 #### 🌎 **IMPACTO SOCIAL**
-- 💪 **+5,000** familias beneficiadas  
+
+- 💪 **+5,000** familias beneficiadas
 - 🏢 **5** premios municipales
 - 📈 **1,150%** crecimiento
 
@@ -521,19 +553,21 @@ Personal capacitado | Urgencias 24h | Niños seguros | Objetos pequeños | Docum
 <td width="33%" align="center">
 
 ### 🏆 **CERTIFICACIONES**
+
 ![Quality](https://img.shields.io/badge/Calidad-ISO_9001-success?style=for-the-badge)
 
 #### 🏅 **CERTIFICACIONES OFICIALES**
 
-| 🏅 **Certificación** | 📅 **Vigencia** | ✅ **Estado** |
-|---|:---:|:---:|
-| **ISO 9001:2015** | 2025 | ✅ Activa |
-| **Municipal Transporte** | 2024 | ✅ Activa |
-| **Registro Nacional** | Permanente | ✅ Activa |
-| **Ambiental** | 2025 | ✅ Activa |
-| **Responsabilidad Social** | 2024 | ✅ Activa |
+| 🏅 **Certificación**       | 📅 **Vigencia** | ✅ **Estado** |
+| -------------------------- | :-------------: | :-----------: |
+| **ISO 9001:2015**          |      2025       |   ✅ Activa   |
+| **Municipal Transporte**   |      2024       |   ✅ Activa   |
+| **Registro Nacional**      |   Permanente    |   ✅ Activa   |
+| **Ambiental**              |      2025       |   ✅ Activa   |
+| **Responsabilidad Social** |      2024       |   ✅ Activa   |
 
 #### 🏆 **PREMIOS RECIENTES**
+
 ```
 🏆 2023: Mejor Asociación Transporte
 🏆 2022: Innovación Movilidad Urbana
@@ -544,20 +578,22 @@ Personal capacitado | Urgencias 24h | Niños seguros | Objetos pequeños | Docum
 <td width="33%" align="center">
 
 ### 👥 **ESTRUCTURA ORGANIZACIONAL**
+
 ![Team](https://img.shields.io/badge/Equipo-PROFESIONAL-4CAF50?style=for-the-badge)
 
 #### 💼 **DIRECTORIO EJECUTIVO**
 
-| 🎯 **Cargo** | 👥 **Responsable** |
-|---|---|
-| 👑 **Presidente** | Juan Carlos Mendoza |
-| 👥 **Vicepresidente** | María Elena Vargas |
-| 📝 **Secretario** | Roberto Fernández |
-| 💰 **Tesorero** | Ana Lucia Castro |
-| 🗣️ **Vocal 1** | Carlos Mamani |
-| 🗣️ **Vocal 2** | Patricia Morales |
+| 🎯 **Cargo**          | 👥 **Responsable**  |
+| --------------------- | ------------------- |
+| 👑 **Presidente**     | Juan Carlos Mendoza |
+| 👥 **Vicepresidente** | María Elena Vargas  |
+| 📝 **Secretario**     | Roberto Fernández   |
+| 💰 **Tesorero**       | Ana Lucia Castro    |
+| 🗣️ **Vocal 1**        | Carlos Mamani       |
+| 🗣️ **Vocal 2**        | Patricia Morales    |
 
 #### 🏢 **DEPARTAMENTOS**
+
 ```
 🚗 OPERACIONES    👥 RRHH
 💰 FINANZAS       🔧 MANTENIMIENTO
@@ -573,10 +609,10 @@ Personal capacitado | Urgencias 24h | Niños seguros | Objetos pequeños | Docum
 ### 🎯 **MISIÓN & VISIÓN**
 
 > **MISIÓN** 🎆  
-> *"Proporcionar servicios de transporte seguro, confiable y accesible, mientras generamos oportunidades de empleo digno para nuestros conductores asociados."*
+> _"Proporcionar servicios de transporte seguro, confiable y accesible, mientras generamos oportunidades de empleo digno para nuestros conductores asociados."_
 
 > **VISIÓN 2025** 🚀  
-> *"Ser la asociación de mototaxis líder en Bolivia, reconocida por su profesionalismo, innovación tecnológica y compromiso social."*
+> _"Ser la asociación de mototaxis líder en Bolivia, reconocida por su profesionalismo, innovación tecnológica y compromiso social."_
 
 </div>
 
@@ -585,6 +621,7 @@ Personal capacitado | Urgencias 24h | Niños seguros | Objetos pequeños | Docum
 <div align="center">
 
 ### 💡 **VALORES, CULTURA & EQUIPO HUMANO**
+
 ![Values](https://img.shields.io/badge/Valores-6_PILARES-purple?style=flat-square) ![Goals](https://img.shields.io/badge/Objetivos_2025-12_METAS-orange?style=flat-square)
 
 </div>
@@ -594,22 +631,24 @@ Personal capacitado | Urgencias 24h | Niños seguros | Objetos pequeños | Docum
 <td width="50%">
 
 ### 🎆 **NUESTROS VALORES FUNDAMENTALES**
+
 ![Core Values](https://img.shields.io/badge/Filosofia-CENTRADA_EN_PERSONAS-FF6B35?style=for-the-badge)
 
 <div align="center">
 
-| 🏆 | **VALOR** | 🎯 **SIGNIFICADO** |
-|:---:|---|---|
-| 🤝 | **HONESTIDAD** | Transparencia total en operaciones |
-| 🛡️ | **SEGURIDAD** | Prioridad absoluta en cada viaje |
-| ⭐ | **EXCELENCIA** | Mejora continua del servicio |
-| 🌱 | **RESPONSABILIDAD** | Compromiso social y ambiental |
-| 🚀 | **INNOVACIÓN** | Tecnologías de vanguardia |
-| 👥 | **TRABAJO EN EQUIPO** | Colaboración y apoyo mutuo |
+| 🏆  | **VALOR**             | 🎯 **SIGNIFICADO**                 |
+| :-: | --------------------- | ---------------------------------- |
+| 🤝  | **HONESTIDAD**        | Transparencia total en operaciones |
+| 🛡️  | **SEGURIDAD**         | Prioridad absoluta en cada viaje   |
+| ⭐  | **EXCELENCIA**        | Mejora continua del servicio       |
+| 🌱  | **RESPONSABILIDAD**   | Compromiso social y ambiental      |
+| 🚀  | **INNOVACIÓN**        | Tecnologías de vanguardia          |
+| 👥  | **TRABAJO EN EQUIPO** | Colaboración y apoyo mutuo         |
 
 </div>
 
 #### ✅ **PRINCIPIOS OPERATIVOS**
+
 ```
 🎆 El cliente siempre es nuestra prioridad
 🌟 Cada conductor es embajador de la marca
@@ -622,27 +661,30 @@ Personal capacitado | Urgencias 24h | Niños seguros | Objetos pequeños | Docum
 <td width="50%">
 
 ### 🎯 **OBJETIVOS ESTRATÉGICOS 2024-2025**
+
 ![Strategic Goals](https://img.shields.io/badge/Estrategia-CRECIMIENTO_SOSTENIBLE-4CAF50?style=for-the-badge)
 
 #### 📈 **CRECIMIENTO OPERATIVO**
 
-| 🎯 **Meta** | 📅 **Plazo** | 📊 **Impacto** |
-|---|:---:|---|
-| 🚗 **200 mototaxis** | Dic 2024 | +33% flota |
-| 🏯 **5 ciudades nuevas** | Jun 2025 | +500% cobertura |
-| 🗺️ **10,000 viajes/mes** | Mar 2025 | +300% servicios |
-| ⭐ **98% satisfacción** | Continuo | Excelencia |
+| 🎯 **Meta**              | 📅 **Plazo** | 📊 **Impacto**  |
+| ------------------------ | :----------: | --------------- |
+| 🚗 **200 mototaxis**     |   Dic 2024   | +33% flota      |
+| 🏯 **5 ciudades nuevas** |   Jun 2025   | +500% cobertura |
+| 🗺️ **10,000 viajes/mes** |   Mar 2025   | +300% servicios |
+| ⭐ **98% satisfacción**  |   Continuo   | Excelencia      |
 
 #### 💻 **DESARROLLO TECNOLÓGICO**
+
 ```
 📱 APP MÓVIL PROPIA        🗺️ GPS TIEMPO REAL
 💳 PAGOS DIGITALES        🏆 PROGRAMA FIDELIZACIÓN
 ```
 
 #### 🌎 **IMPACTO SOCIAL PROYECTADO**
+
 ```
 👥 100 empleos directos nuevos
-🎓 50 conductores en oficios complementarios  
+🎓 50 conductores en oficios complementarios
 🎓 Programa de becas estudiantiles
 🌱 30% reducción emisiones (vehículos eléctricos)
 ```
@@ -736,32 +778,36 @@ Personal capacitado | Urgencias 24h | Niños seguros | Objetos pequeños | Docum
 <td width="33%" align="center">
 
 ### ⚡ **RENDIMIENTO SUPERIOR**
+
 ![Performance](https://img.shields.io/badge/Velocidad-OPTIMIZADA-FF6B35?style=for-the-badge)
 
-| 🎯 **Métrica** | 🏆 **Objetivo** | ✅ **Resultado** |
-|---|:---:|:---:|
-| **Tiempo Carga** | <2s | **0.8s** |
-| **Lighthouse** | 95+ | **98/100** |
-| **Core Web Vitals** | Excelente | **✅ Perfect** |
-| **Compresión** | WebP/AVIF | **✅ Activa** |
-| **CDN Global** | Sí | **✅ Configurado** |
-| **Caché Smart** | Automático | **✅ Optimizado** |
+| 🎯 **Métrica**      | 🏆 **Objetivo** |  ✅ **Resultado**  |
+| ------------------- | :-------------: | :----------------: |
+| **Tiempo Carga**    |       <2s       |      **0.8s**      |
+| **Lighthouse**      |       95+       |     **98/100**     |
+| **Core Web Vitals** |    Excelente    |   **✅ Perfect**   |
+| **Compresión**      |    WebP/AVIF    |   **✅ Activa**    |
+| **CDN Global**      |       Sí        | **✅ Configurado** |
+| **Caché Smart**     |   Automático    | **✅ Optimizado**  |
 
 </td>
 <td width="33%" align="center">
 
 ### 📱 **RESPONSIVIDAD TOTAL**
+
 ![Responsive](https://img.shields.io/badge/Dispositivos-TODOS-4CAF50?style=for-the-badge)
 
 #### 📅 **BREAKPOINTS INTELIGENTES**
+
 ```
 📱 MÓVIL:    320px - 767px
-💻 TABLET:   768px - 1023px  
+💻 TABLET:   768px - 1023px
 🖥️ DESKTOP:  1024px - 1439px
 🖥️ 4K/UHD:   1440px+
 ```
 
 #### 👆 **OPTIMIZACIONES TÁCTILES**
+
 - ✅ Touch-friendly buttons
 - ✅ Swipe gestures
 - ✅ Pinch to zoom
@@ -772,20 +818,22 @@ Personal capacitado | Urgencias 24h | Niños seguros | Objetos pequeños | Docum
 <td width="33%" align="center">
 
 ### 🚀 **SEO & MARKETING**
+
 ![SEO](https://img.shields.io/badge/Visibilidad-MÁXIMA-2196F3?style=for-the-badge)
 
 #### 🗺️ **POSICIONAMIENTO WEB**
 
-| 🎯 **Herramienta** | 📊 **Estado** |
-|---|:---:|
-| **Meta Tags Dinámicos** | ✅ |
-| **Schema Markup** | ✅ |
-| **Sitemap XML** | ✅ |
-| **Google Analytics 4** | ✅ |
-| **Facebook Pixel** | ✅ |
-| **Open Graph** | ✅ |
+| 🎯 **Herramienta**      | 📊 **Estado** |
+| ----------------------- | :-----------: |
+| **Meta Tags Dinámicos** |      ✅       |
+| **Schema Markup**       |      ✅       |
+| **Sitemap XML**         |      ✅       |
+| **Google Analytics 4**  |      ✅       |
+| **Facebook Pixel**      |      ✅       |
+| **Open Graph**          |      ✅       |
 
 #### 📈 **RESULTADO ESPERADO**
+
 ```
 🚀 +300% tráfico orgánico
 🎯 +250% tasa conversión
@@ -1660,6 +1708,7 @@ El sistema administrativo es el **núcleo tecnológico** que controlará todas l
 <div align="center">
 
 ### 🛡️ **COMPROMISO TOTAL CON LA EXCELENCIA**
+
 ![Guarantee](https://img.shields.io/badge/Garantía-12_MESES_COMPLETOS-success?style=for-the-badge) ![Support](https://img.shields.io/badge/Soporte-24%2F7-red?style=for-the-badge)
 
 </div>
@@ -1669,18 +1718,20 @@ El sistema administrativo es el **núcleo tecnológico** que controlará todas l
 <td width="50%">
 
 ### 🎆 **NUESTRAS GARANTÍAS**
+
 ![Our Guarantees](https://img.shields.io/badge/Compromiso-BLINDADO-FF6B35?style=for-the-badge)
 
-| 🏆 | **GARANTÍA** | 📊 **NIVEL** | 🎯 **DETALLE** |
-|:---:|---|:---:|---|
-| ✅ | **Funcionalidad** | **100%** | Todo operativo como se especifica |
-| ⚡ | **Rendimiento** | **<2seg** | Velocidad garantizada siempre |
-| 📏 | **Disponibilidad** | **99.9%** | Máximo 8h caída/año |
-| 🔒 | **Seguridad** | **Bancaria** | Encriptación y protección total |
-| 📞 | **Soporte** | **12 meses** | Asistencia técnica completa |
-| 🔄 | **Updates** | **1 año gratis** | Mejoras y nuevas funciones |
+| 🏆  | **GARANTÍA**       |   📊 **NIVEL**   | 🎯 **DETALLE**                    |
+| :-: | ------------------ | :--------------: | --------------------------------- |
+| ✅  | **Funcionalidad**  |     **100%**     | Todo operativo como se especifica |
+| ⚡  | **Rendimiento**    |    **<2seg**     | Velocidad garantizada siempre     |
+| 📏  | **Disponibilidad** |    **99.9%**     | Máximo 8h caída/año               |
+| 🔒  | **Seguridad**      |   **Bancaria**   | Encriptación y protección total   |
+| 📞  | **Soporte**        |   **12 meses**   | Asistencia técnica completa       |
+| 🔄  | **Updates**        | **1 año gratis** | Mejoras y nuevas funciones        |
 
 #### 💰 **VALOR AGREGADO SIN COSTO**
+
 ```
 🎓 Capacitación completa del equipo
 📄 Documentación técnica detallada
@@ -1693,19 +1744,21 @@ El sistema administrativo es el **núcleo tecnológico** que controlará todas l
 <td width="50%">
 
 ### 🤝 **COMPROMISOS DEL CLIENTE**
+
 ![Client Commitments](https://img.shields.io/badge/Colaboración-ESENCIAL-4CAF50?style=for-the-badge)
 
 #### 🎯 **PARA GARANTIZAR EL ÉXITO TOTAL**
 
-| 📋 | **COMPROMISO** | 🎯 **IMPACTO** |
-|:---:|---|---|
-| 👥 | **Responsable técnico** | Comunicación fluida |
-| 📊 | **Datos existentes** | Migración perfecta |
-| 🎓 | **Participación activa** | Adopción exitosa |
-| 🔍 | **Pruebas durante desarrollo** | Calidad garantizada |
-| 💬 | **Feedback oportuno** | Ajustes precisos |
+| 📋  | **COMPROMISO**                 | 🎯 **IMPACTO**      |
+| :-: | ------------------------------ | ------------------- |
+| 👥  | **Responsable técnico**        | Comunicación fluida |
+| 📊  | **Datos existentes**           | Migración perfecta  |
+| 🎓  | **Participación activa**       | Adopción exitosa    |
+| 🔍  | **Pruebas durante desarrollo** | Calidad garantizada |
+| 💬  | **Feedback oportuno**          | Ajustes precisos    |
 
 #### 🚀 **RESULTADO GARANTIZADO**
+
 ```
 🎆 Implementación en tiempo record
 🏆 Adopción inmediata del equipo
@@ -1714,9 +1767,11 @@ El sistema administrativo es el **núcleo tecnológico** que controlará todas l
 ```
 
 ### 📞 **CONTACTO DIRECTO**
+
 ![Contact](https://img.shields.io/badge/Respuesta-INMEDIATA-2196F3?style=for-the-badge)
 
 **👨‍💻 Luis Fernando - Desarrollador Líder**
+
 - 📧 `luis.desarrollo@email.com`
 - 📱 `+591 XXXXXXXX` (WhatsApp)
 - 🕒 `Lun-Vie 8:00-18:00`
@@ -1731,6 +1786,7 @@ El sistema administrativo es el **núcleo tecnológico** que controlará todas l
 <div align="center">
 
 ### 🚀 **ROADMAP DE IMPLEMENTACIÓN**
+
 ![Implementation](https://img.shields.io/badge/Metodología-AGILE_PROFESIONAL-success?style=for-the-badge)
 
 </div>
@@ -1740,9 +1796,11 @@ El sistema administrativo es el **núcleo tecnológico** que controlará todas l
 <td width="33%" align="center">
 
 ### 🎆 **FASE 1: FUNDACIÓN**
+
 ![Phase 1](https://img.shields.io/badge/Días_1--10-PLANIFICACIÓN-FF6B35?style=for-the-badge)
 
 #### 🏗️ **CONSTRUYENDO LOS CIMIENTOS**
+
 ```
 ✅ Análisis de requerimientos
 ✅ Diseño de arquitectura
@@ -1753,6 +1811,7 @@ El sistema administrativo es el **núcleo tecnológico** que controlará todas l
 ```
 
 **🎯 Entregables:**
+
 - Documentación técnica
 - Mockups aprobados
 - DB estructura
@@ -1762,9 +1821,11 @@ El sistema administrativo es el **núcleo tecnológico** que controlará todas l
 <td width="33%" align="center">
 
 ### 🏢 **FASE 2: CONSTRUCCIÓN**
+
 ![Phase 2](https://img.shields.io/badge/Días_11--25-DESARROLLO-4CAF50?style=for-the-badge)
 
 #### 🔧 **DESARROLLO INTENSIVO**
+
 ```
 ✅ Módulos administrativos core
 ✅ Dashboards ejecutivos
@@ -1776,6 +1837,7 @@ El sistema administrativo es el **núcleo tecnológico** que controlará todas l
 ```
 
 **🎯 Entregables:**
+
 - Sistema completo funcional
 - Módulos integrados
 - Tests pasando 100%
@@ -1785,9 +1847,11 @@ El sistema administrativo es el **núcleo tecnológico** que controlará todas l
 <td width="33%" align="center">
 
 ### 🚀 **FASE 3: LANZAMIENTO**
+
 ![Phase 3](https://img.shields.io/badge/Días_26--30-DESPLIEGUE-2196F3?style=for-the-badge)
 
 #### 🎆 **¡AL AIRE!**
+
 ```
 ✅ Integración completa
 ✅ Testing de carga
@@ -1798,6 +1862,7 @@ El sistema administrativo es el **núcleo tecnológico** que controlará todas l
 ```
 
 **🎯 Entregables:**
+
 - Sistema en producción
 - Equipo capacitado
 - Documentación completa
@@ -1826,9 +1891,11 @@ El sistema administrativo es el **núcleo tecnológico** que controlará todas l
 <td width="33%" align="center">
 
 ### 💰 **INVERSIÓN INTELIGENTE**
+
 ![Investment](https://img.shields.io/badge/Inversión-$8,500-green?style=for-the-badge)
 
 **📈 Retorno Garantizado:**
+
 - 💵 **+$3,900/mes** en beneficios
 - ⏰ **Punto equilibrio:** 2.2 meses
 - 📈 **Ganancia anual:** +$38,400
@@ -1838,9 +1905,11 @@ El sistema administrativo es el **núcleo tecnológico** que controlará todas l
 <td width="33%" align="center">
 
 ### ⚡ **IMPLEMENTACIÓN RÁPIDA**
+
 ![Speed](https://img.shields.io/badge/Tiempo-30_DÍAS-blue?style=for-the-badge)
 
 **🚀 Resultados Inmediatos:**
+
 - 🔥 **15 días:** Website operativo
 - 🏢 **25 días:** Sistema administrativo
 - 🎆 **30 días:** Transformación completa
@@ -1850,9 +1919,11 @@ El sistema administrativo es el **núcleo tecnológico** que controlará todas l
 <td width="33%" align="center">
 
 ### 🛡️ **GARANTÍA TOTAL**
+
 ![Guarantee](https://img.shields.io/badge/Garantía-12_MESES-red?style=for-the-badge)
 
 **🏆 Compromiso Blindado:**
+
 - ✅ **100%** funcionalidad garantizada
 - 📞 **24/7** soporte incluido
 - 🔄 **Actualizaciones** gratuitas
@@ -1880,12 +1951,12 @@ TECNOLOGÍA DE VANGUARDIA + EXPERIENCIA PROFESIONAL + SOPORTE GARANTIZADO = LIDE
 
 ### 🎯 **PRÓXIMOS PASOS INMEDIATOS**
 
-| 🔢 | **ACCIÓN** | ⏱️ **DURACIÓN** | 🎉 **RESULTADO** |
-|:---:|---|:---:|---|
-| **1️⃣** | **Contacto inicial** | 5 min | 📞 Comunicación establecida |
-| **2️⃣** | **Demo personalizada** | 30 min | 🎯 Visión clara del sistema |
-| **3️⃣** | **Propuesta ajustada** | 1 día | 📝 Contrato personalizado |
-| **4️⃣** | **Inicio del proyecto** | Inmediato | 🚀 Transformación en marcha |
+|   🔢   | **ACCIÓN**              | ⏱️ **DURACIÓN** | 🎉 **RESULTADO**            |
+| :----: | ----------------------- | :-------------: | --------------------------- |
+| **1️⃣** | **Contacto inicial**    |      5 min      | 📞 Comunicación establecida |
+| **2️⃣** | **Demo personalizada**  |     30 min      | 🎯 Visión clara del sistema |
+| **3️⃣** | **Propuesta ajustada**  |      1 día      | 📝 Contrato personalizado   |
+| **4️⃣** | **Inicio del proyecto** |    Inmediato    | 🚀 Transformación en marcha |
 
 ---
 
@@ -1893,7 +1964,7 @@ TECNOLOGÍA DE VANGUARDIA + EXPERIENCIA PROFESIONAL + SOPORTE GARANTIZADO = LIDE
 
 **📅 Esta propuesta tiene validez hasta el 30 de Diciembre de 2024**
 
-💡 **Recuerde:** *La tecnología no es un gasto, es la inversión más rentable que hará este año*
+💡 **Recuerde:** _La tecnología no es un gasto, es la inversión más rentable que hará este año_
 
 ---
 
@@ -1907,6 +1978,6 @@ TECNOLOGÍA DE VANGUARDIA + EXPERIENCIA PROFESIONAL + SOPORTE GARANTIZADO = LIDE
 
 **🌟 © 2024 - Propuesta Técnica Exclusiva para Asociación de Mototaxis Primero de Junio**
 
-*"Donde la visión se encuentra con la tecnología"*
+_"Donde la visión se encuentra con la tecnología"_
 
 </div>
