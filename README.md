@@ -1,4 +1,5 @@
 # 🛵 Primero de Junio - Asociación de Mototaxis
+
 ### **PROPUESTA DE PROYECTO INTEGRAL**
 
 <div align="center">
@@ -21,22 +22,23 @@
 Esta propuesta presenta una **solución tecnológica integral** compuesta por **tres componentes interconectados** que transformarán digitalmente las operaciones de la Asociación de Mototaxis "Primero de Junio":
 
 1. **🌐 WEBSITE INSTITUCIONAL** - Presencia digital profesional y captación de clientes
-2. **🔐 SISTEMA DE AUTENTICACIÓN** - Puente de conexión seguro entre ambas plataformas  
+2. **🔐 SISTEMA DE AUTENTICACIÓN** - Puente de conexión seguro entre ambas plataformas
 3. **🏢 SISTEMA ADMINISTRATIVO** - Gestión operativa completa y automatizada
 
 ### 🎯 **OBJETIVOS DEL PROYECTO**
 
-| 🎯 **Objetivo** | 📊 **Impacto Esperado** | ⏱️ **Tiempo** |
-|---|---|---|
-| **Modernizar la imagen institucional** | +300% en presencia digital | 15 días |
-| **Automatizar procesos administrativos** | -70% tiempo en gestión manual | 30 días |
-| **Centralizar información operativa** | +100% control de datos | 20 días |
-| **Mejorar experiencia del cliente** | +250% satisfacción | 25 días |
-| **Incrementar eficiencia operativa** | +150% productividad | 30 días |
+| 🎯 **Objetivo**                          | 📊 **Impacto Esperado**       | ⏱️ **Tiempo** |
+| ---------------------------------------- | ----------------------------- | ------------- |
+| **Modernizar la imagen institucional**   | +300% en presencia digital    | 15 días       |
+| **Automatizar procesos administrativos** | -70% tiempo en gestión manual | 30 días       |
+| **Centralizar información operativa**    | +100% control de datos        | 20 días       |
+| **Mejorar experiencia del cliente**      | +250% satisfacción            | 25 días       |
+| **Incrementar eficiencia operativa**     | +150% productividad           | 30 días       |
 
 ---
 
 # 🌐 **PARTE 1: WEBSITE INSTITUCIONAL**
+
 ## **"Su Ventana Digital al Mundo"**
 
 ### 🎨 **DISEÑO Y EXPERIENCIA VISUAL**
@@ -45,23 +47,25 @@ El website será la **carta de presentación digital** de la asociación, diseñ
 
 #### 🚀 **Tecnologías de Vanguardia**
 
-| 💻 **Tecnología** | 🎯 **Propósito** | ⚡ **Beneficio** |
-|---|---|---|
-| **React 18.2** | Framework frontend moderno | Interfaz rápida y dinámica |
-| **Vite 4.4.5** | Herramienta de construcción | Carga ultrarrápida |
-| **Framer Motion** | Animaciones profesionales | Experiencia inmersiva |
+| 💻 **Tecnología**     | 🎯 **Propósito**             | ⚡ **Beneficio**             |
+| --------------------- | ---------------------------- | ---------------------------- |
+| **React 18.2**        | Framework frontend moderno   | Interfaz rápida y dinámica   |
+| **Vite 4.4.5**        | Herramienta de construcción  | Carga ultrarrápida           |
+| **Framer Motion**     | Animaciones profesionales    | Experiencia inmersiva        |
 | **Responsive Design** | Adaptación multi-dispositivo | Acceso desde cualquier lugar |
-| **PWA Ready** | Aplicación web progresiva | Funciona como app móvil |
+| **PWA Ready**         | Aplicación web progresiva    | Funciona como app móvil      |
 
 ### 📱 **PÁGINAS Y FUNCIONALIDADES DETALLADAS**
 
 #### 🏠 **1. PÁGINA PRINCIPAL (HOME)**
+
 **La primera impresión que determinará el éxito de su presencia digital**
 
 <details>
 <summary><strong>🎯 Sección Hero - Impacto Visual Inmediato</strong></summary>
 
 **Características:**
+
 - **Slider de imágenes HD** de mototaxis en acción
 - **Texto dinámico animado** con los valores de la asociación
 - **Botón CTA prominente** para "Únete Como Conductor"
@@ -69,11 +73,13 @@ El website será la **carta de presentación digital** de la asociación, diseñ
 - **Video promocional** con reproducción automática (opcional)
 
 **Mensajes Clave:**
+
 - "Primero de Junio - Líderes en Transporte Urbano"
 - "Más de X conductores confían en nosotros"
 - "Servicios 24/7 en toda la ciudad"
 
 **Elementos Interactivos:**
+
 - Animaciones de entrada suaves
 - Partículas de fondo animadas
 - Botones con efectos hover
@@ -84,6 +90,7 @@ El website será la **carta de presentación digital** de la asociación, diseñ
 <summary><strong>🛵 Sección de Servicios Destacados</strong></summary>
 
 **Grid de Servicios Principales:**
+
 - **🚗 Transporte Urbano** - Servicio básico de mototaxi
 - **🏥 Servicio Médico** - Traslados de emergencia
 - **📦 Delivery Express** - Envío de paquetes
@@ -92,6 +99,7 @@ El website será la **carta de presentación digital** de la asociación, diseñ
 - **🔧 Mantenimiento** - Servicio técnico especializado
 
 **Cada Servicio Incluye:**
+
 - Icono animado personalizado
 - Descripción concisa del beneficio
 - Precio aproximado o "Consultar"
@@ -103,6 +111,7 @@ El website será la **carta de presentación digital** de la asociación, diseñ
 <summary><strong>📊 Panel de Estadísticas en Vivo</strong></summary>
 
 **Contadores Animados:**
+
 - **+150** Conductores Activos
 - **+5,000** Viajes Completados
 - **98%** Satisfacción del Cliente
@@ -110,6 +119,7 @@ El website será la **carta de presentación digital** de la asociación, diseñ
 - **15** Rutas Principales
 
 **Gráficos Dinámicos:**
+
 - Mapa de cobertura interactivo
 - Tiempo promedio de respuesta
 - Zonas de mayor demanda
@@ -120,11 +130,13 @@ El website será la **carta de presentación digital** de la asociación, diseñ
 <summary><strong>💬 Testimonios de Conductores y Clientes</strong></summary>
 
 **Carrusel de Testimonios:**
+
 - **María González** - "Gracias a Primero de Junio logré independencia económica"
 - **Roberto Silva** - "Cambié la construcción por el mototaxi, mejor decisión"
 - **Carmen López** - "Como madre soltera, la flexibilidad horaria es perfecta"
 
 **Cada Testimonio Incluye:**
+
 - Foto del conductor/cliente
 - Nombre y ocupación anterior
 - Historia de éxito breve
@@ -137,6 +149,7 @@ El website será la **carta de presentación digital** de la asociación, diseñ
 <summary><strong>📞 Formulario de Contacto Inteligente</strong></summary>
 
 **Campos Dinámicos:**
+
 - Tipo de consulta (Conductor, Cliente, Servicios)
 - Datos de contacto
 - Zona de interés
@@ -144,6 +157,7 @@ El website será la **carta de presentación digital** de la asociación, diseñ
 - Mensaje personalizado
 
 **Funcionalidades:**
+
 - Validación en tiempo real
 - Autocompletado de direcciones
 - Estimación automática de tarifas
@@ -152,12 +166,14 @@ El website será la **carta de presentación digital** de la asociación, diseñ
 </details>
 
 #### 🛵 **2. PÁGINA DE SERVICIOS**
+
 **Catálogo completo de soluciones para conductores y clientes**
 
 <details>
 <summary><strong>🎓 Servicios para Conductores</strong></summary>
 
 **Capacitación y Certificación:**
+
 - **Curso Básico de Conducción** - 2 semanas - $150
 - **Manejo Defensivo Avanzado** - 1 semana - $100
 - **Primeros Auxilios** - 3 días - $75
@@ -165,6 +181,7 @@ El website será la **carta de presentación digital** de la asociación, diseñ
 - **Mecánica Básica** - 1 semana - $120
 
 **Servicios de Apoyo:**
+
 - **Gestión de Documentos** - Renovación de licencias
 - **Seguro Integral** - Cobertura completa
 - **Financiamiento de Vehículos** - Planes accesibles
@@ -176,6 +193,7 @@ El website será la **carta de presentación digital** de la asociación, diseñ
 <summary><strong>🚗 Servicios para Clientes</strong></summary>
 
 **Modalidades de Transporte:**
+
 - **Servicio Regular** - Tarifas estándar
 - **Servicio Express** - +30% rapidez
 - **Servicio Nocturno** - Disponible 24h
@@ -183,6 +201,7 @@ El website será la **carta de presentación digital** de la asociación, diseñ
 - **Servicio Turístico** - Recorridos especiales
 
 **Servicios Especializados:**
+
 - **Traslado Médico** - Personal capacitado
 - **Delivery de Medicamentos** - Urgencias
 - **Transporte Escolar** - Niños y adolescentes
@@ -194,23 +213,27 @@ El website será la **carta de presentación digital** de la asociación, diseñ
 <summary><strong>💼 Paquetes y Membresías</strong></summary>
 
 **Para Conductores:**
+
 - **Paquete Starter** - $200/mes - Básico
 - **Paquete Professional** - $350/mes - Completo
 - **Paquete VIP** - $500/mes - Premium con beneficios
 
 **Para Clientes:**
+
 - **Membresía Básica** - Gratuita
 - **Membresía Premium** - $20/mes - Descuentos
 - **Membresía Corporativa** - Empresas - Consultar
 </details>
 
 #### 👨‍💼 **3. PÁGINA DE CONDUCTORES**
+
 **Portal de reclutamiento y información para aspirantes**
 
 <details>
 <summary><strong>🎯 Requisitos y Perfil del Conductor Ideal</strong></summary>
 
 **Requisitos Mínimos:**
+
 - ✅ Edad: 21-55 años
 - ✅ Licencia de conducir vigente (Categoría A)
 - ✅ Antecedentes penales limpios
@@ -219,6 +242,7 @@ El website será la **carta de presentación digital** de la asociación, diseñ
 - ✅ Disponibilidad mínima 6 horas/día
 
 **Perfil Preferencial:**
+
 - 🌟 Experiencia previa en transporte
 - 🌟 Actitud de servicio al cliente
 - 🌟 Responsabilidad y puntualidad
@@ -230,12 +254,14 @@ El website será la **carta de presentación digital** de la asociación, diseñ
 <summary><strong>💰 Beneficios y Compensaciones</strong></summary>
 
 **Ingresos Potenciales:**
+
 - **Conductor Tiempo Completo:** $800-1,200/mes
 - **Conductor Medio Tiempo:** $400-600/mes
 - **Bonos por Rendimiento:** Hasta $200/mes adicionales
 - **Incentivos Especiales:** Fines de semana +20%
 
 **Beneficios Adicionales:**
+
 - 🏥 Seguro médico familiar
 - 🛡️ Seguro de vida
 - 🔧 Mantenimiento gratuito del vehículo
@@ -248,38 +274,45 @@ El website será la **carta de presentación digital** de la asociación, diseñ
 <summary><strong>📋 Proceso de Afiliación Paso a Paso</strong></summary>
 
 **Paso 1: Aplicación Online (5 min)**
+
 - Formulario básico de datos
 - Subida de documentos digitalizados
 - Verificación automática inicial
 
 **Paso 2: Entrevista Personal (30 min)**
+
 - Evaluación presencial
 - Prueba de conocimientos viales
 - Verificación de documentos
 
 **Paso 3: Examen Médico (1 hora)**
+
 - Centro médico autorizado
 - Evaluación física y psicológica
 - Pruebas de vista y reflejos
 
 **Paso 4: Capacitación Básica (2 semanas)**
+
 - Curso de conducción defensiva
 - Atención al cliente
 - Uso de la aplicación móvil
 
 **Paso 5: Período de Prueba (1 mes)**
+
 - Acompañamiento de conductor experimentado
 - Evaluación de rendimiento
 - Certificación final
 </details>
 
 #### 🏢 **4. PÁGINA DE LA ASOCIACIÓN**
+
 **Información institucional y corporativa**
 
 <details>
 <summary><strong>📜 Historia y Misión Institucional</strong></summary>
 
 **Nuestra Historia:**
+
 - **Fundación:** 1° de Junio de 2018
 - **Fundadores:** 12 conductores visionarios
 - **Crecimiento:** De 12 a 150+ conductores
@@ -291,12 +324,14 @@ El website será la **carta de presentación digital** de la asociación, diseñ
 
 **Visión 2025:**
 "Ser la asociación de mototaxis líder en Bolivia, reconocida por su profesionalismo, innovación tecnológica y compromiso social."
+
 </details>
 
 <details>
 <summary><strong>🏆 Certificaciones y Reconocimientos</strong></summary>
 
 **Certificaciones Institucionales:**
+
 - 🏅 ISO 9001:2015 - Gestión de Calidad
 - 🏅 Certificación Municipal de Transporte
 - 🏅 Registro Nacional de Asociaciones
@@ -304,6 +339,7 @@ El website será la **carta de presentación digital** de la asociación, diseñ
 - 🏅 Sello de Empresa Socialmente Responsable
 
 **Premios y Reconocimientos:**
+
 - 🏆 "Mejor Asociación de Transporte 2023"
 - 🏆 "Innovación en Movilidad Urbana 2022"
 - 🏆 "Generación de Empleo 2021"
@@ -315,6 +351,7 @@ El website será la **carta de presentación digital** de la asociación, diseñ
 <summary><strong>👥 Estructura Organizacional</strong></summary>
 
 **Directorio Ejecutivo:**
+
 - **Presidente:** Juan Carlos Mendoza
 - **Vicepresidente:** María Elena Vargas
 - **Secretario:** Roberto Fernández
@@ -323,6 +360,7 @@ El website será la **carta de presentación digital** de la asociación, diseñ
 - **Vocal 2:** Patricia Morales
 
 **Departamentos Operativos:**
+
 - 🚗 **Operaciones** - Gestión diaria de servicios
 - 👥 **Recursos Humanos** - Selección y capacitación
 - 💰 **Finanzas** - Control económico
@@ -332,12 +370,14 @@ El website será la **carta de presentación digital** de la asociación, diseñ
 </details>
 
 #### ℹ️ **5. PÁGINA NOSOTROS**
+
 **Valores, cultura organizacional y equipo humano**
 
 <details>
 <summary><strong>💡 Valores y Principios Fundamentales</strong></summary>
 
 **Nuestros Valores:**
+
 - **🤝 HONESTIDAD** - Transparencia en todas nuestras operaciones
 - **🛡️ SEGURIDAD** - Prioridad absoluta en cada viaje
 - **⭐ EXCELENCIA** - Mejora continua en el servicio
@@ -346,6 +386,7 @@ El website será la **carta de presentación digital** de la asociación, diseñ
 - **👥 TRABAJO EN EQUIPO** - Colaboración y apoyo mutuo
 
 **Principios Operativos:**
+
 - ✅ El cliente siempre es nuestra prioridad
 - ✅ Cada conductor es un embajador de la marca
 - ✅ La capacitación es clave para el crecimiento
@@ -357,18 +398,21 @@ El website será la **carta de presentación digital** de la asociación, diseñ
 <summary><strong>🎯 Objetivos Estratégicos 2024-2025</strong></summary>
 
 **Crecimiento Operativo:**
+
 - 📈 Incrementar la flota a 200 mototaxis
 - 📈 Expandir cobertura a 5 ciudades nuevas
 - 📈 Alcanzar 10,000 viajes mensuales
 - 📈 Mantener 98% de satisfacción del cliente
 
 **Desarrollo Tecnológico:**
+
 - 💻 Lanzar aplicación móvil propia
 - 💻 Implementar sistema GPS en tiempo real
 - 💻 Integrar pagos digitales
 - 💻 Desarrollar programa de fidelización
 
 **Impacto Social:**
+
 - 🌍 Generar 100 empleos directos nuevos
 - 🌍 Capacitar 50 conductores en oficios complementarios
 - 🌍 Implementar programa de becas estudiantiles
@@ -376,12 +420,14 @@ El website será la **carta de presentación digital** de la asociación, diseñ
 </details>
 
 #### 📞 **6. PÁGINA DE CONTACTO**
+
 **Múltiples canales de comunicación y atención**
 
 <details>
 <summary><strong>📍 Información de Contacto Completa</strong></summary>
 
 **Oficina Principal:**
+
 - 📧 **Email:** info@primero1dejunio.com
 - 📱 **WhatsApp:** +591 7XXXXXXX (24/7)
 - ☎️ **Teléfono:** +591 4XXXXXXX
@@ -389,6 +435,7 @@ El website será la **carta de presentación digital** de la asociación, diseñ
 - 🕐 **Horarios:** Lunes a Viernes 8:00-18:00, Sábados 8:00-12:00
 
 **Contactos Departamentales:**
+
 - 🚗 **Operaciones:** operaciones@primero1dejunio.com
 - 👥 **Recursos Humanos:** rrhh@primero1dejunio.com
 - 💰 **Facturación:** facturacion@primero1dejunio.com
@@ -400,6 +447,7 @@ El website será la **carta de presentación digital** de la asociación, diseñ
 <summary><strong>🗺️ Mapa Interactivo y Ubicaciones</strong></summary>
 
 **Oficinas y Puntos de Servicio:**
+
 - 🏢 **Sede Principal** - Centro de la ciudad
 - 🏢 **Sucursal Norte** - Zona residencial
 - 🏢 **Sucursal Sur** - Área comercial
@@ -407,6 +455,7 @@ El website será la **carta de presentación digital** de la asociación, diseñ
 - 🔧 **Taller Secundario** - Reparaciones rápidas
 
 **Cobertura de Servicio:**
+
 - Mapa interactivo con zonas de cobertura
 - Tiempo estimado de llegada por zona
 - Tarifas referenciales por distancia
@@ -417,6 +466,7 @@ El website será la **carta de presentación digital** de la asociación, diseñ
 <summary><strong>📝 Formularios Especializados</strong></summary>
 
 **Formulario de Contacto General:**
+
 - Tipo de consulta (desplegable)
 - Datos personales básicos
 - Mensaje detallado
@@ -424,6 +474,7 @@ El website será la **carta de presentación digital** de la asociación, diseñ
 - Preferencia de contacto
 
 **Formulario de Afiliación Express:**
+
 - Datos del aspirante a conductor
 - Disponibilidad horaria
 - Experiencia previa
@@ -431,6 +482,7 @@ El website será la **carta de presentación digital** de la asociación, diseñ
 - Documentos básicos
 
 **Formulario de Quejas y Sugerencias:**
+
 - Tipo de incidencia
 - Detalles del evento
 - Conductor involucrado (si aplica)
@@ -441,6 +493,7 @@ El website será la **carta de presentación digital** de la asociación, diseñ
 ### 🎨 **CARACTERÍSTICAS TÉCNICAS AVANZADAS**
 
 #### ⚡ **Rendimiento y Optimización**
+
 - **Tiempo de Carga:** <2 segundos
 - **Lighthouse Score:** 95+/100
 - **Core Web Vitals:** Excelente
@@ -449,6 +502,7 @@ El website será la **carta de presentación digital** de la asociación, diseñ
 - **Caché Inteligente:** Actualización automática
 
 #### 📱 **Responsividad Total**
+
 - **Móvil First:** Diseño prioritario para celulares
 - **Breakpoints:** 320px, 768px, 1024px, 1440px+
 - **Touch Friendly:** Botones optimizados para táctil
@@ -456,6 +510,7 @@ El website será la **carta de presentación digital** de la asociación, diseñ
 - **PWA Ready:** Instalable como app
 
 #### 🔍 **SEO y Marketing Digital**
+
 - **Meta Tags Dinámicos:** Cada página optimizada
 - **Schema Markup:** Datos estructurados
 - **Sitemap XML:** Indexación automática
@@ -466,6 +521,7 @@ El website será la **carta de presentación digital** de la asociación, diseñ
 ---
 
 # 🔐 **PARTE 2: SISTEMA DE AUTENTICACIÓN**
+
 ## **"El Puente Seguro Entre Mundos"**
 
 El sistema de autenticación es el **corazón de la seguridad** y el **punto de conexión estratégico** entre el website público y el sistema administrativo privado. Representa la **transición del cliente interesado al usuario autorizado**.
@@ -473,6 +529,7 @@ El sistema de autenticación es el **corazón de la seguridad** y el **punto de 
 ### 🎯 **CONCEPTO ESTRATÉGICO**
 
 El sistema de login no es solo una barrera de seguridad, sino un **embudo de conversión inteligente** que:
+
 - **Filtra** visitantes y los convierte en usuarios registrados
 - **Segmenta** automáticamente según el tipo de usuario
 - **Personaliza** la experiencia según el rol asignado
@@ -486,6 +543,7 @@ El sistema de login no es solo una barrera de seguridad, sino un **embudo de con
 <summary><strong>🛡️ Capa 1: Validación Frontend</strong></summary>
 
 **Validaciones Inmediatas:**
+
 - ✅ Formato de email válido
 - ✅ Contraseña mínima 8 caracteres
 - ✅ Verificación de campos obligatorios
@@ -493,6 +551,7 @@ El sistema de login no es solo una barrera de seguridad, sino un **embudo de con
 - ✅ Encriptación de datos en tránsito
 
 **Experiencia de Usuario:**
+
 - Retroalimentación visual instantánea
 - Indicadores de seguridad de contraseña
 - Autocompletado inteligente
@@ -503,6 +562,7 @@ El sistema de login no es solo una barrera de seguridad, sino un **embudo de con
 <summary><strong>🔐 Capa 2: Autenticación Backend</strong></summary>
 
 **Validación Servidor (PHP):**
+
 - ✅ Hash de contraseñas con BCrypt
 - ✅ Verificación contra base de datos
 - ✅ Prevención de ataques de fuerza bruta
@@ -510,6 +570,7 @@ El sistema de login no es solo una barrera de seguridad, sino un **embudo de con
 - ✅ Bloqueo temporal tras fallos
 
 **Tokens de Seguridad:**
+
 - JWT para sesiones activas
 - Tokens de actualización automática
 - Expiración configurable por rol
@@ -520,12 +581,14 @@ El sistema de login no es solo una barrera de seguridad, sino un **embudo de con
 <summary><strong>🏰 Capa 3: Autorización por Roles</strong></summary>
 
 **Sistema de Roles Dinámico:**
+
 - **👑 ADMINISTRADOR** - Acceso total al sistema
 - **👨‍💼 OPERADOR** - Gestión operativa diaria
 - **👥 SUPERVISOR** - Monitoreo y reportes
 - **🚗 CONDUCTOR** - Panel personal limitado
 
 **Permisos Granulares:**
+
 - Control por módulo del sistema
 - Restricciones por horario
 - Límites de acceso por IP
@@ -537,6 +600,7 @@ El sistema de login no es solo una barrera de seguridad, sino un **embudo de con
 #### 🌟 **Página de Acceso Profesional**
 
 **Elementos Visuales:**
+
 - **Background Animado** con mototaxis en movimiento
 - **Logo Institucional** prominente y centrado
 - **Formulario Moderno** con efectos glassmorphism
@@ -544,6 +608,7 @@ El sistema de login no es solo una barrera de seguridad, sino un **embudo de con
 - **Animaciones Suaves** que generan confianza
 
 **Campos del Formulario:**
+
 ```
 📧 Email/Usuario    [________________________]
 🔒 Contraseña       [________________________] 👁️
@@ -552,6 +617,7 @@ El sistema de login no es solo una barrera de seguridad, sino un **embudo de con
 ```
 
 **Enlaces Adicionales:**
+
 - 🔗 "¿Olvidaste tu contraseña?" - Recuperación automática
 - 🔗 "¿No tienes cuenta?" - Registro de nuevos conductores
 - 🔗 "Problemas de acceso?" - Soporte técnico directo
@@ -559,6 +625,7 @@ El sistema de login no es solo una barrera de seguridad, sino un **embudo de con
 #### 📱 **Versión Móvil Optimizada**
 
 **Características Mobile:**
+
 - Touch ID / Face ID (dispositivos compatibles)
 - Teclado numérico para códigos
 - Botones grandes para facilitar el toque
@@ -591,6 +658,7 @@ graph TD
 <summary><strong>👑 ADMINISTRADOR - Dashboard Ejecutivo</strong></summary>
 
 **Primera Pantalla:**
+
 - Resumen ejecutivo de todas las operaciones
 - Métricas clave: ingresos, conductores, viajes, clientes
 - Gráficos de tendencias y comparativos
@@ -598,6 +666,7 @@ graph TD
 - Acceso a todos los módulos
 
 **Menú Principal:**
+
 - 👥 Gestión de Usuarios y Roles
 - 🚗 Flota de Vehículos
 - 📊 Reportes y Analytics
@@ -609,6 +678,7 @@ graph TD
 <summary><strong>👨‍💼 OPERADOR - Centro de Control</strong></summary>
 
 **Primera Pantalla:**
+
 - Viajes en tiempo real
 - Solicitudes pendientes
 - Conductores disponibles
@@ -616,6 +686,7 @@ graph TD
 - Comunicación directa
 
 **Funciones Principales:**
+
 - 📋 Asignación de viajes
 - 📞 Gestión de llamadas
 - 🗺️ Control de rutas
@@ -627,6 +698,7 @@ graph TD
 <summary><strong>👥 SUPERVISOR - Monitor de Calidad</strong></summary>
 
 **Primera Pantalla:**
+
 - Métricas de calidad del servicio
 - Reportes de conductores
 - Quejas y sugerencias
@@ -634,6 +706,7 @@ graph TD
 - Plan de mejoras
 
 **Responsabilidades:**
+
 - 📈 Monitoreo de KPIs
 - 👥 Evaluación de conductores
 - 📝 Reportes de calidad
@@ -645,6 +718,7 @@ graph TD
 <summary><strong>🚗 CONDUCTOR - Portal Personal</strong></summary>
 
 **Primera Pantalla:**
+
 - Resumen de viajes del día
 - Ingresos acumulados
 - Próximas asignaciones
@@ -652,6 +726,7 @@ graph TD
 - Estado del vehículo
 
 **Herramientas Disponibles:**
+
 - 📱 Recepción de viajes
 - 🗺️ Navegación GPS
 - 💰 Control de ingresos
@@ -663,12 +738,12 @@ graph TD
 
 #### ⏰ **Política de Sesiones**
 
-| 👤 **Rol** | ⏱️ **Duración** | 🔄 **Renovación** | 📱 **Dispositivos** |
-|---|---|---|---|
-| **Administrador** | 8 horas | Automática | 3 simultáneos |
-| **Operador** | 12 horas | Manual cada 4h | 2 simultáneos |
-| **Supervisor** | 8 horas | Automática | 2 simultáneos |
-| **Conductor** | 24 horas | Automática | 1 dispositivo |
+| 👤 **Rol**        | ⏱️ **Duración** | 🔄 **Renovación** | 📱 **Dispositivos** |
+| ----------------- | --------------- | ----------------- | ------------------- |
+| **Administrador** | 8 horas         | Automática        | 3 simultáneos       |
+| **Operador**      | 12 horas        | Manual cada 4h    | 2 simultáneos       |
+| **Supervisor**    | 8 horas         | Automática        | 2 simultáneos       |
+| **Conductor**     | 24 horas        | Automática        | 1 dispositivo       |
 
 #### 🛡️ **Características de Seguridad Avanzada**
 
@@ -681,6 +756,7 @@ graph TD
 #### 🚨 **Sistema de Alertas y Notificaciones**
 
 **Alertas de Seguridad:**
+
 - Intentos de acceso fallidos múltiples
 - Acceso desde dispositivos no reconocidos
 - Cambios de contraseña
@@ -688,6 +764,7 @@ graph TD
 - Actividad fuera del horario permitido
 
 **Notificaciones del Sistema:**
+
 - Nuevos usuarios registrados
 - Cambios en configuraciones críticas
 - Mantenimientos programados
@@ -697,6 +774,7 @@ graph TD
 ---
 
 # 🏢 **PARTE 3: SISTEMA ADMINISTRATIVO**
+
 ## **"El Cerebro Operativo de la Asociación"**
 
 El sistema administrativo es el **núcleo tecnológico** que controlará todas las operaciones diarias de la asociación. Diseñado como una **plataforma integral de gestión empresarial** específicamente adaptada para el negocio del transporte en mototaxi.
@@ -705,15 +783,15 @@ El sistema administrativo es el **núcleo tecnológico** que controlará todas l
 
 #### 💻 **Stack Tecnológico Robusto**
 
-| 🔧 **Tecnología** | 📊 **Versión** | 🎯 **Función Específica** | ⚡ **Ventaja Competitiva** |
-|---|---|---|---|
-| **PHP 8.1+** | Última estable | Lógica de negocio backend | 40% más rápido que versiones anteriores |
-| **MySQL 8.0** | Enterprise ready | Base de datos principal | Soporte para JSON nativo y GIS |
-| **Apache/Nginx** | 2.4+ | Servidor web | Configuración optimizada para PHP |
-| **Redis** | 6.2+ | Cache y sesiones | 10x más rápido que sistema de archivos |
-| **jQuery 3.6** | Última LTS | Interactividad frontend | Compatible con todos los navegadores |
-| **Bootstrap 5** | Framework CSS | Diseño responsivo | Mobile-first approach |
-| **Chart.js** | 4.0+ | Gráficos y dashboards | Visualización de datos profesional |
+| 🔧 **Tecnología** | 📊 **Versión**   | 🎯 **Función Específica** | ⚡ **Ventaja Competitiva**              |
+| ----------------- | ---------------- | ------------------------- | --------------------------------------- |
+| **PHP 8.1+**      | Última estable   | Lógica de negocio backend | 40% más rápido que versiones anteriores |
+| **MySQL 8.0**     | Enterprise ready | Base de datos principal   | Soporte para JSON nativo y GIS          |
+| **Apache/Nginx**  | 2.4+             | Servidor web              | Configuración optimizada para PHP       |
+| **Redis**         | 6.2+             | Cache y sesiones          | 10x más rápido que sistema de archivos  |
+| **jQuery 3.6**    | Última LTS       | Interactividad frontend   | Compatible con todos los navegadores    |
+| **Bootstrap 5**   | Framework CSS    | Diseño responsivo         | Mobile-first approach                   |
+| **Chart.js**      | 4.0+             | Gráficos y dashboards     | Visualización de datos profesional      |
 
 #### 🏗️ **Patrón de Arquitectura MVC Avanzado**
 
@@ -762,12 +840,14 @@ El sistema administrativo es el **núcleo tecnológico** que controlará todas l
 ### 📊 **MÓDULOS OPERATIVOS DETALLADOS**
 
 #### 👑 **1. MÓDULO DE ADMINISTRACIÓN GENERAL**
+
 **El centro de comando para la toma de decisiones estratégicas**
 
 <details>
 <summary><strong>🎯 Dashboard Ejecutivo - Vista de 360°</strong></summary>
 
 **Métricas en Tiempo Real:**
+
 - 💰 **Ingresos Diarios:** $2,450 (↑15% vs ayer)
 - 🚗 **Conductores Activos:** 45/150 (30% en línea)
 - 🛣️ **Viajes Completados:** 234 hoy
@@ -775,6 +855,7 @@ El sistema administrativo es el **núcleo tecnológico** que controlará todas l
 - 🕒 **Tiempo Respuesta:** 8.5 minutos promedio
 
 **Gráficos Interactivos:**
+
 - **Ingresos por Hora** - Gráfico de líneas con predicción
 - **Viajes por Zona** - Mapa de calor interactivo
 - **Conductores vs Demanda** - Análisis de capacidad
@@ -782,6 +863,7 @@ El sistema administrativo es el **núcleo tecnológico** que controlará todas l
 - **Costos Operativos** - Desglose detallado
 
 **Alertas Críticas:**
+
 - 🚨 3 conductores con documentos próximos a vencer
 - ⚠️ Zona Norte con alta demanda, pocos conductores
 - 🔴 Cliente VIP esperando más de 15 minutos
@@ -792,6 +874,7 @@ El sistema administrativo es el **núcleo tecnológico** que controlará todas l
 <summary><strong>📈 Sistema de Reportes Avanzados</strong></summary>
 
 **Reportes Financieros:**
+
 - **Reporte Diario de Ingresos** - PDF/Excel automático
 - **Estado de Cuentas por Conductor** - Individual
 - **Análisis de Rentabilidad** - Por vehículo/conductor
@@ -799,6 +882,7 @@ El sistema administrativo es el **núcleo tecnológico** que controlará todas l
 - **Control de Gastos** - Categorización automática
 
 **Reportes Operativos:**
+
 - **Eficiencia de Conductores** - KPIs individuales
 - **Análisis de Rutas** - Optimización de trayectos
 - **Tiempo de Respuesta** - Por zona y horario
@@ -806,6 +890,7 @@ El sistema administrativo es el **núcleo tecnológico** que controlará todas l
 - **Incidencias y Reclamos** - Seguimiento completo
 
 **Reportes Estratégicos:**
+
 - **Análisis de Mercado** - Competencia y oportunidades
 - **Satisfacción del Cliente** - Encuestas y feedback
 - **Crecimiento y Expansión** - Nuevas zonas potenciales
@@ -813,12 +898,14 @@ El sistema administrativo es el **núcleo tecnológico** que controlará todas l
 </details>
 
 #### 👥 **2. GESTIÓN INTEGRAL DE CONDUCTORES**
+
 **El capital humano es nuestro activo más valioso**
 
 <details>
 <summary><strong>📋 Registro y Perfilado Completo</strong></summary>
 
 **Información Personal:**
+
 ```
 👤 DATOS BÁSICOS
 ├── Nombre completo
@@ -849,6 +936,7 @@ El sistema administrativo es el **núcleo tecnológico** que controlará todas l
 ```
 
 **Control de Documentación:**
+
 - 📄 Licencia de conducir (vigencia y categoría)
 - 📋 Certificado médico (renovación anual)
 - 🏥 Seguro SOAT (seguimiento automático)
@@ -861,6 +949,7 @@ El sistema administrativo es el **núcleo tecnológico** que controlará todas l
 <summary><strong>📊 Sistema de Evaluación y Desempeño</strong></summary>
 
 **KPIs de Rendimiento Individual:**
+
 - ⭐ **Rating Promedio:** 4.7/5.0 (últimos 30 días)
 - 🎯 **Tasa de Aceptación:** 95% (meta: 90%)
 - ⏱️ **Tiempo de Respuesta:** 6.2 min (meta: <8 min)
@@ -871,12 +960,14 @@ El sistema administrativo es el **núcleo tecnológico** que controlará todas l
 - 🏆 **Bonos Ganados:** $150 este mes
 
 **Sistema de Ranking:**
+
 - 🥇 **Top 10%** - Conductor Estrella (beneficios premium)
 - 🥈 **Top 25%** - Conductor Destacado (bonos adicionales)
 - 🥉 **Top 50%** - Conductor Estándar (beneficios normales)
 - ⚠️ **Bottom 20%** - Plan de mejoramiento (capacitación)
 
 **Plan de Desarrollo Personal:**
+
 - 🎓 Cursos recomendados específicos
 - 📈 Metas mensuales personalizadas
 - 👨‍🏫 Mentorías con conductores experimentados
@@ -887,6 +978,7 @@ El sistema administrativo es el **núcleo tecnológico** que controlará todas l
 <summary><strong>💰 Control Financiero del Conductor</strong></summary>
 
 **Estado de Cuenta Individual:**
+
 ```
 📊 RESUMEN FINANCIERO - Juan Pérez (Conductor #025)
 ┌─────────────────────────────────────────────────┐
@@ -914,6 +1006,7 @@ El sistema administrativo es el **núcleo tecnológico** que controlará todas l
 ```
 
 **Histórico de Pagos:**
+
 - 📅 Registro completo de pagos mensuales
 - 📊 Gráficos de evolución de ingresos
 - 🔍 Detalle de cada descuento aplicado
@@ -922,12 +1015,14 @@ El sistema administrativo es el **núcleo tecnológico** que controlará todas l
 </details>
 
 #### 🚗 **3. GESTIÓN AVANZADA DE FLOTA**
+
 **Control total de los activos más importantes**
 
 <details>
 <summary><strong>📋 Registro Técnico Completo</strong></summary>
 
 **Información del Vehículo:**
+
 ```
 🚗 FICHA TÉCNICA - Mototaxi #MT-047
 ┌─────────────────────────────────────────────────┐
@@ -963,6 +1058,7 @@ El sistema administrativo es el **núcleo tecnológico** que controlará todas l
 ```
 
 **Control de Estados:**
+
 - 🟢 **Activo** - En servicio normal
 - 🟡 **Mantenimiento** - En taller programado
 - 🔴 **Fuera de Servicio** - Problema técnico
@@ -974,6 +1070,7 @@ El sistema administrativo es el **núcleo tecnológico** que controlará todas l
 <summary><strong>🔧 Sistema de Mantenimiento Predictivo</strong></summary>
 
 **Programa de Mantenimiento Automático:**
+
 ```
 🛠️ CRONOGRAMA MANTENIMIENTO - Mototaxi #MT-047
 ┌─────────────────────────────────────────────────┐
@@ -996,6 +1093,7 @@ El sistema administrativo es el **núcleo tecnológico** que controlará todas l
 ```
 
 **Alertas Automatizadas:**
+
 - 📧 **Email al conductor** 7 días antes del vencimiento
 - 📱 **SMS recordatorio** 3 días antes
 - 🚨 **Alerta en dashboard** cuando vence
@@ -1003,6 +1101,7 @@ El sistema administrativo es el **núcleo tecnológico** que controlará todas l
 - 📊 **Reporte semanal** de mantenimientos pendientes
 
 **Proveedores de Servicio:**
+
 - 🔧 **Taller Principal** - Mantenimientos mayores
 - ⚡ **Taller Express** - Servicios rápidos
 - 🛞 **Llantera Autorizada** - Neumáticos y alineación
@@ -1011,12 +1110,14 @@ El sistema administrativo es el **núcleo tecnológico** que controlará todas l
 </details>
 
 #### 🛣️ **4. CENTRO DE CONTROL OPERATIVO**
+
 **El corazón que bombea vida a toda la operación**
 
 <details>
 <summary><strong>📞 Central de Llamadas Inteligente</strong></summary>
 
 **Sistema de Recepción de Solicitudes:**
+
 ```
 📞 CENTRAL DE LLAMADAS - Turno Matutino
 ┌─────────────────────────────────────────────────┐
@@ -1045,6 +1146,7 @@ El sistema administrativo es el **núcleo tecnológico** que controlará todas l
 ```
 
 **Funcionalidades Avanzadas:**
+
 - 🎯 **Asignación Automática** basada en proximidad
 - 📍 **GPS en Tiempo Real** de conductores disponibles
 - ⏱️ **Estimación Automática** de tiempo de llegada
@@ -1057,6 +1159,7 @@ El sistema administrativo es el **núcleo tecnológico** que controlará todas l
 <summary><strong>🗺️ Control de Flota en Tiempo Real</strong></summary>
 
 **Mapa Operativo Inteligente:**
+
 - 📍 **Ubicación en Vivo** de todos los vehículos activos
 - 🎯 **Zonas de Alta Demanda** marcadas en rojo
 - 🚗 **Conductores Disponibles** marcados en verde
@@ -1065,6 +1168,7 @@ El sistema administrativo es el **núcleo tecnológico** que controlará todas l
 - ⚠️ **Alertas de Congestión** y rutas alternativas
 
 **Panel de Monitoreo:**
+
 ```
 🗺️ MAPA OPERATIVO - Vista General
 ┌─────────────────────────────────────────────────┐
@@ -1082,15 +1186,18 @@ El sistema administrativo es el **núcleo tecnológico** que controlará todas l
 │ 🟢 Zona Residencial: 1 servicio activo        │
 └─────────────────────────────────────────────────┘
 ```
+
 </details>
 
 #### 💰 **5. SISTEMA FINANCIERO INTEGRAL**
+
 **Control total del flujo de dinero**
 
 <details>
 <summary><strong>📊 Dashboard Financiero</strong></summary>
 
 **Métricas Financieras Diarias:**
+
 ```
 💰 RESUMEN FINANCIERO - 15 de Noviembre 2024
 ┌─────────────────────────────────────────────────┐
@@ -1116,6 +1223,7 @@ El sistema administrativo es el **núcleo tecnológico** que controlará todas l
 ```
 
 **Análisis de Tendencias:**
+
 - 📈 **Comparativo Semanal** - Crecimiento 15%
 - 📊 **Proyección Mensual** - $36,750 estimado
 - 🎯 **Cumplimiento Meta** - 112% de lo planificado
@@ -1127,6 +1235,7 @@ El sistema administrativo es el **núcleo tecnológico** que controlará todas l
 #### 📊 **Business Intelligence Integrado**
 
 **Dashboards Personalizados por Rol:**
+
 - 👑 **CEO Dashboard** - Métricas estratégicas y KPIs ejecutivos
 - 💼 **Operations Dashboard** - Métricas operativas en tiempo real
 - 👥 **HR Dashboard** - Gestión de recursos humanos
@@ -1134,6 +1243,7 @@ El sistema administrativo es el **núcleo tecnológico** que controlará todas l
 - 🎯 **Sales Dashboard** - Métricas de ventas y marketing
 
 **Reportes Automáticos:**
+
 - 📧 **Diarios** - Resumen de operaciones (enviado a las 7:00 AM)
 - 📊 **Semanales** - Análisis de tendencias (lunes 8:00 AM)
 - 📈 **Mensuales** - Reporte ejecutivo completo (1er día del mes)
@@ -1142,6 +1252,7 @@ El sistema administrativo es el **núcleo tecnológico** que controlará todas l
 #### 🤖 **Automatización Inteligente**
 
 **Procesos Automatizados:**
+
 - 📱 **Envío de SMS** automático a clientes
 - 📧 **Emails de confirmación** de servicios
 - 💰 **Cálculo automático** de comisiones
@@ -1151,6 +1262,7 @@ El sistema administrativo es el **núcleo tecnológico** que controlará todas l
 - 🎯 **Asignación inteligente** de servicios
 
 **Integraciones Futuras:**
+
 - 📱 WhatsApp Business API
 - 💳 Pasarelas de pago digitales
 - 🗺️ Google Maps Platform
@@ -1165,20 +1277,21 @@ El sistema administrativo es el **núcleo tecnológico** que controlará todas l
 
 #### 📊 **Desglose de Inversión**
 
-| 📋 **Componente** | 💰 **Costo** | ⏱️ **Tiempo** | 🎯 **ROI Esperado** |
-|---|---|---|---|
-| **Website Institucional** | $2,500 | 15 días | +300% presencia digital |
-| **Sistema de Autenticación** | $800 | 5 días | Seguridad garantizada |
-| **Sistema Administrativo** | $4,200 | 25 días | -70% tiempo gestión |
-| **Base de Datos y Testing** | $500 | 3 días | 100% confiabilidad |
-| **Capacitación y Deploy** | $300 | 2 días | Adopción exitosa |
-| **Documentación Completa** | $200 | Paralelo | Mantenimiento fácil |
-| **===========================** | **========** | **========** | **================** |
-| **🎯 TOTAL INVERSIÓN** | **$8,500** | **30 días** | **+250% eficiencia** |
+| 📋 **Componente**               | 💰 **Costo** | ⏱️ **Tiempo** | 🎯 **ROI Esperado**     |
+| ------------------------------- | ------------ | ------------- | ----------------------- |
+| **Website Institucional**       | $2,500       | 15 días       | +300% presencia digital |
+| **Sistema de Autenticación**    | $800         | 5 días        | Seguridad garantizada   |
+| **Sistema Administrativo**      | $4,200       | 25 días       | -70% tiempo gestión     |
+| **Base de Datos y Testing**     | $500         | 3 días        | 100% confiabilidad      |
+| **Capacitación y Deploy**       | $300         | 2 días        | Adopción exitosa        |
+| **Documentación Completa**      | $200         | Paralelo      | Mantenimiento fácil     |
+| **===========================** | **========** | **========**  | **================**    |
+| **🎯 TOTAL INVERSIÓN**          | **$8,500**   | **30 días**   | **+250% eficiencia**    |
 
 #### 📈 **Análisis de Retorno de Inversión**
 
 **Beneficios Cuantificables:**
+
 - 💰 **Ahorro en Tiempo:** 20 horas/semana → $400/mes
 - 📊 **Mejora en Eficiencia:** 25% → $1,200/mes adicional
 - 🎯 **Reducción de Errores:** 80% → $300/mes ahorrado
@@ -1191,6 +1304,7 @@ El sistema administrativo es el **núcleo tecnológico** que controlará todas l
 ### 📅 **CRONOGRAMA EJECUTIVO**
 
 #### 🚀 **Fase 1: Fundación Digital (Días 1-10)**
+
 - ✅ Análisis de requerimientos específicos
 - ✅ Diseño de arquitectura técnica
 - ✅ Configuración de entorno de desarrollo
@@ -1199,6 +1313,7 @@ El sistema administrativo es el **núcleo tecnológico** que controlará todas l
 - ✅ Desarrollo del website institucional base
 
 #### 🏗️ **Fase 2: Construcción del Sistema (Días 11-25)**
+
 - ✅ Desarrollo de módulos administrativos core
 - ✅ Implementación de dashboards ejecutivos
 - ✅ Sistema de gestión de conductores
@@ -1208,6 +1323,7 @@ El sistema administrativo es el **núcleo tecnológico** que controlará todas l
 - ✅ Testing exhaustivo de funcionalidades
 
 #### 🎯 **Fase 3: Integración y Lanzamiento (Días 26-30)**
+
 - ✅ Integración completa de componentes
 - ✅ Testing de carga y rendimiento
 - ✅ Capacitación del personal administrativo
@@ -1220,6 +1336,7 @@ El sistema administrativo es el **núcleo tecnológico** que controlará todas l
 #### 📚 **Programa de Capacitación Incluido**
 
 **Para Administradores (4 horas):**
+
 - 🎯 Navegación general del sistema
 - 📊 Interpretación de dashboards
 - 👥 Gestión de usuarios y roles
@@ -1227,12 +1344,14 @@ El sistema administrativo es el **núcleo tecnológico** que controlará todas l
 - ⚙️ Configuraciones básicas
 
 **Para Operadores (3 horas):**
+
 - 📞 Uso de central de llamadas
 - 🗺️ Control de flota en tiempo real
 - 🎯 Asignación de servicios
 - 📱 Comunicación con conductores
 
 **Para Supervisores (2 horas):**
+
 - 📊 Monitoreo de KPIs
 - 👥 Evaluación de conductores
 - 📝 Gestión de reportes de calidad
@@ -1240,6 +1359,7 @@ El sistema administrativo es el **núcleo tecnológico** que controlará todas l
 #### 🛡️ **Garantía y Soporte Post-Lanzamiento**
 
 **Incluido Sin Costo Adicional:**
+
 - 🔧 **12 meses de garantía** total del sistema
 - 📞 **Soporte técnico 24/7** los primeros 3 meses
 - 🔄 **Actualizaciones gratuitas** durante 12 meses
@@ -1248,6 +1368,7 @@ El sistema administrativo es el **núcleo tecnológico** que controlará todas l
 - 📊 **Reportes mensuales** de rendimiento del sistema
 
 **Soporte Técnico:**
+
 - ⚡ **Respuesta inmediata** para problemas críticos
 - 📧 **Email de soporte** especializado
 - 📱 **WhatsApp técnico** para consultas rápidas
@@ -1260,18 +1381,19 @@ El sistema administrativo es el **núcleo tecnológico** que controlará todas l
 
 ### ✅ **Nuestras Garantías**
 
-| 🎯 **Aspecto** | 🛡️ **Garantía** | 📋 **Detalle** |
-|---|---|---|
-| **Funcionalidad** | 100% operativo | Todo funciona como se especifica |
-| **Rendimiento** | <2 seg carga | Velocidad garantizada |
-| **Disponibilidad** | 99.9% uptime | Máximo 8 horas caída/año |
-| **Seguridad** | Grado bancario | Encriptación y protección total |
-| **Soporte** | 12 meses gratis | Asistencia técnica completa |
-| **Actualizaciones** | Sin costo 1 año | Mejoras y nuevas funciones |
+| 🎯 **Aspecto**      | 🛡️ **Garantía** | 📋 **Detalle**                   |
+| ------------------- | --------------- | -------------------------------- |
+| **Funcionalidad**   | 100% operativo  | Todo funciona como se especifica |
+| **Rendimiento**     | <2 seg carga    | Velocidad garantizada            |
+| **Disponibilidad**  | 99.9% uptime    | Máximo 8 horas caída/año         |
+| **Seguridad**       | Grado bancario  | Encriptación y protección total  |
+| **Soporte**         | 12 meses gratis | Asistencia técnica completa      |
+| **Actualizaciones** | Sin costo 1 año | Mejoras y nuevas funciones       |
 
 ### 🎯 **Compromisos del Cliente**
 
 **Para Garantizar el Éxito:**
+
 - 👥 **Designar un responsable** técnico de la asociación
 - 📊 **Proporcionar datos** existentes para migración
 - 🎓 **Participar activamente** en capacitaciones
@@ -1281,6 +1403,7 @@ El sistema administrativo es el **núcleo tecnológico** que controlará todas l
 ### 📞 **Contacto para Esta Propuesta**
 
 **Información del Desarrollador:**
+
 - 👨‍💻 **Desarrollador:** Luis Fernando
 - 📧 **Email:** luis.desarrollo@email.com
 - 📱 **WhatsApp:** +591 XXXXXXXX
@@ -1288,6 +1411,7 @@ El sistema administrativo es el **núcleo tecnológico** que controlará todas l
 - 📍 **Ubicación:** Santa Cruz, Bolivia
 
 **Próximos Pasos:**
+
 1. 📞 **Reunión de Presentación** - Demostración en vivo del sistema
 2. 🤝 **Negociación de Términos** - Ajustes según necesidades específicas
 3. ✍️ **Firma de Contrato** - Formalización del proyecto
