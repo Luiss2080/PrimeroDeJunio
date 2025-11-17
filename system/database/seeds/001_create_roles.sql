@@ -21,7 +21,7 @@ INSERT INTO roles (nombre, descripcion, permisos) VALUES
 ),
 (
     'operador', 
-    'Operador con acceso a gestión diaria y registros operativos', 
+    'Operador con acceso a gestion diaria y registros operativos', 
     '{
         "usuarios": {"crear": false, "editar": false, "eliminar": false, "listar": true, "cambiar_rol": false},
         "conductores": {"crear": true, "editar": true, "eliminar": false, "listar": true, "activar_inactivar": false},

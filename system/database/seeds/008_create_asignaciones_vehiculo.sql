@@ -12,6 +12,6 @@ INSERT INTO asignaciones_vehiculo (conductor_id, vehiculo_id, fecha_inicio, fech
 (8, 8, '2025-02-15', NULL, 'completo', '08:00:00', '20:00:00', 'L,M,X,J,V,S,D', 'activa'),
 (9, 9, '2025-01-30', NULL, 'tarde', '15:00:00', '23:00:00', 'L,M,X,J,V,S', 'activa'),
 (10, 10, '2025-02-05', NULL, 'manana', '05:00:00', '13:00:00', 'L,M,X,J,V', 'activa'),
--- Algunas asignaciones históricas (finalizadas)
+-- Algunas asignaciones historicas (finalizadas)
 (1, 11, '2024-10-01', '2024-12-31', 'manana', '06:00:00', '14:00:00', 'L,M,X,J,V', 'terminada'),
 (3, 12, '2024-11-01', '2025-01-14', 'tarde', '14:00:00', '22:00:00', 'L,M,X,J,V,S', 'terminada');

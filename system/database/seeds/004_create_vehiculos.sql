@@ -2,16 +2,16 @@
 -- Datos iniciales para la tabla vehiculos
 
 INSERT INTO vehiculos (placa, marca, modelo, color, ano, cilindraje, numero_motor, numero_chasis, propietario_nombre, propietario_cedula, propietario_telefono, seguro_numero, seguro_vigencia, soat_numero, soat_vigencia, tecnicomecanica_numero, tecnicomecanica_vigencia, tarjeta_propiedad, estado) VALUES
-('ABC123', 'Honda', 'CB125F', 'Rojo', 2020, 125, 'MOT001ABC123', 'CHA001ABC123', 'Pedro Jiménez', '10203040', '3145678901', 'SEG001', '2025-12-31', 'SOAT001', '2025-06-30', 'TEC001', '2025-03-15', 'PROP001', 'activo'),
-('XYZ789', 'Yamaha', 'XTZ125', 'Azul', 2019, 125, 'MOT002XYZ789', 'CHA002XYZ789', 'Carmen López', '50607080', '3167890123', 'SEG002', '2025-11-20', 'SOAT002', '2025-07-22', 'TEC002', '2025-04-10', 'PROP002', 'activo'),
+('ABC123', 'Honda', 'CB125F', 'Rojo', 2020, 125, 'MOT001ABC123', 'CHA001ABC123', 'Pedro Jimenez', '10203040', '3145678901', 'SEG001', '2025-12-31', 'SOAT001', '2025-06-30', 'TEC001', '2025-03-15', 'PROP001', 'activo'),
+('XYZ789', 'Yamaha', 'XTZ125', 'Azul', 2019, 125, 'MOT002XYZ789', 'CHA002XYZ789', 'Carmen Lopez', '50607080', '3167890123', 'SEG002', '2025-11-20', 'SOAT002', '2025-07-22', 'TEC002', '2025-04-10', 'PROP002', 'activo'),
 ('DEF456', 'Suzuki', 'AX100', 'Negro', 2021, 100, 'MOT003DEF456', 'CHA003DEF456', 'Miguel Torres', '90102030', '3189012345', 'SEG003', '2026-01-15', 'SOAT003', '2025-08-30', 'TEC003', '2025-05-25', 'PROP003', 'activo'),
-('GHI012', 'Honda', 'XR150L', 'Verde', 2018, 150, 'MOT004GHI012', 'CHA004GHI012', 'Rosa Martínez', '40506070', '3134567890', 'SEG004', '2025-10-10', 'SOAT004', '2025-05-15', 'TEC004', '2025-02-20', 'PROP004', 'activo'),
+('GHI012', 'Honda', 'XR150L', 'Verde', 2018, 150, 'MOT004GHI012', 'CHA004GHI012', 'Rosa Martinez', '40506070', '3134567890', 'SEG004', '2025-10-10', 'SOAT004', '2025-05-15', 'TEC004', '2025-02-20', 'PROP004', 'activo'),
 ('JKL345', 'Yamaha', 'FZ-FI', 'Blanco', 2020, 150, 'MOT005JKL345', 'CHA005JKL345', 'Diego Vargas', '80901020', '3198765432', 'SEG005', '2026-02-28', 'SOAT005', '2025-09-12', 'TEC005', '2025-06-08', 'PROP005', 'activo'),
-('MNO678', 'Honda', 'CB110', 'Gris', 2019, 110, 'MOT006MNO678', 'CHA006MNO678', 'Ana Gómez', '12345678', '3112233445', 'SEG006', '2025-11-15', 'SOAT006', '2025-12-20', 'TEC006', '2025-08-12', 'PROP006', 'activo'),
+('MNO678', 'Honda', 'CB110', 'Gris', 2019, 110, 'MOT006MNO678', 'CHA006MNO678', 'Ana Gomez', '12345678', '3112233445', 'SEG006', '2025-11-15', 'SOAT006', '2025-12-20', 'TEC006', '2025-08-12', 'PROP006', 'activo'),
 ('PQR901', 'Suzuki', 'DR200', 'Amarillo', 2021, 200, 'MOT007PQR901', 'CHA007PQR901', 'Carlos Herrera', '23456789', '3123344556', 'SEG007', '2026-03-10', 'SOAT007', '2026-01-05', 'TEC007', '2025-09-18', 'PROP007', 'activo'),
 ('STU234', 'Yamaha', 'Crypton', 'Morado', 2020, 110, 'MOT008STU234', 'CHA008STU234', 'Lucia Morales', '34567890', '3134455667', 'SEG008', '2025-12-05', 'SOAT008', '2025-10-30', 'TEC008', '2025-07-25', 'PROP008', 'activo'),
 ('VWX567', 'Honda', 'Wave110', 'Azul Claro', 2018, 110, 'MOT009VWX567', 'CHA009VWX567', 'Roberto Silva', '45678901', '3145566778', 'SEG009', '2025-09-22', 'SOAT009', '2025-11-18', 'TEC009', '2025-06-30', 'PROP009', 'activo'),
 ('YZA890', 'Suzuki', 'EN125', 'Naranja', 2022, 125, 'MOT010YZA890', 'CHA010YZA890', 'Patricia Ruiz', '56789012', '3156677889', 'SEG010', '2026-04-15', 'SOAT010', '2026-02-10', 'TEC010', '2025-10-08', 'PROP010', 'activo'),
 ('BCD123', 'Honda', 'XR190L', 'Rojo Metalizado', 2021, 190, 'MOT011BCD123', 'CHA011BCD123', 'Fernando Castro', '67890123', '3167788990', 'SEG011', '2026-01-20', 'SOAT011', '2025-12-15', 'TEC011', '2025-09-05', 'PROP011', 'activo'),
-('EFG456', 'Yamaha', 'TTR125', 'Verde Militar', 2019, 125, 'MOT012EFG456', 'CHA012EFG456', 'Sandra López', '78901234', '3178899001', 'SEG012', '2025-08-30', 'SOAT012', '2025-07-08', 'TEC012', '2025-04-22', 'PROP012', 'mantenimiento'),
+('EFG456', 'Yamaha', 'TTR125', 'Verde Militar', 2019, 125, 'MOT012EFG456', 'CHA012EFG456', 'Sandra Lopez', '78901234', '3178899001', 'SEG012', '2025-08-30', 'SOAT012', '2025-07-08', 'TEC012', '2025-04-22', 'PROP012', 'mantenimiento'),
 ('HIJ789', 'Suzuki', 'GN125', 'Plateado', 2020, 125, 'MOT013HIJ789', 'CHA013HIJ789', 'Mario Vega', '89012345', '3189900112', 'SEG013', '2025-11-08', 'SOAT013', '2025-09-25', 'TEC013', '2025-05-15', 'PROP013', 'activo');
