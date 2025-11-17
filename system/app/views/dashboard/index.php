@@ -9,7 +9,8 @@
 session_start();
 
 // Función de seguridad: Bloquear acceso a archivos de log
-function blockLogFiles() {
+function blockLogFiles()
+{
     $requestedFile = $_SERVER['REQUEST_URI'] ?? '';
     if (preg_match('/\.log$/i', $requestedFile)) {
         http_response_code(403);
@@ -18,10 +19,11 @@ function blockLogFiles() {
 }
 
 // Función de seguridad: Prevenir directory listing
-function preventDirectoryListing() {
+function preventDirectoryListing()
+{
     $requestedPath = $_SERVER['REQUEST_URI'] ?? '';
     $scriptName = $_SERVER['SCRIPT_NAME'] ?? '';
-    
+
     // Si están intentando acceder al directorio sin especificar archivo
     if (dirname($scriptName) === rtrim($requestedPath, '/')) {
         // Este script ya maneja esa situación
@@ -46,7 +48,7 @@ $user_role = $_SESSION['user_role'] ?? 'operador';
 // Manejo de parámetro role en URL (para compatibilidad con login.php)
 if (isset($_GET['role'])) {
     $url_role = $_GET['role'];
-    
+
     // Validar que el rol de la URL coincida con el rol de la sesión
     $role_mapping = [
         'admin' => ['admin', 'administrador'],
@@ -54,10 +56,10 @@ if (isset($_GET['role'])) {
         'supervisor' => ['supervisor'],
         'conductor' => ['conductor']
     ];
-    
+
     $session_role_normalized = strtolower($user_role);
     $url_role_normalized = strtolower($url_role);
-    
+
     // Verificar si el usuario tiene permisos para el rol solicitado
     $has_permission = false;
     foreach ($role_mapping as $allowed_url_role => $session_roles) {
@@ -66,7 +68,7 @@ if (isset($_GET['role'])) {
             break;
         }
     }
-    
+
     if (!$has_permission) {
         // Si no tiene permisos, usar el rol de la sesión
         $redirect_role = $session_role_normalized;
@@ -87,7 +89,7 @@ switch ($redirect_role) {
     case 'supervisor':
         header('Location: operador.php?view=supervisor'); // Usamos vista especial para supervisor
         break;
-        
+
     case 'conductor':
         header('Location: operador.php?view=conductor'); // Usamos vista especial para conductor
         break;
