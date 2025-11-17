@@ -25,7 +25,7 @@ class TarifaController extends Controller
         $tarifas = $this->tarifa->listarConFiltros($filtros);
         $estadisticas = $this->tarifa->obtenerEstadisticas();
 
-        $this->view('admin/tarifas/index', [
+        $this->view('tarifas/index', [
             'tarifas' => $tarifas,
             'filtros' => $filtros,
             'estadisticas' => $estadisticas
@@ -66,7 +66,7 @@ class TarifaController extends Controller
                 $this->redirect('/admin/tarifas/editar/' . $id);
             } catch (Exception $e) {
                 $this->setFlash('error', $e->getMessage());
-                $this->view('admin/tarifas/crear', [
+                $this->view('tarifas/crear', [
                     'datos' => $_POST,
                     'error' => $e->getMessage()
                 ]);
@@ -74,7 +74,7 @@ class TarifaController extends Controller
             }
         }
 
-        $this->view('admin/tarifas/crear');
+        $this->view('tarifas/crear');
     }
 
     public function editar($id)
@@ -121,7 +121,7 @@ class TarifaController extends Controller
             }
         }
 
-        $this->view('admin/tarifas/editar', [
+        $this->view('tarifas/editar', [
             'tarifa' => $tarifa
         ]);
     }
@@ -184,7 +184,7 @@ class TarifaController extends Controller
             try {
                 $tarifaId = $_POST['tarifa_id'] ?? null;
                 $distancia = floatval($_POST['distancia'] ?? 0);
-                $tiempoMinutos = intval($_POST['tiempo_minutos'] ?? 0);
+                $tiempoMinutos = intval($_POST['duracion_minutos'] ?? 0);
                 $esNocturno = isset($_POST['es_nocturno']);
                 $esFestivo = isset($_POST['es_festivo']);
                 $hayLluvia = isset($_POST['hay_lluvia']);
@@ -222,7 +222,7 @@ class TarifaController extends Controller
 
         $tarifasActivas = $this->tarifa->listarActivas();
 
-        $this->view('admin/tarifas/calcular', [
+        $this->view('tarifas/calcular', [
             'tarifas' => $tarifasActivas
         ]);
     }

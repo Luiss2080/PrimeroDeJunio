@@ -344,7 +344,7 @@ class Tarifa extends Model
             'total' => $total,
             'desglose' => [
                 'distancia_km' => $distancia,
-                'tiempo_minutos' => $tiempoMinutos,
+                'duracion_minutos' => $tiempoMinutos,
                 'es_nocturno' => $esNocturno,
                 'es_festivo' => $esFestivo,
                 'hay_lluvia' => $hayLluvia

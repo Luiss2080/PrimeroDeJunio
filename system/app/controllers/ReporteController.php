@@ -23,7 +23,7 @@ class ReporteController extends Controller
     {
         $this->requirePermission('reportes.ver');
 
-        $this->view('admin/reportes/index', [
+        $this->view('reportes/index', [
             'titulo' => 'Reportes del Sistema'
         ]);
     }
@@ -54,7 +54,7 @@ class ReporteController extends Controller
             return;
         }
 
-        $this->view('admin/reportes/viajes', [
+        $this->view('reportes/viajes', [
             'viajes' => $viajes,
             'estadisticas' => $estadisticas,
             'conductores' => $conductores,
@@ -86,7 +86,7 @@ class ReporteController extends Controller
             return;
         }
 
-        $this->view('admin/reportes/conductores', [
+        $this->view('reportes/conductores', [
             'datos_reporte' => $datosReporte,
             'conductores' => $conductores,
             'filtros' => $filtros
@@ -118,7 +118,7 @@ class ReporteController extends Controller
             return;
         }
 
-        $this->view('admin/reportes/ingresos', [
+        $this->view('reportes/ingresos', [
             'ingresos' => $ingresos,
             'resumen' => $resumen,
             'conductores' => $conductores,
@@ -150,7 +150,7 @@ class ReporteController extends Controller
             return;
         }
 
-        $this->view('admin/reportes/vehiculos', [
+        $this->view('reportes/vehiculos', [
             'datos_reporte' => $datosReporte,
             'vehiculos' => $vehiculos,
             'filtros' => $filtros
@@ -181,7 +181,7 @@ class ReporteController extends Controller
             return;
         }
 
-        $this->view('admin/reportes/clientes', [
+        $this->view('reportes/clientes', [
             'datos_reporte' => $datosReporte,
             'clientes_list' => $clientesList,
             'filtros' => $filtros
@@ -241,7 +241,7 @@ class ReporteController extends Controller
             'distribucion_viajes' => $this->viaje->obtenerDistribucionPorHora($fechaInicio, $fechaFin)
         ];
 
-        $this->view('admin/reportes/dashboard', [
+        $this->view('reportes/dashboard', [
             'metricas' => $metricas,
             'graficos' => $graficos,
             'periodo' => $periodo,
@@ -292,7 +292,7 @@ class ReporteController extends Controller
                 $viaje['direccion_origen'],
                 $viaje['direccion_destino'],
                 $viaje['distancia_km'],
-                $viaje['tiempo_minutos'],
+                $viaje['duracion_minutos'],
                 $viaje['tarifa_nombre'],
                 '$' . number_format($viaje['total'], 2),
                 $viaje['estado']

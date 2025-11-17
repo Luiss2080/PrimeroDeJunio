@@ -97,7 +97,7 @@ ob_start();
                         </div>
                         <div class="meta-item-modern">
                             <i class="fas fa-calendar"></i>
-                            <span>Registrado: <?= date('d/m/Y', strtotime($conductor['fecha_registro'] ?? 'now')) ?></span>
+                            <span>Registrado: <?= date('d/m/Y', strtotime($conductor['fecha_ingreso'] ?? 'now')) ?></span>
                         </div>
                     </div>
                 </div>

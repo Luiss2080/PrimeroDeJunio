@@ -279,7 +279,7 @@ class Conductor extends Model
     /**
      * Asignar vehículo a conductor
      */
-    public function asignarVehiculo($conductorId, $vehiculoId, $fechaAsignacion, $turno = 'diurno')
+    public function asignarVehiculo($conductorId, $vehiculoId, $fechaAsignacion, $turno = 'completo')
     {
         // Primero desasignar vehículo actual si existe
         $this->db->execute(
@@ -464,7 +464,7 @@ class Conductor extends Model
                        AVG(CASE WHEN v.estado = 'completado' THEN v.valor_total ELSE NULL END) as promedio_viaje,
                        SUM(CASE WHEN v.estado = 'completado' THEN v.distancia_km ELSE 0 END) as km_recorridos,
                        AVG(CASE WHEN v.estado = 'completado' AND v.calificacion IS NOT NULL THEN v.calificacion ELSE NULL END) as calificacion_promedio,
-                       SUM(CASE WHEN v.estado = 'completado' THEN v.tiempo_minutos ELSE 0 END) / 60.0 as horas_trabajadas,
+                       SUM(CASE WHEN v.estado = 'completado' THEN v.duracion_minutos ELSE 0 END) / 60.0 as horas_trabajadas,
                        (COUNT(CASE WHEN v.estado = 'completado' THEN 1 END) * 100.0 / COUNT(v.id)) as porcentaje_completados
                 FROM conductores c
                 LEFT JOIN viajes v ON c.id = v.conductor_id

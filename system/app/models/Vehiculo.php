@@ -602,7 +602,7 @@ class Vehiculo extends Model
                        COALESCE(CONCAT(c.nombre, ' ', c.apellido), 'Sin asignar') as conductor_asignado,
                        COUNT(vi.id) as total_viajes,
                        SUM(CASE WHEN vi.estado = 'completado' THEN vi.distancia_km ELSE 0 END) as km_recorridos,
-                       SUM(CASE WHEN vi.estado = 'completado' THEN vi.tiempo_minutos ELSE 0 END) / 60.0 as horas_uso,
+                       SUM(CASE WHEN vi.estado = 'completado' THEN vi.duracion_minutos ELSE 0 END) / 60.0 as horas_uso,
                        SUM(CASE WHEN vi.estado = 'completado' THEN vi.valor_total ELSE 0 END) as ingresos_generados,
                        v.estado
                 FROM vehiculos v
