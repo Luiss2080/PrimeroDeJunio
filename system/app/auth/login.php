@@ -48,13 +48,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (Auth::login($email, $password)) {
                 // Obtener información del usuario logueado
                 $usuarioLogueado = Auth::user();
-                
+
                 // Log de acceso exitoso
                 error_log("[LOGIN SUCCESS] Usuario: {$email}, Role: {$usuarioLogueado['rol_nombre']}, IP: " . $_SERVER['REMOTE_ADDR']);
-                
+
                 // Redireccionar según el rol del usuario
                 $rolNombre = strtolower($usuarioLogueado['rol_nombre']);
-                
+
                 switch ($rolNombre) {
                     case 'administrador':
                         header('Location: http://localhost/PrimeroDeJunio/system/app/views/dashboard/?role=admin');
@@ -82,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } catch (Exception $e) {
             // Log del error
             error_log("[LOGIN ERROR] " . $e->getMessage());
-            
+
             // Mostrar mensaje específico si es problema de usuario inactivo
             if (strpos($e->getMessage(), 'inactivo') !== false) {
                 $error_message = 'Tu cuenta está inactiva. Contacta al administrador.';
