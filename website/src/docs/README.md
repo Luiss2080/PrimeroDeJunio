@@ -25,12 +25,15 @@
 ## 🚦 Antes de Empezar
 
 ### ¿Eres completamente nuevo en programación?
+
 - 👉 Empieza con [**Guía de Instalación Básica**](./01-instalacion-basica.md)
 
 ### ¿Ya tienes algo de experiencia?
+
 - 👉 Ve directo a [**Inicio Rápido**](./05-inicio-rapido.md)
 
 ### ¿Tienes problemas?
+
 - 👉 Consulta [**Solución de Problemas**](./04-troubleshooting.md)
 
 ---
@@ -47,4 +50,4 @@ Si encuentras algún problema que no esté documentado aquí:
 
 **¡Comencemos! 🚀**
 
-*Última actualización: Noviembre 2024*
+_Última actualización: Noviembre 2024_

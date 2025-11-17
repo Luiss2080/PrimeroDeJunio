@@ -18,6 +18,7 @@ PrimeroDeJunio/
 ## 🌐 Frontend - Website (React)
 
 ### **📂 Estructura del Website**
+
 ```
 website/
 ├── 📦 package.json         # Dependencias y scripts de npm
@@ -36,6 +37,7 @@ website/
 ```
 
 ### **🔧 Tecnologías del Frontend**
+
 - **React** `^18.2.0` - Framework de interfaz de usuario
 - **Vite** `^4.4.5` - Herramienta de construcción moderna
 - **React Router** `^6.8.1` - Navegación entre páginas
@@ -43,6 +45,7 @@ website/
 - **Lucide React** `^0.263.1` - Iconos modernos
 
 ### **🎨 Características**
+
 - ⚡ **Ultra rápido**: Vite para desarrollo y construcción
 - 📱 **Responsive**: Diseño adaptable a todos los dispositivos
 - 🎭 **Animaciones**: Transiciones suaves con Framer Motion
@@ -54,6 +57,7 @@ website/
 ## ⚙️ Backend - System (PHP MVC)
 
 ### **📂 Estructura del System**
+
 ```
 system/
 ├── 🚀 app/                 # Aplicación principal
@@ -70,6 +74,7 @@ system/
 ```
 
 ### **🎮 Controladores Principales**
+
 - **AdminController** - Gestión de administradores
 - **ClienteController** - Gestión de clientes
 - **ConductorController** - Gestión de conductores
@@ -80,6 +85,7 @@ system/
 - **ReporteController** - Generación de reportes
 
 ### **📊 Modelos de Datos**
+
 - **Usuario** - Usuarios del sistema
 - **Conductor** - Conductores de mototaxis
 - **Cliente** - Clientes de la asociación
@@ -89,6 +95,7 @@ system/
 - **PagoTarifaDiaria** - Pagos diarios
 
 ### **💎 Núcleo del Framework**
+
 - **Router** - Manejo de rutas
 - **Controller** - Clase base de controladores
 - **Model** - Clase base de modelos
@@ -101,6 +108,7 @@ system/
 ## 🗄️ Base de Datos (MySQL)
 
 ### **📊 Estructura de la Base de Datos**
+
 ```sql
 primero_de_junio/
 ├── 👤 usuarios             # Usuarios del sistema
@@ -118,6 +126,7 @@ primero_de_junio/
 ```
 
 ### **🔗 Relaciones Principales**
+
 ```
 Usuario (1) ──── (N) Conductor
 Conductor (1) ──── (N) Vehiculo
@@ -127,6 +136,7 @@ Conductor (N) ──── (N) Vehiculo (AsignacionVehiculo)
 ```
 
 ### **🗂️ Migraciones Organizadas**
+
 - `000_master_setup.sql` - Configuración inicial
 - `001_create_roles.sql` - Creación de roles
 - `002_create_usuarios.sql` - Tabla de usuarios
@@ -140,15 +150,16 @@ Conductor (N) ──── (N) Vehiculo (AsignacionVehiculo)
 ### **🎯 Patrón Modelo-Vista-Controlador**
 
 #### **📊 Modelo (Model)**
+
 ```php
 // Ejemplo: models/Usuario.php
 class Usuario extends Model {
     protected $table = 'usuarios';
-    
+
     public function obtenerPorEmail($email) {
         // Lógica de base de datos
     }
-    
+
     public function crearUsuario($datos) {
         // Crear nuevo usuario
     }
@@ -156,6 +167,7 @@ class Usuario extends Model {
 ```
 
 #### **🎮 Controlador (Controller)**
+
 ```php
 // Ejemplo: controllers/UsuarioController.php
 class UsuarioController extends Controller {
@@ -163,7 +175,7 @@ class UsuarioController extends Controller {
         $usuarios = $this->model('Usuario')->obtenerTodos();
         $this->view('usuarios/index', compact('usuarios'));
     }
-    
+
     public function crear() {
         // Lógica para crear usuario
     }
@@ -171,6 +183,7 @@ class UsuarioController extends Controller {
 ```
 
 #### **👁️ Vista (View)**
+
 ```php
 // Ejemplo: views/usuarios/index.php
 <h1>Lista de Usuarios</h1>
@@ -187,6 +200,7 @@ class UsuarioController extends Controller {
 ## 🌐 Flujo de Datos
 
 ### **📱 Frontend a Backend**
+
 ```
 1. Usuario interactúa con React UI
 2. React hace petición HTTP al backend PHP
@@ -198,6 +212,7 @@ class UsuarioController extends Controller {
 ```
 
 ### **⚙️ Dentro del Backend**
+
 ```
 1. public/index.php (punto de entrada)
 2. Router.php (determina ruta)
@@ -211,15 +226,18 @@ class UsuarioController extends Controller {
 ## 🛠️ Herramientas de Desarrollo
 
 ### **📦 Gestores de Dependencias**
+
 - **npm** - Para dependencias de JavaScript/React
 - **Composer** - Para dependencias de PHP (opcional)
 
 ### **⚡ Build Tools**
+
 - **Vite** - Construcción y desarrollo del frontend
 - **ESLint** - Análisis de código JavaScript
 - **Prettier** - Formateo de código (recomendado)
 
 ### **🔧 Scripts de Automatización**
+
 - `iniciar-desarrollo.ps1/.bat` - Inicia todo el entorno
 - `importar-seeds.ps1/.bat` - Configura la base de datos
 - `crear-acceso-directo.ps1` - Crea shortcut de escritorio
@@ -231,6 +249,7 @@ class UsuarioController extends Controller {
 ### **⚙️ Archivos de Configuración Principales**
 
 #### **Frontend (package.json)**
+
 ```json
 {
   "scripts": {
@@ -246,6 +265,7 @@ class UsuarioController extends Controller {
 ```
 
 #### **Backend (config/config.php)**
+
 ```php
 return [
     'app' => [
@@ -268,6 +288,7 @@ return [
 ## 🔐 Seguridad y Autenticación
 
 ### **🛡️ Características de Seguridad**
+
 - **Autenticación basada en sesiones** - PHP Sessions
 - **Validación de entrada** - Sanitización de datos
 - **Control de acceso** - Sistema de roles y permisos
@@ -275,6 +296,7 @@ return [
 - **Encriptación de contraseñas** - Hashing seguro
 
 ### **👥 Sistema de Roles**
+
 ```php
 // Roles disponibles
 - Admin      (acceso completo)
@@ -288,6 +310,7 @@ return [
 ## 📱 APIs y Endpoints
 
 ### **🌐 Estructura de API REST**
+
 ```
 GET    /api/usuarios        # Listar usuarios
 POST   /api/usuarios        # Crear usuario
@@ -297,6 +320,7 @@ DELETE /api/usuarios/{id}   # Eliminar usuario
 ```
 
 ### **📋 Endpoints Principales**
+
 - `/api/auth/login` - Autenticación
 - `/api/conductores` - Gestión de conductores
 - `/api/vehiculos` - Gestión de vehículos
@@ -308,18 +332,21 @@ DELETE /api/usuarios/{id}   # Eliminar usuario
 ## 🎯 Principios de Diseño
 
 ### **🎨 Frontend**
+
 - **Component-based** - Componentes reutilizables de React
 - **Responsive Design** - Adaptable a todos los dispositivos
 - **Mobile First** - Diseñado primero para móviles
 - **Progressive Enhancement** - Mejoras progresivas
 
 ### **⚙️ Backend**
+
 - **MVC Pattern** - Separación clara de responsabilidades
 - **RESTful APIs** - Interfaces estándar y predecibles
 - **Single Responsibility** - Cada clase tiene un propósito específico
 - **DRY Principle** - Don't Repeat Yourself
 
 ### **🗄️ Base de Datos**
+
 - **Normalization** - Estructura normalizada
 - **Indexing** - Índices para mejor rendimiento
 - **Referential Integrity** - Integridad referencial
@@ -330,12 +357,14 @@ DELETE /api/usuarios/{id}   # Eliminar usuario
 ## 🚀 Rendimiento y Optimización
 
 ### **⚡ Frontend**
+
 - **Code Splitting** - Carga bajo demanda
 - **Tree Shaking** - Eliminación de código no utilizado
 - **Minification** - Compresión de archivos
 - **Caching** - Caché inteligente
 
 ### **⚙️ Backend**
+
 - **Database Connection Pooling** - Reutilización de conexiones
 - **Query Optimization** - Consultas optimizadas
 - **Caching Layer** - Caché de respuestas frecuentes
@@ -346,12 +375,14 @@ DELETE /api/usuarios/{id}   # Eliminar usuario
 ## 📈 Escalabilidad
 
 ### **🔮 Preparado para Crecimiento**
+
 - **Modular Architecture** - Fácil agregar nuevas funciones
 - **API-First Design** - Backend desacoplado del frontend
 - **Database Design** - Estructura escalable
 - **Configuration Management** - Configuración centralizada
 
 ### **🔄 Posibles Mejoras Futuras**
+
 - Migration a TypeScript para mayor seguridad de tipos
 - Implementación de GraphQL para APIs más eficientes
 - Containerization con Docker
@@ -363,6 +394,7 @@ DELETE /api/usuarios/{id}   # Eliminar usuario
 ## 🎓 Tecnologías y Conceptos Clave
 
 ### **📚 Para Aprender Más**
+
 - **React**: [https://react.dev/](https://react.dev/)
 - **Vite**: [https://vitejs.dev/](https://vitejs.dev/)
 - **PHP**: [https://www.php.net/](https://www.php.net/)
@@ -371,6 +403,7 @@ DELETE /api/usuarios/{id}   # Eliminar usuario
 - **REST APIs**: Diseño de APIs web
 
 ### **🔧 Herramientas Recomendadas**
+
 - **VS Code** - Editor de código principal
 - **Postman** - Testing de APIs
 - **phpMyAdmin** - Administración de base de datos
@@ -382,11 +415,12 @@ DELETE /api/usuarios/{id}   # Eliminar usuario
 ## 🎯 Próximos Pasos
 
 ### Para profundizar en el proyecto:
+
 1. 🔧 **Explora**: [Solución de Problemas](./04-troubleshooting.md)
 2. ⚡ **Optimiza**: [Inicio Rápido](./05-inicio-rapido.md)
 3. 💻 **Practica**: [Comandos Principales](./02-comandos-principales.md)
 
 ---
 
-*🏗️ ¡Con esta arquitectura tienes una base sólida para un sistema completo!*
-*🔄 Última actualización: Noviembre 2024*
+_🏗️ ¡Con esta arquitectura tienes una base sólida para un sistema completo!_
+_🔄 Última actualización: Noviembre 2024_

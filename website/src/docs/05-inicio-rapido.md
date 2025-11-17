@@ -34,17 +34,20 @@ npm install
 ### **⏱️ 15 Minutos Setup Completo**
 
 #### **Paso 1: Descargar Herramientas (5 min)**
+
 1. 📥 [XAMPP](https://www.apachefriends.org/) - Instalar con configuración por defecto
 2. 📥 [Node.js LTS](https://nodejs.org/) - Instalar con configuración por defecto
 3. 📥 Descargar este proyecto y extraer en `C:\xampp\htdocs\PrimeroDeJunio\`
 
 #### **Paso 2: Iniciar Servicios (2 min)**
+
 1. 🟢 Abrir **XAMPP Control Panel**
 2. 🟢 Click **Start** en Apache
 3. 🟢 Click **Start** en MySQL
 4. ✅ Verificar que estén en verde
 
 #### **Paso 3: Configurar Proyecto (5 min)**
+
 ```powershell
 # Abrir PowerShell como administrador
 cd C:\xampp\htdocs\PrimeroDeJunio
@@ -59,6 +62,7 @@ cd ..
 ```
 
 #### **Paso 4: ¡Arrancar! (3 min)**
+
 ```powershell
 # Desde la raíz del proyecto
 .\iniciar-desarrollo.ps1
@@ -71,6 +75,7 @@ cd ..
 ## 📋 Checklist Ultra Rápido
 
 ### **✅ Antes de empezar, verifica:**
+
 ```bash
 □ XAMPP instalado
 □ Node.js instalado (node --version)
@@ -80,6 +85,7 @@ cd ..
 ```
 
 ### **✅ Comandos esenciales:**
+
 ```bash
 □ npm install (en /website/)
 □ .\importar-seeds.ps1 (en raíz)
@@ -87,6 +93,7 @@ cd ..
 ```
 
 ### **✅ URLs que deben funcionar:**
+
 ```bash
 □ http://localhost/ (XAMPP)
 □ http://localhost/PrimeroDeJunio/ (Backend)
@@ -98,13 +105,16 @@ cd ..
 ## 🎯 Comandos de Un Solo Click
 
 ### **🖱️ Crear Acceso Directo**
+
 ```powershell
 # Ejecutar una sola vez para crear shortcut en escritorio
 .\crear-acceso-directo.ps1
 ```
+
 **Resultado**: Doble click en escritorio → proyecto iniciado automáticamente
 
 ### **🔄 Reinicio Completo**
+
 ```powershell
 # Si algo va mal, reset everything:
 .\importar-seeds.ps1    # Resetear base de datos
@@ -112,6 +122,7 @@ cd ..
 ```
 
 ### **📊 Estado del Sistema**
+
 ```powershell
 # Ver todo de un vistazo
 Get-Service | Where-Object {$_.Name -like "*apache*" -or $_.Name -like "*mysql*"}
@@ -123,6 +134,7 @@ netstat -ano | findstr ":80\|:3306\|:3000"
 ## ⚡ Workflow Diario Optimizado
 
 ### **🌅 Al Empezar el Día:**
+
 ```powershell
 # 1. Verificar XAMPP (5 segundos)
 # Apache y MySQL deben estar verdes
@@ -134,9 +146,11 @@ cd C:\xampp\htdocs\PrimeroDeJunio
 # 3. Abrir editor (5 segundos)
 code .
 ```
+
 **⏱️ Total: 20 segundos para estar desarrollando**
 
 ### **🌙 Al Terminar el Día:**
+
 ```powershell
 # 1. Detener servidor de desarrollo
 # Ctrl+C en terminal
@@ -155,6 +169,7 @@ git push
 ## 🎛️ Configuración de Desarrollo Optimizada
 
 ### **⚙️ VS Code Extensions Recomendadas:**
+
 ```bash
 # Instalar automáticamente
 code --install-extension ms-vscode.vscode-typescript-next
@@ -164,6 +179,7 @@ code --install-extension formulahendry.auto-rename-tag
 ```
 
 ### **🔧 Configuración del Editor:**
+
 ```json
 // .vscode/settings.json
 {
@@ -183,11 +199,14 @@ code --install-extension formulahendry.auto-rename-tag
 ## 🚀 Trucos para Desarrollo Rápido
 
 ### **📱 Live Reload Automático**
+
 El proyecto ya está configurado para recarga automática:
+
 - ✅ **Frontend**: Se recarga automáticamente al guardar
 - ✅ **Network Access**: Accesible desde teléfono con tu IP local
 
 ### **🔍 Debug Rápido**
+
 ```bash
 # Frontend - Abrir DevTools
 F12 en el navegador
@@ -200,6 +219,7 @@ http://localhost/phpmyadmin/
 ```
 
 ### **⚡ Comandos de Un Liner**
+
 ```powershell
 # Reinstalar todo desde cero
 cd website; Remove-Item -Recurse -Force node_modules; npm install; cd ..; .\iniciar-desarrollo.ps1
@@ -216,26 +236,29 @@ start http://localhost:3000; start http://localhost/PrimeroDeJunio; start http:/
 ## 📊 Panel de Control Rápido
 
 ### **🎛️ URLs de Control:**
-| Servicio | URL | Propósito |
-|----------|-----|-----------|
-| **Frontend** | http://localhost:3000 | Desarrollo React |
-| **Backend** | http://localhost/PrimeroDeJunio | Sistema PHP |
-| **Base de Datos** | http://localhost/phpmyadmin | Administrar BD |
-| **XAMPP** | http://localhost | Estado de servicios |
+
+| Servicio          | URL                             | Propósito           |
+| ----------------- | ------------------------------- | ------------------- |
+| **Frontend**      | http://localhost:3000           | Desarrollo React    |
+| **Backend**       | http://localhost/PrimeroDeJunio | Sistema PHP         |
+| **Base de Datos** | http://localhost/phpmyadmin     | Administrar BD      |
+| **XAMPP**         | http://localhost                | Estado de servicios |
 
 ### **⌨️ Atajos de Teclado:**
-| Atajo | Función |
-|-------|---------|
-| `Ctrl + C` | Detener servidor |
-| `Ctrl + Shift + R` | Recarga forzada |
-| `F12` | DevTools |
-| `Alt + Tab` | Cambiar entre apps |
+
+| Atajo              | Función            |
+| ------------------ | ------------------ |
+| `Ctrl + C`         | Detener servidor   |
+| `Ctrl + Shift + R` | Recarga forzada    |
+| `F12`              | DevTools           |
+| `Alt + Tab`        | Cambiar entre apps |
 
 ---
 
 ## 🎯 Casos de Uso Rápido
 
 ### **🔧 "Solo quiero ver el proyecto"**
+
 ```powershell
 # Método más rápido (sin instalar dependencias)
 cd C:\xampp\htdocs\PrimeroDeJunio
@@ -243,6 +266,7 @@ cd C:\xampp\htdocs\PrimeroDeJunio
 ```
 
 ### **💻 "Quiero desarrollar el frontend"**
+
 ```powershell
 cd C:\xampp\htdocs\PrimeroDeJunio\website
 npm run dev
@@ -250,6 +274,7 @@ npm run dev
 ```
 
 ### **⚙️ "Quiero trabajar en el backend"**
+
 ```powershell
 # Solo necesitas XAMPP corriendo
 # Trabajar en: http://localhost/PrimeroDeJunio/
@@ -257,6 +282,7 @@ npm run dev
 ```
 
 ### **🗄️ "Solo quiero administrar la base de datos"**
+
 ```powershell
 # Solo necesitas MySQL corriendo
 # Ir a: http://localhost/phpmyadmin/
@@ -267,12 +293,14 @@ npm run dev
 ## 📚 Recursos de Un Vistazo
 
 ### **📖 Documentación:**
+
 - [**📚 Guía Principal**](./README.md) - Índice completo
 - [**🚀 Instalación**](./01-instalacion-basica.md) - Setup detallado
 - [**💻 Comandos**](./02-comandos-principales.md) - Todos los comandos
 - [**🔧 Problemas**](./04-troubleshooting.md) - Solucionar errores
 
 ### **🔗 Enlaces Rápidos:**
+
 ```bash
 # Tecnologías principales
 React Docs: https://react.dev/
@@ -286,12 +314,14 @@ Vite Guide: https://vitejs.dev/guide/
 ## 🎉 ¡Ya Estás Listo!
 
 ### **🚀 Si llegaste hasta aquí:**
+
 ✅ **Tu entorno está configurado**
 ✅ **Conoces los comandos básicos**  
 ✅ **Sabes dónde buscar ayuda**
 ✅ **Puedes empezar a desarrollar**
 
 ### **🔮 Próximos Pasos Recomendados:**
+
 1. **Explora el código** - Empieza por `website/src/App.jsx`
 2. **Haz un cambio pequeño** - Modifica un texto y ve la recarga automática
 3. **Prueba el backend** - Crea un usuario nuevo en el sistema
@@ -304,11 +334,13 @@ Vite Guide: https://vitejs.dev/guide/
 ## 🆘 Ayuda de Emergencia
 
 ### **Si nada de esto funciona:**
+
 1. 🔧 **Ve a**: [Solución de Problemas](./04-troubleshooting.md)
 2. 📖 **Revisa**: [Instalación Básica](./01-instalacion-basica.md)
 3. 📞 **Contacta**: Al equipo de desarrollo
 
 ### **Comando de Pánico:**
+
 ```powershell
 # Reset nuclear - si todo falla
 cd C:\xampp\htdocs\PrimeroDeJunio
@@ -323,5 +355,5 @@ cd ..
 
 ---
 
-*⚡ ¡En menos de 5 minutos deberías estar desarrollando como un pro!*
-*🔄 Última actualización: Noviembre 2024*
+_⚡ ¡En menos de 5 minutos deberías estar desarrollando como un pro!_
+_🔄 Última actualización: Noviembre 2024_
