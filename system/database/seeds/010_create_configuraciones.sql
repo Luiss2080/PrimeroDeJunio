@@ -21,66 +21,66 @@ INSERT INTO configuraciones (clave, valor, descripcion, tipo, categoria) VALUES
 ('debug_mode', 'false', 'Modo debug activado para desarrollo', 'boolean', 'sistema'),
 
 -- Configuraciones de Tarifas
-('tarifa_minima_global', '4500', 'Tarifa mínima por viaje en pesos', 'integer', 'tarifas'),
-('tarifa_por_km', '1800', 'Tarifa por kilómetro recorrido', 'integer', 'tarifas'),
-('tarifa_minuto_espera', '150', 'Tarifa por minuto de espera', 'integer', 'tarifas'),
+('tarifa_minima_global', '4500', 'Tarifa mínima por viaje en pesos', 'number', 'tarifas'),
+('tarifa_por_km', '1800', 'Tarifa por kilómetro recorrido', 'number', 'tarifas'),
+('tarifa_minuto_espera', '150', 'Tarifa por minuto de espera', 'number', 'tarifas'),
 ('tarifa_nocturna_inicio', '22:00', 'Hora de inicio de tarifa nocturna', 'string', 'tarifas'),
 ('tarifa_nocturna_fin', '06:00', 'Hora de fin de tarifa nocturna', 'string', 'tarifas'),
-('recargo_nocturno_porcentaje', '20', 'Porcentaje de recargo nocturno', 'integer', 'tarifas'),
-('tarifa_diaria_conductor', '15000', 'Tarifa diaria que paga cada conductor', 'integer', 'tarifas'),
-('descuento_cliente_frecuente', '5', 'Porcentaje descuento cliente frecuente', 'integer', 'tarifas'),
-('descuento_corporativo_max', '25', 'Máximo descuento corporativo permitido', 'integer', 'tarifas'),
+('recargo_nocturno_porcentaje', '20', 'Porcentaje de recargo nocturno', 'number', 'tarifas'),
+('tarifa_diaria_conductor', '15000', 'Tarifa diaria que paga cada conductor', 'number', 'tarifas'),
+('descuento_cliente_frecuente', '5', 'Porcentaje descuento cliente frecuente', 'number', 'tarifas'),
+('descuento_corporativo_max', '25', 'Máximo descuento corporativo permitido', 'number', 'tarifas'),
 
 -- Configuraciones de Operación
-('max_viajes_dia_conductor', '15', 'Máximo número de viajes por día por conductor', 'integer', 'operacion'),
-('tiempo_max_viaje_minutos', '120', 'Tiempo máximo de un viaje en minutos', 'integer', 'operacion'),
-('distancia_max_viaje_km', '50', 'Distancia máxima de un viaje en kilómetros', 'integer', 'operacion'),
-('tiempo_espera_max_minutos', '15', 'Tiempo máximo de espera de cliente en minutos', 'integer', 'operacion'),
+('max_viajes_dia_conductor', '15', 'Máximo número de viajes por día por conductor', 'number', 'operacion'),
+('tiempo_max_viaje_minutos', '120', 'Tiempo máximo de un viaje en minutos', 'number', 'operacion'),
+('distancia_max_viaje_km', '50', 'Distancia máxima de un viaje en kilómetros', 'number', 'operacion'),
+('tiempo_espera_max_minutos', '15', 'Tiempo máximo de espera de cliente en minutos', 'number', 'operacion'),
 ('horario_operacion_inicio', '05:00', 'Hora de inicio de operaciones diarias', 'string', 'operacion'),
 ('horario_operacion_fin', '23:00', 'Hora de fin de operaciones diarias', 'string', 'operacion'),
 ('dias_operacion', 'L,M,X,J,V,S,D', 'Días de operación de la semana', 'string', 'operacion'),
 
 -- Configuraciones de Mantenimiento
-('kilometraje_mantenimiento_preventivo', '3000', 'Cada cuántos km programar mantenimiento preventivo', 'integer', 'mantenimiento'),
-('kilometraje_mantenimiento_mayor', '10000', 'Cada cuántos km hacer mantenimiento mayor', 'integer', 'mantenimiento'),
-('dias_alerta_mantenimiento', '15', 'Días antes para alertar mantenimiento programado', 'integer', 'mantenimiento'),
+('kilometraje_mantenimiento_preventivo', '3000', 'Cada cuántos km programar mantenimiento preventivo', 'number', 'mantenimiento'),
+('kilometraje_mantenimiento_mayor', '10000', 'Cada cuántos km hacer mantenimiento mayor', 'number', 'mantenimiento'),
+('dias_alerta_mantenimiento', '15', 'Días antes para alertar mantenimiento programado', 'number', 'mantenimiento'),
 ('talleres_autorizados', '["Taller Motos Express", "Mecánica Los Hermanos", "CDA Automotriz"]', 'Lista de talleres autorizados', 'json', 'mantenimiento'),
 
 -- Configuraciones de Alertas y Notificaciones
-('dias_alerta_vencimiento_licencia', '30', 'Días antes para alertar vencimiento de licencia', 'integer', 'alertas'),
-('dias_alerta_vencimiento_soat', '60', 'Días antes para alertar vencimiento de SOAT', 'integer', 'alertas'),
-('dias_alerta_vencimiento_tecnicomecanica', '45', 'Días antes para alertar vencimiento de tecnomecánica', 'integer', 'alertas'),
+('dias_alerta_vencimiento_licencia', '30', 'Días antes para alertar vencimiento de licencia', 'number', 'alertas'),
+('dias_alerta_vencimiento_soat', '60', 'Días antes para alertar vencimiento de SOAT', 'number', 'alertas'),
+('dias_alerta_vencimiento_tecnicomecanica', '45', 'Días antes para alertar vencimiento de tecnomecánica', 'number', 'alertas'),
 ('email_notificaciones', 'admin@primerodejunio.com', 'Email para recibir notificaciones del sistema', 'string', 'notificaciones'),
 ('notificaciones_sms_activas', 'false', 'Activar notificaciones por SMS', 'boolean', 'notificaciones'),
 ('notificaciones_email_activas', 'true', 'Activar notificaciones por email', 'boolean', 'notificaciones'),
 
 -- Configuraciones de Seguridad
-('session_timeout_minutos', '30', 'Tiempo de expiración de sesión en minutos', 'integer', 'seguridad'),
-('max_intentos_login', '5', 'Máximo número de intentos de login fallidos', 'integer', 'seguridad'),
-('tiempo_bloqueo_minutos', '15', 'Tiempo de bloqueo después de intentos fallidos', 'integer', 'seguridad'),
-('password_min_longitud', '6', 'Longitud mínima de contraseñas', 'integer', 'seguridad'),
-('backup_retention_dias', '30', 'Días de retención de backups', 'integer', 'seguridad'),
+('session_timeout_minutos', '30', 'Tiempo de expiración de sesión en minutos', 'number', 'seguridad'),
+('max_intentos_login', '5', 'Máximo número de intentos de login fallidos', 'number', 'seguridad'),
+('tiempo_bloqueo_minutos', '15', 'Tiempo de bloqueo después de intentos fallidos', 'number', 'seguridad'),
+('password_min_longitud', '6', 'Longitud mínima de contraseñas', 'number', 'seguridad'),
+('backup_retention_dias', '30', 'Días de retención de backups', 'number', 'seguridad'),
 
 -- Configuraciones de Reportes
 ('reportes_formato_default', 'PDF', 'Formato por defecto para reportes', 'string', 'reportes'),
-('reportes_max_registros', '1000', 'Máximo número de registros por reporte', 'integer', 'reportes'),
+('reportes_max_registros', '1000', 'Máximo número de registros por reporte', 'number', 'reportes'),
 ('reportes_logo_empresa', 'logo_empresa.png', 'Logo para incluir en reportes', 'string', 'reportes'),
 
 -- Configuraciones de Clientes
-('descuento_max_cliente_frecuente', '10', 'Descuento máximo para cliente frecuente', 'integer', 'clientes'),
-('viajes_minimos_cliente_frecuente', '10', 'Número mínimo de viajes para ser cliente frecuente', 'integer', 'clientes'),
-('dias_inactividad_cliente', '90', 'Días de inactividad para marcar cliente como inactivo', 'integer', 'clientes'),
+('descuento_max_cliente_frecuente', '10', 'Descuento máximo para cliente frecuente', 'number', 'clientes'),
+('viajes_minimos_cliente_frecuente', '10', 'Número mínimo de viajes para ser cliente frecuente', 'number', 'clientes'),
+('dias_inactividad_cliente', '90', 'Días de inactividad para marcar cliente como inactivo', 'number', 'clientes'),
 
 -- Configuraciones de Conductores
-('edad_minima_conductor', '21', 'Edad mínima para ser conductor', 'integer', 'conductores'),
-('experiencia_minima_anos', '2', 'Años mínimos de experiencia requeridos', 'integer', 'conductores'),
+('edad_minima_conductor', '21', 'Edad mínima para ser conductor', 'number', 'conductores'),
+('experiencia_minima_anos', '2', 'Años mínimos de experiencia requeridos', 'number', 'conductores'),
 ('licencia_categoria_requerida', 'A2', 'Categoría de licencia requerida', 'string', 'conductores'),
-('score_minimo_conductor', '4.0', 'Calificación mínima para conductor activo', 'decimal', 'conductores'),
+('score_minimo_conductor', '4.0', 'Calificación mínima para conductor activo', 'number', 'conductores'),
 
 -- Configuraciones de Vehículos
-('ano_minimo_vehiculo', '2015', 'Año mínimo permitido para vehículos', 'integer', 'vehiculos'),
-('cilindraje_minimo', '110', 'Cilindraje mínimo permitido en cc', 'integer', 'vehiculos'),
-('cilindraje_maximo', '200', 'Cilindraje máximo permitido en cc', 'integer', 'vehiculos'),
+('ano_minimo_vehiculo', '2015', 'Año mínimo permitido para vehículos', 'number', 'vehiculos'),
+('cilindraje_minimo', '110', 'Cilindraje mínimo permitido en cc', 'number', 'vehiculos'),
+('cilindraje_maximo', '200', 'Cilindraje máximo permitido en cc', 'number', 'vehiculos'),
 ('marcas_permitidas', '["Honda", "Yamaha", "Suzuki", "Kawasaki", "Bajaj"]', 'Marcas de motos permitidas', 'json', 'vehiculos'),
 
 -- Configuraciones de Integración
@@ -90,11 +90,11 @@ INSERT INTO configuraciones (clave, valor, descripcion, tipo, categoria) VALUES
 ('payment_gateway', 'manual', 'Gateway de pagos configurado', 'string', 'integracion'),
 
 -- Configuraciones de Facturación
-('iva_porcentaje', '19', 'Porcentaje de IVA aplicable', 'integer', 'facturacion'),
+('iva_porcentaje', '19', 'Porcentaje de IVA aplicable', 'number', 'facturacion'),
 ('facturacion_electronica', 'false', 'Facturación electrónica habilitada', 'boolean', 'facturacion'),
 ('resolucion_dian', '', 'Número de resolución DIAN para facturación', 'string', 'facturacion'),
 
 -- Configuraciones de Dashboard
-('refresh_dashboard_segundos', '30', 'Frecuencia de actualización del dashboard', 'integer', 'dashboard'),
-('viajes_recientes_mostrar', '10', 'Número de viajes recientes a mostrar', 'integer', 'dashboard'),
-('alertas_max_mostrar', '5', 'Número máximo de alertas en dashboard', 'integer', 'dashboard');
+('refresh_dashboard_segundos', '30', 'Frecuencia de actualización del dashboard', 'number', 'dashboard'),
+('viajes_recientes_mostrar', '10', 'Número de viajes recientes a mostrar', 'number', 'dashboard'),
+('alertas_max_mostrar', '5', 'Número máximo de alertas en dashboard', 'number', 'dashboard');

@@ -28,7 +28,7 @@ CREATE TABLE pagos_tarifa_diaria (
 
 -- Configuración inicial de monto de tarifa diaria
 INSERT INTO configuraciones (clave, valor, tipo, descripcion, categoria) VALUES
-('tarifa_diaria_monto', '15000', 'integer', 'Monto de tarifa diaria que deben pagar los conductores', 'tarifas'),
+('tarifa_diaria_monto', '15000', 'number', 'Monto de tarifa diaria que deben pagar los conductores', 'tarifas'),
 ('tarifa_diaria_obligatoria', '1', 'boolean', 'Si la tarifa diaria es obligatoria para trabajar', 'tarifas'),
 ('tarifa_diaria_hora_limite', '08:00', 'string', 'Hora límite para pagar tarifa diaria', 'tarifas');
 

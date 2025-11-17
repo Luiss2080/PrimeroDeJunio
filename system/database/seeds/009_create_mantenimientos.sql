@@ -14,24 +14,24 @@ INSERT INTO mantenimientos (vehiculo_id, tipo_mantenimiento, descripcion, kilome
 (10, 'correctivo', 'Cambio de embrague', 19500, 180000.00, 'Taller Especializado Honda', '3201234567', '2025-10-15', '2025-10-16', 'completado', NULL, NULL),
 
 -- Mantenimientos programados (próximos)
-(3, 'revision', 'Revisión técnico-mecánica', 18500, 55000.00, 'CDA Automotriz', '3189012345', '2025-11-15', NULL, 'programado', NULL, NULL),
-(1, 'preventivo', 'Cambio de llantas trasera', 17800, 95000.00, 'Llantas y Servicios', '3212345678', '2025-11-18', NULL, 'programado', NULL, NULL),
-(11, 'preventivo', 'Mantenimiento 5,000 km', 5000, 75000.00, 'Taller Motos Express', '3145678901', '2025-11-20', NULL, 'programado', 10000, NULL),
-(12, 'correctivo', 'Reparación de escape', 8500, 65000.00, 'Mecánica Dos Hermanos', '3223344556', 'CURDATE() + INTERVAL 3 DAY', NULL, 'programado', NULL, NULL),
-(2, 'preventivo', 'Cambio de aceite 22,500 km', 22500, 85000.00, 'Taller Motos Express', '3145678901', 'CURDATE() + INTERVAL 5 DAY', NULL, 'programado', 27500, NULL),
+(3, 'revision', 'Revisión técnico-mecánica', 18500, 55000.00, 'CDA Automotriz', '3189012345', '2025-11-25', NULL, 'programado', NULL, NULL),
+(1, 'preventivo', 'Cambio de llantas trasera', 17800, 95000.00, 'Llantas y Servicios', '3212345678', '2025-11-28', NULL, 'programado', NULL, NULL),
+(11, 'preventivo', 'Mantenimiento 5,000 km', 5000, 75000.00, 'Taller Motos Express', '3145678901', '2025-12-01', NULL, 'programado', 10000, NULL),
+(12, 'correctivo', 'Reparación de escape', 8500, 65000.00, 'Mecánica Dos Hermanos', '3223344556', '2025-11-20', NULL, 'programado', NULL, NULL),
+(2, 'preventivo', 'Cambio de aceite 22,500 km', 22500, 85000.00, 'Taller Motos Express', '3145678901', '2025-11-22', NULL, 'programado', 27500, NULL),
 
 -- Mantenimientos en progreso
-(13, 'correctivo', 'Reparación sistema de refrigeración', 14200, 135000.00, 'Taller Especializado', '3234455667', CURDATE(), NULL, 'en_progreso', NULL, NULL),
+(13, 'correctivo', 'Reparación sistema de refrigeración', 14200, 135000.00, 'Taller Especializado', '3234455667', '2025-11-17', NULL, 'en_proceso', NULL, NULL),
 
 -- Mantenimientos de emergencia recientes
-(4, 'emergencia', 'Reparación de ponchadura', 15200, 25000.00, 'Vulcanizadora 24 Horas', '3245566778', DATE_SUB(CURDATE(), INTERVAL 2 DAY), DATE_SUB(CURDATE(), INTERVAL 2 DAY), 'completado', NULL, NULL),
-(7, 'emergencia', 'Cambio de bombillo delantero', 13100, 15000.00, 'Autopartes Rápidas', '3256677889', DATE_SUB(CURDATE(), INTERVAL 1 DAY), DATE_SUB(CURDATE(), INTERVAL 1 DAY), 'completado', NULL, NULL),
+(4, 'emergencia', 'Reparación de ponchadura', 15200, 25000.00, 'Vulcanizadora 24 Horas', '3245566778', '2025-11-15', '2025-11-15', 'completado', NULL, NULL),
+(7, 'emergencia', 'Cambio de bombillo delantero', 13100, 15000.00, 'Autopartes Rápidas', '3256677889', '2025-11-16', '2025-11-16', 'completado', NULL, NULL),
 
 -- Mantenimientos históricos (más antiguos)
-(1, 'preventivo', 'Mantenimiento 12,000 km', 12000, 90000.00, 'Taller Motos Express', '3145678901', DATE_SUB(CURDATE(), INTERVAL 45 DAY), DATE_SUB(CURDATE(), INTERVAL 45 DAY), 'completado', 15000, NULL),
-(2, 'correctivo', 'Cambio de batería', 20500, 85000.00, 'Baterías Express', '3267788990', DATE_SUB(CURDATE(), INTERVAL 30 DAY), DATE_SUB(CURDATE(), INTERVAL 30 DAY), 'completado', NULL, NULL),
-(3, 'preventivo', 'Cambio de aceite', 16000, 80000.00, 'Lubricantes del Norte', '3278899001', DATE_SUB(CURDATE(), INTERVAL 25 DAY), DATE_SUB(CURDATE(), INTERVAL 25 DAY), 'completado', 19000, NULL),
-(5, 'revision', 'Inspección general', 23500, 45000.00, 'Centro de Inspección', '3289900112', DATE_SUB(CURDATE(), INTERVAL 20 DAY), DATE_SUB(CURDATE(), INTERVAL 20 DAY), 'completado', NULL, NULL),
+(1, 'preventivo', 'Mantenimiento 12,000 km', 12000, 90000.00, 'Taller Motos Express', '3145678901', '2025-10-03', '2025-10-03', 'completado', 15000, NULL),
+(2, 'correctivo', 'Cambio de batería', 20500, 85000.00, 'Baterías Express', '3267788990', '2025-10-18', '2025-10-18', 'completado', NULL, NULL),
+(3, 'preventivo', 'Cambio de aceite', 16000, 80000.00, 'Lubricantes del Norte', '3278899001', '2025-10-23', '2025-10-23', 'completado', 19000, NULL),
+(5, 'revision', 'Inspección general', 23500, 45000.00, 'Centro de Inspección', '3289900112', '2025-10-28', '2025-10-28', 'completado', NULL, NULL),
 
 -- Mantenimientos cancelados (para datos realistas)
-(6, 'preventivo', 'Cambio de pastillas de freno', 17200, 95000.00, 'Frenos Seguros', '3290011223', DATE_SUB(CURDATE(), INTERVAL 10 DAY), NULL, 'cancelado', NULL, NULL);
+(6, 'preventivo', 'Cambio de pastillas de freno', 17200, 95000.00, 'Frenos Seguros', '3290011223', '2025-11-07', NULL, 'cancelado', NULL, NULL);
