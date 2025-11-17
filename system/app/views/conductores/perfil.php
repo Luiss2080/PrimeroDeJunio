@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Vista Perfil Conductor - Sistema PRIMERO DE JUNIO
  */
@@ -79,7 +80,7 @@ ob_start();
                         <i class="fas fa-camera"></i>
                     </button>
                 </div>
-                
+
                 <div class="profile-info-section-modern">
                     <h1 class="profile-name-modern"><?= htmlspecialchars($conductor['nombre'] . ' ' . $conductor['apellido']) ?></h1>
                     <div class="profile-role-modern">
@@ -101,7 +102,7 @@ ob_start();
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="profile-actions-section-modern">
                     <div class="profile-status-badge-modern">
                         <span class="status-badge-modern <?= $conductor['estado'] ?>">
@@ -120,7 +121,7 @@ ob_start();
                                 Activar
                             </button>
                         <?php endif; ?>
-                        
+
                         <?php if (empty($conductor['vehiculo_placa'])): ?>
                             <button class="btn-modern btn-sm btn-info" onclick="asignarVehiculo(<?= $conductor['id'] ?>)">
                                 <i class="fas fa-motorcycle"></i>
@@ -157,7 +158,7 @@ ob_start();
                 </div>
                 <div class="stat-card-glow primary"></div>
             </div>
-            
+
             <div class="stat-card-modern success">
                 <div class="stat-card-background">
                     <div class="stat-icon-modern">
@@ -175,7 +176,7 @@ ob_start();
                 </div>
                 <div class="stat-card-glow success"></div>
             </div>
-            
+
             <div class="stat-card-modern info">
                 <div class="stat-card-background">
                     <div class="stat-icon-modern">
@@ -192,7 +193,7 @@ ob_start();
                 </div>
                 <div class="stat-card-glow info"></div>
             </div>
-            
+
             <div class="stat-card-modern warning">
                 <div class="stat-card-background">
                     <div class="stat-icon-modern">
@@ -235,7 +236,7 @@ ob_start();
                                 <i class="fas fa-edit"></i>
                             </button>
                         </div>
-                        
+
                         <div class="section-content-modern">
                             <div class="info-grid-modern">
                                 <div class="info-item-modern">
@@ -285,7 +286,7 @@ ob_start();
                                 <i class="fas fa-edit"></i>
                             </button>
                         </div>
-                        
+
                         <div class="section-content-modern">
                             <div class="info-grid-modern">
                                 <div class="info-item-modern">
@@ -362,7 +363,7 @@ ob_start();
                                 <i class="fas fa-edit"></i>
                             </button>
                         </div>
-                        
+
                         <div class="section-content-modern">
                             <div class="info-grid-modern">
                                 <div class="info-item-modern">
@@ -441,7 +442,7 @@ ob_start();
                                 </button>
                             <?php endif; ?>
                         </div>
-                        
+
                         <div class="section-content-modern">
                             <?php if (!empty($conductor['vehiculo_placa'])): ?>
                                 <div class="vehicle-info-modern">
@@ -452,7 +453,7 @@ ob_start();
                                         <div class="vehicle-details-modern">
                                             <div class="vehicle-plate-modern"><?= htmlspecialchars($conductor['vehiculo_placa']) ?></div>
                                             <div class="vehicle-model-modern">
-                                                <?= htmlspecialchars($vehiculo['marca'] ?? 'N/A') ?> 
+                                                <?= htmlspecialchars($vehiculo['marca'] ?? 'N/A') ?>
                                                 <?= htmlspecialchars($vehiculo['modelo'] ?? '') ?>
                                             </div>
                                             <div class="vehicle-year-modern">Año: <?= htmlspecialchars($vehiculo['ano'] ?? 'N/A') ?></div>
@@ -463,7 +464,7 @@ ob_start();
                                             </span>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="vehicle-stats-modern">
                                         <div class="vehicle-stat-modern">
                                             <span class="stat-value"><?= $vehiculo['kilometraje'] ?? 0 ?> km</span>
@@ -513,7 +514,7 @@ ob_start();
                                 <i class="fas fa-edit"></i>
                             </button>
                         </div>
-                        
+
                         <div class="section-content-modern">
                             <?php if (!empty($conductor['contacto_emergencia_nombre'])): ?>
                                 <div class="emergency-contact-modern">
@@ -573,7 +574,7 @@ ob_start();
                                 <i class="fas fa-edit"></i>
                             </button>
                         </div>
-                        
+
                         <div class="section-content-modern">
                             <?php if (!empty($conductor['observaciones'])): ?>
                                 <div class="observations-modern">
@@ -650,203 +651,203 @@ ob_start();
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Initialize AOS
-    if (typeof AOS !== 'undefined') {
-        AOS.init({
-            duration: 800,
-            easing: 'ease-out-cubic',
-            once: true
-        });
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize AOS
+        if (typeof AOS !== 'undefined') {
+            AOS.init({
+                duration: 800,
+                easing: 'ease-out-cubic',
+                once: true
+            });
+        }
+
+        console.log('Conductor profile page initialized');
+    });
+
+    // Action functions
+    function editarSeccion(seccion) {
+        window.location.href = `/admin/conductores/editar/<?= $conductor['id'] ?>#${seccion}`;
     }
 
-    console.log('Conductor profile page initialized');
-});
-
-// Action functions
-function editarSeccion(seccion) {
-    window.location.href = `/admin/conductores/editar/<?= $conductor['id'] ?>#${seccion}`;
-}
-
-function cambiarContrasena(conductorId) {
-    document.getElementById('passwordModal').classList.add('active');
-}
-
-function closePasswordModal() {
-    document.getElementById('passwordModal').classList.remove('active');
-    document.getElementById('passwordForm').reset();
-}
-
-function togglePassword(inputId) {
-    const input = document.getElementById(inputId);
-    const button = input.parentElement.querySelector('.password-toggle-modern');
-    
-    if (input.type === 'password') {
-        input.type = 'text';
-        button.innerHTML = '<i class="fas fa-eye-slash"></i>';
-    } else {
-        input.type = 'password';
-        button.innerHTML = '<i class="fas fa-eye"></i>';
+    function cambiarContrasena(conductorId) {
+        document.getElementById('passwordModal').classList.add('active');
     }
-}
 
-function updatePassword() {
-    const newPassword = document.getElementById('newPassword').value;
-    const confirmPassword = document.getElementById('confirmPassword').value;
-    const forceChange = document.getElementById('forceChange').checked;
-    
-    if (!newPassword) {
-        showAlert('Por favor ingrese una nueva contraseña', 'error');
-        return;
+    function closePasswordModal() {
+        document.getElementById('passwordModal').classList.remove('active');
+        document.getElementById('passwordForm').reset();
     }
-    
-    if (newPassword.length < 6) {
-        showAlert('La contraseña debe tener al menos 6 caracteres', 'error');
-        return;
-    }
-    
-    if (newPassword !== confirmPassword) {
-        showAlert('Las contraseñas no coinciden', 'error');
-        return;
-    }
-    
-    if (typeof Swal !== 'undefined') {
-        Swal.fire({
-            title: 'Contraseña actualizada',
-            text: 'La contraseña ha sido cambiada exitosamente',
-            icon: 'success',
-            timer: 2000,
-            showConfirmButton: false
-        });
-    } else {
-        alert('Contraseña actualizada exitosamente');
-    }
-    
-    closePasswordModal();
-}
 
-function cambiarFoto(conductorId) {
-    if (typeof Swal !== 'undefined') {
-        Swal.fire({
-            title: 'Cambiar Foto de Perfil',
-            text: 'Redirigiendo a la página de edición...',
-            icon: 'info',
-            timer: 1500,
-            showConfirmButton: false
-        }).then(() => {
+    function togglePassword(inputId) {
+        const input = document.getElementById(inputId);
+        const button = input.parentElement.querySelector('.password-toggle-modern');
+
+        if (input.type === 'password') {
+            input.type = 'text';
+            button.innerHTML = '<i class="fas fa-eye-slash"></i>';
+        } else {
+            input.type = 'password';
+            button.innerHTML = '<i class="fas fa-eye"></i>';
+        }
+    }
+
+    function updatePassword() {
+        const newPassword = document.getElementById('newPassword').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+        const forceChange = document.getElementById('forceChange').checked;
+
+        if (!newPassword) {
+            showAlert('Por favor ingrese una nueva contraseña', 'error');
+            return;
+        }
+
+        if (newPassword.length < 6) {
+            showAlert('La contraseña debe tener al menos 6 caracteres', 'error');
+            return;
+        }
+
+        if (newPassword !== confirmPassword) {
+            showAlert('Las contraseñas no coinciden', 'error');
+            return;
+        }
+
+        if (typeof Swal !== 'undefined') {
+            Swal.fire({
+                title: 'Contraseña actualizada',
+                text: 'La contraseña ha sido cambiada exitosamente',
+                icon: 'success',
+                timer: 2000,
+                showConfirmButton: false
+            });
+        } else {
+            alert('Contraseña actualizada exitosamente');
+        }
+
+        closePasswordModal();
+    }
+
+    function cambiarFoto(conductorId) {
+        if (typeof Swal !== 'undefined') {
+            Swal.fire({
+                title: 'Cambiar Foto de Perfil',
+                text: 'Redirigiendo a la página de edición...',
+                icon: 'info',
+                timer: 1500,
+                showConfirmButton: false
+            }).then(() => {
+                window.location.href = `/admin/conductores/editar/${conductorId}#foto`;
+            });
+        } else {
             window.location.href = `/admin/conductores/editar/${conductorId}#foto`;
-        });
-    } else {
-        window.location.href = `/admin/conductores/editar/${conductorId}#foto`;
+        }
     }
-}
 
-function asignarVehiculo(conductorId) {
-    window.location.href = `/admin/asignaciones/crear?conductor_id=${conductorId}`;
-}
+    function asignarVehiculo(conductorId) {
+        window.location.href = `/admin/asignaciones/crear?conductor_id=${conductorId}`;
+    }
 
-function desasignarVehiculo(conductorId) {
-    if (typeof Swal !== 'undefined') {
-        Swal.fire({
-            title: '¿Desasignar vehículo?',
-            text: 'El conductor quedará sin vehículo asignado',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Desasignar',
-            cancelButtonText: 'Cancelar',
-            confirmButtonColor: '#f59e0b'
-        }).then((result) => {
-            if (result.isConfirmed) {
+    function desasignarVehiculo(conductorId) {
+        if (typeof Swal !== 'undefined') {
+            Swal.fire({
+                title: '¿Desasignar vehículo?',
+                text: 'El conductor quedará sin vehículo asignado',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Desasignar',
+                cancelButtonText: 'Cancelar',
+                confirmButtonColor: '#f59e0b'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = `/admin/conductores/desasignar-vehiculo/${conductorId}`;
+                }
+            });
+        } else {
+            if (confirm('¿Está seguro de desasignar el vehículo de este conductor?')) {
                 window.location.href = `/admin/conductores/desasignar-vehiculo/${conductorId}`;
             }
-        });
-    } else {
-        if (confirm('¿Está seguro de desasignar el vehículo de este conductor?')) {
-            window.location.href = `/admin/conductores/desasignar-vehiculo/${conductorId}`;
         }
     }
-}
 
-function suspenderConductor(conductorId) {
-    if (typeof Swal !== 'undefined') {
-        Swal.fire({
-            title: 'Suspender Conductor',
-            text: 'Ingrese el motivo de la suspensión:',
-            input: 'textarea',
-            inputAttributes: {
-                autocapitalize: 'off',
-                placeholder: 'Motivo de suspensión...'
-            },
-            showCancelButton: true,
-            confirmButtonText: 'Suspender',
-            cancelButtonText: 'Cancelar',
-            confirmButtonColor: '#f59e0b',
-            inputValidator: (value) => {
-                if (!value) {
-                    return 'Debe ingresar un motivo para la suspensión';
+    function suspenderConductor(conductorId) {
+        if (typeof Swal !== 'undefined') {
+            Swal.fire({
+                title: 'Suspender Conductor',
+                text: 'Ingrese el motivo de la suspensión:',
+                input: 'textarea',
+                inputAttributes: {
+                    autocapitalize: 'off',
+                    placeholder: 'Motivo de suspensión...'
+                },
+                showCancelButton: true,
+                confirmButtonText: 'Suspender',
+                cancelButtonText: 'Cancelar',
+                confirmButtonColor: '#f59e0b',
+                inputValidator: (value) => {
+                    if (!value) {
+                        return 'Debe ingresar un motivo para la suspensión';
+                    }
                 }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = `/admin/conductores/suspender/${conductorId}?motivo=${encodeURIComponent(result.value)}`;
+                }
+            });
+        } else {
+            const motivo = prompt('Ingrese el motivo de suspensión:');
+            if (motivo) {
+                window.location.href = `/admin/conductores/suspender/${conductorId}?motivo=${encodeURIComponent(motivo)}`;
             }
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = `/admin/conductores/suspender/${conductorId}?motivo=${encodeURIComponent(result.value)}`;
-            }
-        });
-    } else {
-        const motivo = prompt('Ingrese el motivo de suspensión:');
-        if (motivo) {
-            window.location.href = `/admin/conductores/suspender/${conductorId}?motivo=${encodeURIComponent(motivo)}`;
         }
     }
-}
 
-function activarConductor(conductorId) {
-    if (typeof Swal !== 'undefined') {
-        Swal.fire({
-            title: '¿Activar conductor?',
-            text: 'El conductor podrá volver a trabajar',
-            icon: 'success',
-            showCancelButton: true,
-            confirmButtonText: 'Activar',
-            cancelButtonText: 'Cancelar',
-            confirmButtonColor: '#22c55e'
-        }).then((result) => {
-            if (result.isConfirmed) {
+    function activarConductor(conductorId) {
+        if (typeof Swal !== 'undefined') {
+            Swal.fire({
+                title: '¿Activar conductor?',
+                text: 'El conductor podrá volver a trabajar',
+                icon: 'success',
+                showCancelButton: true,
+                confirmButtonText: 'Activar',
+                cancelButtonText: 'Cancelar',
+                confirmButtonColor: '#22c55e'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = `/admin/conductores/activar/${conductorId}`;
+                }
+            });
+        } else {
+            if (confirm('¿Está seguro de activar este conductor?')) {
                 window.location.href = `/admin/conductores/activar/${conductorId}`;
             }
-        });
-    } else {
-        if (confirm('¿Está seguro de activar este conductor?')) {
-            window.location.href = `/admin/conductores/activar/${conductorId}`;
         }
     }
-}
 
-// Contact functions
-function llamar(telefono) {
-    window.location.href = `tel:${telefono}`;
-}
-
-function enviarEmail(email) {
-    window.location.href = `mailto:${email}`;
-}
-
-function verMapa(direccion) {
-    window.open(`https://maps.google.com/maps?q=${direccion}`, '_blank');
-}
-
-function showAlert(message, type = 'info') {
-    if (typeof Swal !== 'undefined') {
-        Swal.fire({
-            title: type === 'error' ? 'Error' : 'Información',
-            text: message,
-            icon: type === 'error' ? 'error' : 'info',
-            timer: 3000,
-            showConfirmButton: false
-        });
-    } else {
-        alert(message);
+    // Contact functions
+    function llamar(telefono) {
+        window.location.href = `tel:${telefono}`;
     }
-}
+
+    function enviarEmail(email) {
+        window.location.href = `mailto:${email}`;
+    }
+
+    function verMapa(direccion) {
+        window.open(`https://maps.google.com/maps?q=${direccion}`, '_blank');
+    }
+
+    function showAlert(message, type = 'info') {
+        if (typeof Swal !== 'undefined') {
+            Swal.fire({
+                title: type === 'error' ? 'Error' : 'Información',
+                text: message,
+                icon: type === 'error' ? 'error' : 'info',
+                timer: 3000,
+                showConfirmButton: false
+            });
+        } else {
+            alert(message);
+        }
+    }
 </script>
 
 <?php
