@@ -1,0 +1,59 @@
+# PRIMERO DE JUNIO - Configuración Apache Principal
+# =====================================================
+
+# Habilitar motor de reescritura
+RewriteEngine On
+
+# Seguridad: Bloquear acceso a archivos sensibles
+<FilesMatch "\.(log|sql|md|txt|json|ini|env)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Seguridad: Bloquear acceso a directorios del sistema
+<IfModule mod_rewrite.c>
+    RewriteRule ^system/config/ - [F,L]
+    RewriteRule ^system/database/migrations/ - [F,L]
+    RewriteRule ^system/logs/ - [F,L]
+</IfModule>
+
+# Seguridad: Headers de seguridad
+<IfModule mod_headers.c>
+    Header always set X-Frame-Options DENY
+    Header always set X-Content-Type-Options nosniff
+    Header always set X-XSS-Protection "1; mode=block"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# Compresión para mejor rendimiento
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/xml
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE application/xhtml+xml
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/x-javascript
+</IfModule>
+
+# Cache para recursos estáticos
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/ico "access plus 1 year"
+</IfModule>
+
+# Prevenir hotlinking de imágenes
+<IfModule mod_rewrite.c>
+    RewriteCond %{HTTP_REFERER} !^$
+    RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?localhost [NC]
+    RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?primero1dejunio\.com [NC]
+    RewriteRule \.(jpg|jpeg|png|gif|ico)$ - [F]
+</IfModule>
