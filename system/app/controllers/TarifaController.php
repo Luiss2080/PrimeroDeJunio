@@ -16,7 +16,7 @@ class TarifaController extends Controller
     public function index()
     {
         $this->requirePermission('tarifas.ver');
-        
+
         $filtros = [
             'buscar' => $_GET['buscar'] ?? '',
             'estado' => $_GET['estado'] ?? ''
@@ -35,7 +35,7 @@ class TarifaController extends Controller
     public function crear()
     {
         $this->requirePermission('tarifas.crear');
-        
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             try {
                 $datos = [
@@ -61,10 +61,9 @@ class TarifaController extends Controller
                 }
 
                 $id = $this->tarifa->create($datos);
-                
+
                 $this->setFlash('success', 'Tarifa creada exitosamente');
                 $this->redirect('/admin/tarifas/editar/' . $id);
-                
             } catch (Exception $e) {
                 $this->setFlash('error', $e->getMessage());
                 $this->view('admin/tarifas/crear', [
@@ -81,7 +80,7 @@ class TarifaController extends Controller
     public function editar($id)
     {
         $this->requirePermission('tarifas.editar');
-        
+
         $tarifa = $this->tarifa->find($id);
         if (!$tarifa) {
             $this->setFlash('error', 'Tarifa no encontrada');
@@ -114,10 +113,9 @@ class TarifaController extends Controller
                 }
 
                 $this->tarifa->update($id, $datos);
-                
+
                 $this->setFlash('success', 'Tarifa actualizada exitosamente');
                 $this->redirect('/admin/tarifas/editar/' . $id);
-                
             } catch (Exception $e) {
                 $this->setFlash('error', $e->getMessage());
             }
@@ -131,7 +129,7 @@ class TarifaController extends Controller
     public function eliminar($id)
     {
         $this->requirePermission('tarifas.eliminar');
-        
+
         try {
             $tarifa = $this->tarifa->find($id);
             if (!$tarifa) {
@@ -145,9 +143,8 @@ class TarifaController extends Controller
             }
 
             $this->tarifa->delete($id);
-            
+
             $this->setFlash('success', 'Tarifa eliminada exitosamente');
-            
         } catch (Exception $e) {
             $this->setFlash('error', $e->getMessage());
         }
@@ -158,7 +155,7 @@ class TarifaController extends Controller
     public function cambiarEstado($id)
     {
         $this->requirePermission('tarifas.editar');
-        
+
         try {
             $tarifa = $this->tarifa->find($id);
             if (!$tarifa) {
@@ -167,9 +164,8 @@ class TarifaController extends Controller
 
             $nuevoEstado = $tarifa['estado'] === 'activa' ? 'inactiva' : 'activa';
             $this->tarifa->update($id, ['estado' => $nuevoEstado]);
-            
+
             $this->setFlash('success', 'Estado de la tarifa actualizado exitosamente');
-            
         } catch (Exception $e) {
             $this->setFlash('error', $e->getMessage());
         }
@@ -183,7 +179,7 @@ class TarifaController extends Controller
     public function calcular()
     {
         $this->requirePermission('tarifas.ver');
-        
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             try {
                 $tarifaId = $_POST['tarifa_id'] ?? null;
@@ -215,7 +211,6 @@ class TarifaController extends Controller
                     'success' => true,
                     'calculo' => $calculo
                 ]);
-                
             } catch (Exception $e) {
                 $this->jsonResponse([
                     'success' => false,
@@ -226,7 +221,7 @@ class TarifaController extends Controller
         }
 
         $tarifasActivas = $this->tarifa->listarActivas();
-        
+
         $this->view('admin/tarifas/calcular', [
             'tarifas' => $tarifasActivas
         ]);

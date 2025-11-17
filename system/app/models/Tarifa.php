@@ -70,7 +70,7 @@ class Tarifa extends Model
         $valorBase = $tarifa['tarifa_base'];
         $valorKm = $distanciaKm * $tarifa['tarifa_por_km'];
         $valorMinutos = $duracionMinutos * $tarifa['tarifa_por_minuto'];
-        
+
         $valorCalculado = $valorBase + $valorKm + $valorMinutos;
 
         // Aplicar tarifa mínima
@@ -172,7 +172,7 @@ class Tarifa extends Model
         unset($tarifa['id']);
         unset($tarifa['created_at']);
         unset($tarifa['updated_at']);
-        
+
         $tarifa['nombre'] = $nuevoNombre;
         $tarifa['estado'] = 'inactiva';
         $tarifa['fecha_vigencia_inicio'] = date('Y-m-d');
@@ -189,7 +189,7 @@ class Tarifa extends Model
                        AVG(v.valor_total) as valor_promedio
                 FROM viajes v 
                 WHERE v.tarifa_aplicada_id = ? AND v.estado = 'completado'";
-        
+
         $params = [$tarifaId];
 
         if ($fechaInicio) {
@@ -295,7 +295,7 @@ class Tarifa extends Model
         $valorBase = floatval($tarifa['tarifa_base']);
         $valorKm = $distancia * floatval($tarifa['tarifa_por_km']);
         $valorMinutos = $tiempoMinutos * floatval($tarifa['tarifa_por_minuto']);
-        
+
         $subtotal = $valorBase + $valorKm + $valorMinutos;
 
         // Aplicar tarifa mínima

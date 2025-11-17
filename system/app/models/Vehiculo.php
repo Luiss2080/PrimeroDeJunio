@@ -154,7 +154,7 @@ class Vehiculo extends Model
                        AVG(distancia_km) as distancia_promedio
                 FROM viajes 
                 WHERE vehiculo_id = ? AND estado = 'completado'";
-        
+
         $params = [$vehiculoId];
 
         if ($fechaInicio) {
@@ -211,7 +211,7 @@ class Vehiculo extends Model
                 FROM vehiculos v 
                 INNER JOIN viajes vi ON v.id = vi.vehiculo_id 
                 WHERE vi.estado = 'completado'";
-        
+
         $params = [];
 
         if ($fechaInicio) {
@@ -227,7 +227,7 @@ class Vehiculo extends Model
         $sql .= " GROUP BY v.id 
                   ORDER BY total_viajes DESC 
                   LIMIT ?";
-        
+
         $params[] = $limite;
 
         return $this->db->fetchAll($sql, $params);
@@ -396,19 +396,19 @@ class Vehiculo extends Model
         $tecnicomecanica = $this->obtenerVencimientosTecnicomecanica($dias);
 
         $vencimientos = [];
-        
+
         foreach ($soat as $v) {
             $v['tipo'] = 'SOAT';
             $vencimientos[] = $v;
         }
-        
+
         foreach ($tecnicomecanica as $v) {
             $v['tipo'] = 'Tecnomecánica';
             $vencimientos[] = $v;
         }
 
         // Ordenar por días restantes
-        usort($vencimientos, function($a, $b) {
+        usort($vencimientos, function ($a, $b) {
             return $a['dias_restantes'] - $b['dias_restantes'];
         });
 
@@ -424,7 +424,7 @@ class Vehiculo extends Model
                 FROM mantenimientos m
                 INNER JOIN vehiculos v ON m.vehiculo_id = v.id
                 WHERE 1=1";
-        
+
         $params = [];
 
         if ($vehiculoId) {
@@ -455,7 +455,7 @@ class Vehiculo extends Model
         if ($incluirInactivos) {
             return $this->all('placa');
         }
-        
+
         $sql = "SELECT * FROM {$this->table} WHERE estado IN ('activo', 'mantenimiento') ORDER BY placa";
         return $this->db->fetchAll($sql);
     }
@@ -506,7 +506,7 @@ class Vehiculo extends Model
             "SELECT COUNT(*) as count FROM viajes WHERE vehiculo_id = ?",
             [$id]
         );
-        
+
         return $viajes['count'] == 0;
     }
 

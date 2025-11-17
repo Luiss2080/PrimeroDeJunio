@@ -35,7 +35,7 @@ class Conductor extends Model
                 [$id]
             );
         }
-        
+
         return $this->db->fetchAll(
             "SELECT c.*, u.email, u.avatar 
              FROM conductores c 
@@ -49,11 +49,11 @@ class Conductor extends Model
         $sql = "SELECT c.*, u.email, u.avatar 
                 FROM conductores c 
                 LEFT JOIN usuarios u ON c.usuario_id = u.id";
-        
+
         if (!$incluirInactivos) {
             $sql .= " WHERE c.estado = 'activo'";
         }
-        
+
         $sql .= " ORDER BY c.nombre, c.apellido";
 
         return $this->db->fetchAll($sql);
@@ -132,7 +132,7 @@ class Conductor extends Model
         $sql = "SELECT COUNT(*) as total_viajes, SUM(valor_total) as total_ingresos 
                 FROM viajes 
                 WHERE conductor_id = ? AND estado = 'completado'";
-        
+
         $params = [$conductorId];
 
         if ($fechaInicio) {
@@ -202,7 +202,7 @@ class Conductor extends Model
                 FROM conductores c 
                 INNER JOIN viajes v ON c.id = v.conductor_id 
                 WHERE v.estado = 'completado' AND c.estado = 'activo'";
-        
+
         $params = [];
 
         if ($fechaInicio) {
@@ -218,7 +218,7 @@ class Conductor extends Model
         $sql .= " GROUP BY c.id 
                   ORDER BY total_viajes DESC, total_ingresos DESC 
                   LIMIT ?";
-        
+
         $params[] = $limite;
 
         return $this->db->fetchAll($sql, $params);
@@ -260,7 +260,7 @@ class Conductor extends Model
                     SUM(CASE WHEN estado = 'completado' THEN distancia_km ELSE 0 END) as total_km
                 FROM viajes 
                 WHERE conductor_id = ?";
-        
+
         $params = [$conductorId];
 
         if ($fechaInicio) {
@@ -325,7 +325,7 @@ class Conductor extends Model
             "SELECT COUNT(*) as count FROM viajes WHERE conductor_id = ?",
             [$id]
         );
-        
+
         return $viajes['count'] == 0;
     }
 
@@ -384,7 +384,7 @@ class Conductor extends Model
 
         $hoy = new DateTime();
         $vencimiento = new DateTime($conductor['licencia_vigencia']);
-        
+
         if ($vencimiento < $hoy) {
             return -1; // Ya venció
         }
@@ -469,7 +469,7 @@ class Conductor extends Model
                 FROM conductores c
                 LEFT JOIN viajes v ON c.id = v.conductor_id
                 WHERE c.estado = 'activo'";
-        
+
         $params = [];
 
         if (!empty($filtros['fecha_inicio'])) {

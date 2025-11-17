@@ -69,7 +69,7 @@ class Cliente extends Model
                        AVG(valor_total) as promedio_gasto, AVG(calificacion) as calificacion_promedio
                 FROM viajes 
                 WHERE cliente_id = ? AND estado = 'completado'";
-        
+
         $params = [$clienteId];
 
         if ($fechaInicio) {
@@ -93,7 +93,7 @@ class Cliente extends Model
                 INNER JOIN conductores c ON v.conductor_id = c.id
                 INNER JOIN vehiculos ve ON v.vehiculo_id = ve.id
                 WHERE v.cliente_id = ?";
-        
+
         $params = [$clienteId];
 
         if ($fechaInicio) {
@@ -107,11 +107,11 @@ class Cliente extends Model
         }
 
         $sql .= " ORDER BY v.fecha_hora_inicio DESC";
-        
+
         if ($limite > 0) {
             $sql .= " LIMIT ?";
             $params[] = $limite;
-            
+
             if ($offset > 0) {
                 $sql .= " OFFSET ?";
                 $params[] = $offset;
@@ -128,7 +128,7 @@ class Cliente extends Model
                 FROM clientes cl 
                 INNER JOIN viajes v ON cl.id = v.cliente_id 
                 WHERE v.estado = 'completado' AND cl.estado = 'activo'";
-        
+
         $params = [];
 
         if ($fechaInicio) {
@@ -145,7 +145,7 @@ class Cliente extends Model
                   HAVING total_viajes >= 5
                   ORDER BY total_viajes DESC 
                   LIMIT ?";
-        
+
         $params[] = $limite;
 
         return $this->db->fetchAll($sql, $params);
@@ -214,7 +214,7 @@ class Cliente extends Model
                 FROM clientes cl 
                 INNER JOIN viajes v ON cl.id = v.cliente_id 
                 WHERE v.estado = 'completado' AND cl.estado = 'activo'";
-        
+
         $params = [];
 
         if ($fechaInicio) {
@@ -230,7 +230,7 @@ class Cliente extends Model
         $sql .= " GROUP BY cl.id 
                   ORDER BY total_gastado DESC 
                   LIMIT ?";
-        
+
         $params[] = $limite;
 
         return $this->db->fetchAll($sql, $params);
@@ -250,7 +250,7 @@ class Cliente extends Model
                     AVG(CASE WHEN estado = 'completado' AND calificacion IS NOT NULL THEN calificacion ELSE NULL END) as calificacion_promedio
                 FROM viajes 
                 WHERE cliente_id = ?";
-        
+
         $params = [$clienteId];
 
         if ($fechaInicio) {
@@ -342,7 +342,7 @@ class Cliente extends Model
             "SELECT COUNT(*) as count FROM viajes WHERE cliente_id = ?",
             [$id]
         );
-        
+
         return $viajes['count'] == 0;
     }
 
@@ -353,12 +353,12 @@ class Cliente extends Model
     {
         $sql = "SELECT COUNT(*) as count FROM clientes WHERE documento_identidad = ?";
         $params = [$documento];
-        
+
         if ($excludeId) {
             $sql .= " AND id != ?";
             $params[] = $excludeId;
         }
-        
+
         $result = $this->db->fetch($sql, $params);
         return $result['count'] == 0;
     }
@@ -370,12 +370,12 @@ class Cliente extends Model
     {
         $sql = "SELECT COUNT(*) as count FROM clientes WHERE telefono = ?";
         $params = [$telefono];
-        
+
         if ($excludeId) {
             $sql .= " AND id != ?";
             $params[] = $excludeId;
         }
-        
+
         $result = $this->db->fetch($sql, $params);
         return $result['count'] == 0;
     }

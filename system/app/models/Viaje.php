@@ -59,7 +59,7 @@ class Viaje extends Model
                 INNER JOIN vehiculos ve ON v.vehiculo_id = ve.id
                 LEFT JOIN clientes cl ON v.cliente_id = cl.id
                 WHERE 1=1";
-        
+
         $params = [];
 
         if ($fechaInicio) {
@@ -181,7 +181,7 @@ class Viaje extends Model
                 INNER JOIN vehiculos ve ON v.vehiculo_id = ve.id
                 LEFT JOIN clientes cl ON v.cliente_id = cl.id
                 WHERE v.conductor_id = ?";
-        
+
         $params = [$conductorId];
 
         if ($fechaInicio) {
@@ -208,7 +208,7 @@ class Viaje extends Model
                 INNER JOIN conductores c ON v.conductor_id = c.id
                 LEFT JOIN clientes cl ON v.cliente_id = cl.id
                 WHERE v.vehiculo_id = ?";
-        
+
         $params = [$vehiculoId];
 
         if ($fechaInicio) {
@@ -233,7 +233,7 @@ class Viaje extends Model
                        AVG(distancia_km) as distancia_promedio
                 FROM viajes 
                 WHERE estado = 'completado'";
-        
+
         $params = [];
 
         if ($fechaInicio) {
@@ -249,7 +249,7 @@ class Viaje extends Model
         $sql .= " GROUP BY origen, destino
                   ORDER BY frecuencia DESC
                   LIMIT ?";
-        
+
         $params[] = $limite;
 
         return $this->db->fetchAll($sql, $params);
@@ -328,8 +328,17 @@ class Viaje extends Model
              OR c.nombre LIKE ? OR c.apellido LIKE ?
              OR ve.placa LIKE ?
              ORDER BY v.fecha_hora_inicio DESC",
-            ["%$termino%", "%$termino%", "%$termino%", "%$termino%", 
-             "%$termino%", "%$termino%", "%$termino%", "%$termino%", "%$termino%"]
+            [
+                "%$termino%",
+                "%$termino%",
+                "%$termino%",
+                "%$termino%",
+                "%$termino%",
+                "%$termino%",
+                "%$termino%",
+                "%$termino%",
+                "%$termino%"
+            ]
         );
     }
 
@@ -388,7 +397,7 @@ class Viaje extends Model
                     SUM(CASE WHEN estado = 'completado' THEN distancia_km ELSE 0 END) as total_km
                 FROM viajes 
                 WHERE conductor_id = ?";
-        
+
         $params = [$conductorId];
 
         if ($fechaInicio) {
@@ -453,7 +462,7 @@ class Viaje extends Model
                 INNER JOIN conductores c ON v.conductor_id = c.id
                 INNER JOIN vehiculos ve ON v.vehiculo_id = ve.id
                 WHERE 1=1";
-        
+
         $params = [];
 
         if ($fecha) {
@@ -499,7 +508,7 @@ class Viaje extends Model
     {
         $fechaInicio = date('Y-m-01');
         $fechaFin = date('Y-m-t');
-        
+
         return $this->obtenerEstadisticas($fechaInicio, $fechaFin);
     }
 
@@ -534,7 +543,7 @@ class Viaje extends Model
                 FROM conductores c
                 INNER JOIN viajes v ON c.id = v.conductor_id
                 WHERE v.estado = 'completado'";
-        
+
         $params = [];
 
         if ($fechaInicio) {
@@ -550,7 +559,7 @@ class Viaje extends Model
         $sql .= " GROUP BY c.id
                   ORDER BY total_viajes DESC, total_ingresos DESC
                   LIMIT ?";
-        
+
         $params[] = $limite;
 
         return $this->db->fetchAll($sql, $params);
@@ -704,7 +713,7 @@ class Viaje extends Model
                 LEFT JOIN clientes cl ON v.cliente_id = cl.id
                 LEFT JOIN tarifas t ON v.tarifa_aplicada_id = t.id
                 WHERE 1=1";
-        
+
         $params = [];
 
         if (!empty($filtros['fecha_inicio'])) {
@@ -748,7 +757,7 @@ class Viaje extends Model
                     SUM(CASE WHEN estado = 'completado' THEN distancia_km ELSE 0 END) as km_totales,
                     AVG(CASE WHEN estado = 'completado' THEN distancia_km ELSE NULL END) as promedio_km
                 FROM viajes v WHERE 1=1";
-        
+
         $params = [];
 
         if (!empty($filtros['fecha_inicio'])) {
@@ -775,7 +784,7 @@ class Viaje extends Model
     public function obtenerReporteIngresos($filtros = [])
     {
         $agrupacion = $filtros['tipo_agrupacion'] ?? 'diario';
-        
+
         switch ($agrupacion) {
             case 'semanal':
                 $dateFormat = "YEARWEEK(v.fecha_hora_inicio)";
@@ -800,7 +809,7 @@ class Viaje extends Model
                     AVG(valor_total) as promedio_viaje
                 FROM viajes v 
                 WHERE estado = 'completado'";
-        
+
         $params = [];
 
         if (!empty($filtros['fecha_inicio'])) {
@@ -836,7 +845,7 @@ class Viaje extends Model
                     AVG(valor_total) as promedio_viaje
                 FROM viajes v 
                 WHERE estado = 'completado'";
-        
+
         $params = [];
 
         if (!empty($filtros['fecha_inicio'])) {

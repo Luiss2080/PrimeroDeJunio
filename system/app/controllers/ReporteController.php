@@ -22,7 +22,7 @@ class ReporteController extends Controller
     public function index()
     {
         $this->requirePermission('reportes.ver');
-        
+
         $this->view('admin/reportes/index', [
             'titulo' => 'Reportes del Sistema'
         ]);
@@ -34,7 +34,7 @@ class ReporteController extends Controller
     public function viajes()
     {
         $this->requirePermission('reportes.ver');
-        
+
         $filtros = [
             'fecha_inicio' => $_GET['fecha_inicio'] ?? date('Y-m-01'),
             'fecha_fin' => $_GET['fecha_fin'] ?? date('Y-m-d'),
@@ -68,7 +68,7 @@ class ReporteController extends Controller
     public function conductores()
     {
         $this->requirePermission('reportes.ver');
-        
+
         $filtros = [
             'fecha_inicio' => $_GET['fecha_inicio'] ?? date('Y-m-01'),
             'fecha_fin' => $_GET['fecha_fin'] ?? date('Y-m-d'),
@@ -99,7 +99,7 @@ class ReporteController extends Controller
     public function ingresos()
     {
         $this->requirePermission('reportes.ver');
-        
+
         $filtros = [
             'fecha_inicio' => $_GET['fecha_inicio'] ?? date('Y-m-01'),
             'fecha_fin' => $_GET['fecha_fin'] ?? date('Y-m-d'),
@@ -132,7 +132,7 @@ class ReporteController extends Controller
     public function vehiculos()
     {
         $this->requirePermission('reportes.ver');
-        
+
         $filtros = [
             'fecha_inicio' => $_GET['fecha_inicio'] ?? date('Y-m-01'),
             'fecha_fin' => $_GET['fecha_fin'] ?? date('Y-m-d'),
@@ -163,7 +163,7 @@ class ReporteController extends Controller
     public function clientes()
     {
         $this->requirePermission('reportes.ver');
-        
+
         $filtros = [
             'fecha_inicio' => $_GET['fecha_inicio'] ?? date('Y-m-01'),
             'fecha_fin' => $_GET['fecha_fin'] ?? date('Y-m-d'),
@@ -194,9 +194,9 @@ class ReporteController extends Controller
     public function dashboard()
     {
         $this->requirePermission('reportes.dashboard');
-        
+
         $periodo = $_GET['periodo'] ?? 'mes_actual';
-        
+
         // Definir fechas según el período
         switch ($periodo) {
             case 'hoy':
@@ -256,15 +256,15 @@ class ReporteController extends Controller
     private function exportarReporteViajes($viajes, $filtros)
     {
         $nombreArchivo = 'reporte_viajes_' . date('Y-m-d_H-i-s') . '.csv';
-        
+
         header('Content-Type: text/csv; charset=utf-8');
         header('Content-Disposition: attachment; filename=' . $nombreArchivo);
-        
+
         $output = fopen('php://output', 'w');
-        
+
         // Escribir BOM para UTF-8
         fputs($output, "\xEF\xBB\xBF");
-        
+
         // Cabeceras
         fputcsv($output, [
             'ID Viaje',
@@ -280,7 +280,7 @@ class ReporteController extends Controller
             'Total',
             'Estado'
         ]);
-        
+
         // Datos
         foreach ($viajes as $viaje) {
             fputcsv($output, [
@@ -298,7 +298,7 @@ class ReporteController extends Controller
                 $viaje['estado']
             ]);
         }
-        
+
         fclose($output);
         exit;
     }
@@ -309,13 +309,13 @@ class ReporteController extends Controller
     private function exportarReporteConductores($datos, $filtros)
     {
         $nombreArchivo = 'reporte_conductores_' . date('Y-m-d_H-i-s') . '.csv';
-        
+
         header('Content-Type: text/csv; charset=utf-8');
         header('Content-Disposition: attachment; filename=' . $nombreArchivo);
-        
+
         $output = fopen('php://output', 'w');
         fputs($output, "\xEF\xBB\xBF");
-        
+
         fputcsv($output, [
             'Conductor',
             'Total Viajes',
@@ -325,7 +325,7 @@ class ReporteController extends Controller
             'Km Recorridos',
             'Calificación Promedio'
         ]);
-        
+
         foreach ($datos as $fila) {
             fputcsv($output, [
                 $fila['conductor_nombre'],
@@ -337,7 +337,7 @@ class ReporteController extends Controller
                 number_format($fila['calificacion_promedio'], 1)
             ]);
         }
-        
+
         fclose($output);
         exit;
     }
@@ -348,13 +348,13 @@ class ReporteController extends Controller
     private function exportarReporteIngresos($ingresos, $resumen, $filtros)
     {
         $nombreArchivo = 'reporte_ingresos_' . date('Y-m-d_H-i-s') . '.csv';
-        
+
         header('Content-Type: text/csv; charset=utf-8');
         header('Content-Disposition: attachment; filename=' . $nombreArchivo);
-        
+
         $output = fopen('php://output', 'w');
         fputs($output, "\xEF\xBB\xBF");
-        
+
         fputcsv($output, [
             'Período',
             'Total Viajes',
@@ -363,7 +363,7 @@ class ReporteController extends Controller
             'Ingresos Netos',
             'Promedio por Viaje'
         ]);
-        
+
         foreach ($ingresos as $fila) {
             fputcsv($output, [
                 $fila['periodo'],
@@ -374,7 +374,7 @@ class ReporteController extends Controller
                 '$' . number_format($fila['promedio_viaje'], 2)
             ]);
         }
-        
+
         fclose($output);
         exit;
     }
@@ -385,13 +385,13 @@ class ReporteController extends Controller
     private function exportarReporteVehiculos($datos, $filtros)
     {
         $nombreArchivo = 'reporte_vehiculos_' . date('Y-m-d_H-i-s') . '.csv';
-        
+
         header('Content-Type: text/csv; charset=utf-8');
         header('Content-Disposition: attachment; filename=' . $nombreArchivo);
-        
+
         $output = fopen('php://output', 'w');
         fputs($output, "\xEF\xBB\xBF");
-        
+
         fputcsv($output, [
             'Vehículo',
             'Conductor Asignado',
@@ -401,7 +401,7 @@ class ReporteController extends Controller
             'Ingresos Generados',
             'Estado'
         ]);
-        
+
         foreach ($datos as $fila) {
             fputcsv($output, [
                 $fila['vehiculo_info'],
@@ -413,7 +413,7 @@ class ReporteController extends Controller
                 $fila['estado']
             ]);
         }
-        
+
         fclose($output);
         exit;
     }
@@ -424,13 +424,13 @@ class ReporteController extends Controller
     private function exportarReporteClientes($datos, $filtros)
     {
         $nombreArchivo = 'reporte_clientes_' . date('Y-m-d_H-i-s') . '.csv';
-        
+
         header('Content-Type: text/csv; charset=utf-8');
         header('Content-Disposition: attachment; filename=' . $nombreArchivo);
-        
+
         $output = fopen('php://output', 'w');
         fputs($output, "\xEF\xBB\xBF");
-        
+
         fputcsv($output, [
             'Cliente',
             'Tipo Cliente',
@@ -440,7 +440,7 @@ class ReporteController extends Controller
             'Último Viaje',
             'Estado'
         ]);
-        
+
         foreach ($datos as $fila) {
             fputcsv($output, [
                 $fila['cliente_nombre'],
@@ -452,7 +452,7 @@ class ReporteController extends Controller
                 $fila['estado']
             ]);
         }
-        
+
         fclose($output);
         exit;
     }
