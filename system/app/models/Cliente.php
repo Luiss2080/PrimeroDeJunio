@@ -395,4 +395,79 @@ class Cliente extends Model
     {
         return $this->where(['estado' => 'activo'], 'nombre, apellido');
     }
+
+    /**
+     * Obtener reporte de actividad de clientes
+     */
+    public function obtenerReporteActividad($filtros = [])
+    {
+        $sql = "SELECT c.id, c.nombre, c.apellido, c.telefono, c.tipo_cliente,
+                       CONCAT(c.nombre, ' ', COALESCE(c.apellido, '')) as cliente_nombre,
+                       COUNT(v.id) as total_viajes,
+                       SUM(CASE WHEN v.estado = 'completado' THEN v.valor_total ELSE 0 END) as gasto_total,
+                       AVG(CASE WHEN v.estado = 'completado' THEN v.valor_total ELSE NULL END) as promedio_viaje,
+                       MAX(v.fecha_hora_inicio) as ultimo_viaje,
+                       c.estado
+                FROM clientes c
+                LEFT JOIN viajes v ON c.id = v.cliente_id";
+
+        $params = [];
+
+        if (!empty($filtros['fecha_inicio'])) {
+            $sql .= " AND DATE(v.fecha_hora_inicio) >= ?";
+            $params[] = $filtros['fecha_inicio'];
+        }
+
+        if (!empty($filtros['fecha_fin'])) {
+            $sql .= " AND DATE(v.fecha_hora_inicio) <= ?";
+            $params[] = $filtros['fecha_fin'];
+        }
+
+        if (!empty($filtros['cliente_id'])) {
+            $sql .= " AND c.id = ?";
+            $params[] = $filtros['cliente_id'];
+        }
+
+        if (!empty($filtros['tipo_cliente'])) {
+            $sql .= " AND c.tipo_cliente = ?";
+            $params[] = $filtros['tipo_cliente'];
+        }
+
+        $sql .= " GROUP BY c.id, c.nombre, c.apellido, c.telefono, c.tipo_cliente, c.estado
+                  ORDER BY total_viajes DESC";
+
+        return $this->db->fetchAll($sql, $params);
+    }
+
+    /**
+     * Obtener métricas de clientes
+     */
+    public function obtenerMetricas($fechaInicio, $fechaFin)
+    {
+        $sql = "SELECT 
+                    COUNT(DISTINCT c.id) as total_clientes,
+                    COUNT(DISTINCT CASE WHEN v.id IS NOT NULL THEN c.id END) as clientes_activos,
+                    COUNT(DISTINCT CASE WHEN c.tipo_cliente = 'corporativo' THEN c.id END) as clientes_corporativos,
+                    COUNT(DISTINCT CASE WHEN c.tipo_cliente = 'frecuente' THEN c.id END) as clientes_frecuentes
+                FROM clientes c
+                LEFT JOIN viajes v ON c.id = v.cliente_id 
+                    AND DATE(v.fecha_hora_inicio) BETWEEN ? AND ?
+                    AND v.estado = 'completado'
+                WHERE c.estado = 'activo'";
+
+        return $this->db->fetch($sql, [$fechaInicio, $fechaFin]);
+    }
+
+    /**
+     * Listar clientes activos
+     */
+    public function listarActivos()
+    {
+        return $this->db->fetchAll(
+            "SELECT c.*, CONCAT(c.nombre, ' ', COALESCE(c.apellido, '')) as nombre_completo
+             FROM clientes c 
+             WHERE c.estado = 'activo'
+             ORDER BY c.nombre, c.apellido"
+        );
+    }
 }

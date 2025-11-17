@@ -451,4 +451,97 @@ class Conductor extends Model
                 WHERE c.estado = 'activo' AND v.id IS NULL";
         return $this->db->fetchAll($sql, [$hoy]);
     }
+
+    /**
+     * Obtener reporte de rendimiento de conductores
+     */
+    public function obtenerReporteRendimiento($filtros = [])
+    {
+        $sql = "SELECT c.id, c.nombre, c.apellido,
+                       CONCAT(c.nombre, ' ', c.apellido) as conductor_nombre,
+                       COUNT(v.id) as total_viajes,
+                       SUM(CASE WHEN v.estado = 'completado' THEN v.valor_total ELSE 0 END) as ingresos_totales,
+                       AVG(CASE WHEN v.estado = 'completado' THEN v.valor_total ELSE NULL END) as promedio_viaje,
+                       SUM(CASE WHEN v.estado = 'completado' THEN v.distancia_km ELSE 0 END) as km_recorridos,
+                       AVG(CASE WHEN v.estado = 'completado' AND v.calificacion IS NOT NULL THEN v.calificacion ELSE NULL END) as calificacion_promedio,
+                       SUM(CASE WHEN v.estado = 'completado' THEN v.tiempo_minutos ELSE 0 END) / 60.0 as horas_trabajadas,
+                       (COUNT(CASE WHEN v.estado = 'completado' THEN 1 END) * 100.0 / COUNT(v.id)) as porcentaje_completados
+                FROM conductores c
+                LEFT JOIN viajes v ON c.id = v.conductor_id
+                WHERE c.estado = 'activo'";
+        
+        $params = [];
+
+        if (!empty($filtros['fecha_inicio'])) {
+            $sql .= " AND DATE(v.fecha_hora_inicio) >= ?";
+            $params[] = $filtros['fecha_inicio'];
+        }
+
+        if (!empty($filtros['fecha_fin'])) {
+            $sql .= " AND DATE(v.fecha_hora_inicio) <= ?";
+            $params[] = $filtros['fecha_fin'];
+        }
+
+        if (!empty($filtros['conductor_id'])) {
+            $sql .= " AND c.id = ?";
+            $params[] = $filtros['conductor_id'];
+        }
+
+        $sql .= " GROUP BY c.id, c.nombre, c.apellido
+                  ORDER BY total_viajes DESC";
+
+        return $this->db->fetchAll($sql, $params);
+    }
+
+    /**
+     * Obtener métricas de conductores
+     */
+    public function obtenerMetricas($fechaInicio, $fechaFin)
+    {
+        $sql = "SELECT 
+                    COUNT(DISTINCT c.id) as total_conductores,
+                    COUNT(DISTINCT CASE WHEN v.id IS NOT NULL THEN c.id END) as conductores_activos,
+                    AVG(CASE WHEN v.estado = 'completado' AND v.calificacion IS NOT NULL THEN v.calificacion END) as calificacion_promedio_sistema
+                FROM conductores c
+                LEFT JOIN viajes v ON c.id = v.conductor_id 
+                    AND DATE(v.fecha_hora_inicio) BETWEEN ? AND ?
+                WHERE c.estado = 'activo'";
+
+        return $this->db->fetch($sql, [$fechaInicio, $fechaFin]);
+    }
+
+    /**
+     * Obtener top conductores para período
+     */
+    public function obtenerTopConductoresPeriodo($fechaInicio, $fechaFin, $limite = 10)
+    {
+        $sql = "SELECT c.id, c.nombre, c.apellido,
+                       CONCAT(c.nombre, ' ', c.apellido) as conductor_nombre,
+                       COUNT(v.id) as total_viajes,
+                       SUM(CASE WHEN v.estado = 'completado' THEN v.valor_total ELSE 0 END) as ingresos_totales,
+                       AVG(CASE WHEN v.estado = 'completado' AND v.calificacion IS NOT NULL THEN v.calificacion END) as calificacion_promedio
+                FROM conductores c
+                INNER JOIN viajes v ON c.id = v.conductor_id
+                WHERE c.estado = 'activo'
+                    AND DATE(v.fecha_hora_inicio) BETWEEN ? AND ?
+                    AND v.estado = 'completado'
+                GROUP BY c.id, c.nombre, c.apellido
+                ORDER BY total_viajes DESC, ingresos_totales DESC
+                LIMIT ?";
+
+        return $this->db->fetchAll($sql, [$fechaInicio, $fechaFin, $limite]);
+    }
+
+    /**
+     * Listar conductores activos
+     */
+    public function listarActivos()
+    {
+        return $this->db->fetchAll(
+            "SELECT c.*, CONCAT(c.nombre, ' ', c.apellido) as nombre_completo
+             FROM conductores c 
+             WHERE c.estado = 'activo'
+             ORDER BY c.nombre, c.apellido"
+        );
+    }
 }

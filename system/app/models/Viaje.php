@@ -687,4 +687,258 @@ class Viaje extends Model
             [$minutos]
         );
     }
+
+    /**
+     * Obtener reporte detallado con filtros
+     */
+    public function obtenerReporte($filtros = [])
+    {
+        $sql = "SELECT v.*, 
+                       c.nombre as conductor_nombre, c.apellido as conductor_apellido,
+                       ve.placa as vehiculo_placa, ve.marca as vehiculo_marca, ve.modelo as vehiculo_modelo,
+                       COALESCE(cl.nombre, v.cliente_nombre) as cliente_nombre,
+                       t.nombre as tarifa_nombre
+                FROM viajes v
+                INNER JOIN conductores c ON v.conductor_id = c.id
+                INNER JOIN vehiculos ve ON v.vehiculo_id = ve.id
+                LEFT JOIN clientes cl ON v.cliente_id = cl.id
+                LEFT JOIN tarifas t ON v.tarifa_aplicada_id = t.id
+                WHERE 1=1";
+        
+        $params = [];
+
+        if (!empty($filtros['fecha_inicio'])) {
+            $sql .= " AND DATE(v.fecha_hora_inicio) >= ?";
+            $params[] = $filtros['fecha_inicio'];
+        }
+
+        if (!empty($filtros['fecha_fin'])) {
+            $sql .= " AND DATE(v.fecha_hora_inicio) <= ?";
+            $params[] = $filtros['fecha_fin'];
+        }
+
+        if (!empty($filtros['conductor_id'])) {
+            $sql .= " AND v.conductor_id = ?";
+            $params[] = $filtros['conductor_id'];
+        }
+
+        if (!empty($filtros['estado'])) {
+            $sql .= " AND v.estado = ?";
+            $params[] = $filtros['estado'];
+        }
+
+        $sql .= " ORDER BY v.fecha_hora_inicio DESC";
+
+        return $this->db->fetchAll($sql, $params);
+    }
+
+    /**
+     * Obtener estadísticas del reporte
+     */
+    public function obtenerEstadisticasReporte($filtros = [])
+    {
+        $sql = "SELECT 
+                    COUNT(*) as total_viajes,
+                    SUM(CASE WHEN estado = 'completado' THEN 1 ELSE 0 END) as completados,
+                    SUM(CASE WHEN estado = 'cancelado' THEN 1 ELSE 0 END) as cancelados,
+                    SUM(CASE WHEN estado = 'en_curso' THEN 1 ELSE 0 END) as en_curso,
+                    SUM(CASE WHEN estado = 'pendiente' THEN 1 ELSE 0 END) as pendientes,
+                    SUM(CASE WHEN estado = 'completado' THEN valor_total ELSE 0 END) as ingresos_totales,
+                    AVG(CASE WHEN estado = 'completado' THEN valor_total ELSE NULL END) as promedio_viaje,
+                    SUM(CASE WHEN estado = 'completado' THEN distancia_km ELSE 0 END) as km_totales,
+                    AVG(CASE WHEN estado = 'completado' THEN distancia_km ELSE NULL END) as promedio_km
+                FROM viajes v WHERE 1=1";
+        
+        $params = [];
+
+        if (!empty($filtros['fecha_inicio'])) {
+            $sql .= " AND DATE(v.fecha_hora_inicio) >= ?";
+            $params[] = $filtros['fecha_inicio'];
+        }
+
+        if (!empty($filtros['fecha_fin'])) {
+            $sql .= " AND DATE(v.fecha_hora_inicio) <= ?";
+            $params[] = $filtros['fecha_fin'];
+        }
+
+        if (!empty($filtros['conductor_id'])) {
+            $sql .= " AND v.conductor_id = ?";
+            $params[] = $filtros['conductor_id'];
+        }
+
+        return $this->db->fetch($sql, $params);
+    }
+
+    /**
+     * Obtener reporte de ingresos
+     */
+    public function obtenerReporteIngresos($filtros = [])
+    {
+        $agrupacion = $filtros['tipo_agrupacion'] ?? 'diario';
+        
+        switch ($agrupacion) {
+            case 'semanal':
+                $dateFormat = "YEARWEEK(v.fecha_hora_inicio)";
+                $dateLabel = "CONCAT('Semana ', WEEK(v.fecha_hora_inicio), ' - ', YEAR(v.fecha_hora_inicio))";
+                break;
+            case 'mensual':
+                $dateFormat = "DATE_FORMAT(v.fecha_hora_inicio, '%Y-%m')";
+                $dateLabel = "DATE_FORMAT(v.fecha_hora_inicio, '%M %Y')";
+                break;
+            default:
+                $dateFormat = "DATE(v.fecha_hora_inicio)";
+                $dateLabel = "DATE(v.fecha_hora_inicio)";
+        }
+
+        $sql = "SELECT 
+                    $dateFormat as periodo_group,
+                    $dateLabel as periodo,
+                    COUNT(*) as total_viajes,
+                    SUM(valor_total) as ingresos_brutos,
+                    SUM(descuentos) as descuentos,
+                    SUM(valor_total - COALESCE(descuentos, 0)) as ingresos_netos,
+                    AVG(valor_total) as promedio_viaje
+                FROM viajes v 
+                WHERE estado = 'completado'";
+        
+        $params = [];
+
+        if (!empty($filtros['fecha_inicio'])) {
+            $sql .= " AND DATE(v.fecha_hora_inicio) >= ?";
+            $params[] = $filtros['fecha_inicio'];
+        }
+
+        if (!empty($filtros['fecha_fin'])) {
+            $sql .= " AND DATE(v.fecha_hora_inicio) <= ?";
+            $params[] = $filtros['fecha_fin'];
+        }
+
+        if (!empty($filtros['conductor_id'])) {
+            $sql .= " AND v.conductor_id = ?";
+            $params[] = $filtros['conductor_id'];
+        }
+
+        $sql .= " GROUP BY $dateFormat ORDER BY periodo_group DESC";
+
+        return $this->db->fetchAll($sql, $params);
+    }
+
+    /**
+     * Obtener resumen de ingresos
+     */
+    public function obtenerResumenIngresos($filtros = [])
+    {
+        $sql = "SELECT 
+                    SUM(valor_total) as total_bruto,
+                    SUM(descuentos) as total_descuentos,
+                    SUM(valor_total - COALESCE(descuentos, 0)) as total_neto,
+                    COUNT(*) as total_viajes,
+                    AVG(valor_total) as promedio_viaje
+                FROM viajes v 
+                WHERE estado = 'completado'";
+        
+        $params = [];
+
+        if (!empty($filtros['fecha_inicio'])) {
+            $sql .= " AND DATE(v.fecha_hora_inicio) >= ?";
+            $params[] = $filtros['fecha_inicio'];
+        }
+
+        if (!empty($filtros['fecha_fin'])) {
+            $sql .= " AND DATE(v.fecha_hora_inicio) <= ?";
+            $params[] = $filtros['fecha_fin'];
+        }
+
+        if (!empty($filtros['conductor_id'])) {
+            $sql .= " AND v.conductor_id = ?";
+            $params[] = $filtros['conductor_id'];
+        }
+
+        return $this->db->fetch($sql, $params);
+    }
+
+    /**
+     * Obtener métricas generales
+     */
+    public function obtenerMetricasGenerales($fechaInicio, $fechaFin)
+    {
+        $sql = "SELECT 
+                    COUNT(*) as total_viajes,
+                    SUM(CASE WHEN estado = 'completado' THEN 1 ELSE 0 END) as completados,
+                    SUM(CASE WHEN estado = 'cancelado' THEN 1 ELSE 0 END) as cancelados,
+                    SUM(CASE WHEN estado = 'en_curso' THEN 1 ELSE 0 END) as en_curso,
+                    SUM(CASE WHEN estado = 'pendiente' THEN 1 ELSE 0 END) as pendientes,
+                    SUM(CASE WHEN estado = 'completado' THEN distancia_km ELSE 0 END) as km_totales
+                FROM viajes 
+                WHERE DATE(fecha_hora_inicio) BETWEEN ? AND ?";
+
+        return $this->db->fetch($sql, [$fechaInicio, $fechaFin]);
+    }
+
+    /**
+     * Obtener métricas de ingresos
+     */
+    public function obtenerMetricasIngresos($fechaInicio, $fechaFin)
+    {
+        $sql = "SELECT 
+                    SUM(valor_total) as total_ingresos,
+                    AVG(valor_total) as promedio_viaje,
+                    SUM(descuentos) as total_descuentos,
+                    COUNT(DISTINCT conductor_id) as conductores_activos
+                FROM viajes 
+                WHERE estado = 'completado' 
+                AND DATE(fecha_hora_inicio) BETWEEN ? AND ?";
+
+        return $this->db->fetch($sql, [$fechaInicio, $fechaFin]);
+    }
+
+    /**
+     * Obtener viajes por día
+     */
+    public function obtenerViajesPorDia($fechaInicio, $fechaFin)
+    {
+        return $this->db->fetchAll(
+            "SELECT DATE(fecha_hora_inicio) as fecha,
+                    COUNT(*) as total_viajes,
+                    SUM(CASE WHEN estado = 'completado' THEN 1 ELSE 0 END) as completados
+             FROM viajes 
+             WHERE DATE(fecha_hora_inicio) BETWEEN ? AND ?
+             GROUP BY DATE(fecha_hora_inicio)
+             ORDER BY fecha",
+            [$fechaInicio, $fechaFin]
+        );
+    }
+
+    /**
+     * Obtener ingresos por día
+     */
+    public function obtenerIngresosPorDia($fechaInicio, $fechaFin)
+    {
+        return $this->db->fetchAll(
+            "SELECT DATE(fecha_hora_inicio) as fecha,
+                    SUM(valor_total) as ingresos
+             FROM viajes 
+             WHERE estado = 'completado'
+             AND DATE(fecha_hora_inicio) BETWEEN ? AND ?
+             GROUP BY DATE(fecha_hora_inicio)
+             ORDER BY fecha",
+            [$fechaInicio, $fechaFin]
+        );
+    }
+
+    /**
+     * Obtener distribución de viajes por hora
+     */
+    public function obtenerDistribucionPorHora($fechaInicio, $fechaFin)
+    {
+        return $this->db->fetchAll(
+            "SELECT HOUR(fecha_hora_inicio) as hora,
+                    COUNT(*) as total_viajes
+             FROM viajes 
+             WHERE DATE(fecha_hora_inicio) BETWEEN ? AND ?
+             GROUP BY HOUR(fecha_hora_inicio)
+             ORDER BY hora",
+            [$fechaInicio, $fechaFin]
+        );
+    }
 }

@@ -591,4 +591,82 @@ class Vehiculo extends Model
 
         return $atencion;
     }
+
+    /**
+     * Obtener reporte de uso de vehículos
+     */
+    public function obtenerReporteUso($filtros = [])
+    {
+        $sql = "SELECT v.id, v.placa, v.marca, v.modelo, v.color, v.ano,
+                       CONCAT(v.placa, ' - ', v.marca, ' ', v.modelo) as vehiculo_info,
+                       COALESCE(CONCAT(c.nombre, ' ', c.apellido), 'Sin asignar') as conductor_asignado,
+                       COUNT(vi.id) as total_viajes,
+                       SUM(CASE WHEN vi.estado = 'completado' THEN vi.distancia_km ELSE 0 END) as km_recorridos,
+                       SUM(CASE WHEN vi.estado = 'completado' THEN vi.tiempo_minutos ELSE 0 END) / 60.0 as horas_uso,
+                       SUM(CASE WHEN vi.estado = 'completado' THEN vi.valor_total ELSE 0 END) as ingresos_generados,
+                       v.estado
+                FROM vehiculos v
+                LEFT JOIN asignaciones_vehiculo av ON v.id = av.vehiculo_id AND av.estado = 'activa'
+                LEFT JOIN conductores c ON av.conductor_id = c.id
+                LEFT JOIN viajes vi ON v.id = vi.vehiculo_id";
+
+        $whereConditions = [];
+        $params = [];
+
+        if (!empty($filtros['fecha_inicio'])) {
+            $whereConditions[] = "DATE(vi.fecha_hora_inicio) >= ?";
+            $params[] = $filtros['fecha_inicio'];
+        }
+
+        if (!empty($filtros['fecha_fin'])) {
+            $whereConditions[] = "DATE(vi.fecha_hora_inicio) <= ?";
+            $params[] = $filtros['fecha_fin'];
+        }
+
+        if (!empty($filtros['vehiculo_id'])) {
+            $whereConditions[] = "v.id = ?";
+            $params[] = $filtros['vehiculo_id'];
+        }
+
+        if (!empty($whereConditions)) {
+            $sql .= " WHERE " . implode(" AND ", $whereConditions);
+        }
+
+        $sql .= " GROUP BY v.id, v.placa, v.marca, v.modelo, v.color, v.ano, 
+                          conductor_asignado, v.estado
+                  ORDER BY total_viajes DESC";
+
+        return $this->db->fetchAll($sql, $params);
+    }
+
+    /**
+     * Obtener métricas de vehículos
+     */
+    public function obtenerMetricas($fechaInicio, $fechaFin)
+    {
+        $sql = "SELECT 
+                    COUNT(DISTINCT v.id) as total_vehiculos,
+                    COUNT(DISTINCT CASE WHEN vi.id IS NOT NULL THEN v.id END) as vehiculos_en_uso,
+                    COUNT(DISTINCT CASE WHEN v.estado = 'activo' THEN v.id END) as vehiculos_activos,
+                    COUNT(DISTINCT CASE WHEN v.estado = 'mantenimiento' THEN v.id END) as vehiculos_mantenimiento
+                FROM vehiculos v
+                LEFT JOIN viajes vi ON v.id = vi.vehiculo_id 
+                    AND DATE(vi.fecha_hora_inicio) BETWEEN ? AND ?
+                    AND vi.estado = 'completado'";
+
+        return $this->db->fetch($sql, [$fechaInicio, $fechaFin]);
+    }
+
+    /**
+     * Listar vehículos activos
+     */
+    public function listarActivos()
+    {
+        return $this->db->fetchAll(
+            "SELECT v.*, CONCAT(v.placa, ' - ', v.marca, ' ', v.modelo) as descripcion_completa
+             FROM vehiculos v 
+             WHERE v.estado = 'activo'
+             ORDER BY v.placa"
+        );
+    }
 }

@@ -243,4 +243,112 @@ class Tarifa extends Model
             ["%$termino%", "%$termino%"]
         );
     }
+
+    public function buscarPorNombre($nombre)
+    {
+        return $this->db->fetch(
+            "SELECT * FROM tarifas WHERE nombre = ?",
+            [$nombre]
+        );
+    }
+
+    public function listarConFiltros($filtros = [])
+    {
+        $sql = "SELECT * FROM tarifas WHERE 1=1";
+        $params = [];
+
+        if (!empty($filtros['buscar'])) {
+            $sql .= " AND (nombre LIKE ? OR descripcion LIKE ?)";
+            $params[] = "%{$filtros['buscar']}%";
+            $params[] = "%{$filtros['buscar']}%";
+        }
+
+        if (!empty($filtros['estado'])) {
+            $sql .= " AND estado = ?";
+            $params[] = $filtros['estado'];
+        }
+
+        $sql .= " ORDER BY created_at DESC";
+
+        return $this->db->fetchAll($sql, $params);
+    }
+
+    public function listarActivas()
+    {
+        return $this->db->fetchAll(
+            "SELECT * FROM tarifas WHERE estado = 'activa' ORDER BY nombre"
+        );
+    }
+
+    public function verificarUsoEnViajes($tarifaId)
+    {
+        $result = $this->db->fetch(
+            "SELECT COUNT(*) as count FROM viajes WHERE tarifa_aplicada_id = ?",
+            [$tarifaId]
+        );
+        return $result['count'];
+    }
+
+    public function calcularPrecio($tarifa, $distancia, $tiempoMinutos, $esNocturno = false, $esFestivo = false, $hayLluvia = false)
+    {
+        // Cálculo base
+        $valorBase = floatval($tarifa['tarifa_base']);
+        $valorKm = $distancia * floatval($tarifa['tarifa_por_km']);
+        $valorMinutos = $tiempoMinutos * floatval($tarifa['tarifa_por_minuto']);
+        
+        $subtotal = $valorBase + $valorKm + $valorMinutos;
+
+        // Aplicar tarifa mínima
+        if ($subtotal < floatval($tarifa['tarifa_minima'])) {
+            $subtotal = floatval($tarifa['tarifa_minima']);
+        }
+
+        // Aplicar tarifa máxima si existe
+        if (floatval($tarifa['tarifa_maxima']) > 0 && $subtotal > floatval($tarifa['tarifa_maxima'])) {
+            $subtotal = floatval($tarifa['tarifa_maxima']);
+        }
+
+        $recargos = [];
+        $totalRecargos = 0;
+
+        // Recargo nocturno
+        if ($esNocturno && floatval($tarifa['recargo_nocturno']) > 0) {
+            $recargoNocturno = $subtotal * (floatval($tarifa['recargo_nocturno']) / 100);
+            $recargos['nocturno'] = $recargoNocturno;
+            $totalRecargos += $recargoNocturno;
+        }
+
+        // Recargo festivo
+        if ($esFestivo && floatval($tarifa['recargo_festivo']) > 0) {
+            $recargoFestivo = $subtotal * (floatval($tarifa['recargo_festivo']) / 100);
+            $recargos['festivo'] = $recargoFestivo;
+            $totalRecargos += $recargoFestivo;
+        }
+
+        // Recargo por lluvia
+        if ($hayLluvia && floatval($tarifa['recargo_lluvia']) > 0) {
+            $recargoLluvia = $subtotal * (floatval($tarifa['recargo_lluvia']) / 100);
+            $recargos['lluvia'] = $recargoLluvia;
+            $totalRecargos += $recargoLluvia;
+        }
+
+        $total = $subtotal + $totalRecargos;
+
+        return [
+            'tarifa_base' => $valorBase,
+            'valor_km' => $valorKm,
+            'valor_minutos' => $valorMinutos,
+            'subtotal' => $subtotal,
+            'recargos' => $recargos,
+            'total_recargos' => $totalRecargos,
+            'total' => $total,
+            'desglose' => [
+                'distancia_km' => $distancia,
+                'tiempo_minutos' => $tiempoMinutos,
+                'es_nocturno' => $esNocturno,
+                'es_festivo' => $esFestivo,
+                'hay_lluvia' => $hayLluvia
+            ]
+        ];
+    }
 }
