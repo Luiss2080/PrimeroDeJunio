@@ -7,19 +7,25 @@
 
 session_start();
 
+// Cargar dependencias necesarias aquí para usar Auth en toda la página
+require_once '../bootstrap.php';
+require_once APP_PATH . '/core/Auth.php';
+
 // Verificar si hay una solicitud de logout
 if (isset($_GET['logout'])) {
-    session_destroy();
+    Auth::logout();
     header('Location: ' . $_SERVER['PHP_SELF']);
     exit;
 }
 
 // Verificar si ya está logueado (solo redirigir si no viene del website)
-if (isset($_SESSION['user_id']) && !isset($_GET['force'])) {
+if (Auth::check() && !isset($_GET['force'])) {
     // Si ya está logueado, mostrar opción para ir al dashboard o cerrar sesión
     $already_logged = true;
+    $current_user = Auth::user();
 } else {
     $already_logged = false;
+    $current_user = null;
 }
 
 // Variables para el formulario
@@ -37,19 +43,52 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $error_message = 'Por favor, ingresa un email válido.';
     } else {
-        // Aquí iría la lógica de autenticación con la base de datos
-        // Por ahora, usaremos credenciales de ejemplo para mototaxis
-        if ($email === 'admin@primero1dejunio.com' && $password === 'mototaxi123') {
-            $_SESSION['user_id'] = 1;
-            $_SESSION['user_email'] = $email;
-            $_SESSION['user_name'] = 'Administrador';
-            $_SESSION['user_role'] = 'admin';
-
-            // Redireccionar al dashboard
-            header('Location: http://localhost/PrimeroDeJunio/system/app/views/dashboard/');
-            exit;
-        } else {
-            $error_message = 'Credenciales incorrectas. Inténtalo nuevamente.';
+        try {
+            // Intentar iniciar sesión usando la clase Auth
+            if (Auth::login($email, $password)) {
+                // Obtener información del usuario logueado
+                $usuarioLogueado = Auth::user();
+                
+                // Log de acceso exitoso
+                error_log("[LOGIN SUCCESS] Usuario: {$email}, Role: {$usuarioLogueado['rol_nombre']}, IP: " . $_SERVER['REMOTE_ADDR']);
+                
+                // Redireccionar según el rol del usuario
+                $rolNombre = strtolower($usuarioLogueado['rol_nombre']);
+                
+                switch ($rolNombre) {
+                    case 'administrador':
+                        header('Location: http://localhost/PrimeroDeJunio/system/app/views/dashboard/?role=admin');
+                        break;
+                    case 'operador':
+                        header('Location: http://localhost/PrimeroDeJunio/system/app/views/dashboard/?role=operador');
+                        break;
+                    case 'supervisor':
+                        header('Location: http://localhost/PrimeroDeJunio/system/app/views/dashboard/?role=supervisor');
+                        break;
+                    case 'conductor':
+                        header('Location: http://localhost/PrimeroDeJunio/system/app/views/dashboard/?role=conductor');
+                        break;
+                    default:
+                        // Por defecto, redireccionar al dashboard general
+                        header('Location: http://localhost/PrimeroDeJunio/system/app/views/dashboard/');
+                        break;
+                }
+                exit;
+            } else {
+                // Log de intento de acceso fallido
+                error_log("[LOGIN FAILED] Email: {$email}, IP: " . $_SERVER['REMOTE_ADDR']);
+                $error_message = 'Credenciales incorrectas. Verifica tu email y contraseña.';
+            }
+        } catch (Exception $e) {
+            // Log del error
+            error_log("[LOGIN ERROR] " . $e->getMessage());
+            
+            // Mostrar mensaje específico si es problema de usuario inactivo
+            if (strpos($e->getMessage(), 'inactivo') !== false) {
+                $error_message = 'Tu cuenta está inactiva. Contacta al administrador.';
+            } else {
+                $error_message = 'Error del sistema. Por favor, inténtalo más tarde o contacta al administrador.';
+            }
         }
     }
 }
@@ -203,7 +242,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <div class="alert alert-info" style="background: rgba(0, 255, 102, 0.1); border: 1px solid rgba(0, 255, 102, 0.3); color: #00ff66;">
                             <div class="alert-icon">ℹ️</div>
                             <div class="alert-message">
-                                Ya tienes una sesión activa como <strong><?php echo htmlspecialchars($_SESSION['user_name'] ?? 'Usuario'); ?></strong>
+                                Ya tienes una sesión activa como <strong><?php echo htmlspecialchars($current_user['nombre'] . ' ' . $current_user['apellido'] ?? 'Usuario'); ?></strong>
+                                (<?php echo htmlspecialchars($current_user['rol_nombre'] ?? 'Sin rol'); ?>)
                                 <br>
                                 <a href="http://localhost/PrimeroDeJunio/system/app/views/dashboard/" style="color: #00ff66; text-decoration: underline; margin-right: 15px;">Ir al Dashboard</a>
                                 <a href="?logout=1" style="color: #ff6b6b; text-decoration: underline;">Cerrar Sesión</a>
