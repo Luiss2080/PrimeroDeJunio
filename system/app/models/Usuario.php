@@ -212,7 +212,7 @@ class Usuario extends Model
              WHERE c.usuario_id = ?",
             [$id]
         );
-        
+
         return $viajesConductor['count'] == 0;
     }
 
@@ -232,7 +232,7 @@ class Usuario extends Model
     {
         $sql = "SELECT password FROM {$this->table} WHERE id = ?";
         $result = $this->db->fetch($sql, [$usuarioId]);
-        
+
         if (!$result) {
             return false;
         }
@@ -246,7 +246,7 @@ class Usuario extends Model
     public function actualizarPassword($usuarioId, $password)
     {
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-        
+
         $sql = "UPDATE {$this->table} SET password = ?, updated_at = NOW() WHERE id = ?";
         return $this->db->execute($sql, [$passwordHash, $usuarioId]);
     }
