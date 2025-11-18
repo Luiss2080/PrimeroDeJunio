@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Dashboard Administrativo - PRIMERO DE JUNIO
  * Sistema de gestión de mototaxis
@@ -23,19 +24,20 @@ $userData = [
 ?>
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Admin - Primero de Junio</title>
-    
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    
+
     <!-- Estilos optimizados del Sistema -->
     <link rel="stylesheet" href="/PrimeroDeJunio/system/public/assets/css/header.css">
     <link rel="stylesheet" href="/PrimeroDeJunio/system/public/assets/css/sidebar.css">
     <link rel="stylesheet" href="/PrimeroDeJunio/system/public/assets/css/footer.css">
-    
+
     <style>
         /* Contenido específico del dashboard */
         .dashboard-content {
@@ -161,25 +163,26 @@ $userData = [
                 margin-left: 0;
                 padding: 20px 15px;
             }
-            
+
             .stats-grid {
                 grid-template-columns: 1fr;
                 gap: 15px;
             }
-            
+
             .dashboard-title {
                 font-size: 2rem;
             }
         }
     </style>
 </head>
+
 <body>
     <!-- Header -->
     <?php include_once __DIR__ . '/../layouts/header.php'; ?>
-    
+
     <!-- Sidebar -->
     <?php include_once __DIR__ . '/../layouts/sidebar.php'; ?>
-    
+
     <!-- Contenido Principal del Dashboard -->
     <main class="dashboard-content">
         <!-- Header del Dashboard -->
@@ -303,4 +306,5 @@ $userData = [
     <script src="/PrimeroDeJunio/system/public/assets/js/sidebar.js"></script>
     <script src="/PrimeroDeJunio/system/public/assets/js/footer.js"></script>
 </body>
+
 </html>
