@@ -16,7 +16,8 @@ class Usuario extends Model
         'fecha_nacimiento',
         'avatar',
         'rol_id',
-        'estado'
+        'estado',
+        'ultimo_acceso'
     ];
 
     public function crearUsuario($data)
