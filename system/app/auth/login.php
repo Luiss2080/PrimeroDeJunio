@@ -1,45 +1,65 @@
 <?php
 
 /**
- * PRIMERO DE JUNIO - LOGIN SIMPLIFICADO
+ * PRIMERO DE JUNIO - LOGIN CON METODOLOGÍA EXITOSA MIGRADA
  */
 
-// Iniciar sesión limpia
-session_start();
+// 1. Control estricto de sesión (metodología que funciona)
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}
 
-// Cargar dependencias
+// 2. Cargar dependencias
 require_once '../bootstrap.php';
 require_once APP_PATH . '/core/Auth.php';
 
-// Variables
 $error_message = '';
+$debug_info = '';
 
-// LOGOUT SIMPLE
+// 3. Logout simple y efectivo
 if (isset($_GET['logout'])) {
     session_destroy();
-    header('Location: login.php');
+    header('Location: ' . strtok($_SERVER["REQUEST_URI"], '?'));
     exit;
 }
 
-// PROCESAR LOGIN
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = trim($_POST['email'] ?? '');
-    $password = $_POST['password'] ?? '';
+// 4. Procesar formulario (metodología exitosa de login_clean.php)
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['email']) && !empty($_POST['password'])) {
 
-    if (empty($email) || empty($password)) {
-        $error_message = 'Por favor, completa todos los campos.';
-    } else {
-        try {
-            if (Auth::login($email, $password)) {
-                // Login exitoso - redirigir al dashboard
-                header('Location: http://localhost/PrimeroDeJunio/system/public/index.php/admin/dashboard');
-                exit;
-            } else {
-                $error_message = 'Email o contraseña incorrectos.';
-            }
-        } catch (Exception $e) {
-            $error_message = 'Error: ' . $e->getMessage();
+    $email = trim($_POST['email']);
+    $password = $_POST['password'];
+
+    $debug_info = "Procesando login para: $email";
+
+    try {
+        // Intentar login usando la metodología que funciona
+        $loginSuccess = Auth::login($email, $password);
+
+        if ($loginSuccess) {
+            // Obtener usuario y rol
+            $user = Auth::user();
+            $debug_info .= " | Login exitoso | Rol: " . ($user['rol_nombre'] ?? 'desconocido');
+
+            // Redireccionar con la metodología múltiple que funciona
+            $redirectUrl = 'http://localhost/PrimeroDeJunio/system/public/index.php/admin/dashboard';
+
+            echo "<!DOCTYPE html><html><head><title>Redirigiendo...</title></head><body>";
+            echo "<h2 style='color: green; text-align: center; margin-top: 50px;'>✅ Login exitoso</h2>";
+            echo "<p style='text-align: center;'>Bienvenido " . htmlspecialchars($user['nombre']) . "! Redirigiendo al dashboard...</p>";
+            echo "<script>setTimeout(function(){ window.location.href = '$redirectUrl'; }, 1500);</script>";
+            echo "<meta http-equiv='refresh' content='3;url=$redirectUrl'>";
+            echo "<div style='text-align: center; margin-top: 20px;'>";
+            echo "<a href='$redirectUrl' style='color: blue; text-decoration: none; background: #f0f8ff; padding: 10px 20px; border-radius: 5px;'>Si no eres redirigido automáticamente, haz clic aquí</a>";
+            echo "</div>";
+            echo "</body></html>";
+            exit;
+        } else {
+            $error_message = 'Credenciales incorrectas';
+            $debug_info .= " | Login falló - credenciales incorrectas";
         }
+    } catch (Exception $e) {
+        $error_message = 'Error del sistema: ' . $e->getMessage();
+        $debug_info .= " | Excepción: " . $e->getMessage();
     }
 }
 ?>
@@ -172,6 +192,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <p class="form-subtitle">Ingresa tus credenciales para continuar</p>
                     </div>
 
+                    <!-- Debug info (solo visible si hay debug) -->
+                    <?php if (!empty($debug_info) && strpos($debug_info, 'Procesando') !== false): ?>
+                        <div style="background:#f0f8ff;border:1px solid #ccc;padding:8px;margin:10px 0;font-size:11px;border-radius:4px;">
+                            <strong>Debug:</strong> <?php echo htmlspecialchars($debug_info); ?>
+                        </div>
+                    <?php endif; ?>
+
                     <!-- Mensajes de error -->
                     <?php if (!empty($error_message)): ?>
                         <div class="alert alert-error">
@@ -193,9 +220,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     id="email"
                                     name="email"
                                     class="form-input"
-                                    placeholder="conductor@primero1dejunio.com"
+                                    placeholder="admin@primero1dejunio.com"
                                     required
-                                    autocomplete="email">
+                                    autocomplete="email"
+                                    value="<?php echo htmlspecialchars($_POST['email'] ?? ''); ?>">
                             </div>
                             <div class="input-error" id="emailError"></div>
                         </div>
@@ -274,10 +302,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             </p>
                         </div>
 
-                        <!-- Enlace de limpieza de sesión discreto -->
-                        <div style="text-align: center; margin-top: 20px;">
+                        <!-- Credenciales de ayuda y limpieza de sesión -->
+                        <div style="text-align: center; margin-top: 20px; padding-top: 15px; border-top: 1px solid #333;">
+                            <small style="color: #666; display: block; margin-bottom: 10px;">
+                                <strong>Credenciales de prueba:</strong><br>
+                                📧 admin@primero1dejunio.com<br>
+                                🔑 mototaxi123
+                            </small>
                             <a href="?logout=1" style="color: #666; font-size: 11px; text-decoration: none; opacity: 0.7;">
-                                ¿Problemas de acceso? Limpiar sesión
+                                🗑️ ¿Problemas de acceso? Limpiar sesión
                             </a>
                         </div>
 
