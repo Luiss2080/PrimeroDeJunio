@@ -508,7 +508,7 @@
   .system-sidebar:not(.mobile-open) {
     width: var(--sidebar-width-collapsed);
   }
-  
+
   .system-sidebar:not(.mobile-open) .sidebar-logo-text,
   .system-sidebar:not(.mobile-open) .nav-text,
   .system-sidebar:not(.mobile-open) .nav-badge,
@@ -519,26 +519,26 @@
     opacity: 0;
     visibility: hidden;
   }
-  
+
   .system-sidebar:not(.mobile-open) .sidebar-header {
     justify-content: center;
     padding: 1rem;
   }
-  
+
   .system-sidebar:not(.mobile-open) .nav-link-content {
     justify-content: center;
     padding: 0.75rem 1rem;
   }
-  
+
   .system-sidebar:not(.mobile-open) .nav-icon {
     margin-right: 0;
   }
-  
+
   .system-sidebar:not(.mobile-open) .user-card {
     justify-content: center;
     padding: 0.5rem;
   }
-  
+
   .system-sidebar:not(.mobile-open) .submenu {
     display: none;
   }
@@ -551,15 +551,15 @@
     width: var(--sidebar-width);
     z-index: 1002;
   }
-  
+
   .system-sidebar.mobile-open {
     transform: translateX(0);
   }
-  
+
   .sidebar-close {
     display: flex;
   }
-  
+
   /* Restaurar visibilidad de elementos en móvil */
   .system-sidebar.mobile-open .sidebar-logo-text,
   .system-sidebar.mobile-open .nav-text,
@@ -571,26 +571,26 @@
     opacity: 1;
     visibility: visible;
   }
-  
+
   .system-sidebar.mobile-open .sidebar-header {
     justify-content: space-between;
     padding: 1.5rem 1.5rem 1rem;
   }
-  
+
   .system-sidebar.mobile-open .nav-link-content {
     justify-content: flex-start;
     padding: 0.75rem 1.5rem;
   }
-  
+
   .system-sidebar.mobile-open .nav-icon {
     margin-right: 1rem;
   }
-  
+
   .system-sidebar.mobile-open .user-card {
     justify-content: flex-start;
     padding: 0.75rem;
   }
-  
+
   .system-sidebar.mobile-open .submenu {
     display: block;
   }
@@ -655,7 +655,7 @@
   .system-sidebar.collapsed .nav-link {
     position: relative;
   }
-  
+
   .system-sidebar.collapsed .nav-link::after {
     content: attr(title);
     position: absolute;
@@ -675,7 +675,7 @@
     border: 1px solid rgba(0, 255, 102, 0.2);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   }
-  
+
   .system-sidebar.collapsed .nav-link:hover::after {
     opacity: 1;
     visibility: visible;

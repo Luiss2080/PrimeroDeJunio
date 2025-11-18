@@ -49,8 +49,10 @@
   --border-radius-large: 12px;
 
   /* Fuentes */
-  --font-primary: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-headings: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-primary: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  --font-headings: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
 
   /* Altura del header */
   --header-height: 70px;
@@ -77,8 +79,7 @@
   border-bottom: 1px solid rgba(0, 255, 102, 0.2);
   z-index: 1000;
   transition: var(--transition-fast);
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3), 
-              0 0 0 1px rgba(0, 255, 102, 0.1);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0, 255, 102, 0.1);
 }
 
 .header-wrapper {
@@ -313,8 +314,13 @@
 }
 
 @keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.1); }
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
 }
 
 /* Dropdown de Notificaciones */
@@ -644,16 +650,16 @@
   .header-wrapper {
     margin-left: var(--sidebar-width-collapsed);
   }
-  
+
   .header-search {
     max-width: 300px;
     margin: 0 1rem;
   }
-  
+
   .user-info {
     display: none;
   }
-  
+
   .user-profile-btn {
     padding: 0.4rem;
   }
@@ -664,21 +670,21 @@
   .sidebar-toggle {
     display: flex;
   }
-  
+
   .header-wrapper {
     margin-left: 0;
     padding: 0 1rem;
   }
-  
+
   .header-logo {
     display: none;
   }
-  
+
   .header-search {
     max-width: 250px;
     margin: 0 0.5rem;
   }
-  
+
   .notifications-dropdown,
   .user-dropdown {
     width: 280px;
@@ -690,16 +696,16 @@
   .header-container {
     gap: 1rem;
   }
-  
+
   .header-search {
     max-width: 200px;
   }
-  
+
   .search-input {
     font-size: 0.8rem;
     height: 36px;
   }
-  
+
   .notifications-dropdown,
   .user-dropdown {
     width: 260px;
