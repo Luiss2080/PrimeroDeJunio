@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Dashboard Administrativo - PRIMERO DE JUNIO
  * Sistema de gestión de mototaxis con diseño moderno
@@ -16,20 +17,21 @@ $current_page = 'dashboard';
 ?>
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Admin - Primero de Junio</title>
-    
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    
+
     <!-- Estilos del Sistema -->
     <link rel="stylesheet" href="/PrimeroDeJunio/system/public/assets/css/header.css">
     <link rel="stylesheet" href="/PrimeroDeJunio/system/public/assets/css/sidebar.css">
     <link rel="stylesheet" href="/PrimeroDeJunio/system/public/assets/css/footer.css">
     <link rel="stylesheet" href="/PrimeroDeJunio/system/public/assets/css/dashboard.css">
-    
+
     <style>
         /* Reset y variables globales */
         * {
@@ -56,7 +58,8 @@ $current_page = 'dashboard';
             color: var(--white);
             min-height: 100vh;
             overflow-x: hidden;
-            padding-top: 80px; /* Espacio para header fijo */
+            padding-top: 80px;
+            /* Espacio para header fijo */
         }
 
         /* Layout principal del dashboard */
@@ -257,7 +260,7 @@ $current_page = 'dashboard';
             .dashboard-layout {
                 grid-template-columns: 1fr;
             }
-            
+
             .dashboard-sections {
                 grid-template-columns: 1fr;
             }
@@ -267,36 +270,37 @@ $current_page = 'dashboard';
             .main-content {
                 padding: 1rem;
             }
-            
+
             .dashboard-title {
                 font-size: 2rem;
             }
-            
+
             .stats-grid {
                 grid-template-columns: 1fr;
             }
-            
+
             .quick-actions {
                 grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             }
         }
     </style>
 </head>
+
 <body>
-    
+
     <!-- Header del Sistema -->
     <?php include_once __DIR__ . '/../layouts/header.php'; ?>
-    
+
     <!-- Layout principal -->
     <div class="dashboard-layout">
-        
+
         <!-- Sidebar -->
         <?php include_once __DIR__ . '/../layouts/sidebar.php'; ?>
-        
+
         <!-- Contenido Principal -->
         <main class="main-content">
             <div class="dashboard-container">
-                
+
                 <!-- Header del Dashboard -->
                 <header class="dashboard-header">
                     <h1 class="dashboard-title">Dashboard Administrativo</h1>
@@ -356,27 +360,27 @@ $current_page = 'dashboard';
                         <i class="fas fa-user-plus"></i>
                         <span>Nuevo Conductor</span>
                     </a>
-                    
+
                     <a href="/PrimeroDeJunio/system/public/index.php/admin/vehiculos/nuevo" class="action-btn">
                         <i class="fas fa-car"></i>
                         <span>Registrar Vehículo</span>
                     </a>
-                    
+
                     <a href="/PrimeroDeJunio/system/public/index.php/admin/viajes" class="action-btn">
                         <i class="fas fa-route"></i>
                         <span>Ver Viajes</span>
                     </a>
-                    
+
                     <a href="/PrimeroDeJunio/system/public/index.php/admin/reportes" class="action-btn">
                         <i class="fas fa-chart-bar"></i>
                         <span>Reportes</span>
                     </a>
-                    
+
                     <a href="/PrimeroDeJunio/system/public/index.php/admin/configuracion" class="action-btn">
                         <i class="fas fa-cog"></i>
                         <span>Configuración</span>
                     </a>
-                    
+
                     <a href="/PrimeroDeJunio/system/public/index.php/admin/usuarios" class="action-btn">
                         <i class="fas fa-users-cog"></i>
                         <span>Gestionar Usuarios</span>
@@ -385,7 +389,7 @@ $current_page = 'dashboard';
 
                 <!-- Secciones del Dashboard -->
                 <div class="dashboard-sections">
-                    
+
                     <!-- Viajes Recientes -->
                     <div class="section-card">
                         <h2 class="section-title">
@@ -394,7 +398,7 @@ $current_page = 'dashboard';
                             </div>
                             Viajes Recientes
                         </h2>
-                        
+
                         <div class="recent-trips">
                             <!-- Aquí se cargarían los viajes recientes -->
                             <p style="color: var(--gray-light); text-align: center; padding: 2rem;">
@@ -412,7 +416,7 @@ $current_page = 'dashboard';
                             </div>
                             Notificaciones
                         </h2>
-                        
+
                         <div class="notifications">
                             <!-- Aquí se cargarían las notificaciones -->
                             <p style="color: var(--gray-light); text-align: center; padding: 2rem;">
@@ -422,24 +426,24 @@ $current_page = 'dashboard';
                         </div>
                     </div>
                 </div>
-                
+
             </div>
         </main>
     </div>
 
     <!-- Footer del Sistema -->
     <?php include_once __DIR__ . '/../layouts/footer.php'; ?>
-    
+
     <!-- Scripts -->
     <script src="/PrimeroDeJunio/system/public/assets/js/header.js"></script>
     <script src="/PrimeroDeJunio/system/public/assets/js/sidebar.js"></script>
     <script src="/PrimeroDeJunio/system/public/assets/js/footer.js"></script>
-    
+
     <script>
         // Inicialización específica del dashboard
         document.addEventListener('DOMContentLoaded', function() {
             console.log('Dashboard administrativo cargado correctamente');
-            
+
             // Cargar datos dinámicos
             loadDashboardData();
         });
@@ -453,52 +457,53 @@ $current_page = 'dashboard';
         }
     </script>
 </body>
+
 </html>
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-        }
+grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+gap: 15px;
+}
 
-        .menu-item {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            color: #333;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
+.menu-item {
+background: rgba(255, 255, 255, 0.95);
+padding: 20px;
+border-radius: 8px;
+text-decoration: none;
+color: #333;
+box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+transition: all 0.3s ease;
+}
 
-        .menu-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
-            text-decoration: none;
-            color: #333;
-        }
+.menu-item:hover {
+transform: translateY(-3px);
+box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+text-decoration: none;
+color: #333;
+}
 
-        .menu-icon {
-            font-size: 1.5em;
-            margin-bottom: 10px;
-            display: block;
-        }
+.menu-icon {
+font-size: 1.5em;
+margin-bottom: 10px;
+display: block;
+}
 
-        .logout-btn {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: #dc3545;
-            color: white;
-            padding: 10px 15px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-size: 0.9em;
-        }
+.logout-btn {
+position: fixed;
+top: 20px;
+right: 20px;
+background: #dc3545;
+color: white;
+padding: 10px 15px;
+border-radius: 5px;
+text-decoration: none;
+font-size: 0.9em;
+}
 
-        .logout-btn:hover {
-            background: #c82333;
-            text-decoration: none;
-            color: white;
-        }
-    </style>
+.logout-btn:hover {
+background: #c82333;
+text-decoration: none;
+color: white;
+}
+</style>
 </head>
 
 <body>

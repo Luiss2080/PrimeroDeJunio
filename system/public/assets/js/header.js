@@ -4,310 +4,310 @@
  */
 
 class HeaderManager {
-    constructor() {
-        this.header = null;
-        this.userDropdown = null;
-        this.menuToggle = null;
-        this.searchInput = null;
-        this.notificationBtn = null;
-        this.isDropdownOpen = false;
-        this.searchTimeout = null;
-        
-        this.init();
-    }
+  constructor() {
+    this.header = null;
+    this.userDropdown = null;
+    this.menuToggle = null;
+    this.searchInput = null;
+    this.notificationBtn = null;
+    this.isDropdownOpen = false;
+    this.searchTimeout = null;
 
-    init() {
-        this.bindElements();
-        this.bindEvents();
-        this.setupSearch();
-        this.setupNotifications();
-        this.handleResponsive();
-    }
+    this.init();
+  }
 
-    bindElements() {
-        this.header = document.querySelector('.system-header');
-        this.userDropdown = document.querySelector('.user-dropdown');
-        this.menuToggle = document.querySelector('.menu-toggle');
-        this.searchInput = document.querySelector('.search-input');
-        this.notificationBtn = document.querySelector('.notification-btn');
-    }
+  init() {
+    this.bindElements();
+    this.bindEvents();
+    this.setupSearch();
+    this.setupNotifications();
+    this.handleResponsive();
+  }
 
-    bindEvents() {
-        // Dropdown de usuario
-        if (this.userDropdown) {
-            const userBtn = this.userDropdown.querySelector('.user-btn');
-            const dropdownMenu = this.userDropdown.querySelector('.dropdown-menu');
+  bindElements() {
+    this.header = document.querySelector(".system-header");
+    this.userDropdown = document.querySelector(".user-dropdown");
+    this.menuToggle = document.querySelector(".menu-toggle");
+    this.searchInput = document.querySelector(".search-input");
+    this.notificationBtn = document.querySelector(".notification-btn");
+  }
 
-            if (userBtn && dropdownMenu) {
-                userBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    this.toggleUserDropdown();
-                });
+  bindEvents() {
+    // Dropdown de usuario
+    if (this.userDropdown) {
+      const userBtn = this.userDropdown.querySelector(".user-btn");
+      const dropdownMenu = this.userDropdown.querySelector(".dropdown-menu");
 
-                // Cerrar dropdown al hacer click fuera
-                document.addEventListener('click', (e) => {
-                    if (!this.userDropdown.contains(e.target)) {
-                        this.closeUserDropdown();
-                    }
-                });
-
-                // Cerrar con ESC
-                document.addEventListener('keydown', (e) => {
-                    if (e.key === 'Escape') {
-                        this.closeUserDropdown();
-                    }
-                });
-            }
-        }
-
-        // Toggle del menú móvil
-        if (this.menuToggle) {
-            this.menuToggle.addEventListener('click', () => {
-                this.toggleMobileMenu();
-            });
-        }
-
-        // Scroll del header
-        window.addEventListener('scroll', () => {
-            this.handleScroll();
+      if (userBtn && dropdownMenu) {
+        userBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          this.toggleUserDropdown();
         });
 
-        // Redimensionar ventana
-        window.addEventListener('resize', () => {
-            this.handleResize();
-        });
-    }
-
-    setupSearch() {
-        if (!this.searchInput) return;
-
-        this.searchInput.addEventListener('input', (e) => {
-            clearTimeout(this.searchTimeout);
-            const query = e.target.value.trim();
-
-            this.searchTimeout = setTimeout(() => {
-                if (query.length >= 2) {
-                    this.performSearch(query);
-                }
-            }, 300);
-        });
-
-        this.searchInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                const query = e.target.value.trim();
-                if (query.length >= 2) {
-                    this.performSearch(query);
-                }
-            }
-        });
-
-        // Placeholder dinámico
-        this.animateSearchPlaceholder();
-    }
-
-    setupNotifications() {
-        if (!this.notificationBtn) return;
-
-        this.notificationBtn.addEventListener('click', () => {
-            this.toggleNotifications();
-        });
-
-        // Simular actualización de notificaciones
-        this.updateNotificationCount();
-        
-        // Actualizar cada 30 segundos
-        setInterval(() => {
-            this.updateNotificationCount();
-        }, 30000);
-    }
-
-    toggleUserDropdown() {
-        const dropdownMenu = this.userDropdown.querySelector('.dropdown-menu');
-        
-        if (this.isDropdownOpen) {
+        // Cerrar dropdown al hacer click fuera
+        document.addEventListener("click", (e) => {
+          if (!this.userDropdown.contains(e.target)) {
             this.closeUserDropdown();
-        } else {
-            this.openUserDropdown();
-        }
-    }
-
-    openUserDropdown() {
-        const dropdownMenu = this.userDropdown.querySelector('.dropdown-menu');
-        
-        this.userDropdown.classList.add('active');
-        dropdownMenu.classList.add('show');
-        dropdownMenu.classList.add('fade-in');
-        this.isDropdownOpen = true;
-
-        // Animación de entrada
-        setTimeout(() => {
-            dropdownMenu.classList.remove('fade-in');
-        }, 300);
-    }
-
-    closeUserDropdown() {
-        const dropdownMenu = this.userDropdown.querySelector('.dropdown-menu');
-        
-        this.userDropdown.classList.remove('active');
-        dropdownMenu.classList.remove('show');
-        this.isDropdownOpen = false;
-    }
-
-    toggleMobileMenu() {
-        const sidebar = document.querySelector('.system-sidebar');
-        const overlay = document.querySelector('.sidebar-overlay');
-
-        if (sidebar) {
-            sidebar.classList.toggle('show');
-            
-            if (overlay) {
-                overlay.classList.toggle('show');
-            }
-
-            // Crear overlay si no existe
-            if (!overlay) {
-                this.createSidebarOverlay();
-            }
-        }
-    }
-
-    createSidebarOverlay() {
-        const overlay = document.createElement('div');
-        overlay.className = 'sidebar-overlay show';
-        document.body.appendChild(overlay);
-
-        overlay.addEventListener('click', () => {
-            this.toggleMobileMenu();
+          }
         });
+
+        // Cerrar con ESC
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") {
+            this.closeUserDropdown();
+          }
+        });
+      }
     }
 
-    performSearch(query) {
-        console.log('Buscando:', query);
-        
-        // Aquí se implementaría la búsqueda real
-        // Por ahora solo mostramos un mensaje
-        this.showSearchFeedback(query);
+    // Toggle del menú móvil
+    if (this.menuToggle) {
+      this.menuToggle.addEventListener("click", () => {
+        this.toggleMobileMenu();
+      });
     }
 
-    showSearchFeedback(query) {
-        const searchContainer = this.searchInput.parentElement;
-        
-        // Remover feedback anterior
-        const existingFeedback = searchContainer.querySelector('.search-feedback');
-        if (existingFeedback) {
-            existingFeedback.remove();
+    // Scroll del header
+    window.addEventListener("scroll", () => {
+      this.handleScroll();
+    });
+
+    // Redimensionar ventana
+    window.addEventListener("resize", () => {
+      this.handleResize();
+    });
+  }
+
+  setupSearch() {
+    if (!this.searchInput) return;
+
+    this.searchInput.addEventListener("input", (e) => {
+      clearTimeout(this.searchTimeout);
+      const query = e.target.value.trim();
+
+      this.searchTimeout = setTimeout(() => {
+        if (query.length >= 2) {
+          this.performSearch(query);
         }
+      }, 300);
+    });
 
-        // Crear nuevo feedback
-        const feedback = document.createElement('div');
-        feedback.className = 'search-feedback';
-        feedback.innerHTML = `
+    this.searchInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        const query = e.target.value.trim();
+        if (query.length >= 2) {
+          this.performSearch(query);
+        }
+      }
+    });
+
+    // Placeholder dinámico
+    this.animateSearchPlaceholder();
+  }
+
+  setupNotifications() {
+    if (!this.notificationBtn) return;
+
+    this.notificationBtn.addEventListener("click", () => {
+      this.toggleNotifications();
+    });
+
+    // Simular actualización de notificaciones
+    this.updateNotificationCount();
+
+    // Actualizar cada 30 segundos
+    setInterval(() => {
+      this.updateNotificationCount();
+    }, 30000);
+  }
+
+  toggleUserDropdown() {
+    const dropdownMenu = this.userDropdown.querySelector(".dropdown-menu");
+
+    if (this.isDropdownOpen) {
+      this.closeUserDropdown();
+    } else {
+      this.openUserDropdown();
+    }
+  }
+
+  openUserDropdown() {
+    const dropdownMenu = this.userDropdown.querySelector(".dropdown-menu");
+
+    this.userDropdown.classList.add("active");
+    dropdownMenu.classList.add("show");
+    dropdownMenu.classList.add("fade-in");
+    this.isDropdownOpen = true;
+
+    // Animación de entrada
+    setTimeout(() => {
+      dropdownMenu.classList.remove("fade-in");
+    }, 300);
+  }
+
+  closeUserDropdown() {
+    const dropdownMenu = this.userDropdown.querySelector(".dropdown-menu");
+
+    this.userDropdown.classList.remove("active");
+    dropdownMenu.classList.remove("show");
+    this.isDropdownOpen = false;
+  }
+
+  toggleMobileMenu() {
+    const sidebar = document.querySelector(".system-sidebar");
+    const overlay = document.querySelector(".sidebar-overlay");
+
+    if (sidebar) {
+      sidebar.classList.toggle("show");
+
+      if (overlay) {
+        overlay.classList.toggle("show");
+      }
+
+      // Crear overlay si no existe
+      if (!overlay) {
+        this.createSidebarOverlay();
+      }
+    }
+  }
+
+  createSidebarOverlay() {
+    const overlay = document.createElement("div");
+    overlay.className = "sidebar-overlay show";
+    document.body.appendChild(overlay);
+
+    overlay.addEventListener("click", () => {
+      this.toggleMobileMenu();
+    });
+  }
+
+  performSearch(query) {
+    console.log("Buscando:", query);
+
+    // Aquí se implementaría la búsqueda real
+    // Por ahora solo mostramos un mensaje
+    this.showSearchFeedback(query);
+  }
+
+  showSearchFeedback(query) {
+    const searchContainer = this.searchInput.parentElement;
+
+    // Remover feedback anterior
+    const existingFeedback = searchContainer.querySelector(".search-feedback");
+    if (existingFeedback) {
+      existingFeedback.remove();
+    }
+
+    // Crear nuevo feedback
+    const feedback = document.createElement("div");
+    feedback.className = "search-feedback";
+    feedback.innerHTML = `
             <div class="search-result">
                 <i class="fas fa-search"></i>
                 <span>Buscando: "${query}"...</span>
             </div>
         `;
-        
-        searchContainer.appendChild(feedback);
 
-        // Remover después de 3 segundos
-        setTimeout(() => {
-            feedback.remove();
-        }, 3000);
+    searchContainer.appendChild(feedback);
+
+    // Remover después de 3 segundos
+    setTimeout(() => {
+      feedback.remove();
+    }, 3000);
+  }
+
+  animateSearchPlaceholder() {
+    const placeholders = [
+      "Buscar usuarios...",
+      "Buscar vehículos...",
+      "Buscar conductores...",
+      "Buscar viajes...",
+      "Buscar reportes...",
+    ];
+
+    let currentIndex = 0;
+
+    setInterval(() => {
+      currentIndex = (currentIndex + 1) % placeholders.length;
+      this.searchInput.placeholder = placeholders[currentIndex];
+    }, 3000);
+  }
+
+  toggleNotifications() {
+    // Aquí se implementaría el panel de notificaciones
+    console.log("Mostrando notificaciones");
+
+    // Simular marcado como leído
+    this.markNotificationsAsRead();
+  }
+
+  updateNotificationCount() {
+    const badge = this.notificationBtn?.querySelector(".notification-badge");
+    if (!badge) return;
+
+    // Simular obtención de notificaciones del servidor
+    const count = Math.floor(Math.random() * 10);
+
+    if (count > 0) {
+      badge.textContent = count;
+      badge.style.display = "block";
+      this.notificationBtn.classList.add("has-notifications");
+    } else {
+      badge.style.display = "none";
+      this.notificationBtn.classList.remove("has-notifications");
+    }
+  }
+
+  markNotificationsAsRead() {
+    const badge = this.notificationBtn?.querySelector(".notification-badge");
+    if (badge) {
+      badge.style.display = "none";
+      this.notificationBtn.classList.remove("has-notifications");
+    }
+  }
+
+  handleScroll() {
+    const scrollY = window.scrollY;
+
+    if (scrollY > 50) {
+      this.header?.classList.add("scrolled");
+    } else {
+      this.header?.classList.remove("scrolled");
+    }
+  }
+
+  handleResize() {
+    // Cerrar dropdown en redimensión
+    if (this.isDropdownOpen && window.innerWidth <= 768) {
+      this.closeUserDropdown();
     }
 
-    animateSearchPlaceholder() {
-        const placeholders = [
-            'Buscar usuarios...',
-            'Buscar vehículos...',
-            'Buscar conductores...',
-            'Buscar viajes...',
-            'Buscar reportes...'
-        ];
-        
-        let currentIndex = 0;
-        
-        setInterval(() => {
-            currentIndex = (currentIndex + 1) % placeholders.length;
-            this.searchInput.placeholder = placeholders[currentIndex];
-        }, 3000);
+    // Cerrar menú móvil en desktop
+    if (window.innerWidth > 768) {
+      const sidebar = document.querySelector(".system-sidebar");
+      const overlay = document.querySelector(".sidebar-overlay");
+
+      if (sidebar?.classList.contains("show")) {
+        sidebar.classList.remove("show");
+      }
+
+      if (overlay?.classList.contains("show")) {
+        overlay.classList.remove("show");
+      }
     }
+  }
 
-    toggleNotifications() {
-        // Aquí se implementaría el panel de notificaciones
-        console.log('Mostrando notificaciones');
-        
-        // Simular marcado como leído
-        this.markNotificationsAsRead();
+  handleResponsive() {
+    // Verificar si es móvil
+    const isMobile = window.innerWidth <= 768;
+
+    if (isMobile) {
+      this.header?.classList.add("mobile");
+    } else {
+      this.header?.classList.remove("mobile");
     }
-
-    updateNotificationCount() {
-        const badge = this.notificationBtn?.querySelector('.notification-badge');
-        if (!badge) return;
-
-        // Simular obtención de notificaciones del servidor
-        const count = Math.floor(Math.random() * 10);
-        
-        if (count > 0) {
-            badge.textContent = count;
-            badge.style.display = 'block';
-            this.notificationBtn.classList.add('has-notifications');
-        } else {
-            badge.style.display = 'none';
-            this.notificationBtn.classList.remove('has-notifications');
-        }
-    }
-
-    markNotificationsAsRead() {
-        const badge = this.notificationBtn?.querySelector('.notification-badge');
-        if (badge) {
-            badge.style.display = 'none';
-            this.notificationBtn.classList.remove('has-notifications');
-        }
-    }
-
-    handleScroll() {
-        const scrollY = window.scrollY;
-        
-        if (scrollY > 50) {
-            this.header?.classList.add('scrolled');
-        } else {
-            this.header?.classList.remove('scrolled');
-        }
-    }
-
-    handleResize() {
-        // Cerrar dropdown en redimensión
-        if (this.isDropdownOpen && window.innerWidth <= 768) {
-            this.closeUserDropdown();
-        }
-
-        // Cerrar menú móvil en desktop
-        if (window.innerWidth > 768) {
-            const sidebar = document.querySelector('.system-sidebar');
-            const overlay = document.querySelector('.sidebar-overlay');
-            
-            if (sidebar?.classList.contains('show')) {
-                sidebar.classList.remove('show');
-            }
-            
-            if (overlay?.classList.contains('show')) {
-                overlay.classList.remove('show');
-            }
-        }
-    }
-
-    handleResponsive() {
-        // Verificar si es móvil
-        const isMobile = window.innerWidth <= 768;
-        
-        if (isMobile) {
-            this.header?.classList.add('mobile');
-        } else {
-            this.header?.classList.remove('mobile');
-        }
-    }
+  }
 }
 
 // CSS adicional dinámico
@@ -364,13 +364,13 @@ const headerStyles = `
 `;
 
 // Inyectar estilos adicionales
-const styleSheet = document.createElement('style');
+const styleSheet = document.createElement("style");
 styleSheet.textContent = headerStyles;
 document.head.appendChild(styleSheet);
 
 // Inicializar cuando el DOM esté listo
-document.addEventListener('DOMContentLoaded', () => {
-    new HeaderManager();
+document.addEventListener("DOMContentLoaded", () => {
+  new HeaderManager();
 });
 
 // Exportar para uso global si es necesario

@@ -4,260 +4,262 @@
  */
 
 class FooterManager {
-    constructor() {
-        this.footer = null;
-        this.scrollToTopBtn = null;
-        this.systemStatus = null;
-        this.lastScrollY = 0;
-        this.scrollThreshold = 300;
-        
-        this.init();
+  constructor() {
+    this.footer = null;
+    this.scrollToTopBtn = null;
+    this.systemStatus = null;
+    this.lastScrollY = 0;
+    this.scrollThreshold = 300;
+
+    this.init();
+  }
+
+  init() {
+    this.bindElements();
+    this.bindEvents();
+    this.updateSystemInfo();
+    this.setupScrollToTop();
+    this.startSystemMonitoring();
+  }
+
+  bindElements() {
+    this.footer = document.querySelector(".system-footer");
+    this.scrollToTopBtn = document.querySelector(".scroll-to-top");
+    this.systemStatus = document.querySelector(".system-status");
+  }
+
+  bindEvents() {
+    // Scroll to top button
+    if (this.scrollToTopBtn) {
+      this.scrollToTopBtn.addEventListener("click", () => {
+        this.scrollToTop();
+      });
     }
 
-    init() {
-        this.bindElements();
-        this.bindEvents();
-        this.updateSystemInfo();
-        this.setupScrollToTop();
-        this.startSystemMonitoring();
+    // Enlaces del footer
+    const footerLinks = this.footer?.querySelectorAll('a[href^="#"]');
+    footerLinks?.forEach((link) => {
+      link.addEventListener("click", (e) => {
+        this.handleInternalLink(e, link);
+      });
+    });
+
+    // Monitor de scroll
+    window.addEventListener("scroll", () => {
+      this.handleScroll();
+    });
+
+    // Eventos de teclado
+    document.addEventListener("keydown", (e) => {
+      this.handleKeyboard(e);
+    });
+
+    // Eventos de sistema
+    this.setupSystemEvents();
+  }
+
+  updateSystemInfo() {
+    // Actualizar información del sistema
+    this.updateVersion();
+    this.updateUptime();
+    this.updateLastActivity();
+
+    // Actualizar cada minuto
+    setInterval(() => {
+      this.updateUptime();
+      this.updateLastActivity();
+    }, 60000);
+  }
+
+  updateVersion() {
+    const versionElement = document.querySelector(".system-version");
+    if (versionElement) {
+      // Obtener versión del sistema (esto vendría del backend)
+      const version = window.systemInfo?.version || "1.0.0";
+      versionElement.textContent = `v${version}`;
+    }
+  }
+
+  updateUptime() {
+    const uptimeElement = document.querySelector(".system-uptime");
+    if (uptimeElement) {
+      // Calcular tiempo de sesión
+      const startTime = sessionStorage.getItem("sessionStart") || Date.now();
+      const currentTime = Date.now();
+      const uptime = currentTime - startTime;
+
+      const hours = Math.floor(uptime / (1000 * 60 * 60));
+      const minutes = Math.floor((uptime % (1000 * 60 * 60)) / (1000 * 60));
+
+      uptimeElement.textContent = `${hours}h ${minutes}m`;
+    }
+  }
+
+  updateLastActivity() {
+    const activityElement = document.querySelector(".last-activity");
+    if (activityElement) {
+      const now = new Date();
+      const timeString = now.toLocaleTimeString("es-ES", {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+      activityElement.textContent = timeString;
+    }
+  }
+
+  setupScrollToTop() {
+    if (!this.scrollToTopBtn) {
+      this.createScrollToTopBtn();
+    }
+  }
+
+  createScrollToTopBtn() {
+    this.scrollToTopBtn = document.createElement("button");
+    this.scrollToTopBtn.className = "scroll-to-top";
+    this.scrollToTopBtn.innerHTML = '<i class="fas fa-chevron-up"></i>';
+    this.scrollToTopBtn.setAttribute("aria-label", "Volver al inicio");
+    this.scrollToTopBtn.setAttribute("title", "Volver al inicio");
+
+    document.body.appendChild(this.scrollToTopBtn);
+
+    this.scrollToTopBtn.addEventListener("click", () => {
+      this.scrollToTop();
+    });
+  }
+
+  handleScroll() {
+    const currentScrollY = window.scrollY;
+
+    // Mostrar/ocultar botón scroll to top
+    if (currentScrollY > this.scrollThreshold) {
+      this.showScrollToTop();
+    } else {
+      this.hideScrollToTop();
     }
 
-    bindElements() {
-        this.footer = document.querySelector('.system-footer');
-        this.scrollToTopBtn = document.querySelector('.scroll-to-top');
-        this.systemStatus = document.querySelector('.system-status');
+    this.lastScrollY = currentScrollY;
+  }
+
+  showScrollToTop() {
+    if (this.scrollToTopBtn) {
+      this.scrollToTopBtn.classList.add("show");
     }
+  }
 
-    bindEvents() {
-        // Scroll to top button
-        if (this.scrollToTopBtn) {
-            this.scrollToTopBtn.addEventListener('click', () => {
-                this.scrollToTop();
-            });
-        }
-
-        // Enlaces del footer
-        const footerLinks = this.footer?.querySelectorAll('a[href^="#"]');
-        footerLinks?.forEach(link => {
-            link.addEventListener('click', (e) => {
-                this.handleInternalLink(e, link);
-            });
-        });
-
-        // Monitor de scroll
-        window.addEventListener('scroll', () => {
-            this.handleScroll();
-        });
-
-        // Eventos de teclado
-        document.addEventListener('keydown', (e) => {
-            this.handleKeyboard(e);
-        });
-
-        // Eventos de sistema
-        this.setupSystemEvents();
+  hideScrollToTop() {
+    if (this.scrollToTopBtn) {
+      this.scrollToTopBtn.classList.remove("show");
     }
+  }
 
-    updateSystemInfo() {
-        // Actualizar información del sistema
-        this.updateVersion();
-        this.updateUptime();
-        this.updateLastActivity();
-        
-        // Actualizar cada minuto
-        setInterval(() => {
-            this.updateUptime();
-            this.updateLastActivity();
-        }, 60000);
-    }
+  scrollToTop() {
+    const startY = window.scrollY;
+    const targetY = 0;
+    const distance = startY - targetY;
+    const duration = Math.min(800, Math.abs(distance) * 0.5);
+    let startTime = null;
 
-    updateVersion() {
-        const versionElement = document.querySelector('.system-version');
-        if (versionElement) {
-            // Obtener versión del sistema (esto vendría del backend)
-            const version = window.systemInfo?.version || '1.0.0';
-            versionElement.textContent = `v${version}`;
-        }
-    }
+    const easeOutCubic = (t) => {
+      return 1 - Math.pow(1 - t, 3);
+    };
 
-    updateUptime() {
-        const uptimeElement = document.querySelector('.system-uptime');
-        if (uptimeElement) {
-            // Calcular tiempo de sesión
-            const startTime = sessionStorage.getItem('sessionStart') || Date.now();
-            const currentTime = Date.now();
-            const uptime = currentTime - startTime;
-            
-            const hours = Math.floor(uptime / (1000 * 60 * 60));
-            const minutes = Math.floor((uptime % (1000 * 60 * 60)) / (1000 * 60));
-            
-            uptimeElement.textContent = `${hours}h ${minutes}m`;
-        }
-    }
+    const animate = (currentTime) => {
+      if (startTime === null) startTime = currentTime;
 
-    updateLastActivity() {
-        const activityElement = document.querySelector('.last-activity');
-        if (activityElement) {
-            const now = new Date();
-            const timeString = now.toLocaleTimeString('es-ES', {
-                hour: '2-digit',
-                minute: '2-digit'
-            });
-            activityElement.textContent = timeString;
-        }
-    }
+      const timeElapsed = currentTime - startTime;
+      const progress = Math.min(timeElapsed / duration, 1);
+      const ease = easeOutCubic(progress);
 
-    setupScrollToTop() {
-        if (!this.scrollToTopBtn) {
-            this.createScrollToTopBtn();
-        }
-    }
+      window.scrollTo(0, startY - distance * ease);
 
-    createScrollToTopBtn() {
-        this.scrollToTopBtn = document.createElement('button');
-        this.scrollToTopBtn.className = 'scroll-to-top';
-        this.scrollToTopBtn.innerHTML = '<i class="fas fa-chevron-up"></i>';
-        this.scrollToTopBtn.setAttribute('aria-label', 'Volver al inicio');
-        this.scrollToTopBtn.setAttribute('title', 'Volver al inicio');
-        
-        document.body.appendChild(this.scrollToTopBtn);
-        
-        this.scrollToTopBtn.addEventListener('click', () => {
-            this.scrollToTop();
-        });
-    }
-
-    handleScroll() {
-        const currentScrollY = window.scrollY;
-        
-        // Mostrar/ocultar botón scroll to top
-        if (currentScrollY > this.scrollThreshold) {
-            this.showScrollToTop();
-        } else {
-            this.hideScrollToTop();
-        }
-        
-        this.lastScrollY = currentScrollY;
-    }
-
-    showScrollToTop() {
-        if (this.scrollToTopBtn) {
-            this.scrollToTopBtn.classList.add('show');
-        }
-    }
-
-    hideScrollToTop() {
-        if (this.scrollToTopBtn) {
-            this.scrollToTopBtn.classList.remove('show');
-        }
-    }
-
-    scrollToTop() {
-        const startY = window.scrollY;
-        const targetY = 0;
-        const distance = startY - targetY;
-        const duration = Math.min(800, Math.abs(distance) * 0.5);
-        let startTime = null;
-
-        const easeOutCubic = (t) => {
-            return 1 - Math.pow(1 - t, 3);
-        };
-
-        const animate = (currentTime) => {
-            if (startTime === null) startTime = currentTime;
-            
-            const timeElapsed = currentTime - startTime;
-            const progress = Math.min(timeElapsed / duration, 1);
-            const ease = easeOutCubic(progress);
-            
-            window.scrollTo(0, startY - (distance * ease));
-            
-            if (progress < 1) {
-                requestAnimationFrame(animate);
-            }
-        };
-
+      if (progress < 1) {
         requestAnimationFrame(animate);
+      }
+    };
 
-        // Efecto visual en el botón
-        this.scrollToTopBtn?.classList.add('bounce');
-        setTimeout(() => {
-            this.scrollToTopBtn?.classList.remove('bounce');
-        }, 600);
+    requestAnimationFrame(animate);
+
+    // Efecto visual en el botón
+    this.scrollToTopBtn?.classList.add("bounce");
+    setTimeout(() => {
+      this.scrollToTopBtn?.classList.remove("bounce");
+    }, 600);
+  }
+
+  handleInternalLink(e, link) {
+    const href = link.getAttribute("href");
+
+    if (href.startsWith("#")) {
+      e.preventDefault();
+
+      const targetId = href.substring(1);
+      const targetElement = document.getElementById(targetId);
+
+      if (targetElement) {
+        this.smoothScrollTo(targetElement);
+      }
+    }
+  }
+
+  smoothScrollTo(element) {
+    const targetY = element.offsetTop - 100; // Offset para header fijo
+
+    window.scrollTo({
+      top: targetY,
+      behavior: "smooth",
+    });
+  }
+
+  handleKeyboard(e) {
+    // Scroll to top con Ctrl + Home
+    if (e.ctrlKey && e.key === "Home") {
+      e.preventDefault();
+      this.scrollToTop();
     }
 
-    handleInternalLink(e, link) {
-        const href = link.getAttribute('href');
-        
-        if (href.startsWith('#')) {
-            e.preventDefault();
-            
-            const targetId = href.substring(1);
-            const targetElement = document.getElementById(targetId);
-            
-            if (targetElement) {
-                this.smoothScrollTo(targetElement);
-            }
-        }
+    // Ir al footer con Ctrl + End
+    if (e.ctrlKey && e.key === "End") {
+      e.preventDefault();
+      this.footer?.scrollIntoView({ behavior: "smooth" });
+    }
+  }
+
+  setupSystemEvents() {
+    // Guardar tiempo de inicio de sesión
+    if (!sessionStorage.getItem("sessionStart")) {
+      sessionStorage.setItem("sessionStart", Date.now().toString());
     }
 
-    smoothScrollTo(element) {
-        const targetY = element.offsetTop - 100; // Offset para header fijo
-        
-        window.scrollTo({
-            top: targetY,
-            behavior: 'smooth'
-        });
-    }
+    // Detectar inactividad
+    let inactivityTimer;
+    const resetTimer = () => {
+      clearTimeout(inactivityTimer);
+      this.updateLastActivity();
 
-    handleKeyboard(e) {
-        // Scroll to top con Ctrl + Home
-        if (e.ctrlKey && e.key === 'Home') {
-            e.preventDefault();
-            this.scrollToTop();
-        }
-        
-        // Ir al footer con Ctrl + End
-        if (e.ctrlKey && e.key === 'End') {
-            e.preventDefault();
-            this.footer?.scrollIntoView({ behavior: 'smooth' });
-        }
-    }
+      inactivityTimer = setTimeout(() => {
+        this.handleInactivity();
+      }, 30 * 60 * 1000); // 30 minutos
+    };
 
-    setupSystemEvents() {
-        // Guardar tiempo de inicio de sesión
-        if (!sessionStorage.getItem('sessionStart')) {
-            sessionStorage.setItem('sessionStart', Date.now().toString());
-        }
+    // Eventos que indican actividad
+    ["mousedown", "mousemove", "keypress", "scroll", "touchstart"].forEach(
+      (event) => {
+        document.addEventListener(event, resetTimer, true);
+      }
+    );
 
-        // Detectar inactividad
-        let inactivityTimer;
-        const resetTimer = () => {
-            clearTimeout(inactivityTimer);
-            this.updateLastActivity();
-            
-            inactivityTimer = setTimeout(() => {
-                this.handleInactivity();
-            }, 30 * 60 * 1000); // 30 minutos
-        };
+    resetTimer();
+  }
 
-        // Eventos que indican actividad
-        ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'].forEach(event => {
-            document.addEventListener(event, resetTimer, true);
-        });
+  handleInactivity() {
+    // Mostrar mensaje de inactividad
+    this.showInactivityWarning();
+  }
 
-        resetTimer();
-    }
-
-    handleInactivity() {
-        // Mostrar mensaje de inactividad
-        this.showInactivityWarning();
-    }
-
-    showInactivityWarning() {
-        const warning = document.createElement('div');
-        warning.className = 'inactivity-warning';
-        warning.innerHTML = `
+  showInactivityWarning() {
+    const warning = document.createElement("div");
+    warning.className = "inactivity-warning";
+    warning.innerHTML = `
             <div class="warning-content">
                 <i class="fas fa-clock"></i>
                 <h3>Sesión inactiva</h3>
@@ -268,70 +270,76 @@ class FooterManager {
                 </div>
             </div>
         `;
-        
-        document.body.appendChild(warning);
-        
-        // Eventos de los botones
-        warning.querySelector('.btn-continue')?.addEventListener('click', () => {
-            warning.remove();
-        });
-        
-        warning.querySelector('.btn-logout')?.addEventListener('click', () => {
-            window.location.href = '/auth/logout.php';
-        });
-        
-        // Auto-cerrar después de 5 minutos
-        setTimeout(() => {
-            if (document.body.contains(warning)) {
-                window.location.href = '/auth/logout.php';
-            }
-        }, 5 * 60 * 1000);
+
+    document.body.appendChild(warning);
+
+    // Eventos de los botones
+    warning.querySelector(".btn-continue")?.addEventListener("click", () => {
+      warning.remove();
+    });
+
+    warning.querySelector(".btn-logout")?.addEventListener("click", () => {
+      window.location.href = "/auth/logout.php";
+    });
+
+    // Auto-cerrar después de 5 minutos
+    setTimeout(() => {
+      if (document.body.contains(warning)) {
+        window.location.href = "/auth/logout.php";
+      }
+    }, 5 * 60 * 1000);
+  }
+
+  startSystemMonitoring() {
+    // Monitor de rendimiento del sistema
+    this.updateSystemStats();
+
+    setInterval(() => {
+      this.updateSystemStats();
+    }, 5000);
+  }
+
+  updateSystemStats() {
+    // Obtener estadísticas de rendimiento
+    if ("memory" in performance) {
+      const memInfo = performance.memory;
+      const memUsage = (
+        (memInfo.usedJSHeapSize / memInfo.totalJSHeapSize) *
+        100
+      ).toFixed(1);
+
+      // Actualizar indicador si existe
+      const memElement = document.querySelector(".memory-usage");
+      if (memElement) {
+        memElement.textContent = `${memUsage}%`;
+      }
     }
 
-    startSystemMonitoring() {
-        // Monitor de rendimiento del sistema
-        this.updateSystemStats();
-        
-        setInterval(() => {
-            this.updateSystemStats();
-        }, 5000);
-    }
+    // Monitor de conexión
+    this.updateConnectionQuality();
+  }
 
-    updateSystemStats() {
-        // Obtener estadísticas de rendimiento
-        if ('memory' in performance) {
-            const memInfo = performance.memory;
-            const memUsage = (memInfo.usedJSHeapSize / memInfo.totalJSHeapSize * 100).toFixed(1);
-            
-            // Actualizar indicador si existe
-            const memElement = document.querySelector('.memory-usage');
-            if (memElement) {
-                memElement.textContent = `${memUsage}%`;
-            }
-        }
-        
-        // Monitor de conexión
-        this.updateConnectionQuality();
-    }
+  updateConnectionQuality() {
+    const statusElement = document.querySelector(".connection-status");
+    if (!statusElement) return;
 
-    updateConnectionQuality() {
-        const statusElement = document.querySelector('.connection-status');
-        if (!statusElement) return;
+    const connection =
+      navigator.connection ||
+      navigator.mozConnection ||
+      navigator.webkitConnection;
 
-        const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-        
-        if (connection) {
-            const effectiveType = connection.effectiveType || 'unknown';
-            const downlink = connection.downlink || 0;
-            
-            let quality = 'good';
-            if (downlink < 1) quality = 'poor';
-            else if (downlink < 5) quality = 'fair';
-            
-            statusElement.className = `connection-status ${quality}`;
-            statusElement.textContent = effectiveType.toUpperCase();
-        }
+    if (connection) {
+      const effectiveType = connection.effectiveType || "unknown";
+      const downlink = connection.downlink || 0;
+
+      let quality = "good";
+      if (downlink < 1) quality = "poor";
+      else if (downlink < 5) quality = "fair";
+
+      statusElement.className = `connection-status ${quality}`;
+      statusElement.textContent = effectiveType.toUpperCase();
     }
+  }
 }
 
 // CSS adicional dinámico
@@ -460,13 +468,13 @@ const footerStyles = `
 `;
 
 // Inyectar estilos adicionales
-const styleSheet = document.createElement('style');
+const styleSheet = document.createElement("style");
 styleSheet.textContent = footerStyles;
 document.head.appendChild(styleSheet);
 
 // Inicializar cuando el DOM esté listo
-document.addEventListener('DOMContentLoaded', () => {
-    new FooterManager();
+document.addEventListener("DOMContentLoaded", () => {
+  new FooterManager();
 });
 
 // Exportar para uso global si es necesario
