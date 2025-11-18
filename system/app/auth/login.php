@@ -1,4 +1,5 @@
 <?php
+
 /**
  * PRIMERO DE JUNIO - LOGIN SIMPLIFICADO
  */
