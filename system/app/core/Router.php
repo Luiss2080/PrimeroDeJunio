@@ -10,7 +10,14 @@ class Router
 
     public function __construct()
     {
-        $this->routes = include APP_PATH . '../routes/web.php';
+        $routesPath = ROOT_PATH . '/routes/web.php';
+        
+        if (file_exists($routesPath)) {
+            $routes = include $routesPath;
+            $this->routes = is_array($routes) ? $routes : [];
+        } else {
+            throw new Exception("Archivo de rutas no encontrado: " . $routesPath);
+        }
     }
 
     public function dispatch()
@@ -39,11 +46,20 @@ class Router
             $uri = substr($uri, strlen($systemPath));
         }
 
+        // Remover index.php/ si existe al inicio
+        if (strpos($uri, 'index.php/') === 0) {
+            $uri = substr($uri, 10); // Longitud de 'index.php/'
+        }
+
         return trim($uri, '/');
     }
 
     private function findRoute($method, $uri)
     {
+        if (!is_array($this->routes) || empty($this->routes)) {
+            return null;
+        }
+        
         foreach ($this->routes as $routePattern => $handler) {
             list($routeMethod, $routePath) = explode('|', $routePattern, 2);
 
@@ -102,10 +118,10 @@ class Router
             list($controllerName, $methodName) = explode('@', $handler);
 
             $controllerClass = $controllerName;
-            $controllerFile = APP_PATH . 'controllers/' . $controllerClass . '.php';
+            $controllerFile = APP_PATH . '/controllers/' . $controllerClass . '.php';
 
             if (!file_exists($controllerFile)) {
-                throw new Exception("Controlador no encontrado: $controllerClass");
+                throw new Exception("Controlador no encontrado: $controllerClass en $controllerFile");
             }
 
             require_once $controllerFile;

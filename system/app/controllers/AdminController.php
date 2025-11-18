@@ -44,49 +44,18 @@ class AdminController extends Controller
     public function dashboard()
     {
         try {
-            // Obtener estadísticas generales
-            $estadisticas = [
-                'usuarios' => $this->usuario->obtenerEstadisticas(),
-                'conductores' => $this->conductor->obtenerEstadisticas(),
-                'vehiculos' => $this->vehiculo->obtenerEstadisticas(),
-                'clientes' => $this->cliente->obtenerEstadisticas(),
-                'viajes' => $this->viaje->obtenerEstadisticas()
+            // Datos básicos para el dashboard
+            $data = [
+                'usuario_actual' => Auth::user(),
+                'titulo' => 'Dashboard Administrativo',
+                'mensaje' => '¡Bienvenido al sistema de gestión de mototaxis!'
             ];
 
-            // Datos para gráficos
-            $ingresosMensuales = $this->viaje->obtenerIngresosMensuales();
-            $viajesHoy = $this->viaje->obtenerViajesDelDia(date('Y-m-d'));
-            $conductoresActivos = $this->conductor->obtenerActivos();
-            $vehiculosMantenimiento = $this->vehiculo->obtenerVehiculosMantenimiento();
-            
-            // Alertas y notificaciones
-            $alertas = $this->obtenerAlertas();
-
-            // Actividad reciente
-            $actividadReciente = $this->obtenerActividadReciente();
-
-            // Top conductores del mes
-            $topConductores = $this->conductor->obtenerTopConductores(5);
-
-            // Vehículos más utilizados
-            $vehiculosTop = $this->vehiculo->obtenerMasUtilizados(5);
-
-            $this->view('admin/dashboard/index', [
-                'estadisticas' => $estadisticas,
-                'ingresos_mensuales' => $ingresosMensuales,
-                'viajes_hoy' => $viajesHoy,
-                'conductores_activos' => count($conductoresActivos),
-                'vehiculos_mantenimiento' => count($vehiculosMantenimiento),
-                'alertas' => $alertas,
-                'actividad_reciente' => $actividadReciente,
-                'top_conductores' => $topConductores,
-                'vehiculos_top' => $vehiculosTop,
-                'usuario_actual' => Auth::user()
-            ]);
+            $this->view('dashboard/administrador', $data);
 
         } catch (Exception $e) {
             $this->setFlash('error', 'Error al cargar el dashboard: ' . $e->getMessage());
-            $this->view('admin/dashboard/error');
+            $this->view('dashboard/index');
         }
     }
 

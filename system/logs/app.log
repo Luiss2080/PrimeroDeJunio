@@ -41,3 +41,31 @@
 [2025-11-18 09:16:25] WARNING: Session already active: session ini settings skipped 
 [2025-11-18 09:16:25] INFO: Sistema inicializado correctamente 
 [2025-11-18 09:16:25] INFO: Sistema inicializado correctamente 
+[2025-11-18 09:18:31] INFO: Sistema inicializado correctamente 
+[2025-11-18 09:18:33] WARNING: Session already active: session ini settings skipped 
+[2025-11-18 09:18:33] INFO: Sistema inicializado correctamente 
+[2025-11-18 09:19:09] WARNING: Session already active: session ini settings skipped 
+[2025-11-18 09:19:09] INFO: Sistema inicializado correctamente 
+[2025-11-18 09:19:22] WARNING: Session already active: session ini settings skipped 
+[2025-11-18 09:19:22] INFO: Sistema inicializado correctamente 
+[2025-11-18 09:19:22] INFO: Sistema inicializado correctamente 
+[2025-11-18 09:21:13] INFO: Sistema inicializado correctamente 
+[2025-11-18 09:24:57] WARNING: Session already active: session ini settings skipped 
+[2025-11-18 09:24:57] INFO: Sistema inicializado correctamente 
+[2025-11-18 09:25:40] WARNING: Session already active: session ini settings skipped 
+[2025-11-18 09:25:40] INFO: Sistema inicializado correctamente 
+[2025-11-18 09:25:47] WARNING: Session already active: session ini settings skipped 
+[2025-11-18 09:25:47] INFO: Sistema inicializado correctamente 
+[2025-11-18 09:25:47] INFO: Sistema inicializado correctamente 
+[2025-11-18 09:25:47] ERROR: Error no capturado {"error":"Controlador no encontrado: AdminController","trace":"#0 C:\\xampp\\htdocs\\PrimeroDeJunio\\system\\app\\core\\Router.php(35): Router->executeRoute(Array)\n#1 C:\\xampp\\htdocs\\PrimeroDeJunio\\system\\public\\index.php(15): Router->dispatch()\n#2 {main}"}
+[2025-11-18 09:35:09] INFO: Sistema inicializado correctamente 
+[2025-11-18 09:35:09] ERROR: Error no capturado {"error":"Vista no encontrada: admin\/dashboard\/error","trace":"#0 C:\\xampp\\htdocs\\PrimeroDeJunio\\system\\app\\controllers\\AdminController.php(89): Controller->view('admin\/dashboard...')\n#1 C:\\xampp\\htdocs\\PrimeroDeJunio\\system\\app\\core\\Router.php(140): AdminController->dashboard()\n#2 C:\\xampp\\htdocs\\PrimeroDeJunio\\system\\app\\core\\Router.php(35): Router->executeRoute(Array)\n#3 C:\\xampp\\htdocs\\PrimeroDeJunio\\system\\public\\index.php(15): Router->dispatch()\n#4 {main}"}
+[2025-11-18 09:35:12] WARNING: Session already active: session ini settings skipped 
+[2025-11-18 09:35:12] INFO: Sistema inicializado correctamente 
+[2025-11-18 09:35:14] WARNING: Session already active: session ini settings skipped 
+[2025-11-18 09:35:14] INFO: Sistema inicializado correctamente 
+[2025-11-18 09:35:21] WARNING: Session already active: session ini settings skipped 
+[2025-11-18 09:35:21] INFO: Sistema inicializado correctamente 
+[2025-11-18 09:35:22] INFO: Sistema inicializado correctamente 
+[2025-11-18 09:35:22] ERROR: Error no capturado {"error":"Vista no encontrada: admin\/dashboard\/error","trace":"#0 C:\\xampp\\htdocs\\PrimeroDeJunio\\system\\app\\controllers\\AdminController.php(89): Controller->view('admin\/dashboard...')\n#1 C:\\xampp\\htdocs\\PrimeroDeJunio\\system\\app\\core\\Router.php(140): AdminController->dashboard()\n#2 C:\\xampp\\htdocs\\PrimeroDeJunio\\system\\app\\core\\Router.php(35): Router->executeRoute(Array)\n#3 C:\\xampp\\htdocs\\PrimeroDeJunio\\system\\public\\index.php(15): Router->dispatch()\n#4 {main}"}
+[2025-11-18 09:42:49] INFO: Sistema inicializado correctamente 
