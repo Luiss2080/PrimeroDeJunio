@@ -160,17 +160,17 @@ return [
     // ========================================
     // RUTAS DE ERROR
     // ========================================
-    'GET|error/404' => function() {
+    'GET|error/404' => function () {
         http_response_code(404);
         echo "Página no encontrada - 404";
     },
-    
-    'GET|error/403' => function() {
+
+    'GET|error/403' => function () {
         http_response_code(403);
         echo "Acceso denegado - 403";
     },
-    
-    'GET|error/500' => function() {
+
+    'GET|error/500' => function () {
         http_response_code(500);
         echo "Error interno del servidor - 500";
     }

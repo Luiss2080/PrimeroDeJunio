@@ -1,4 +1,5 @@
 <?php
+
 /**
  * PRIMERO DE JUNIO - LOGIN SIMPLIFICADO
  */
@@ -44,6 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -59,37 +61,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             align-items: center;
             justify-content: center;
         }
+
         .login-container {
             background: white;
             border-radius: 10px;
             padding: 40px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
             width: 100%;
             max-width: 400px;
         }
+
         .logo {
             text-align: center;
             margin-bottom: 30px;
         }
+
         .logo h1 {
             color: #333;
             margin: 0;
             font-size: 24px;
         }
+
         .logo p {
             color: #666;
             margin: 5px 0 0 0;
             font-size: 14px;
         }
+
         .form-group {
             margin-bottom: 20px;
         }
+
         .form-group label {
             display: block;
             margin-bottom: 5px;
             color: #333;
             font-weight: bold;
         }
+
         .form-group input {
             width: 100%;
             padding: 12px;
@@ -98,10 +107,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             font-size: 16px;
             box-sizing: border-box;
         }
+
         .form-group input:focus {
             outline: none;
             border-color: #667eea;
         }
+
         .btn {
             width: 100%;
             padding: 12px;
@@ -113,9 +124,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             cursor: pointer;
             font-weight: bold;
         }
+
         .btn:hover {
             background: #5a67d8;
         }
+
         .error {
             background: #fee;
             border: 1px solid #fcc;
@@ -124,16 +137,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             border-radius: 5px;
             margin-bottom: 20px;
         }
+
         .logout-link {
             text-align: center;
             margin-top: 20px;
         }
+
         .logout-link a {
             color: #667eea;
             text-decoration: none;
         }
     </style>
 </head>
+
 <body>
     <div class="login-container">
         <div class="logo">
@@ -164,4 +180,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </div>
 </body>
+
 </html>
