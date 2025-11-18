@@ -69,3 +69,8 @@
 [2025-11-18 09:35:22] INFO: Sistema inicializado correctamente 
 [2025-11-18 09:35:22] ERROR: Error no capturado {"error":"Vista no encontrada: admin\/dashboard\/error","trace":"#0 C:\\xampp\\htdocs\\PrimeroDeJunio\\system\\app\\controllers\\AdminController.php(89): Controller->view('admin\/dashboard...')\n#1 C:\\xampp\\htdocs\\PrimeroDeJunio\\system\\app\\core\\Router.php(140): AdminController->dashboard()\n#2 C:\\xampp\\htdocs\\PrimeroDeJunio\\system\\app\\core\\Router.php(35): Router->executeRoute(Array)\n#3 C:\\xampp\\htdocs\\PrimeroDeJunio\\system\\public\\index.php(15): Router->dispatch()\n#4 {main}"}
 [2025-11-18 09:42:49] INFO: Sistema inicializado correctamente 
+[2025-11-18 09:50:12] WARNING: Session already active: session ini settings skipped 
+[2025-11-18 09:50:12] INFO: Sistema inicializado correctamente 
+[2025-11-18 09:50:17] WARNING: Session already active: session ini settings skipped 
+[2025-11-18 09:50:17] INFO: Sistema inicializado correctamente 
+[2025-11-18 09:50:18] INFO: Sistema inicializado correctamente 

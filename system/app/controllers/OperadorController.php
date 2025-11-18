@@ -37,56 +37,23 @@ class OperadorController extends Controller
     }
 
     /**
-     * Dashboard operativo con estadísticas del día
+     * Dashboard operativo simple
      */
     public function dashboard()
     {
         try {
-            $fechaHoy = date('Y-m-d');
-
-            // Estadísticas del día
-            $estadisticasHoy = [
-                'viajes_hoy' => $this->viaje->obtenerViajesDelDia($fechaHoy),
-                'viajes_en_curso' => $this->viaje->obtenerEnCurso(),
-                'ingresos_hoy' => $this->viaje->obtenerEstadisticasDia($fechaHoy),
-                'conductores_activos' => $this->conductor->obtenerActivos()
+            // Datos básicos para el dashboard
+            $data = [
+                'usuario_actual' => Auth::user(),
+                'titulo' => 'Dashboard Operador',
+                'mensaje' => '¡Panel de operaciones listo!'
             ];
 
-            // Viajes pendientes que requieren atención
-            $viajespendientes = $this->viaje->obtenerPendientes();
-
-            // Conductores disponibles
-            $conductoresDisponibles = $this->conductor->obtenerDisponibles();
-
-            // Vehículos disponibles
-            $vehiculosDisponibles = $this->vehiculo->obtenerDisponibles();
-
-            // Alertas operativas
-            $alertas = $this->obtenerAlertasOperativas();
-
-            // Actividad reciente
-            $actividadReciente = [
-                'viajes_recientes' => $this->viaje->obtenerRecientes(10),
-                'clientes_nuevos' => $this->cliente->obtenerClientesNuevos(1), // Hoy
-            ];
-
-            // Resumen de pagos del día
-            $pagosDia = $this->pagoTarifa->obtenerPagosDelDia($fechaHoy);
-
-            $this->view('operador/dashboard/index', [
-                'estadisticas_hoy' => $estadisticasHoy,
-                'viajes_pendientes' => $viajespendientes,
-                'conductores_disponibles' => $conductoresDisponibles,
-                'vehiculos_disponibles' => $vehiculosDisponibles,
-                'alertas' => $alertas,
-                'actividad_reciente' => $actividadReciente,
-                'pagos_dia' => $pagosDia,
-                'usuario_actual' => Auth::user()
-            ]);
+            $this->view('dashboard/operador', $data);
 
         } catch (Exception $e) {
             $this->setFlash('error', 'Error al cargar el dashboard: ' . $e->getMessage());
-            $this->view('operador/dashboard/error');
+            $this->view('dashboard/index');
         }
     }
 
