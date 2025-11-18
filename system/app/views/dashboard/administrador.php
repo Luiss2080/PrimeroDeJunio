@@ -1,103 +1,459 @@
 <?php
-
 /**
- * Dashboard Administrativo - Simple
- * Sistema PRIMERO DE JUNIO
+ * Dashboard Administrativo - PRIMERO DE JUNIO
+ * Sistema de gestión de mototaxis con diseño moderno
  */
+
+// Validar que el usuario esté logueado
+if (!Auth::check()) {
+    header('Location: /PrimeroDeJunio/system/public/index.php/auth/login');
+    exit;
+}
+
+// Obtener datos del usuario actual
+$usuario_actual = Auth::user();
+$current_page = 'dashboard';
 ?>
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Admin - Primero de Junio</title>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- Estilos del Sistema -->
+    <link rel="stylesheet" href="/PrimeroDeJunio/system/public/assets/css/header.css">
+    <link rel="stylesheet" href="/PrimeroDeJunio/system/public/assets/css/sidebar.css">
+    <link rel="stylesheet" href="/PrimeroDeJunio/system/public/assets/css/footer.css">
+    <link rel="stylesheet" href="/PrimeroDeJunio/system/public/assets/css/dashboard.css">
+    
     <style>
+        /* Reset y variables globales */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        :root {
+            --primary-green: #00ff66;
+            --primary-green-dark: #00cc52;
+            --bg-dark: #000000;
+            --bg-dark-secondary: #0a0a0a;
+            --bg-dark-tertiary: #1a1a1a;
+            --white: #ffffff;
+            --gray-light: #e5e5e5;
+            --gray-medium: #999999;
+            --transition-fast: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #333;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+            color: var(--white);
             min-height: 100vh;
+            overflow-x: hidden;
+            padding-top: 80px; /* Espacio para header fijo */
         }
 
-        .container {
-            max-width: 1200px;
+        /* Layout principal del dashboard */
+        .dashboard-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            min-height: calc(100vh - 80px);
+            transition: var(--transition-fast);
+        }
+
+        .main-content {
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            overflow-y: auto;
+        }
+
+        /* Área de contenido del dashboard */
+        .dashboard-container {
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 20px;
         }
 
-        .header {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        .dashboard-header {
+            margin-bottom: 2rem;
         }
 
-        .header h1 {
-            color: #333;
-            margin-bottom: 10px;
+        .dashboard-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--primary-green) 0%, #00ff88 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .user-info {
-            background: #f8f9fa;
-            padding: 10px 15px;
-            border-radius: 5px;
-            border-left: 4px solid #28a745;
+        .dashboard-subtitle {
+            color: var(--gray-light);
+            font-size: 1.1rem;
+            font-weight: 400;
         }
 
-        .dashboard-grid {
+        /* Tarjetas de estadísticas */
+        .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
         }
 
-        .card {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            transition: transform 0.3s ease;
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: var(--transition-fast);
+            position: relative;
+            overflow: hidden;
         }
 
-        .card:hover {
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(135deg, var(--primary-green) 0%, #00ff88 100%);
+        }
+
+        .stat-card:hover {
             transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 10px 40px rgba(0, 255, 102, 0.2);
         }
 
-        .card h3 {
-            color: #333;
-            margin-bottom: 15px;
-            font-size: 1.2em;
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-green) 0%, #00ff88 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: var(--bg-dark);
+            font-size: 1.5rem;
         }
 
-        .card-icon {
-            font-size: 2em;
-            margin-bottom: 15px;
-            display: block;
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+            line-height: 1;
         }
 
-        .card-number {
-            font-size: 2.5em;
-            font-weight: bold;
-            color: #667eea;
-            margin-bottom: 10px;
+        .stat-label {
+            color: var(--gray-light);
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
         }
 
-        .card-label {
-            color: #666;
-            font-size: 0.9em;
+        .stat-change {
+            font-size: 0.85rem;
+            font-weight: 500;
         }
 
-        .menu-grid {
+        .stat-change.positive {
+            color: var(--primary-green);
+        }
+
+        .stat-change.negative {
+            color: #ff6b6b;
+        }
+
+        /* Secciones del dashboard */
+        .dashboard-sections {
             display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .section-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary-green) 0%, #00ff88 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--bg-dark);
+        }
+
+        /* Acciones rápidas */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .action-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-decoration: none;
+            color: var(--white);
+            transition: var(--transition-fast);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            text-align: center;
+        }
+
+        .action-btn:hover {
+            background: rgba(0, 255, 102, 0.1);
+            border-color: var(--primary-green);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 255, 102, 0.3);
+        }
+
+        .action-btn i {
+            font-size: 2rem;
+            color: var(--primary-green);
+        }
+
+        .action-btn span {
+            font-weight: 500;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .dashboard-layout {
+                grid-template-columns: 1fr;
+            }
+            
+            .dashboard-sections {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 1rem;
+            }
+            
+            .dashboard-title {
+                font-size: 2rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .quick-actions {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Header del Sistema -->
+    <?php include_once __DIR__ . '/../layouts/header.php'; ?>
+    
+    <!-- Layout principal -->
+    <div class="dashboard-layout">
+        
+        <!-- Sidebar -->
+        <?php include_once __DIR__ . '/../layouts/sidebar.php'; ?>
+        
+        <!-- Contenido Principal -->
+        <main class="main-content">
+            <div class="dashboard-container">
+                
+                <!-- Header del Dashboard -->
+                <header class="dashboard-header">
+                    <h1 class="dashboard-title">Dashboard Administrativo</h1>
+                    <p class="dashboard-subtitle">Bienvenido al sistema de gestión de mototaxis Primero de Junio</p>
+                </header>
+
+                <!-- Tarjetas de Estadísticas -->
+                <section class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-number">150</div>
+                        <div class="stat-label">Conductores Activos</div>
+                        <div class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i> +12% este mes
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-motorcycle"></i>
+                        </div>
+                        <div class="stat-number">89</div>
+                        <div class="stat-label">Vehículos en Servicio</div>
+                        <div class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i> +5% este mes
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-route"></i>
+                        </div>
+                        <div class="stat-number">1,234</div>
+                        <div class="stat-label">Viajes Hoy</div>
+                        <div class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i> +8% vs ayer
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <div class="stat-number">$45,890</div>
+                        <div class="stat-label">Ingresos del Mes</div>
+                        <div class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i> +15% este mes
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Acciones Rápidas -->
+                <section class="quick-actions">
+                    <a href="/PrimeroDeJunio/system/public/index.php/admin/conductores/nuevo" class="action-btn">
+                        <i class="fas fa-user-plus"></i>
+                        <span>Nuevo Conductor</span>
+                    </a>
+                    
+                    <a href="/PrimeroDeJunio/system/public/index.php/admin/vehiculos/nuevo" class="action-btn">
+                        <i class="fas fa-car"></i>
+                        <span>Registrar Vehículo</span>
+                    </a>
+                    
+                    <a href="/PrimeroDeJunio/system/public/index.php/admin/viajes" class="action-btn">
+                        <i class="fas fa-route"></i>
+                        <span>Ver Viajes</span>
+                    </a>
+                    
+                    <a href="/PrimeroDeJunio/system/public/index.php/admin/reportes" class="action-btn">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Reportes</span>
+                    </a>
+                    
+                    <a href="/PrimeroDeJunio/system/public/index.php/admin/configuracion" class="action-btn">
+                        <i class="fas fa-cog"></i>
+                        <span>Configuración</span>
+                    </a>
+                    
+                    <a href="/PrimeroDeJunio/system/public/index.php/admin/usuarios" class="action-btn">
+                        <i class="fas fa-users-cog"></i>
+                        <span>Gestionar Usuarios</span>
+                    </a>
+                </section>
+
+                <!-- Secciones del Dashboard -->
+                <div class="dashboard-sections">
+                    
+                    <!-- Viajes Recientes -->
+                    <div class="section-card">
+                        <h2 class="section-title">
+                            <div class="section-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            Viajes Recientes
+                        </h2>
+                        
+                        <div class="recent-trips">
+                            <!-- Aquí se cargarían los viajes recientes -->
+                            <p style="color: var(--gray-light); text-align: center; padding: 2rem;">
+                                <i class="fas fa-info-circle"></i>
+                                Los viajes recientes se mostrarán aquí
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Notificaciones y Alertas -->
+                    <div class="section-card">
+                        <h2 class="section-title">
+                            <div class="section-icon">
+                                <i class="fas fa-bell"></i>
+                            </div>
+                            Notificaciones
+                        </h2>
+                        
+                        <div class="notifications">
+                            <!-- Aquí se cargarían las notificaciones -->
+                            <p style="color: var(--gray-light); text-align: center; padding: 2rem;">
+                                <i class="fas fa-check-circle"></i>
+                                No hay notificaciones nuevas
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer del Sistema -->
+    <?php include_once __DIR__ . '/../layouts/footer.php'; ?>
+    
+    <!-- Scripts -->
+    <script src="/PrimeroDeJunio/system/public/assets/js/header.js"></script>
+    <script src="/PrimeroDeJunio/system/public/assets/js/sidebar.js"></script>
+    <script src="/PrimeroDeJunio/system/public/assets/js/footer.js"></script>
+    
+    <script>
+        // Inicialización específica del dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Dashboard administrativo cargado correctamente');
+            
+            // Cargar datos dinámicos
+            loadDashboardData();
+        });
+
+        function loadDashboardData() {
+            // Aquí se cargarían los datos reales del dashboard
+            // Por ahora solo mostramos un mensaje de carga
+            setTimeout(() => {
+                console.log('Datos del dashboard cargados');
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 15px;
         }

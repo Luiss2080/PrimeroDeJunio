@@ -1,518 +1,377 @@
 /**
- * SISTEMA PRIMERO DE JUNIO - HEADER JAVASCRIPT
- * JavaScript moderno para interacciones del header
+ * PRIMERO DE JUNIO - HEADER JAVASCRIPT PROFESIONAL
+ * Funcionalidades optimizadas para header del sistema - Basado en el sitio web
  */
 
-document.addEventListener("DOMContentLoaded", function () {
-  // === ELEMENTOS DEL HEADER ===
-  const sidebarToggle = document.getElementById("sidebarToggle");
-  const notificationBtn = document.getElementById("notificationBtn");
-  const notificationsDropdown = document.getElementById(
-    "notificationsDropdown"
-  );
-  const userProfileBtn = document.getElementById("userProfileBtn");
-  const userDropdown = document.getElementById("userDropdown");
-  const headerOverlay = document.getElementById("headerOverlay");
-  const globalSearch = document.getElementById("globalSearch");
-
-  // === VARIABLES DE ESTADO ===
-  let activeDropdown = null;
-  let searchTimeout = null;
-
-  // === TOGGLE SIDEBAR ===
-  if (sidebarToggle) {
-    sidebarToggle.addEventListener("click", function () {
-      toggleSidebar();
-    });
-  }
-
-  // === NOTIFICACIONES ===
-  if (notificationBtn && notificationsDropdown) {
-    notificationBtn.addEventListener("click", function (e) {
-      e.stopPropagation();
-      toggleDropdown("notifications");
-    });
-  }
-
-  // === PERFIL DE USUARIO ===
-  if (userProfileBtn && userDropdown) {
-    userProfileBtn.addEventListener("click", function (e) {
-      e.stopPropagation();
-      toggleDropdown("user");
-    });
-  }
-
-  // === OVERLAY ===
-  if (headerOverlay) {
-    headerOverlay.addEventListener("click", function () {
-      closeAllDropdowns();
-    });
-  }
-
-  // === BÚSQUEDA GLOBAL ===
-  if (globalSearch) {
-    globalSearch.addEventListener("input", function (e) {
-      handleGlobalSearch(e.target.value);
-    });
-
-    globalSearch.addEventListener("keypress", function (e) {
-      if (e.key === "Enter") {
-        e.preventDefault();
-        performSearch(e.target.value);
-      }
-    });
-
-    // Focus con Ctrl+K
-    document.addEventListener("keydown", function (e) {
-      if (e.ctrlKey && e.key === "k") {
-        e.preventDefault();
-        globalSearch.focus();
-        globalSearch.select();
-      }
-    });
-  }
-
-  // === CERRAR DROPDOWNS AL HACER CLIC FUERA ===
-  document.addEventListener("click", function (e) {
-    if (
-      !e.target.closest(".notifications-container") &&
-      !e.target.closest(".user-profile-container")
-    ) {
-      closeAllDropdowns();
+class HeaderManager {
+    constructor() {
+        this.header = null;
+        this.userDropdown = null;
+        this.menuToggle = null;
+        this.searchInput = null;
+        this.notificationBtn = null;
+        this.isDropdownOpen = false;
+        this.searchTimeout = null;
+        
+        this.init();
     }
-  });
 
-  // === ESCAPE KEY ===
-  document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape") {
-      closeAllDropdowns();
+    init() {
+        this.bindElements();
+        this.bindEvents();
+        this.setupSearch();
+        this.setupNotifications();
+        this.handleResponsive();
     }
-  });
 
-  // === FUNCIONES ===
+    bindElements() {
+        this.header = document.querySelector('.system-header');
+        this.userDropdown = document.querySelector('.user-dropdown');
+        this.menuToggle = document.querySelector('.menu-toggle');
+        this.searchInput = document.querySelector('.search-input');
+        this.notificationBtn = document.querySelector('.notification-btn');
+    }
 
-  /**
-   * Toggle del sidebar
-   */
-  function toggleSidebar() {
-    const sidebar = document.getElementById("systemSidebar");
-    const sidebarOverlay = document.getElementById("sidebarOverlay");
-    const headerWrapper = document.querySelector(".header-wrapper");
+    bindEvents() {
+        // Dropdown de usuario
+        if (this.userDropdown) {
+            const userBtn = this.userDropdown.querySelector('.user-btn');
+            const dropdownMenu = this.userDropdown.querySelector('.dropdown-menu');
 
-    if (!sidebar) return;
+            if (userBtn && dropdownMenu) {
+                userBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    this.toggleUserDropdown();
+                });
 
-    // En móvil, usar overlay
-    if (window.innerWidth <= 768) {
-      sidebar.classList.toggle("mobile-open");
-      sidebarOverlay?.classList.toggle("show");
+                // Cerrar dropdown al hacer click fuera
+                document.addEventListener('click', (e) => {
+                    if (!this.userDropdown.contains(e.target)) {
+                        this.closeUserDropdown();
+                    }
+                });
 
-      // Prevenir scroll del body
-      if (sidebar.classList.contains("mobile-open")) {
-        document.body.style.overflow = "hidden";
-      } else {
-        document.body.style.overflow = "";
-      }
-    } else {
-      // En desktop, colapsar
-      sidebar.classList.toggle("collapsed");
-
-      if (headerWrapper) {
-        if (sidebar.classList.contains("collapsed")) {
-          headerWrapper.classList.add("sidebar-collapsed");
-        } else {
-          headerWrapper.classList.remove("sidebar-collapsed");
+                // Cerrar con ESC
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape') {
+                        this.closeUserDropdown();
+                    }
+                });
+            }
         }
-      }
-    }
 
-    // Animar el botón
-    if (sidebarToggle) {
-      sidebarToggle.classList.toggle("active");
-    }
-  }
-
-  /**
-   * Toggle de dropdowns
-   */
-  function toggleDropdown(type) {
-    const dropdown =
-      type === "notifications" ? notificationsDropdown : userDropdown;
-
-    if (!dropdown) return;
-
-    // Si ya está activo, cerrar
-    if (activeDropdown === type) {
-      closeAllDropdowns();
-      return;
-    }
-
-    // Cerrar otros dropdowns
-    closeAllDropdowns();
-
-    // Abrir el dropdown actual
-    dropdown.classList.add("show");
-    headerOverlay.classList.add("show");
-    activeDropdown = type;
-
-    // Animar entrada
-    setTimeout(() => {
-      dropdown.style.transform = "translateY(0)";
-      dropdown.style.opacity = "1";
-    }, 10);
-  }
-
-  /**
-   * Cerrar todos los dropdowns
-   */
-  function closeAllDropdowns() {
-    [notificationsDropdown, userDropdown].forEach((dropdown) => {
-      if (dropdown) {
-        dropdown.classList.remove("show");
-      }
-    });
-
-    if (headerOverlay) {
-      headerOverlay.classList.remove("show");
-    }
-
-    activeDropdown = null;
-  }
-
-  /**
-   * Manejar búsqueda global
-   */
-  function handleGlobalSearch(query) {
-    // Limpiar timeout anterior
-    if (searchTimeout) {
-      clearTimeout(searchTimeout);
-    }
-
-    // Si la query está vacía, limpiar resultados
-    if (!query.trim()) {
-      clearSearchResults();
-      return;
-    }
-
-    // Debounce de 300ms
-    searchTimeout = setTimeout(() => {
-      performLiveSearch(query);
-    }, 300);
-  }
-
-  /**
-   * Realizar búsqueda en vivo
-   */
-  function performLiveSearch(query) {
-    // Aquí implementarías la lógica de búsqueda
-    console.log("Buscando:", query);
-
-    // Ejemplo de implementación con fetch
-    /*
-        fetch(`/api/search?q=${encodeURIComponent(query)}`)
-            .then(response => response.json())
-            .then(data => {
-                displaySearchResults(data);
-            })
-            .catch(error => {
-                console.error('Error en búsqueda:', error);
+        // Toggle del menú móvil
+        if (this.menuToggle) {
+            this.menuToggle.addEventListener('click', () => {
+                this.toggleMobileMenu();
             });
-        */
-  }
-
-  /**
-   * Realizar búsqueda completa
-   */
-  function performSearch(query) {
-    if (!query.trim()) return;
-
-    // Redirigir a página de búsqueda o mostrar resultados
-    window.location.href = `/admin/buscar?q=${encodeURIComponent(query)}`;
-  }
-
-  /**
-   * Limpiar resultados de búsqueda
-   */
-  function clearSearchResults() {
-    // Implementar lógica para limpiar resultados
-  }
-
-  /**
-   * Mostrar resultados de búsqueda
-   */
-  function displaySearchResults(results) {
-    // Implementar lógica para mostrar resultados
-  }
-
-  // === RESPONSIVE HANDLERS ===
-
-  /**
-   * Manejar cambios de tamaño de ventana
-   */
-  function handleResize() {
-    const sidebar = document.getElementById("systemSidebar");
-    const sidebarOverlay = document.getElementById("sidebarOverlay");
-    const headerWrapper = document.querySelector(".header-wrapper");
-
-    if (!sidebar) return;
-
-    // Si cambiamos a desktop y el sidebar está abierto en móvil, cerrar overlay
-    if (window.innerWidth > 768) {
-      sidebar.classList.remove("mobile-open");
-      sidebarOverlay?.classList.remove("show");
-      document.body.style.overflow = "";
-    }
-
-    // Ajustar header wrapper según estado del sidebar
-    if (headerWrapper && sidebar) {
-      if (window.innerWidth <= 768) {
-        headerWrapper.classList.remove("sidebar-collapsed");
-        headerWrapper.classList.add("sidebar-hidden");
-      } else if (window.innerWidth <= 1024) {
-        headerWrapper.classList.add("sidebar-collapsed");
-        headerWrapper.classList.remove("sidebar-hidden");
-      } else {
-        headerWrapper.classList.remove("sidebar-hidden");
-        if (!sidebar.classList.contains("collapsed")) {
-          headerWrapper.classList.remove("sidebar-collapsed");
         }
-      }
-    }
-  }
 
-  // Throttle para resize
-  let resizeTimeout;
-  window.addEventListener("resize", function () {
-    if (resizeTimeout) {
-      clearTimeout(resizeTimeout);
-    }
-    resizeTimeout = setTimeout(handleResize, 100);
-  });
+        // Scroll del header
+        window.addEventListener('scroll', () => {
+            this.handleScroll();
+        });
 
-  // Ejecutar al cargar
-  handleResize();
-
-  // === NOTIFICACIONES EN TIEMPO REAL ===
-
-  /**
-   * Actualizar contador de notificaciones
-   */
-  function updateNotificationCount(count) {
-    const badge = document.querySelector(".notification-badge");
-    const countSpan = document.querySelector(".notifications-count");
-
-    if (badge) {
-      if (count > 0) {
-        badge.textContent = count > 99 ? "99+" : count;
-        badge.style.display = "flex";
-      } else {
-        badge.style.display = "none";
-      }
+        // Redimensionar ventana
+        window.addEventListener('resize', () => {
+            this.handleResize();
+        });
     }
 
-    if (countSpan) {
-      countSpan.textContent = `${count} nuevas`;
+    setupSearch() {
+        if (!this.searchInput) return;
+
+        this.searchInput.addEventListener('input', (e) => {
+            clearTimeout(this.searchTimeout);
+            const query = e.target.value.trim();
+
+            this.searchTimeout = setTimeout(() => {
+                if (query.length >= 2) {
+                    this.performSearch(query);
+                }
+            }, 300);
+        });
+
+        this.searchInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                const query = e.target.value.trim();
+                if (query.length >= 2) {
+                    this.performSearch(query);
+                }
+            }
+        });
+
+        // Placeholder dinámico
+        this.animateSearchPlaceholder();
     }
 
-    // Actualizar atributo del botón
-    if (notificationBtn) {
-      notificationBtn.setAttribute("data-count", count);
-    }
-  }
+    setupNotifications() {
+        if (!this.notificationBtn) return;
 
-  /**
-   * Añadir nueva notificación
-   */
-  function addNotification(notification) {
-    const notificationsList = document.querySelector(".notifications-list");
+        this.notificationBtn.addEventListener('click', () => {
+            this.toggleNotifications();
+        });
 
-    if (!notificationsList) return;
-
-    const notificationElement = createNotificationElement(notification);
-
-    // Si no hay notificaciones, remover mensaje "no hay notificaciones"
-    const noNotifications =
-      notificationsList.querySelector(".no-notifications");
-    if (noNotifications) {
-      noNotifications.remove();
+        // Simular actualización de notificaciones
+        this.updateNotificationCount();
+        
+        // Actualizar cada 30 segundos
+        setInterval(() => {
+            this.updateNotificationCount();
+        }, 30000);
     }
 
-    // Añadir al principio de la lista
-    notificationsList.insertBefore(
-      notificationElement,
-      notificationsList.firstChild
-    );
-
-    // Limitar a 5 notificaciones
-    const notifications = notificationsList.querySelectorAll(
-      ".notification-item:not(.no-notifications)"
-    );
-    if (notifications.length > 5) {
-      notifications[notifications.length - 1].remove();
+    toggleUserDropdown() {
+        const dropdownMenu = this.userDropdown.querySelector('.dropdown-menu');
+        
+        if (this.isDropdownOpen) {
+            this.closeUserDropdown();
+        } else {
+            this.openUserDropdown();
+        }
     }
 
-    // Animar entrada
-    notificationElement.style.opacity = "0";
-    notificationElement.style.transform = "translateX(-20px)";
-    setTimeout(() => {
-      notificationElement.style.transition = "all 0.3s ease";
-      notificationElement.style.opacity = "1";
-      notificationElement.style.transform = "translateX(0)";
-    }, 10);
-  }
+    openUserDropdown() {
+        const dropdownMenu = this.userDropdown.querySelector('.dropdown-menu');
+        
+        this.userDropdown.classList.add('active');
+        dropdownMenu.classList.add('show');
+        dropdownMenu.classList.add('fade-in');
+        this.isDropdownOpen = true;
 
-  /**
-   * Crear elemento de notificación
-   */
-  function createNotificationElement(notification) {
-    const element = document.createElement("div");
-    element.className = "notification-item";
-    element.innerHTML = `
-            <div class="notification-icon">
-                <i class="${notification.icon || "fas fa-info-circle"}"></i>
-            </div>
-            <div class="notification-content">
-                <h4>${escapeHtml(notification.title)}</h4>
-                <p>${escapeHtml(notification.message)}</p>
-                <small>${notification.time || "Ahora"}</small>
+        // Animación de entrada
+        setTimeout(() => {
+            dropdownMenu.classList.remove('fade-in');
+        }, 300);
+    }
+
+    closeUserDropdown() {
+        const dropdownMenu = this.userDropdown.querySelector('.dropdown-menu');
+        
+        this.userDropdown.classList.remove('active');
+        dropdownMenu.classList.remove('show');
+        this.isDropdownOpen = false;
+    }
+
+    toggleMobileMenu() {
+        const sidebar = document.querySelector('.system-sidebar');
+        const overlay = document.querySelector('.sidebar-overlay');
+
+        if (sidebar) {
+            sidebar.classList.toggle('show');
+            
+            if (overlay) {
+                overlay.classList.toggle('show');
+            }
+
+            // Crear overlay si no existe
+            if (!overlay) {
+                this.createSidebarOverlay();
+            }
+        }
+    }
+
+    createSidebarOverlay() {
+        const overlay = document.createElement('div');
+        overlay.className = 'sidebar-overlay show';
+        document.body.appendChild(overlay);
+
+        overlay.addEventListener('click', () => {
+            this.toggleMobileMenu();
+        });
+    }
+
+    performSearch(query) {
+        console.log('Buscando:', query);
+        
+        // Aquí se implementaría la búsqueda real
+        // Por ahora solo mostramos un mensaje
+        this.showSearchFeedback(query);
+    }
+
+    showSearchFeedback(query) {
+        const searchContainer = this.searchInput.parentElement;
+        
+        // Remover feedback anterior
+        const existingFeedback = searchContainer.querySelector('.search-feedback');
+        if (existingFeedback) {
+            existingFeedback.remove();
+        }
+
+        // Crear nuevo feedback
+        const feedback = document.createElement('div');
+        feedback.className = 'search-feedback';
+        feedback.innerHTML = `
+            <div class="search-result">
+                <i class="fas fa-search"></i>
+                <span>Buscando: "${query}"...</span>
             </div>
         `;
-    return element;
-  }
-
-  /**
-   * Escapar HTML
-   */
-  function escapeHtml(text) {
-    const div = document.createElement("div");
-    div.textContent = text;
-    return div.innerHTML;
-  }
-
-  // === INICIALIZACIÓN ===
-
-  /**
-   * Inicializar header
-   */
-  function initHeader() {
-    // Añadir clase de carga completada
-    document.body.classList.add("header-loaded");
-
-    // Inicializar tooltips si es necesario
-    initTooltips();
-
-    // Configurar WebSocket para notificaciones en tiempo real
-    setupWebSocket();
-  }
-
-  /**
-   * Inicializar tooltips
-   */
-  function initTooltips() {
-    // Implementar tooltips para elementos que lo necesiten
-  }
-
-  /**
-   * Configurar WebSocket para notificaciones
-   */
-  function setupWebSocket() {
-    // Implementar conexión WebSocket para notificaciones en tiempo real
-    /*
-        const ws = new WebSocket('ws://localhost:8080');
         
-        ws.onmessage = function(event) {
-            const data = JSON.parse(event.data);
-            if (data.type === 'notification') {
-                addNotification(data.notification);
-                updateNotificationCount(data.count);
+        searchContainer.appendChild(feedback);
+
+        // Remover después de 3 segundos
+        setTimeout(() => {
+            feedback.remove();
+        }, 3000);
+    }
+
+    animateSearchPlaceholder() {
+        const placeholders = [
+            'Buscar usuarios...',
+            'Buscar vehículos...',
+            'Buscar conductores...',
+            'Buscar viajes...',
+            'Buscar reportes...'
+        ];
+        
+        let currentIndex = 0;
+        
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % placeholders.length;
+            this.searchInput.placeholder = placeholders[currentIndex];
+        }, 3000);
+    }
+
+    toggleNotifications() {
+        // Aquí se implementaría el panel de notificaciones
+        console.log('Mostrando notificaciones');
+        
+        // Simular marcado como leído
+        this.markNotificationsAsRead();
+    }
+
+    updateNotificationCount() {
+        const badge = this.notificationBtn?.querySelector('.notification-badge');
+        if (!badge) return;
+
+        // Simular obtención de notificaciones del servidor
+        const count = Math.floor(Math.random() * 10);
+        
+        if (count > 0) {
+            badge.textContent = count;
+            badge.style.display = 'block';
+            this.notificationBtn.classList.add('has-notifications');
+        } else {
+            badge.style.display = 'none';
+            this.notificationBtn.classList.remove('has-notifications');
+        }
+    }
+
+    markNotificationsAsRead() {
+        const badge = this.notificationBtn?.querySelector('.notification-badge');
+        if (badge) {
+            badge.style.display = 'none';
+            this.notificationBtn.classList.remove('has-notifications');
+        }
+    }
+
+    handleScroll() {
+        const scrollY = window.scrollY;
+        
+        if (scrollY > 50) {
+            this.header?.classList.add('scrolled');
+        } else {
+            this.header?.classList.remove('scrolled');
+        }
+    }
+
+    handleResize() {
+        // Cerrar dropdown en redimensión
+        if (this.isDropdownOpen && window.innerWidth <= 768) {
+            this.closeUserDropdown();
+        }
+
+        // Cerrar menú móvil en desktop
+        if (window.innerWidth > 768) {
+            const sidebar = document.querySelector('.system-sidebar');
+            const overlay = document.querySelector('.sidebar-overlay');
+            
+            if (sidebar?.classList.contains('show')) {
+                sidebar.classList.remove('show');
             }
-        };
-        */
-  }
+            
+            if (overlay?.classList.contains('show')) {
+                overlay.classList.remove('show');
+            }
+        }
+    }
 
-  // Inicializar cuando el DOM esté listo
-  initHeader();
+    handleResponsive() {
+        // Verificar si es móvil
+        const isMobile = window.innerWidth <= 768;
+        
+        if (isMobile) {
+            this.header?.classList.add('mobile');
+        } else {
+            this.header?.classList.remove('mobile');
+        }
+    }
+}
 
-  // === EXPOSER FUNCIONES GLOBALMENTE ===
-  window.HeaderManager = {
-    toggleSidebar,
-    updateNotificationCount,
-    addNotification,
-    closeAllDropdowns,
-  };
+// CSS adicional dinámico
+const headerStyles = `
+.search-feedback {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 255, 102, 0.2);
+    border-radius: 8px;
+    padding: 10px;
+    margin-top: 5px;
+    z-index: 1000;
+    animation: slideDown 0.3s ease-out;
+}
+
+.search-result {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--white);
+    font-size: 14px;
+}
+
+.search-result i {
+    color: var(--primary-green);
+}
+
+.notification-btn.has-notifications {
+    animation: pulse 2s infinite;
+}
+
+.system-header.scrolled {
+    background: rgba(0, 0, 0, 0.98);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+}
+
+.system-header.mobile .header-container {
+    padding: 0 10px;
+}
+
+@media (max-width: 768px) {
+    .search-feedback {
+        position: fixed;
+        top: var(--header-height);
+        left: 10px;
+        right: 10px;
+        margin: 10px 0;
+    }
+}
+`;
+
+// Inyectar estilos adicionales
+const styleSheet = document.createElement('style');
+styleSheet.textContent = headerStyles;
+document.head.appendChild(styleSheet);
+
+// Inicializar cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', () => {
+    new HeaderManager();
 });
 
-/**
- * UTILIDADES ADICIONALES
- */
-
-// Función para mostrar mensajes toast
-function showToast(message, type = "info") {
-  const toast = document.createElement("div");
-  toast.className = `toast toast-${type}`;
-  toast.innerHTML = `
-        <div class="toast-content">
-            <i class="fas fa-${getToastIcon(type)}"></i>
-            <span>${message}</span>
-        </div>
-    `;
-
-  // Estilos inline para el toast
-  Object.assign(toast.style, {
-    position: "fixed",
-    top: "100px",
-    right: "20px",
-    background:
-      type === "error" ? "#dc3545" : type === "success" ? "#28a745" : "#007bff",
-    color: "white",
-    padding: "1rem 1.5rem",
-    borderRadius: "8px",
-    boxShadow: "0 4px 15px rgba(0, 0, 0, 0.2)",
-    zIndex: "10000",
-    opacity: "0",
-    transform: "translateX(100%)",
-    transition: "all 0.3s ease",
-  });
-
-  document.body.appendChild(toast);
-
-  // Animar entrada
-  setTimeout(() => {
-    toast.style.opacity = "1";
-    toast.style.transform = "translateX(0)";
-  }, 10);
-
-  // Remover después de 3 segundos
-  setTimeout(() => {
-    toast.style.opacity = "0";
-    toast.style.transform = "translateX(100%)";
-    setTimeout(() => {
-      document.body.removeChild(toast);
-    }, 300);
-  }, 3000);
-}
-
-function getToastIcon(type) {
-  switch (type) {
-    case "success":
-      return "check-circle";
-    case "error":
-      return "exclamation-triangle";
-    case "warning":
-      return "exclamation-circle";
-    default:
-      return "info-circle";
-  }
-}
-
-// Función para confirmar acciones
-function confirmAction(message, callback) {
-  if (confirm(message)) {
-    callback();
-  }
-}
-
-// Exportar utilidades
-window.UIUtils = {
-  showToast,
-  confirmAction,
-};
+// Exportar para uso global si es necesario
+window.HeaderManager = HeaderManager;
