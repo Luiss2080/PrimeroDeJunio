@@ -7,7 +7,7 @@
 
 // Validar que el usuario esté logueado
 if (!Auth::check()) {
-    header('Location: /PrimeroDeJunio/system/public/index.php/auth/login');
+    header('Location: http://localhost/PrimeroDeJunio/system/public/index.php/login');
     exit;
 }
 

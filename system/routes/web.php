@@ -36,6 +36,7 @@ return [
     // Dashboard Admin
     'GET|admin' => 'AdminController@index',
     'GET|admin/dashboard' => 'AdminController@dashboard',
+    'GET|dashboard/administrador' => 'AdminController@dashboard',
 
     // Gestión de Usuarios (Admin)
     'GET|admin/usuarios' => 'AdminController@usuarios',

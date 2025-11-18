@@ -1,369 +1,167 @@
 <?php
-
 /**
- * PRIMERO DE JUNIO - ASOCIACIÓN MOTOTAXIS - LOGIN SYSTEM
- * Página de inicio de sesión que conecta website con system
+ * PRIMERO DE JUNIO - LOGIN SIMPLIFICADO
  */
 
+// Iniciar sesión limpia
 session_start();
 
-// Cargar dependencias necesarias aquí para usar Auth en toda la página
+// Cargar dependencias
 require_once '../bootstrap.php';
 require_once APP_PATH . '/core/Auth.php';
 
-// Verificar si hay una solicitud de logout
+// Variables
+$error_message = '';
+
+// LOGOUT SIMPLE
 if (isset($_GET['logout'])) {
-    Auth::logout();
-    header('Location: ' . $_SERVER['PHP_SELF']);
+    session_destroy();
+    header('Location: login.php');
     exit;
 }
 
-// Verificar si ya está logueado (solo redirigir si no viene del website)
-if (Auth::check() && !isset($_GET['force'])) {
-    // Si ya está logueado, mostrar opción para ir al dashboard o cerrar sesión
-    $already_logged = true;
-    $current_user = Auth::user();
-} else {
-    $already_logged = false;
-    $current_user = null;
-}
-
-// Variables para el formulario
-$error_message = '';
-$success_message = '';
-
-// Procesar el login si se envía el formulario
+// PROCESAR LOGIN
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = trim($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
 
-    // Validaciones básicas
     if (empty($email) || empty($password)) {
         $error_message = 'Por favor, completa todos los campos.';
-    } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $error_message = 'Por favor, ingresa un email válido.';
     } else {
         try {
-            // Intentar iniciar sesión usando la clase Auth
             if (Auth::login($email, $password)) {
-                // Obtener información del usuario logueado
-                $usuarioLogueado = Auth::user();
-
-                // Log de acceso exitoso
-                error_log("[LOGIN SUCCESS] Usuario: {$email}, Role: {$usuarioLogueado['rol_nombre']}, IP: " . $_SERVER['REMOTE_ADDR']);
-
-                // Redireccionar según el rol del usuario usando las rutas definidas
-                $rolNombre = strtolower($usuarioLogueado['rol_nombre']);
-
-                switch ($rolNombre) {
-                    case 'administrador':
-                    case 'admin':
-                        header('Location: http://localhost/PrimeroDeJunio/system/public/index.php/admin/dashboard');
-                        break;
-                    case 'operador':
-                        header('Location: http://localhost/PrimeroDeJunio/system/public/index.php/operador/dashboard');
-                        break;
-                    case 'supervisor':
-                        header('Location: http://localhost/PrimeroDeJunio/system/public/index.php/supervisor/dashboard');
-                        break;
-                    case 'conductor':
-                        header('Location: http://localhost/PrimeroDeJunio/system/public/index.php/conductor/dashboard');
-                        break;
-                    default:
-                        // Por defecto, redireccionar al dashboard de admin
-                        header('Location: http://localhost/PrimeroDeJunio/system/public/index.php/admin/dashboard');
-                        break;
-                }
+                // Login exitoso - redirigir al dashboard
+                header('Location: http://localhost/PrimeroDeJunio/system/public/index.php/admin/dashboard');
                 exit;
             } else {
-                // Log de intento de acceso fallido
-                error_log("[LOGIN FAILED] Email: {$email}, IP: " . $_SERVER['REMOTE_ADDR']);
-                $error_message = 'Credenciales incorrectas. Verifica tu email y contraseña.';
+                $error_message = 'Email o contraseña incorrectos.';
             }
         } catch (Exception $e) {
-            // Log del error
-            error_log("[LOGIN ERROR] " . $e->getMessage());
-
-            // Mostrar mensaje específico si es problema de usuario inactivo
-            if (strpos($e->getMessage(), 'inactivo') !== false) {
-                $error_message = 'Tu cuenta está inactiva. Contacta al administrador.';
-            } else {
-                $error_message = 'Error del sistema. Por favor, inténtalo más tarde o contacta al administrador.';
-            }
+            $error_message = 'Error: ' . $e->getMessage();
         }
     }
 }
 ?>
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acceso Administrativo - PRIMERO DE JUNIO Asociación de Mototaxis</title>
-    <link rel="icon" type="image/jpeg" href="http://localhost/PrimeroDeJunio/website/public/images/logoMoto.jpg">
-
-    <!-- Precargar fuentes -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-    <!-- CSS del login -->
-    <link rel="stylesheet" href="http://localhost/PrimeroDeJunio/system/public/assets/css/login.css">
-
-    <!-- Meta tags para SEO -->
-    <meta name="description" content="Accede a tu cuenta en PRIMERO DE JUNIO Asociación de Mototaxis. Plataforma administrativa para conductores y servicios.">
-    <meta name="keywords" content="login, primero de junio, mototaxis, asociacion, iniciar sesión, conductores">
-    <meta name="robots" content="noindex, nofollow">
-
-    <!-- Open Graph -->
-    <meta property="og:title" content="Iniciar Sesión - PRIMERO DE JUNIO Asociación de Mototaxis">
-    <meta property="og:description" content="Accede a tu cuenta en PRIMERO DE JUNIO Asociación de Mototaxis">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="<?php echo $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; ?>">
+    <title>Login - PRIMERO DE JUNIO</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .login-container {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            width: 100%;
+            max-width: 400px;
+        }
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .logo h1 {
+            color: #333;
+            margin: 0;
+            font-size: 24px;
+        }
+        .logo p {
+            color: #666;
+            margin: 5px 0 0 0;
+            font-size: 14px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: bold;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        .btn {
+            width: 100%;
+            padding: 12px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .btn:hover {
+            background: #5a67d8;
+        }
+        .error {
+            background: #fee;
+            border: 1px solid #fcc;
+            color: #c00;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .logout-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .logout-link a {
+            color: #667eea;
+            text-decoration: none;
+        }
+    </style>
 </head>
-
 <body>
-    <!-- Background animado -->
-    <div class="login-background">
-        <div class="bg-shapes">
-            <div class="shape shape-1"></div>
-            <div class="shape shape-2"></div>
-            <div class="shape shape-3"></div>
-            <div class="shape shape-4"></div>
-        </div>
-        <div class="bg-grid"></div>
-    </div>
-
-    <!-- Contenedor principal flotante -->
-    <div class="main-login-wrapper">
-        <div class="floating-container">
-
-            <!-- Panel Izquierdo - Branding Profesional -->
-            <div class="login-branding">
-                <!-- Efectos de background -->
-                <div class="branding-effects">
-                    <div class="gradient-mesh"></div>
-                    <div class="floating-elements">
-                        <div class="float-element element-1"></div>
-                        <div class="float-element element-2"></div>
-                        <div class="float-element element-3"></div>
-                    </div>
-                </div>
-
-                <div class="branding-content">
-                    <!-- Logo y marca - Diseño profesional -->
-                    <div class="brand-section">
-                        <div class="logo-container">
-                            <div class="logo-backdrop"></div>
-                            <img src="http://localhost/PrimeroDeJunio/website/public/images/logoMoto.jpg" alt="PRIMERO DE JUNIO" class="brand-logo">
-                        </div>
-                        <div class="brand-text">
-                            <h1 class="brand-title">PRIMERO DE JUNIO</h1>
-                            <div class="brand-line"></div>
-                            <span class="brand-subtitle">ASOCIACIÓN MOTOTAXIS</span>
-                        </div>
-                    </div>
-
-                    <!-- Mensaje profesional -->
-                    <div class="welcome-section">
-                        <h2 class="welcome-title">¡Bienvenido!</h2>
-                        <p class="welcome-description">
-                            Inicia sesión con tu cuenta administrativa y accede a la plataforma de gestión diseñada para conductores profesionales y operadores de mototaxis con excelencia en el servicio.
-                        </p>
-                    </div>
-
-                    <!-- Sección de redes sociales -->
-                    <div class="social-section">
-                        <p class="social-text">¿Tienes dudas o quieres saber más?</p>
-                        <p class="social-title">¡Contáctate con nosotros!</p>
-                        <div class="social-media-links">
-                            <a href="#" class="social-link whatsapp" title="WhatsApp">
-                                <div class="social-icon">💬</div>
-                                <span>WhatsApp</span>
-                            </a>
-                            <a href="#" class="social-link facebook" title="Facebook">
-                                <div class="social-icon">📘</div>
-                                <span>Facebook</span>
-                            </a>
-                            <a href="#" class="social-link instagram" title="Instagram">
-                                <div class="social-icon">📷</div>
-                                <span>Instagram</span>
-                            </a>
-                            <a href="#" class="social-link youtube" title="YouTube">
-                                <div class="social-icon">📺</div>
-                                <span>YouTube</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Sección derecha - Formulario de login -->
-            <div class="login-form-section">
-                <!-- Líneas decorativas -->
-                <div class="form-lines">
-                    <div class="line line-1"></div>
-                    <div class="line line-2"></div>
-                    <div class="line line-3"></div>
-                </div>
-
-                <!-- Partículas decorativas -->
-                <div class="form-particles">
-                    <div class="particle particle-1"></div>
-                    <div class="particle particle-2"></div>
-                    <div class="particle particle-3"></div>
-                    <div class="particle particle-4"></div>
-                </div>
-
-                <div class="form-container">
-                    <!-- Header del formulario -->
-                    <div class="form-header">
-                        <h2 class="form-title">Iniciar Sesión</h2>
-                        <p class="form-subtitle">Ingresa tus credenciales para continuar</p>
-                    </div>
-
-                    <!-- Mensajes de error/éxito -->
-                    <?php if (!empty($error_message)): ?>
-                        <div class="alert alert-error">
-                            <div class="alert-icon">⚠️</div>
-                            <div class="alert-message"><?php echo htmlspecialchars($error_message); ?></div>
-                        </div>
-                    <?php endif; ?>
-
-                    <?php if (!empty($success_message)): ?>
-                        <div class="alert alert-success">
-                            <div class="alert-icon">✅</div>
-                            <div class="alert-message"><?php echo htmlspecialchars($success_message); ?></div>
-                        </div>
-                    <?php endif; ?>
-
-                    <!-- Mensaje si ya hay sesión activa -->
-                    <?php if ($already_logged): ?>
-                        <div class="alert alert-info" style="background: rgba(0, 255, 102, 0.1); border: 1px solid rgba(0, 255, 102, 0.3); color: #00ff66;">
-                            <div class="alert-icon">ℹ️</div>
-                            <div class="alert-message">
-                                Ya tienes una sesión activa como <strong><?php echo htmlspecialchars($current_user['nombre'] . ' ' . $current_user['apellido'] ?? 'Usuario'); ?></strong>
-                                (<?php echo htmlspecialchars($current_user['rol_nombre'] ?? 'Sin rol'); ?>)
-                                <br>
-                                <a href="http://localhost/PrimeroDeJunio/system/app/views/dashboard/" style="color: #00ff66; text-decoration: underline; margin-right: 15px;">Ir al Dashboard</a>
-                                <a href="?logout=1" style="color: #ff6b6b; text-decoration: underline;">Cerrar Sesión</a>
-                            </div>
-                        </div>
-                    <?php endif; ?>
-
-                    <!-- Formulario de login -->
-                    <form class="login-form" method="POST" action="" id="loginForm">
-
-                        <!-- Campo Email -->
-                        <div class="input-group">
-                            <label for="email" class="input-label">Correo Electrónico</label>
-                            <div class="input-wrapper">
-                                <div class="input-icon">📧</div>
-                                <input
-                                    type="email"
-                                    id="email"
-                                    name="email"
-                                    class="form-input"
-                                    placeholder="conductor@primero1dejunio.com"
-                                    value="<?php echo htmlspecialchars($email ?? ''); ?>"
-                                    required
-                                    autocomplete="email">
-                            </div>
-                            <div class="input-error" id="emailError"></div>
-                        </div>
-
-                        <!-- Campo Contraseña -->
-                        <div class="input-group">
-                            <label for="password" class="input-label">Contraseña</label>
-                            <div class="input-wrapper">
-                                <div class="input-icon">🔒</div>
-                                <input
-                                    type="password"
-                                    id="password"
-                                    name="password"
-                                    class="form-input"
-                                    placeholder="••••••••••"
-                                    required
-                                    autocomplete="current-password">
-                                <button type="button" class="password-toggle" id="passwordToggle">
-                                    <span class="toggle-icon">👁️</span>
-                                </button>
-                            </div>
-                            <div class="input-error" id="passwordError"></div>
-                        </div>
-
-                        <!-- Recordar y Olvidé contraseña -->
-                        <div class="form-options">
-                            <label class="checkbox-label">
-                                <input type="checkbox" name="remember" id="remember" class="checkbox-input">
-                                <span class="checkbox-custom"></span>
-                                <span class="checkbox-text">Recordarme</span>
-                            </label>
-                            <a href="#" class="forgot-password" id="forgotPasswordLink">¿Olvidaste tu contraseña?</a>
-                        </div>
-
-                        <!-- Botón de submit -->
-                        <button type="submit" class="login-button btn-primero-junio" id="loginButton">
-                            <span class="button-text">🏍️ ACCESO MOTOTAXI</span>
-                            <span class="button-loader" id="buttonLoader">
-                                <div class="loader-spinner"></div>
-                            </span>
-                        </button>
-
-                    </form>
-
-                    <!-- Footer del formulario -->
-                    <div class="form-footer">
-                        <p class="register-text">
-                            ¿Quieres unirte a nuestra asociación de conductores?
-                            <a href="#" class="register-link" id="registerLink">¡Solicita tu registro!</a>
-                        </p>
-
-                        <!-- Social Media Links -->
-                        <div class="social-media-links">
-                            <a href="#" class="social-link servicios" title="Servicios de Mototaxi">
-                                <div class="social-icon">🏍️</div>
-                                <span>Servicios</span>
-                            </a>
-                            <a href="#" class="social-link conductores" title="Conductores">
-                                <div class="social-icon">👥</div>
-                                <span>Conductores</span>
-                            </a>
-                            <a href="#" class="social-link asociacion" title="Asociación">
-                                <div class="social-icon">🏢</div>
-                                <span>Asociación</span>
-                            </a>
-                            <a href="#" class="social-link soporte" title="Soporte">
-                                <div class="social-icon">💬</div>
-                                <span>Soporte 24/7</span>
-                            </a>
-                        </div>
-
-                        <!-- Register Link -->
-                        <div class="register-section">
-                            <p class="no-account-text">¿No tienes cuenta de conductor?
-                                <a href="#" class="register-link-main" id="registerMainLink">¡Solicita acceso exclusivo!</a>
-                            </p>
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
+    <div class="login-container">
+        <div class="logo">
+            <h1>PRIMERO DE JUNIO</h1>
+            <p>ASOCIACIÓN MOTOTAXIS</p>
         </div>
 
+        <?php if (!empty($error_message)): ?>
+            <div class="error"><?php echo htmlspecialchars($error_message); ?></div>
+        <?php endif; ?>
+
+        <form method="POST">
+            <div class="form-group">
+                <label for="email">Correo Electrónico</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <button type="submit" class="btn">Iniciar Sesión</button>
+        </form>
+
+        <div class="logout-link">
+            <a href="?logout=1">¿Problemas? Limpiar sesión</a>
+        </div>
     </div>
-
-    <!-- JavaScript -->
-    <script src="http://localhost/PrimeroDeJunio/system/public/assets/js/login.js"></script>
-
-    <!-- Analytics (opcional) -->
-    <script>
-        // Google Analytics o similar
-        console.log('🔐 PRIMERO DE JUNIO Login: Página cargada correctamente');
-    </script>
-
 </body>
-
 </html>

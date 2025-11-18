@@ -1,0 +1,22 @@
+RewriteEngine On
+
+# Redirigir todo a index.php si no es un archivo existente
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php/$1 [QSA,L]
+
+# Permitir acceso a archivos estáticos
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^assets/.*$ - [L]
+
+# Configuración de seguridad
+<Files "*.php">
+    Order Allow,Deny
+    Allow from all
+</Files>
+
+# Bloquear acceso a archivos de configuración
+<Files ".env">
+    Order Allow,Deny
+    Deny from all
+</Files>

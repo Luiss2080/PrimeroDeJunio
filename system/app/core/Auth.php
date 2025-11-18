@@ -52,9 +52,23 @@ class Auth
             session_start();
         }
 
+        // Limpiar variables estáticas
         self::$usuario = null;
         self::$permisos = [];
 
+        // Limpiar todos los datos de sesión
+        $_SESSION = [];
+
+        // Limpiar cookie de sesión si existe
+        if (ini_get("session.use_cookies")) {
+            $params = session_get_cookie_params();
+            setcookie(session_name(), '', time() - 42000,
+                $params["path"], $params["domain"],
+                $params["secure"], $params["httponly"]
+            );
+        }
+
+        // Destruir la sesión completamente
         session_unset();
         session_destroy();
 
@@ -66,10 +80,12 @@ class Auth
      */
     public static function check()
     {
+        // Asegurar que la sesión esté iniciada
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 
+        // Verificar simplemente si existe user_id en la sesión
         return isset($_SESSION['user_id']) && !empty($_SESSION['user_id']);
     }
 
@@ -184,7 +200,9 @@ class Auth
                 echo json_encode(['error' => 'No autenticado']);
                 exit;
             } else {
-                header('Location: /login');
+                // Usar URL absoluta para el redirect
+                $loginUrl = rtrim($_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'], '/') . '/PrimeroDeJunio/system/app/auth/login.php';
+                header('Location: ' . $loginUrl);
                 exit;
             }
         }
@@ -222,7 +240,9 @@ class Auth
                 echo json_encode(['error' => 'Rol insuficiente']);
                 exit;
             } else {
-                header('Location: /dashboard?error=rol_insuficiente');
+                // Usar URL absoluta para el redirect
+                $loginUrl = rtrim($_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'], '/') . '/PrimeroDeJunio/system/app/auth/login.php?error=rol_insuficiente';
+                header('Location: ' . $loginUrl);
                 exit;
             }
         }
@@ -333,21 +353,22 @@ class Auth
     {
         $usuario = self::user();
         if (!$usuario) {
-            return '/login';
+            return 'http://localhost/PrimeroDeJunio/system/public/index.php/login';
         }
 
         $rol = strtolower($usuario['rol_nombre'] ?? '');
+        $baseUrl = 'http://localhost/PrimeroDeJunio/system/public/index.php';
 
         switch ($rol) {
             case 'admin':
             case 'administrador':
-                return '/admin/dashboard';
+                return $baseUrl . '/admin/dashboard';
             case 'operador':
-                return '/operador/dashboard';
+                return $baseUrl . '/operador/dashboard';
             case 'conductor':
-                return '/conductor/dashboard';
+                return $baseUrl . '/conductor/dashboard';
             default:
-                return '/dashboard';
+                return $baseUrl . '/admin/dashboard';
         }
     }
 
