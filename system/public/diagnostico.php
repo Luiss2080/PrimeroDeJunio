@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Página de diagnóstico para verificar conexión y datos
  */
@@ -12,7 +13,7 @@ try {
     // Probar conexión a la base de datos
     $db = Database::getInstance();
     echo "<p style='color: green;'>✓ Conexión a base de datos exitosa</p>";
-    
+
     // Verificar tabla usuarios
     $usuarios = $db->fetchAll("SELECT * FROM usuarios LIMIT 5");
     echo "<h3>Usuarios en la base de datos:</h3>";
@@ -28,7 +29,7 @@ try {
         echo "</tr>";
     }
     echo "</table>";
-    
+
     // Verificar tabla roles
     $roles = $db->fetchAll("SELECT * FROM roles");
     echo "<h3>Roles en la base de datos:</h3>";
@@ -43,16 +44,16 @@ try {
         echo "</tr>";
     }
     echo "</table>";
-    
+
     // Verificar usuario admin específico
     $admin = $db->fetch(
         "SELECT u.*, r.nombre as rol_nombre 
          FROM usuarios u 
          LEFT JOIN roles r ON u.rol_id = r.id 
-         WHERE u.email = ?", 
+         WHERE u.email = ?",
         ['admin@primero1dejunio.com']
     );
-    
+
     echo "<h3>Usuario Admin:</h3>";
     if ($admin) {
         echo "<pre>";
@@ -61,7 +62,6 @@ try {
     } else {
         echo "<p style='color: red;'>❌ Usuario admin no encontrado</p>";
     }
-    
 } catch (Exception $e) {
     echo "<p style='color: red;'>❌ Error: " . $e->getMessage() . "</p>";
 }

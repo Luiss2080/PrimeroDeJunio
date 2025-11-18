@@ -134,10 +134,10 @@ class Auth
         if (!$usuario || !isset($usuario['rol_nombre'])) {
             return false;
         }
-        
+
         $rolUsuario = strtolower($usuario['rol_nombre']);
         $rolRequerido = strtolower($rolNombre);
-        
+
         // Manejar equivalencias de roles
         if ($rolRequerido === 'administrador' && $rolUsuario === 'admin') {
             return true;
@@ -145,7 +145,7 @@ class Auth
         if ($rolRequerido === 'admin' && $rolUsuario === 'administrador') {
             return true;
         }
-        
+
         return $rolUsuario === $rolRequerido;
     }
 
@@ -322,7 +322,7 @@ class Auth
      */
     private static function isAjaxRequest()
     {
-        return !empty($_SERVER['HTTP_X_REQUESTED_WITH']) 
+        return !empty($_SERVER['HTTP_X_REQUESTED_WITH'])
             && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
     }
 
@@ -337,7 +337,7 @@ class Auth
         }
 
         $rol = strtolower($usuario['rol_nombre'] ?? '');
-        
+
         switch ($rol) {
             case 'admin':
             case 'administrador':
@@ -358,22 +358,47 @@ class Auth
     {
         $permisos = [
             'administrador' => [
-                'usuarios.ver', 'usuarios.crear', 'usuarios.editar', 'usuarios.eliminar',
-                'conductores.ver', 'conductores.crear', 'conductores.editar', 'conductores.eliminar',
-                'vehiculos.ver', 'vehiculos.crear', 'vehiculos.editar', 'vehiculos.eliminar',
-                'clientes.ver', 'clientes.crear', 'clientes.editar', 'clientes.eliminar',
-                'viajes.ver', 'viajes.crear', 'viajes.editar', 'viajes.eliminar',
-                'reportes.ver', 'configuracion.editar'
+                'usuarios.ver',
+                'usuarios.crear',
+                'usuarios.editar',
+                'usuarios.eliminar',
+                'conductores.ver',
+                'conductores.crear',
+                'conductores.editar',
+                'conductores.eliminar',
+                'vehiculos.ver',
+                'vehiculos.crear',
+                'vehiculos.editar',
+                'vehiculos.eliminar',
+                'clientes.ver',
+                'clientes.crear',
+                'clientes.editar',
+                'clientes.eliminar',
+                'viajes.ver',
+                'viajes.crear',
+                'viajes.editar',
+                'viajes.eliminar',
+                'reportes.ver',
+                'configuracion.editar'
             ],
             'operador' => [
-                'conductores.ver', 'conductores.crear', 'conductores.editar',
-                'vehiculos.ver', 'vehiculos.crear', 'vehiculos.editar',
-                'clientes.ver', 'clientes.crear', 'clientes.editar',
-                'viajes.ver', 'viajes.crear', 'viajes.editar',
+                'conductores.ver',
+                'conductores.crear',
+                'conductores.editar',
+                'vehiculos.ver',
+                'vehiculos.crear',
+                'vehiculos.editar',
+                'clientes.ver',
+                'clientes.crear',
+                'clientes.editar',
+                'viajes.ver',
+                'viajes.crear',
+                'viajes.editar',
                 'reportes.ver'
             ],
             'conductor' => [
-                'viajes.ver', 'viajes.editar',
+                'viajes.ver',
+                'viajes.editar',
                 'clientes.ver'
             ]
         ];

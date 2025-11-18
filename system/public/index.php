@@ -10,10 +10,9 @@ require_once '../app/bootstrap.php';
 try {
     // Inicializar el router (ya carga las rutas automáticamente)
     $router = new Router();
-    
+
     // Procesar la request actual
     $router->dispatch();
-    
 } catch (Exception $e) {
     // Manejo de errores global
     if (config('app.debug')) {
@@ -26,7 +25,7 @@ try {
         echo "<h1>Error del Servidor</h1>";
         echo "<p>Ha ocurrido un error interno. Por favor, contacta al administrador.</p>";
     }
-    
+
     // Log del error
     logError("Error no capturado", ['error' => $e->getMessage(), 'trace' => $e->getTraceAsString()]);
 }

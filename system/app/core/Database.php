@@ -37,9 +37,9 @@ class Database
             if (!isset($this->config['database'])) {
                 throw new Exception("Configuración de base de datos no encontrada");
             }
-            
+
             $dbConfig = $this->config['database'];
-            
+
             // Verificar campos requeridos
             $requiredFields = ['host', 'name', 'user', 'password'];
             foreach ($requiredFields as $field) {
@@ -47,9 +47,9 @@ class Database
                     throw new Exception("Campo de configuración '$field' no encontrado");
                 }
             }
-            
+
             $dsn = "mysql:host={$dbConfig['host']};dbname={$dbConfig['name']};charset=utf8mb4";
-            
+
             $options = [
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
@@ -63,7 +63,6 @@ class Database
                 $dbConfig['password'],
                 $options
             );
-
         } catch (PDOException $e) {
             throw new Exception("Error de conexión a la base de datos: " . $e->getMessage());
         }
@@ -233,7 +232,7 @@ class Database
         }
 
         $sql = file_get_contents($filePath);
-        
+
         if ($sql === false) {
             throw new Exception("No se pudo leer el archivo SQL: $filePath");
         }
@@ -242,7 +241,7 @@ class Database
         $queries = explode(';', $sql);
 
         $this->beginTransaction();
-        
+
         try {
             foreach ($queries as $query) {
                 $query = trim($query);
@@ -276,7 +275,7 @@ class Database
              WHERE table_schema = ? AND table_name = ?",
             [$this->config['database']['name'], $tableName]
         );
-        
+
         return $result['count'] > 0;
     }
 

@@ -79,9 +79,10 @@ spl_autoload_register(function ($className) {
 require_once APP_PATH . '/helpers/funciones.php';
 
 // Función para manejar errores no capturados
-function handleException($exception) {
+function handleException($exception)
+{
     global $config;
-    
+
     if ($config['app']['debug']) {
         echo "<h1>Error no capturado</h1>";
         echo "<p><strong>Mensaje:</strong> " . $exception->getMessage() . "</p>";
@@ -92,20 +93,21 @@ function handleException($exception) {
         echo "<h1>Error del servidor</h1>";
         echo "<p>Ha ocurrido un error interno. Por favor, contacta al administrador.</p>";
     }
-    
+
     // Registrar error
     logSystemError($exception);
 }
 
 // Función para registrar errores
-function logSystemError($exception) {
+function logSystemError($exception)
+{
     $logFile = LOGS_PATH . '/error.log';
-    
+
     // Crear directorio de logs si no existe
     if (!is_dir(LOGS_PATH)) {
         mkdir(LOGS_PATH, 0755, true);
     }
-    
+
     $logMessage = sprintf(
         "[%s] %s in %s:%d\nStack trace:\n%s\n\n",
         date('Y-m-d H:i:s'),
@@ -114,7 +116,7 @@ function logSystemError($exception) {
         $exception->getLine(),
         $exception->getTraceAsString()
     );
-    
+
     file_put_contents($logFile, $logMessage, FILE_APPEND | LOCK_EX);
 }
 
@@ -122,13 +124,14 @@ function logSystemError($exception) {
 set_exception_handler('handleException');
 
 // Función helper para logging
-function writeLog($level, $message, $context = []) {
+function writeLog($level, $message, $context = [])
+{
     $logFile = LOGS_PATH . '/app.log';
-    
+
     if (!is_dir(LOGS_PATH)) {
         mkdir(LOGS_PATH, 0755, true);
     }
-    
+
     $logEntry = sprintf(
         "[%s] %s: %s %s\n",
         date('Y-m-d H:i:s'),
@@ -136,24 +139,28 @@ function writeLog($level, $message, $context = []) {
         $message,
         !empty($context) ? json_encode($context) : ''
     );
-    
+
     file_put_contents($logFile, $logEntry, FILE_APPEND | LOCK_EX);
 }
 
 // Funciones helper para logging por nivel
-function logInfo($message, $context = []) {
+function logInfo($message, $context = [])
+{
     writeLog('info', $message, $context);
 }
 
-function logError($message, $context = []) {
+function logError($message, $context = [])
+{
     writeLog('error', $message, $context);
 }
 
-function logWarning($message, $context = []) {
+function logWarning($message, $context = [])
+{
     writeLog('warning', $message, $context);
 }
 
-function logDebug($message, $context = []) {
+function logDebug($message, $context = [])
+{
     global $config;
     if ($config['app']['debug']) {
         writeLog('debug', $message, $context);
@@ -164,65 +171,74 @@ function logDebug($message, $context = []) {
 // las opciones de sesión. No es necesario volver a llamar a session_start() aquí.
 
 // Función helper para obtener configuración
-function config($key, $default = null) {
+function config($key, $default = null)
+{
     global $config;
-    
+
     $keys = explode('.', $key);
     $value = $config;
-    
+
     foreach ($keys as $k) {
         if (!isset($value[$k])) {
             return $default;
         }
         $value = $value[$k];
     }
-    
+
     return $value;
 }
 
 // Función helper para URLs
-function url($path = '') {
+function url($path = '')
+{
     $baseUrl = rtrim(config('app.url'), '/');
     $path = ltrim($path, '/');
     return $baseUrl . '/' . $path;
 }
 
 // Función helper para assets
-function asset($path) {
+function asset($path)
+{
     return url('assets/' . ltrim($path, '/'));
 }
 
 // Función helper para redirección
-function redirect($url, $statusCode = 302) {
+function redirect($url, $statusCode = 302)
+{
     header("Location: $url", true, $statusCode);
     exit;
 }
 
 // Función helper para escape HTML
-function e($string) {
+function e($string)
+{
     return htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
 }
 
 // Función helper para formatear fecha
-function formatDate($date, $format = 'Y-m-d H:i:s') {
+function formatDate($date, $format = 'Y-m-d H:i:s')
+{
     if (empty($date)) return '';
-    
+
     $dateObj = new DateTime($date);
     return $dateObj->format($format);
 }
 
 // Función helper para formatear moneda
-function formatMoney($amount, $currency = 'COP') {
+function formatMoney($amount, $currency = 'COP')
+{
     return number_format($amount, 0, ',', '.') . ' ' . $currency;
 }
 
 // Función helper para validar email
-function isValidEmail($email) {
+function isValidEmail($email)
+{
     return filter_var($email, FILTER_VALIDATE_EMAIL) !== false;
 }
 
 // Función helper para generar token aleatorio
-function generateToken($length = 32) {
+function generateToken($length = 32)
+{
     return bin2hex(random_bytes($length));
 }
 
