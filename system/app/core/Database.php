@@ -16,7 +16,7 @@ class Database
         $this->loadConfig();
         $this->connect();
     }
-    
+
     /**
      * Cargar configuración con fallbacks
      */
@@ -32,7 +32,7 @@ class Database
             // Método 4: Desde la raíz del sistema
             $_SERVER['DOCUMENT_ROOT'] . '/PrimeroDeJunio/system/config/config.php'
         ];
-        
+
         foreach ($configPaths as $configPath) {
             if ($configPath && file_exists($configPath)) {
                 try {
@@ -46,7 +46,7 @@ class Database
                 }
             }
         }
-        
+
         // Si no se pudo cargar la configuración, usar valores por defecto
         $this->config = [
             'database' => [
