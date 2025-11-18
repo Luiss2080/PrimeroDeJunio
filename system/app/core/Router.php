@@ -11,7 +11,7 @@ class Router
     public function __construct()
     {
         $routesPath = ROOT_PATH . '/routes/web.php';
-        
+
         if (file_exists($routesPath)) {
             $routes = include $routesPath;
             $this->routes = is_array($routes) ? $routes : [];
@@ -59,7 +59,7 @@ class Router
         if (!is_array($this->routes) || empty($this->routes)) {
             return null;
         }
-        
+
         foreach ($this->routes as $routePattern => $handler) {
             list($routeMethod, $routePath) = explode('|', $routePattern, 2);
 

@@ -16,7 +16,7 @@ class AdminController extends Controller
     public function __construct()
     {
         parent::__construct();
-        
+
         // Verificar autenticación y rol de administrador
         Auth::requireAuth();
         Auth::requireRole('administrador');
@@ -52,7 +52,6 @@ class AdminController extends Controller
             ];
 
             $this->view('dashboard/administrador', $data);
-
         } catch (Exception $e) {
             $this->setFlash('error', 'Error al cargar el dashboard: ' . $e->getMessage());
             $this->view('dashboard/index');
@@ -207,7 +206,7 @@ class AdminController extends Controller
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             try {
                 $configuraciones = $_POST['configuracion'] ?? [];
-                
+
                 foreach ($configuraciones as $clave => $valor) {
                     $this->configuracion->establecer($clave, $valor);
                 }
@@ -252,13 +251,13 @@ class AdminController extends Controller
     {
         // Viajes en curso
         $viajesEnCurso = $this->viaje->obtenerEnCurso();
-        
+
         // Conductores conectados/activos
         $conductoresActivos = $this->conductor->obtenerActivos();
-        
+
         // Alertas del sistema
         $alertas = $this->obtenerAlertas();
-        
+
         // Estadísticas en tiempo real
         $estadisticasReal = [
             'viajes_hoy' => $this->viaje->obtenerViajesDelDia(date('Y-m-d')),
