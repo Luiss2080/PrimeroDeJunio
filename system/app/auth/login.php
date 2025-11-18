@@ -52,25 +52,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Log de acceso exitoso
                 error_log("[LOGIN SUCCESS] Usuario: {$email}, Role: {$usuarioLogueado['rol_nombre']}, IP: " . $_SERVER['REMOTE_ADDR']);
 
-                // Redireccionar según el rol del usuario
+                // Redireccionar según el rol del usuario usando las rutas definidas
                 $rolNombre = strtolower($usuarioLogueado['rol_nombre']);
 
                 switch ($rolNombre) {
                     case 'administrador':
-                        header('Location: http://localhost/PrimeroDeJunio/system/app/views/dashboard/?role=admin');
+                    case 'admin':
+                        header('Location: http://localhost/PrimeroDeJunio/system/public/index.php/admin/dashboard');
                         break;
                     case 'operador':
-                        header('Location: http://localhost/PrimeroDeJunio/system/app/views/dashboard/?role=operador');
+                        header('Location: http://localhost/PrimeroDeJunio/system/public/index.php/operador/dashboard');
                         break;
                     case 'supervisor':
-                        header('Location: http://localhost/PrimeroDeJunio/system/app/views/dashboard/?role=supervisor');
+                        header('Location: http://localhost/PrimeroDeJunio/system/public/index.php/supervisor/dashboard');
                         break;
                     case 'conductor':
-                        header('Location: http://localhost/PrimeroDeJunio/system/app/views/dashboard/?role=conductor');
+                        header('Location: http://localhost/PrimeroDeJunio/system/public/index.php/conductor/dashboard');
                         break;
                     default:
-                        // Por defecto, redireccionar al dashboard general
-                        header('Location: http://localhost/PrimeroDeJunio/system/app/views/dashboard/');
+                        // Por defecto, redireccionar al dashboard de admin
+                        header('Location: http://localhost/PrimeroDeJunio/system/public/index.php/admin/dashboard');
                         break;
                 }
                 exit;

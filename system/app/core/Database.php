@@ -12,8 +12,52 @@ class Database
 
     private function __construct()
     {
-        $this->config = require_once CONFIG_PATH . '/config.php';
+        // Cargar configuración con múltiples métodos de fallback
+        $this->loadConfig();
         $this->connect();
+    }
+    
+    /**
+     * Cargar configuración con fallbacks
+     */
+    private function loadConfig()
+    {
+        $configPaths = [
+            // Método 1: Usar CONFIG_PATH si está definido
+            defined('CONFIG_PATH') ? CONFIG_PATH . '/config.php' : null,
+            // Método 2: Path relativo desde Database.php
+            dirname(dirname(__DIR__)) . '/config/config.php',
+            // Método 3: Path absoluto calculado
+            __DIR__ . '/../../config/config.php',
+            // Método 4: Desde la raíz del sistema
+            $_SERVER['DOCUMENT_ROOT'] . '/PrimeroDeJunio/system/config/config.php'
+        ];
+        
+        foreach ($configPaths as $configPath) {
+            if ($configPath && file_exists($configPath)) {
+                try {
+                    $this->config = require $configPath;
+                    if (is_array($this->config) && isset($this->config['database'])) {
+                        return; // Configuración cargada exitosamente
+                    }
+                } catch (Exception $e) {
+                    // Continuar con el siguiente path
+                    continue;
+                }
+            }
+        }
+        
+        // Si no se pudo cargar la configuración, usar valores por defecto
+        $this->config = [
+            'database' => [
+                'host' => 'localhost',
+                'name' => 'primero_de_junio',
+                'user' => 'root',
+                'password' => '',
+                'port' => 3306,
+                'charset' => 'utf8mb4'
+            ]
+        ];
     }
 
     /**
