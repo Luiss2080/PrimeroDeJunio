@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Dashboard Administrativo - Simple
  * Sistema PRIMERO DE JUNIO
@@ -6,6 +7,7 @@
 ?>
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,113 +18,113 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: #333;
             min-height: 100vh;
         }
-        
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
-        
+
         .header {
-            background: rgba(255,255,255,0.95);
+            background: rgba(255, 255, 255, 0.95);
             padding: 20px;
             border-radius: 10px;
             margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
-        
+
         .header h1 {
             color: #333;
             margin-bottom: 10px;
         }
-        
+
         .user-info {
             background: #f8f9fa;
             padding: 10px 15px;
             border-radius: 5px;
             border-left: 4px solid #28a745;
         }
-        
+
         .dashboard-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
             margin-bottom: 30px;
         }
-        
+
         .card {
-            background: rgba(255,255,255,0.95);
+            background: rgba(255, 255, 255, 0.95);
             padding: 25px;
             border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             text-align: center;
             transition: transform 0.3s ease;
         }
-        
+
         .card:hover {
             transform: translateY(-5px);
         }
-        
+
         .card h3 {
             color: #333;
             margin-bottom: 15px;
             font-size: 1.2em;
         }
-        
+
         .card-icon {
             font-size: 2em;
             margin-bottom: 15px;
             display: block;
         }
-        
+
         .card-number {
             font-size: 2.5em;
             font-weight: bold;
             color: #667eea;
             margin-bottom: 10px;
         }
-        
+
         .card-label {
             color: #666;
             font-size: 0.9em;
         }
-        
+
         .menu-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 15px;
         }
-        
+
         .menu-item {
-            background: rgba(255,255,255,0.95);
+            background: rgba(255, 255, 255, 0.95);
             padding: 20px;
             border-radius: 8px;
             text-decoration: none;
             color: #333;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
         }
-        
+
         .menu-item:hover {
             transform: translateY(-3px);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
             text-decoration: none;
             color: #333;
         }
-        
+
         .menu-icon {
             font-size: 1.5em;
             margin-bottom: 10px;
             display: block;
         }
-        
+
         .logout-btn {
             position: fixed;
             top: 20px;
@@ -134,7 +136,7 @@
             text-decoration: none;
             font-size: 0.9em;
         }
-        
+
         .logout-btn:hover {
             background: #c82333;
             text-decoration: none;
@@ -142,45 +144,46 @@
         }
     </style>
 </head>
+
 <body>
     <a href="/PrimeroDeJunio/system/app/auth/login.php?logout=1" class="logout-btn">🚪 Cerrar Sesión</a>
-    
+
     <div class="container">
         <div class="header">
             <h1>🏍️ Dashboard Administrativo</h1>
             <div class="user-info">
-                <strong>👤 Bienvenido:</strong> 
-                <?= htmlspecialchars($usuario_actual['nombre'] ?? 'Administrador') ?> 
+                <strong>👤 Bienvenido:</strong>
+                <?= htmlspecialchars($usuario_actual['nombre'] ?? 'Administrador') ?>
                 <strong>📧</strong> <?= htmlspecialchars($usuario_actual['email'] ?? 'admin@primero1dejunio.com') ?>
             </div>
         </div>
-        
+
         <div class="dashboard-grid">
             <div class="card">
                 <span class="card-icon">👥</span>
                 <div class="card-number">5</div>
                 <div class="card-label">Usuarios Totales</div>
             </div>
-            
+
             <div class="card">
                 <span class="card-icon">🏍️</span>
                 <div class="card-number">12</div>
                 <div class="card-label">Conductores Activos</div>
             </div>
-            
+
             <div class="card">
                 <span class="card-icon">🚗</span>
                 <div class="card-number">8</div>
                 <div class="card-label">Vehículos Registrados</div>
             </div>
-            
+
             <div class="card">
                 <span class="card-icon">📋</span>
                 <div class="card-number">25</div>
                 <div class="card-label">Viajes Hoy</div>
             </div>
         </div>
-        
+
         <h2 style="color: white; margin-bottom: 20px;">📋 Gestión del Sistema</h2>
         <div class="menu-grid">
             <a href="/PrimeroDeJunio/system/public/index.php/admin/usuarios" class="menu-item">
@@ -188,104 +191,105 @@
                 <strong>Gestión de Usuarios</strong><br>
                 <small>Crear, editar y gestionar usuarios</small>
             </a>
-            
+
             <a href="/PrimeroDeJunio/system/public/index.php/admin/conductores" class="menu-item">
                 <span class="menu-icon">🏍️</span>
                 <strong>Gestión de Conductores</strong><br>
                 <small>Administrar conductores y licencias</small>
             </a>
-            
+
             <a href="/PrimeroDeJunio/system/public/index.php/admin/vehiculos" class="menu-item">
                 <span class="menu-icon">🚗</span>
                 <strong>Gestión de Vehículos</strong><br>
                 <small>Registro y mantenimiento de motos</small>
             </a>
-            
+
             <a href="/PrimeroDeJunio/system/public/index.php/admin/viajes" class="menu-item">
                 <span class="menu-icon">📋</span>
                 <strong>Gestión de Viajes</strong><br>
                 <small>Historial y seguimiento de viajes</small>
             </a>
-            
+
             <a href="/PrimeroDeJunio/system/public/index.php/admin/clientes" class="menu-item">
                 <span class="menu-icon">👤</span>
                 <strong>Gestión de Clientes</strong><br>
                 <small>Base de datos de clientes</small>
             </a>
-            
+
             <a href="/PrimeroDeJunio/system/public/index.php/admin/reportes" class="menu-item">
                 <span class="menu-icon">📊</span>
                 <strong>Reportes</strong><br>
                 <small>Estadísticas e informes del sistema</small>
             </a>
-            
+
             <a href="/PrimeroDeJunio/system/public/index.php/admin/configuracion" class="menu-item">
                 <span class="menu-icon">⚙️</span>
                 <strong>Configuración</strong><br>
                 <small>Ajustes del sistema y preferencias</small>
             </a>
-            
+
             <a href="/PrimeroDeJunio/system/public/index.php/admin/permisos" class="menu-item">
                 <span class="menu-icon">🔐</span>
                 <strong>Roles y Permisos</strong><br>
                 <small>Gestión de accesos y permisos</small>
             </a>
         </div>
-        
+
         <div style="text-align: center; margin-top: 40px; color: rgba(255,255,255,0.8);">
             <p>Sistema de Gestión Mototaxis "Primero de Junio" v1.0</p>
             <p>© 2025 - Panel de Administración</p>
         </div>
     </div>
 </body>
+
 </html>
-    <div class="stats-card" data-clickable="true" data-url="/admin/usuarios">
-        <div class="stats-icon">
-            <i class="fas fa-users"></i>
-        </div>
-        <div class="stats-value">156</div>
-        <div class="stats-label">Usuarios Activos</div>
-        <div class="stats-change positive">
-            <i class="fas fa-arrow-up"></i>
-            +12%
-        </div>
+<div class="stats-card" data-clickable="true" data-url="/admin/usuarios">
+    <div class="stats-icon">
+        <i class="fas fa-users"></i>
     </div>
+    <div class="stats-value">156</div>
+    <div class="stats-label">Usuarios Activos</div>
+    <div class="stats-change positive">
+        <i class="fas fa-arrow-up"></i>
+        +12%
+    </div>
+</div>
 
-    <div class="stats-card" data-clickable="true" data-url="/admin/viajes">
-        <div class="stats-icon">
-            <i class="fas fa-route"></i>
-        </div>
-        <div class="stats-value">1247</div>
-        <div class="stats-label">Viajes Completados</div>
-        <div class="stats-change positive">
-            <i class="fas fa-arrow-up"></i>
-            +8%
-        </div>
+<div class="stats-card" data-clickable="true" data-url="/admin/viajes">
+    <div class="stats-icon">
+        <i class="fas fa-route"></i>
     </div>
+    <div class="stats-value">1247</div>
+    <div class="stats-label">Viajes Completados</div>
+    <div class="stats-change positive">
+        <i class="fas fa-arrow-up"></i>
+        +8%
+    </div>
+</div>
 
-    <div class="stats-card" data-clickable="true" data-url="/admin/vehiculos">
-        <div class="stats-icon">
-            <i class="fas fa-motorcycle"></i>
-        </div>
-        <div class="stats-value">89</div>
-        <div class="stats-label">Vehículos Registrados</div>
-        <div class="stats-change positive">
-            <i class="fas fa-arrow-up"></i>
-            +5%
-        </div>
+<div class="stats-card" data-clickable="true" data-url="/admin/vehiculos">
+    <div class="stats-icon">
+        <i class="fas fa-motorcycle"></i>
     </div>
+    <div class="stats-value">89</div>
+    <div class="stats-label">Vehículos Registrados</div>
+    <div class="stats-change positive">
+        <i class="fas fa-arrow-up"></i>
+        +5%
+    </div>
+</div>
 
-    <div class="stats-card" data-clickable="true" data-url="/admin/ingresos">
-        <div class="stats-icon">
-            <i class="fas fa-dollar-sign"></i>
-        </div>
-        <div class="stats-value">$25680</div>
-        <div class="stats-label">Ingresos del Mes</div>
-        <div class="stats-change positive">
-            <i class="fas fa-arrow-up"></i>
-            +15%
-        </div>
+<div class="stats-card" data-clickable="true" data-url="/admin/ingresos">
+    <div class="stats-icon">
+        <i class="fas fa-dollar-sign"></i>
     </div>
+    <div class="stats-value">$25680</div>
+    <div class="stats-label">Ingresos del Mes</div>
+    <div class="stats-change positive">
+        <i class="fas fa-arrow-up"></i>
+        +15%
+    </div>
+</div>
 </div>
 
 <!-- Panel de Gestión Rápida -->

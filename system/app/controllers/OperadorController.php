@@ -15,7 +15,7 @@ class OperadorController extends Controller
     public function __construct()
     {
         parent::__construct();
-        
+
         // Verificar autenticación y rol de operador
         Auth::requireAuth();
         Auth::requireRole('operador');
@@ -50,7 +50,6 @@ class OperadorController extends Controller
             ];
 
             $this->view('dashboard/operador', $data);
-
         } catch (Exception $e) {
             $this->setFlash('error', 'Error al cargar el dashboard: ' . $e->getMessage());
             $this->view('dashboard/index');
@@ -113,7 +112,6 @@ class OperadorController extends Controller
                 $viajeId = $this->viaje->create($datos);
                 $this->setFlash('success', 'Viaje creado exitosamente');
                 $this->redirect('/operador/viajes/ver/' . $viajeId);
-
             } catch (Exception $e) {
                 $this->setFlash('error', 'Error al crear viaje: ' . $e->getMessage());
             }
@@ -294,7 +292,6 @@ class OperadorController extends Controller
                 $clienteId = $this->cliente->create($datos);
                 $this->setFlash('success', 'Cliente creado exitosamente');
                 $this->redirect('/operador/clientes/ver/' . $clienteId);
-
             } catch (Exception $e) {
                 $this->setFlash('error', 'Error al crear cliente: ' . $e->getMessage());
             }
@@ -376,7 +373,6 @@ class OperadorController extends Controller
                 $pagoId = $this->pagoTarifa->create($datos);
                 $this->setFlash('success', 'Pago registrado exitosamente');
                 $this->redirect('/operador/pagos/ver/' . $pagoId);
-
             } catch (Exception $e) {
                 $this->setFlash('error', 'Error al registrar pago: ' . $e->getMessage());
             }
@@ -430,10 +426,10 @@ class OperadorController extends Controller
     {
         // Viajes en curso
         $viajesEnCurso = $this->viaje->obtenerEnCurso();
-        
+
         // Conductores activos
         $conductoresActivos = $this->conductor->obtenerActivos();
-        
+
         // Vehículos en uso
         $vehiculosEnUso = $this->vehiculo->obtenerEnUso();
 
@@ -526,7 +522,7 @@ class OperadorController extends Controller
     private function obtenerEstadisticasHoy()
     {
         $hoy = date('Y-m-d');
-        
+
         return [
             'viajes_completados' => $this->viaje->count(['estado' => 'completado', 'fecha' => $hoy]),
             'viajes_en_curso' => count($this->viaje->obtenerEnCurso()),
