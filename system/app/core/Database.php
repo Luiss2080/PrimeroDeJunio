@@ -33,7 +33,22 @@ class Database
     private function connect()
     {
         try {
-            $dsn = "mysql:host={$this->config['database']['host']};dbname={$this->config['database']['name']};charset=utf8mb4";
+            // Verificar que la configuración se cargó correctamente
+            if (!isset($this->config['database'])) {
+                throw new Exception("Configuración de base de datos no encontrada");
+            }
+            
+            $dbConfig = $this->config['database'];
+            
+            // Verificar campos requeridos
+            $requiredFields = ['host', 'name', 'user', 'password'];
+            foreach ($requiredFields as $field) {
+                if (!array_key_exists($field, $dbConfig)) {
+                    throw new Exception("Campo de configuración '$field' no encontrado");
+                }
+            }
+            
+            $dsn = "mysql:host={$dbConfig['host']};dbname={$dbConfig['name']};charset=utf8mb4";
             
             $options = [
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
@@ -44,8 +59,8 @@ class Database
 
             $this->pdo = new PDO(
                 $dsn,
-                $this->config['database']['user'],
-                $this->config['database']['password'],
+                $dbConfig['user'],
+                $dbConfig['password'],
                 $options
             );
 

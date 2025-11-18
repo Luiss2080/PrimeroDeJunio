@@ -131,7 +131,22 @@ class Auth
     public static function hasRole($rolNombre)
     {
         $usuario = self::user();
-        return $usuario && $usuario['rol_nombre'] === $rolNombre;
+        if (!$usuario || !isset($usuario['rol_nombre'])) {
+            return false;
+        }
+        
+        $rolUsuario = strtolower($usuario['rol_nombre']);
+        $rolRequerido = strtolower($rolNombre);
+        
+        // Manejar equivalencias de roles
+        if ($rolRequerido === 'administrador' && $rolUsuario === 'admin') {
+            return true;
+        }
+        if ($rolRequerido === 'admin' && $rolUsuario === 'administrador') {
+            return true;
+        }
+        
+        return $rolUsuario === $rolRequerido;
     }
 
     /**
@@ -139,7 +154,7 @@ class Auth
      */
     public static function isAdmin()
     {
-        return self::hasRole('administrador');
+        return self::hasRole('administrador') || self::hasRole('admin');
     }
 
     /**
@@ -321,7 +336,10 @@ class Auth
             return '/login';
         }
 
-        switch ($usuario['rol_nombre']) {
+        $rol = strtolower($usuario['rol_nombre'] ?? '');
+        
+        switch ($rol) {
+            case 'admin':
             case 'administrador':
                 return '/admin/dashboard';
             case 'operador':

@@ -38,12 +38,24 @@ if ($config['app']['debug']) {
     ini_set('display_errors', 0);
 }
 
-// Configurar sesiones
-ini_set('session.name', $config['session']['name']);
-ini_set('session.cookie_lifetime', $config['session']['lifetime']);
-ini_set('session.cookie_path', $config['session']['path']);
-ini_set('session.cookie_httponly', $config['session']['httponly']);
-ini_set('session.cookie_secure', $config['session']['secure']);
+// Configurar sesiones: sólo ajustar settings si NO hay una sesión activa
+if (session_status() === PHP_SESSION_NONE) {
+    ini_set('session.name', $config['session']['name']);
+    ini_set('session.cookie_lifetime', $config['session']['lifetime']);
+    ini_set('session.cookie_path', $config['session']['path']);
+    ini_set('session.cookie_httponly', $config['session']['httponly']);
+    ini_set('session.cookie_secure', $config['session']['secure']);
+
+    // Iniciar la sesión ahora que la configuración se aplicó
+    session_start();
+} else {
+    // Si la sesión ya está activa no intentamos cambiar ini settings relacionados
+    // para evitar warnings: ini_set() cannot change session ini settings when a
+    // session is active.
+    if (function_exists('logWarning')) {
+        logWarning('Session already active: session ini settings skipped');
+    }
+}
 
 // Autoloader para clases
 spl_autoload_register(function ($className) {
@@ -148,10 +160,8 @@ function logDebug($message, $context = []) {
     }
 }
 
-// Inicializar sesión si no está iniciada
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+// Nota: la inicialización de sesión se maneja más arriba cuando se configuran
+// las opciones de sesión. No es necesario volver a llamar a session_start() aquí.
 
 // Función helper para obtener configuración
 function config($key, $default = null) {
