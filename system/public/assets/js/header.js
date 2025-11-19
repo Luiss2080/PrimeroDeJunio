@@ -7,10 +7,13 @@ class HeaderManager {
   constructor() {
     this.header = null;
     this.userDropdown = null;
+    this.notificationDropdown = null;
     this.menuToggle = null;
     this.searchInput = null;
-    this.notificationBtn = null;
-    this.isDropdownOpen = false;
+    this.searchContainer = null;
+    this.loadingBar = null;
+    this.isUserDropdownOpen = false;
+    this.isNotificationDropdownOpen = false;
     this.searchTimeout = null;
 
     this.init();
@@ -21,59 +24,78 @@ class HeaderManager {
     this.bindEvents();
     this.setupSearch();
     this.setupNotifications();
-    this.handleResponsive();
+    this.handleScrollEffects();
+    this.setupPlaceholderAnimation();
   }
 
   bindElements() {
-    this.header = document.querySelector(".system-header");
-    this.userDropdown = document.querySelector(".user-dropdown");
-    this.menuToggle = document.querySelector(".menu-toggle");
-    this.searchInput = document.querySelector(".search-input");
-    this.notificationBtn = document.querySelector(".notification-btn");
+    this.header = document.querySelector('.header');
+    this.userDropdown = document.querySelector('.user-dropdown');
+    this.notificationDropdown = document.querySelector('.notification-dropdown');
+    this.menuToggle = document.querySelector('.menu-toggle');
+    this.searchInput = document.querySelector('.search-input');
+    this.searchContainer = document.querySelector('.search-container');
+    this.loadingBar = document.querySelector('.loading-bar');
   }
 
   bindEvents() {
-    // Dropdown de usuario
+    // User dropdown
     if (this.userDropdown) {
-      const userBtn = this.userDropdown.querySelector(".user-btn");
-      const dropdownMenu = this.userDropdown.querySelector(".dropdown-menu");
+      const userBtn = this.userDropdown.querySelector('.user-btn');
+      const userMenu = this.userDropdown.querySelector('.dropdown-menu');
 
-      if (userBtn && dropdownMenu) {
-        userBtn.addEventListener("click", (e) => {
+      if (userBtn && userMenu) {
+        userBtn.addEventListener('click', (e) => {
           e.stopPropagation();
           this.toggleUserDropdown();
-        });
-
-        // Cerrar dropdown al hacer click fuera
-        document.addEventListener("click", (e) => {
-          if (!this.userDropdown.contains(e.target)) {
-            this.closeUserDropdown();
-          }
-        });
-
-        // Cerrar con ESC
-        document.addEventListener("keydown", (e) => {
-          if (e.key === "Escape") {
-            this.closeUserDropdown();
-          }
         });
       }
     }
 
-    // Toggle del menú móvil
+    // Notification dropdown
+    if (this.notificationDropdown) {
+      const notificationBtn = this.notificationDropdown.querySelector('.notification-btn');
+      const notificationMenu = this.notificationDropdown.querySelector('.dropdown-menu');
+
+      if (notificationBtn && notificationMenu) {
+        notificationBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          this.toggleNotificationDropdown();
+        });
+      }
+    }
+
+    // Menu toggle para móvil
     if (this.menuToggle) {
-      this.menuToggle.addEventListener("click", () => {
+      this.menuToggle.addEventListener('click', () => {
         this.toggleMobileMenu();
       });
     }
 
-    // Scroll del header
-    window.addEventListener("scroll", () => {
+    // Cerrar dropdowns al hacer click fuera
+    document.addEventListener('click', (e) => {
+      if (!this.userDropdown?.contains(e.target)) {
+        this.closeUserDropdown();
+      }
+      if (!this.notificationDropdown?.contains(e.target)) {
+        this.closeNotificationDropdown();
+      }
+    });
+
+    // Cerrar con ESC
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        this.closeAllDropdowns();
+      }
+    });
+
+    // Scroll effects
+    window.addEventListener('scroll', () => {
       this.handleScroll();
     });
 
-    // Redimensionar ventana
-    window.addEventListener("resize", () => {
+    // Resize events
+    window.addEventListener('resize', () => {
       this.handleResize();
     });
   }
@@ -81,19 +103,23 @@ class HeaderManager {
   setupSearch() {
     if (!this.searchInput) return;
 
-    this.searchInput.addEventListener("input", (e) => {
+    // Input event with debounce
+    this.searchInput.addEventListener('input', (e) => {
       clearTimeout(this.searchTimeout);
       const query = e.target.value.trim();
 
       this.searchTimeout = setTimeout(() => {
         if (query.length >= 2) {
           this.performSearch(query);
+        } else {
+          this.hideSearchResults();
         }
       }, 300);
     });
 
-    this.searchInput.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") {
+    // Enter key
+    this.searchInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
         e.preventDefault();
         const query = e.target.value.trim();
         if (query.length >= 2) {
@@ -102,128 +128,45 @@ class HeaderManager {
       }
     });
 
-    // Placeholder dinámico
-    this.animateSearchPlaceholder();
+    // Focus effects
+    this.searchInput.addEventListener('focus', () => {
+      this.searchContainer?.classList.add('focused');
+    });
+
+    this.searchInput.addEventListener('blur', () => {
+      setTimeout(() => {
+        this.searchContainer?.classList.remove('focused');
+        this.hideSearchResults();
+      }, 200);
+    });
   }
 
   setupNotifications() {
-    if (!this.notificationBtn) return;
+    // Mark all as read
+    const markAllReadBtn = document.querySelector('.mark-all-read');
+    if (markAllReadBtn) {
+      markAllReadBtn.addEventListener('click', () => {
+        this.markAllNotificationsAsRead();
+      });
+    }
 
-    this.notificationBtn.addEventListener("click", () => {
-      this.toggleNotifications();
-    });
-
-    // Simular actualización de notificaciones
+    // Update notification count periodically
     this.updateNotificationCount();
-
-    // Actualizar cada 30 segundos
     setInterval(() => {
       this.updateNotificationCount();
-    }, 30000);
+    }, 30000); // Every 30 seconds
   }
 
-  toggleUserDropdown() {
-    const dropdownMenu = this.userDropdown.querySelector(".dropdown-menu");
+  setupPlaceholderAnimation() {
+    if (!this.searchInput) return;
 
-    if (this.isDropdownOpen) {
-      this.closeUserDropdown();
-    } else {
-      this.openUserDropdown();
-    }
-  }
-
-  openUserDropdown() {
-    const dropdownMenu = this.userDropdown.querySelector(".dropdown-menu");
-
-    this.userDropdown.classList.add("active");
-    dropdownMenu.classList.add("show");
-    dropdownMenu.classList.add("fade-in");
-    this.isDropdownOpen = true;
-
-    // Animación de entrada
-    setTimeout(() => {
-      dropdownMenu.classList.remove("fade-in");
-    }, 300);
-  }
-
-  closeUserDropdown() {
-    const dropdownMenu = this.userDropdown.querySelector(".dropdown-menu");
-
-    this.userDropdown.classList.remove("active");
-    dropdownMenu.classList.remove("show");
-    this.isDropdownOpen = false;
-  }
-
-  toggleMobileMenu() {
-    const sidebar = document.querySelector(".system-sidebar");
-    const overlay = document.querySelector(".sidebar-overlay");
-
-    if (sidebar) {
-      sidebar.classList.toggle("show");
-
-      if (overlay) {
-        overlay.classList.toggle("show");
-      }
-
-      // Crear overlay si no existe
-      if (!overlay) {
-        this.createSidebarOverlay();
-      }
-    }
-  }
-
-  createSidebarOverlay() {
-    const overlay = document.createElement("div");
-    overlay.className = "sidebar-overlay show";
-    document.body.appendChild(overlay);
-
-    overlay.addEventListener("click", () => {
-      this.toggleMobileMenu();
-    });
-  }
-
-  performSearch(query) {
-    console.log("Buscando:", query);
-
-    // Aquí se implementaría la búsqueda real
-    // Por ahora solo mostramos un mensaje
-    this.showSearchFeedback(query);
-  }
-
-  showSearchFeedback(query) {
-    const searchContainer = this.searchInput.parentElement;
-
-    // Remover feedback anterior
-    const existingFeedback = searchContainer.querySelector(".search-feedback");
-    if (existingFeedback) {
-      existingFeedback.remove();
-    }
-
-    // Crear nuevo feedback
-    const feedback = document.createElement("div");
-    feedback.className = "search-feedback";
-    feedback.innerHTML = `
-            <div class="search-result">
-                <i class="fas fa-search"></i>
-                <span>Buscando: "${query}"...</span>
-            </div>
-        `;
-
-    searchContainer.appendChild(feedback);
-
-    // Remover después de 3 segundos
-    setTimeout(() => {
-      feedback.remove();
-    }, 3000);
-  }
-
-  animateSearchPlaceholder() {
     const placeholders = [
-      "Buscar usuarios...",
-      "Buscar vehículos...",
-      "Buscar conductores...",
-      "Buscar viajes...",
-      "Buscar reportes...",
+      'Buscar usuarios...',
+      'Buscar vehículos...',
+      'Buscar conductores...',
+      'Buscar viajes...',
+      'Buscar reportes...',
+      'Buscar tarifas...'
     ];
 
     let currentIndex = 0;
@@ -234,142 +177,349 @@ class HeaderManager {
     }, 3000);
   }
 
-  toggleNotifications() {
-    // Aquí se implementaría el panel de notificaciones
-    console.log("Mostrando notificaciones");
+  toggleUserDropdown() {
+    if (this.isUserDropdownOpen) {
+      this.closeUserDropdown();
+    } else {
+      this.closeNotificationDropdown(); // Close other dropdown first
+      this.openUserDropdown();
+    }
+  }
 
-    // Simular marcado como leído
-    this.markNotificationsAsRead();
+  openUserDropdown() {
+    const userMenu = this.userDropdown?.querySelector('.dropdown-menu');
+    if (!userMenu) return;
+
+    this.userDropdown.classList.add('active');
+    userMenu.classList.add('show');
+    userMenu.classList.add('fade-in');
+    this.isUserDropdownOpen = true;
+
+    // Remove animation class after animation completes
+    setTimeout(() => {
+      userMenu.classList.remove('fade-in');
+    }, 300);
+  }
+
+  closeUserDropdown() {
+    const userMenu = this.userDropdown?.querySelector('.dropdown-menu');
+    if (!userMenu) return;
+
+    this.userDropdown.classList.remove('active');
+    userMenu.classList.remove('show');
+    this.isUserDropdownOpen = false;
+  }
+
+  toggleNotificationDropdown() {
+    if (this.isNotificationDropdownOpen) {
+      this.closeNotificationDropdown();
+    } else {
+      this.closeUserDropdown(); // Close other dropdown first
+      this.openNotificationDropdown();
+    }
+  }
+
+  openNotificationDropdown() {
+    const notificationMenu = this.notificationDropdown?.querySelector('.dropdown-menu');
+    if (!notificationMenu) return;
+
+    this.notificationDropdown.classList.add('active');
+    notificationMenu.classList.add('show');
+    notificationMenu.classList.add('slide-down');
+    this.isNotificationDropdownOpen = true;
+
+    // Remove animation class after animation completes
+    setTimeout(() => {
+      notificationMenu.classList.remove('slide-down');
+    }, 300);
+  }
+
+  closeNotificationDropdown() {
+    const notificationMenu = this.notificationDropdown?.querySelector('.dropdown-menu');
+    if (!notificationMenu) return;
+
+    this.notificationDropdown.classList.remove('active');
+    notificationMenu.classList.remove('show');
+    this.isNotificationDropdownOpen = false;
+  }
+
+  closeAllDropdowns() {
+    this.closeUserDropdown();
+    this.closeNotificationDropdown();
+  }
+
+  toggleMobileMenu() {
+    // This would interact with sidebar - implement based on sidebar structure
+    console.log('Toggle mobile menu');
+    
+    // Add event to show/hide sidebar or mobile navigation
+    const sidebar = document.querySelector('.sidebar');
+    if (sidebar) {
+      sidebar.classList.toggle('show');
+    }
+  }
+
+  performSearch(query) {
+    console.log('Searching for:', query);
+    
+    // Show loading
+    this.showLoadingBar();
+    
+    // Here you would implement the actual search functionality
+    // For now, we'll just simulate a search
+    setTimeout(() => {
+      this.hideLoadingBar();
+      this.showSearchResults(query);
+    }, 800);
+  }
+
+  showSearchResults(query) {
+    const searchResults = this.searchContainer?.querySelector('.search-results');
+    if (!searchResults) return;
+
+    // Mock search results
+    searchResults.innerHTML = `
+      <div class="search-results-content">
+        <div class="search-result-item">
+          <i class="fas fa-users"></i>
+          <span>Buscar usuarios: "${query}"</span>
+        </div>
+        <div class="search-result-item">
+          <i class="fas fa-car"></i>
+          <span>Buscar vehículos: "${query}"</span>
+        </div>
+        <div class="search-result-item">
+          <i class="fas fa-route"></i>
+          <span>Buscar viajes: "${query}"</span>
+        </div>
+      </div>
+    `;
+
+    searchResults.classList.add('show');
+  }
+
+  hideSearchResults() {
+    const searchResults = this.searchContainer?.querySelector('.search-results');
+    if (searchResults) {
+      searchResults.classList.remove('show');
+    }
+  }
+
+  showLoadingBar() {
+    if (this.loadingBar) {
+      this.loadingBar.classList.add('active');
+    }
+  }
+
+  hideLoadingBar() {
+    if (this.loadingBar) {
+      this.loadingBar.classList.remove('active');
+    }
   }
 
   updateNotificationCount() {
-    const badge = this.notificationBtn?.querySelector(".notification-badge");
+    const badge = document.querySelector('.notification-badge');
     if (!badge) return;
 
-    // Simular obtención de notificaciones del servidor
-    const count = Math.floor(Math.random() * 10);
+    // Simulate getting notification count from server
+    const count = Math.floor(Math.random() * 8);
 
     if (count > 0) {
       badge.textContent = count;
-      badge.style.display = "block";
-      this.notificationBtn.classList.add("has-notifications");
+      badge.style.display = 'block';
+      
+      // Add pulse animation
+      const notificationBtn = document.querySelector('.notification-btn');
+      if (notificationBtn) {
+        notificationBtn.classList.add('pulse');
+        setTimeout(() => {
+          notificationBtn.classList.remove('pulse');
+        }, 2000);
+      }
     } else {
-      badge.style.display = "none";
-      this.notificationBtn.classList.remove("has-notifications");
+      badge.style.display = 'none';
     }
   }
 
-  markNotificationsAsRead() {
-    const badge = this.notificationBtn?.querySelector(".notification-badge");
+  markAllNotificationsAsRead() {
+    // Mark all notifications as read
+    const unreadItems = document.querySelectorAll('.notification-item.unread');
+    unreadItems.forEach(item => {
+      item.classList.remove('unread');
+    });
+
+    // Hide notification badge
+    const badge = document.querySelector('.notification-badge');
     if (badge) {
-      badge.style.display = "none";
-      this.notificationBtn.classList.remove("has-notifications");
+      badge.style.display = 'none';
     }
+
+    // Show success feedback
+    this.showNotification('Todas las notificaciones marcadas como leídas', 'success');
   }
 
   handleScroll() {
     const scrollY = window.scrollY;
 
     if (scrollY > 50) {
-      this.header?.classList.add("scrolled");
+      this.header?.classList.add('scrolled');
     } else {
-      this.header?.classList.remove("scrolled");
+      this.header?.classList.remove('scrolled');
     }
   }
 
   handleResize() {
-    // Cerrar dropdown en redimensión
-    if (this.isDropdownOpen && window.innerWidth <= 768) {
-      this.closeUserDropdown();
-    }
-
-    // Cerrar menú móvil en desktop
-    if (window.innerWidth > 768) {
-      const sidebar = document.querySelector(".system-sidebar");
-      const overlay = document.querySelector(".sidebar-overlay");
-
-      if (sidebar?.classList.contains("show")) {
-        sidebar.classList.remove("show");
-      }
-
-      if (overlay?.classList.contains("show")) {
-        overlay.classList.remove("show");
-      }
+    // Close dropdowns on resize
+    if (window.innerWidth <= 768) {
+      this.closeAllDropdowns();
     }
   }
 
-  handleResponsive() {
-    // Verificar si es móvil
-    const isMobile = window.innerWidth <= 768;
+  handleScrollEffects() {
+    let lastScrollY = window.scrollY;
+    
+    window.addEventListener('scroll', () => {
+      const currentScrollY = window.scrollY;
+      
+      // Hide/show header based on scroll direction
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        this.header?.style.setProperty('transform', 'translateY(-100%)');
+      } else {
+        this.header?.style.setProperty('transform', 'translateY(0)');
+      }
+      
+      lastScrollY = currentScrollY;
+    });
+  }
 
-    if (isMobile) {
-      this.header?.classList.add("mobile");
-    } else {
-      this.header?.classList.remove("mobile");
-    }
+  showNotification(message, type = 'info') {
+    // Create notification toast
+    const notification = document.createElement('div');
+    notification.className = `notification-toast ${type}`;
+    notification.innerHTML = `
+      <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-info-circle'}"></i>
+      <span>${message}</span>
+    `;
+
+    document.body.appendChild(notification);
+
+    // Show notification
+    setTimeout(() => {
+      notification.classList.add('show');
+    }, 100);
+
+    // Remove notification after 3 seconds
+    setTimeout(() => {
+      notification.classList.remove('show');
+      setTimeout(() => {
+        notification.remove();
+      }, 300);
+    }, 3000);
   }
 }
 
-// CSS adicional dinámico
-const headerStyles = `
-.search-feedback {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: rgba(0, 0, 0, 0.95);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(0, 255, 102, 0.2);
-    border-radius: 8px;
-    padding: 10px;
-    margin-top: 5px;
-    z-index: 1000;
-    animation: slideDown 0.3s ease-out;
+// CSS adicional dinámico para efectos y notificaciones
+const additionalStyles = `
+.notification-toast {
+  position: fixed;
+  top: 100px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(0, 255, 102, 0.3);
+  border-radius: var(--border-radius-large);
+  padding: 16px 20px;
+  color: var(--white);
+  font-size: 14px;
+  font-weight: 500;
+  z-index: 10000;
+  transform: translateX(400px);
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 350px;
 }
 
-.search-result {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--white);
-    font-size: 14px;
+.notification-toast.show {
+  transform: translateX(0);
+  opacity: 1;
 }
 
-.search-result i {
-    color: var(--primary-green);
+.notification-toast.success {
+  border-color: rgba(0, 255, 102, 0.5);
+  background: rgba(0, 255, 102, 0.1);
 }
 
-.notification-btn.has-notifications {
-    animation: pulse 2s infinite;
+.notification-toast.success i {
+  color: var(--primary-green);
 }
 
-.system-header.scrolled {
-    background: rgba(0, 0, 0, 0.98);
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+.search-results-content {
+  padding: 10px 0;
 }
 
-.system-header.mobile .header-container {
-    padding: 0 10px;
+.search-result-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  color: var(--white);
+  cursor: pointer;
+  transition: var(--transition-fast);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.search-result-item:hover {
+  background: rgba(0, 255, 102, 0.1);
+  color: var(--primary-green);
+}
+
+.search-result-item:last-child {
+  border-bottom: none;
+}
+
+.search-result-item i {
+  width: 16px;
+  text-align: center;
+  color: var(--primary-green);
+}
+
+.search-container.focused .search-input {
+  border-color: var(--primary-green);
+  background: rgba(0, 255, 102, 0.08);
+  box-shadow: 0 0 0 2px rgba(0, 255, 102, 0.25);
+}
+
+.header {
+  transition: transform var(--transition-smooth), 
+              background var(--transition-fast),
+              box-shadow var(--transition-fast);
 }
 
 @media (max-width: 768px) {
-    .search-feedback {
-        position: fixed;
-        top: var(--header-height);
-        left: 10px;
-        right: 10px;
-        margin: 10px 0;
-    }
+  .notification-toast {
+    left: 20px;
+    right: 20px;
+    max-width: none;
+    transform: translateY(-100px);
+  }
+  
+  .notification-toast.show {
+    transform: translateY(0);
+  }
 }
 `;
 
 // Inyectar estilos adicionales
-const styleSheet = document.createElement("style");
-styleSheet.textContent = headerStyles;
+const styleSheet = document.createElement('style');
+styleSheet.textContent = additionalStyles;
 document.head.appendChild(styleSheet);
 
 // Inicializar cuando el DOM esté listo
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', () => {
   new HeaderManager();
 });
 

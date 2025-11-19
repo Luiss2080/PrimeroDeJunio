@@ -42,19 +42,24 @@ class LoginController extends Controller
         }
 
         try {
-            $usuario = trim($_POST['usuario'] ?? '');
+            $email = trim($_POST['email'] ?? '');
             $password = $_POST['password'] ?? '';
 
             // Validaciones básicas
-            if (empty($usuario) || empty($password)) {
+            if (empty($email) || empty($password)) {
                 throw new Exception('Todos los campos son obligatorios');
             }
 
+            // Validar formato de email
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                throw new Exception('Por favor ingrese un email válido');
+            }
+
             // Intentar autenticación
-            $resultado = Auth::login($usuario, $password);
+            $resultado = Auth::login($email, $password);
             
             if (!$resultado) {
-                throw new Exception('Credenciales incorrectas');
+                throw new Exception('Email o contraseña incorrectos');
             }
 
             // Login exitoso - verificar estado del usuario
@@ -73,7 +78,7 @@ class LoginController extends Controller
 
         } catch (Exception $e) {
             // Registrar intento fallido
-            $this->registrarIntentoFallido($usuario ?? 'desconocido', $e->getMessage());
+            $this->registrarIntentoFallido($email ?? 'desconocido', $e->getMessage());
             
             $this->setFlash('error', $e->getMessage());
             $this->redirect('/login');

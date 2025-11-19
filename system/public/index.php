@@ -8,6 +8,17 @@
 require_once '../app/bootstrap.php';
 
 try {
+    // Verificar si la URL es para login, redirigir al login funcional
+    $requestUri = $_SERVER['REQUEST_URI'];
+    $path = parse_url($requestUri, PHP_URL_PATH);
+    
+    // Si es una ruta de login, redirigir al login que funciona
+    if (strpos($path, '/login') !== false || strpos($path, 'index.php') === false || $path === '/PrimeroDeJunio/system/public/') {
+        $loginUrl = '../app/auth/login.php';
+        header("Location: $loginUrl");
+        exit;
+    }
+    
     // Inicializar el router (ya carga las rutas automáticamente)
     $router = new Router();
 

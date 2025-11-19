@@ -40,21 +40,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['email']) && !empty($
             $user = Auth::user();
             $debug_info .= " | Login exitoso | Rol: " . ($user['rol_nombre'] ?? 'desconocido');
 
-            // Redireccionar con la metodología múltiple que funciona
-            $redirectUrl = 'http://localhost/PrimeroDeJunio/system/public/index.php/admin/dashboard';
+            // Determinar URL de redirección según el rol
+            $rol = strtolower($user['rol_nombre'] ?? '');
+            switch ($rol) {
+                case 'admin':
+                case 'administrador':
+                    $redirectUrl = '../../public/index.php/admin/dashboard';
+                    break;
+                case 'operador':
+                    $redirectUrl = '../../public/index.php/operador/dashboard';
+                    break;
+                case 'conductor':
+                    $redirectUrl = '../../public/index.php/conductor/dashboard';
+                    break;
+                default:
+                    $redirectUrl = '../../public/index.php/admin/dashboard';
+            }
 
+            // Redireccionar inmediatamente usando múltiples métodos
+            header("Location: $redirectUrl");
             echo "<!DOCTYPE html><html><head><title>Redirigiendo...</title></head><body>";
             echo "<h2 style='color: green; text-align: center; margin-top: 50px;'>✅ Login exitoso</h2>";
             echo "<p style='text-align: center;'>Bienvenido " . htmlspecialchars($user['nombre']) . "! Redirigiendo al dashboard...</p>";
-            echo "<script>setTimeout(function(){ window.location.href = '$redirectUrl'; }, 1500);</script>";
-            echo "<meta http-equiv='refresh' content='3;url=$redirectUrl'>";
+            echo "<script>window.location.href = '$redirectUrl';</script>";
+            echo "<meta http-equiv='refresh' content='1;url=$redirectUrl'>";
             echo "<div style='text-align: center; margin-top: 20px;'>";
             echo "<a href='$redirectUrl' style='color: blue; text-decoration: none; background: #f0f8ff; padding: 10px 20px; border-radius: 5px;'>Si no eres redirigido automáticamente, haz clic aquí</a>";
             echo "</div>";
             echo "</body></html>";
             exit;
         } else {
-            $error_message = 'Credenciales incorrectas';
+            $error_message = 'Email o contraseña incorrectos';
             $debug_info .= " | Login falló - credenciales incorrectas";
         }
     } catch (Exception $e) {
@@ -70,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['email']) && !empty($
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acceso Administrativo - PRIMERO DE JUNIO Asociación de Mototaxis</title>
-    <link rel="icon" type="image/jpeg" href="http://localhost/PrimeroDeJunio/website/public/images/logoMoto.jpg">
+    <link rel="icon" type="image/jpeg" href="../../../website/public/images/logoMoto.jpg">
 
     <!-- Precargar fuentes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -78,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['email']) && !empty($
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <!-- CSS del login -->
-    <link rel="stylesheet" href="http://localhost/PrimeroDeJunio/system/public/assets/css/login.css">
+    <link rel="stylesheet" href="../../public/assets/css/login.css">
 
     <!-- Meta tags para SEO -->
     <meta name="description" content="Accede a tu cuenta en PRIMERO DE JUNIO Asociación de Mototaxis. Plataforma administrativa para conductores y servicios.">
@@ -323,7 +339,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['email']) && !empty($
     </div>
 
     <!-- JavaScript -->
-    <script src="http://localhost/PrimeroDeJunio/system/public/assets/js/login.js"></script>
+    <script src="../../public/assets/js/login.js"></script>
 
     <!-- Analytics (opcional) -->
     <script>
