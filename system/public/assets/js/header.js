@@ -29,23 +29,25 @@ class HeaderManager {
   }
 
   bindElements() {
-    this.header = document.querySelector('.header');
-    this.userDropdown = document.querySelector('.user-dropdown');
-    this.notificationDropdown = document.querySelector('.notification-dropdown');
-    this.menuToggle = document.querySelector('.menu-toggle');
-    this.searchInput = document.querySelector('.search-input');
-    this.searchContainer = document.querySelector('.search-container');
-    this.loadingBar = document.querySelector('.loading-bar');
+    this.header = document.querySelector(".header");
+    this.userDropdown = document.querySelector(".user-dropdown");
+    this.notificationDropdown = document.querySelector(
+      ".notification-dropdown"
+    );
+    this.menuToggle = document.querySelector(".menu-toggle");
+    this.searchInput = document.querySelector(".search-input");
+    this.searchContainer = document.querySelector(".search-container");
+    this.loadingBar = document.querySelector(".loading-bar");
   }
 
   bindEvents() {
     // User dropdown
     if (this.userDropdown) {
-      const userBtn = this.userDropdown.querySelector('.user-btn');
-      const userMenu = this.userDropdown.querySelector('.dropdown-menu');
+      const userBtn = this.userDropdown.querySelector(".user-btn");
+      const userMenu = this.userDropdown.querySelector(".dropdown-menu");
 
       if (userBtn && userMenu) {
-        userBtn.addEventListener('click', (e) => {
+        userBtn.addEventListener("click", (e) => {
           e.stopPropagation();
           this.toggleUserDropdown();
         });
@@ -54,11 +56,13 @@ class HeaderManager {
 
     // Notification dropdown
     if (this.notificationDropdown) {
-      const notificationBtn = this.notificationDropdown.querySelector('.notification-btn');
-      const notificationMenu = this.notificationDropdown.querySelector('.dropdown-menu');
+      const notificationBtn =
+        this.notificationDropdown.querySelector(".notification-btn");
+      const notificationMenu =
+        this.notificationDropdown.querySelector(".dropdown-menu");
 
       if (notificationBtn && notificationMenu) {
-        notificationBtn.addEventListener('click', (e) => {
+        notificationBtn.addEventListener("click", (e) => {
           e.stopPropagation();
           this.toggleNotificationDropdown();
         });
@@ -67,13 +71,13 @@ class HeaderManager {
 
     // Menu toggle para móvil
     if (this.menuToggle) {
-      this.menuToggle.addEventListener('click', () => {
+      this.menuToggle.addEventListener("click", () => {
         this.toggleMobileMenu();
       });
     }
 
     // Cerrar dropdowns al hacer click fuera
-    document.addEventListener('click', (e) => {
+    document.addEventListener("click", (e) => {
       if (!this.userDropdown?.contains(e.target)) {
         this.closeUserDropdown();
       }
@@ -83,19 +87,19 @@ class HeaderManager {
     });
 
     // Cerrar con ESC
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
         this.closeAllDropdowns();
       }
     });
 
     // Scroll effects
-    window.addEventListener('scroll', () => {
+    window.addEventListener("scroll", () => {
       this.handleScroll();
     });
 
     // Resize events
-    window.addEventListener('resize', () => {
+    window.addEventListener("resize", () => {
       this.handleResize();
     });
   }
@@ -104,7 +108,7 @@ class HeaderManager {
     if (!this.searchInput) return;
 
     // Input event with debounce
-    this.searchInput.addEventListener('input', (e) => {
+    this.searchInput.addEventListener("input", (e) => {
       clearTimeout(this.searchTimeout);
       const query = e.target.value.trim();
 
@@ -118,8 +122,8 @@ class HeaderManager {
     });
 
     // Enter key
-    this.searchInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
+    this.searchInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
         e.preventDefault();
         const query = e.target.value.trim();
         if (query.length >= 2) {
@@ -129,13 +133,13 @@ class HeaderManager {
     });
 
     // Focus effects
-    this.searchInput.addEventListener('focus', () => {
-      this.searchContainer?.classList.add('focused');
+    this.searchInput.addEventListener("focus", () => {
+      this.searchContainer?.classList.add("focused");
     });
 
-    this.searchInput.addEventListener('blur', () => {
+    this.searchInput.addEventListener("blur", () => {
       setTimeout(() => {
-        this.searchContainer?.classList.remove('focused');
+        this.searchContainer?.classList.remove("focused");
         this.hideSearchResults();
       }, 200);
     });
@@ -143,9 +147,9 @@ class HeaderManager {
 
   setupNotifications() {
     // Mark all as read
-    const markAllReadBtn = document.querySelector('.mark-all-read');
+    const markAllReadBtn = document.querySelector(".mark-all-read");
     if (markAllReadBtn) {
-      markAllReadBtn.addEventListener('click', () => {
+      markAllReadBtn.addEventListener("click", () => {
         this.markAllNotificationsAsRead();
       });
     }
@@ -161,12 +165,12 @@ class HeaderManager {
     if (!this.searchInput) return;
 
     const placeholders = [
-      'Buscar usuarios...',
-      'Buscar vehículos...',
-      'Buscar conductores...',
-      'Buscar viajes...',
-      'Buscar reportes...',
-      'Buscar tarifas...'
+      "Buscar usuarios...",
+      "Buscar vehículos...",
+      "Buscar conductores...",
+      "Buscar viajes...",
+      "Buscar reportes...",
+      "Buscar tarifas...",
     ];
 
     let currentIndex = 0;
@@ -187,26 +191,26 @@ class HeaderManager {
   }
 
   openUserDropdown() {
-    const userMenu = this.userDropdown?.querySelector('.dropdown-menu');
+    const userMenu = this.userDropdown?.querySelector(".dropdown-menu");
     if (!userMenu) return;
 
-    this.userDropdown.classList.add('active');
-    userMenu.classList.add('show');
-    userMenu.classList.add('fade-in');
+    this.userDropdown.classList.add("active");
+    userMenu.classList.add("show");
+    userMenu.classList.add("fade-in");
     this.isUserDropdownOpen = true;
 
     // Remove animation class after animation completes
     setTimeout(() => {
-      userMenu.classList.remove('fade-in');
+      userMenu.classList.remove("fade-in");
     }, 300);
   }
 
   closeUserDropdown() {
-    const userMenu = this.userDropdown?.querySelector('.dropdown-menu');
+    const userMenu = this.userDropdown?.querySelector(".dropdown-menu");
     if (!userMenu) return;
 
-    this.userDropdown.classList.remove('active');
-    userMenu.classList.remove('show');
+    this.userDropdown.classList.remove("active");
+    userMenu.classList.remove("show");
     this.isUserDropdownOpen = false;
   }
 
@@ -220,26 +224,28 @@ class HeaderManager {
   }
 
   openNotificationDropdown() {
-    const notificationMenu = this.notificationDropdown?.querySelector('.dropdown-menu');
+    const notificationMenu =
+      this.notificationDropdown?.querySelector(".dropdown-menu");
     if (!notificationMenu) return;
 
-    this.notificationDropdown.classList.add('active');
-    notificationMenu.classList.add('show');
-    notificationMenu.classList.add('slide-down');
+    this.notificationDropdown.classList.add("active");
+    notificationMenu.classList.add("show");
+    notificationMenu.classList.add("slide-down");
     this.isNotificationDropdownOpen = true;
 
     // Remove animation class after animation completes
     setTimeout(() => {
-      notificationMenu.classList.remove('slide-down');
+      notificationMenu.classList.remove("slide-down");
     }, 300);
   }
 
   closeNotificationDropdown() {
-    const notificationMenu = this.notificationDropdown?.querySelector('.dropdown-menu');
+    const notificationMenu =
+      this.notificationDropdown?.querySelector(".dropdown-menu");
     if (!notificationMenu) return;
 
-    this.notificationDropdown.classList.remove('active');
-    notificationMenu.classList.remove('show');
+    this.notificationDropdown.classList.remove("active");
+    notificationMenu.classList.remove("show");
     this.isNotificationDropdownOpen = false;
   }
 
@@ -250,21 +256,21 @@ class HeaderManager {
 
   toggleMobileMenu() {
     // This would interact with sidebar - implement based on sidebar structure
-    console.log('Toggle mobile menu');
-    
+    console.log("Toggle mobile menu");
+
     // Add event to show/hide sidebar or mobile navigation
-    const sidebar = document.querySelector('.sidebar');
+    const sidebar = document.querySelector(".sidebar");
     if (sidebar) {
-      sidebar.classList.toggle('show');
+      sidebar.classList.toggle("show");
     }
   }
 
   performSearch(query) {
-    console.log('Searching for:', query);
-    
+    console.log("Searching for:", query);
+
     // Show loading
     this.showLoadingBar();
-    
+
     // Here you would implement the actual search functionality
     // For now, we'll just simulate a search
     setTimeout(() => {
@@ -274,7 +280,8 @@ class HeaderManager {
   }
 
   showSearchResults(query) {
-    const searchResults = this.searchContainer?.querySelector('.search-results');
+    const searchResults =
+      this.searchContainer?.querySelector(".search-results");
     if (!searchResults) return;
 
     // Mock search results
@@ -295,30 +302,31 @@ class HeaderManager {
       </div>
     `;
 
-    searchResults.classList.add('show');
+    searchResults.classList.add("show");
   }
 
   hideSearchResults() {
-    const searchResults = this.searchContainer?.querySelector('.search-results');
+    const searchResults =
+      this.searchContainer?.querySelector(".search-results");
     if (searchResults) {
-      searchResults.classList.remove('show');
+      searchResults.classList.remove("show");
     }
   }
 
   showLoadingBar() {
     if (this.loadingBar) {
-      this.loadingBar.classList.add('active');
+      this.loadingBar.classList.add("active");
     }
   }
 
   hideLoadingBar() {
     if (this.loadingBar) {
-      this.loadingBar.classList.remove('active');
+      this.loadingBar.classList.remove("active");
     }
   }
 
   updateNotificationCount() {
-    const badge = document.querySelector('.notification-badge');
+    const badge = document.querySelector(".notification-badge");
     if (!badge) return;
 
     // Simulate getting notification count from server
@@ -326,45 +334,48 @@ class HeaderManager {
 
     if (count > 0) {
       badge.textContent = count;
-      badge.style.display = 'block';
-      
+      badge.style.display = "block";
+
       // Add pulse animation
-      const notificationBtn = document.querySelector('.notification-btn');
+      const notificationBtn = document.querySelector(".notification-btn");
       if (notificationBtn) {
-        notificationBtn.classList.add('pulse');
+        notificationBtn.classList.add("pulse");
         setTimeout(() => {
-          notificationBtn.classList.remove('pulse');
+          notificationBtn.classList.remove("pulse");
         }, 2000);
       }
     } else {
-      badge.style.display = 'none';
+      badge.style.display = "none";
     }
   }
 
   markAllNotificationsAsRead() {
     // Mark all notifications as read
-    const unreadItems = document.querySelectorAll('.notification-item.unread');
-    unreadItems.forEach(item => {
-      item.classList.remove('unread');
+    const unreadItems = document.querySelectorAll(".notification-item.unread");
+    unreadItems.forEach((item) => {
+      item.classList.remove("unread");
     });
 
     // Hide notification badge
-    const badge = document.querySelector('.notification-badge');
+    const badge = document.querySelector(".notification-badge");
     if (badge) {
-      badge.style.display = 'none';
+      badge.style.display = "none";
     }
 
     // Show success feedback
-    this.showNotification('Todas las notificaciones marcadas como leídas', 'success');
+    this.showNotification(
+      "Todas las notificaciones marcadas como leídas",
+      "success"
+    );
   }
 
   handleScroll() {
     const scrollY = window.scrollY;
 
     if (scrollY > 50) {
-      this.header?.classList.add('scrolled');
+      this.header?.classList.add("scrolled");
     } else {
-      this.header?.classList.remove('scrolled');
+      this.header?.classList.remove("scrolled");
     }
   }
 
@@ -377,27 +388,29 @@ class HeaderManager {
 
   handleScrollEffects() {
     let lastScrollY = window.scrollY;
-    
-    window.addEventListener('scroll', () => {
+
+    window.addEventListener("scroll", () => {
       const currentScrollY = window.scrollY;
-      
+
       // Hide/show header based on scroll direction
       if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        this.header?.style.setProperty('transform', 'translateY(-100%)');
+        this.header?.style.setProperty("transform", "translateY(-100%)");
       } else {
-        this.header?.style.setProperty('transform', 'translateY(0)');
+        this.header?.style.setProperty("transform", "translateY(0)");
       }
-      
+
       lastScrollY = currentScrollY;
     });
   }
 
-  showNotification(message, type = 'info') {
+  showNotification(message, type = "info") {
     // Create notification toast
-    const notification = document.createElement('div');
+    const notification = document.createElement("div");
     notification.className = `notification-toast ${type}`;
     notification.innerHTML = `
-      <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-info-circle'}"></i>
+      <i class="fas ${
+        type === "success" ? "fa-check-circle" : "fa-info-circle"
+      }"></i>
       <span>${message}</span>
     `;
 
@@ -405,12 +418,12 @@ class HeaderManager {
 
     // Show notification
     setTimeout(() => {
-      notification.classList.add('show');
+      notification.classList.add("show");
     }, 100);
 
     // Remove notification after 3 seconds
     setTimeout(() => {
-      notification.classList.remove('show');
+      notification.classList.remove("show");
       setTimeout(() => {
         notification.remove();
       }, 300);
@@ -514,12 +527,12 @@ const additionalStyles = `
 `;
 
 // Inyectar estilos adicionales
-const styleSheet = document.createElement('style');
+const styleSheet = document.createElement("style");
 styleSheet.textContent = additionalStyles;
 document.head.appendChild(styleSheet);
 
 // Inicializar cuando el DOM esté listo
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
   new HeaderManager();
 });
 

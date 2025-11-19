@@ -57,14 +57,14 @@ class LoginController extends Controller
 
             // Intentar autenticación
             $resultado = Auth::login($email, $password);
-            
+
             if (!$resultado) {
                 throw new Exception('Email o contraseña incorrectos');
             }
 
             // Login exitoso - verificar estado del usuario
             $usuarioData = Auth::user();
-            
+
             if ($usuarioData['estado'] !== 'activo') {
                 Auth::logout();
                 throw new Exception('Usuario inactivo. Contacte al administrador');
@@ -75,11 +75,10 @@ class LoginController extends Controller
 
             // Redirigir según el rol
             $this->redirigirSegunRol();
-
         } catch (Exception $e) {
             // Registrar intento fallido
             $this->registrarIntentoFallido($email ?? 'desconocido', $e->getMessage());
-            
+
             $this->setFlash('error', $e->getMessage());
             $this->redirect('/login');
         }
@@ -92,14 +91,13 @@ class LoginController extends Controller
     {
         try {
             $usuario = Auth::user();
-            
+
             if ($usuario) {
                 $this->registrarLogout($usuario['id']);
             }
 
             Auth::logout();
             $this->setFlash('success', 'Sesión cerrada correctamente');
-            
         } catch (Exception $e) {
             $this->setFlash('error', 'Error al cerrar sesión');
         }
@@ -114,19 +112,18 @@ class LoginController extends Controller
     {
         try {
             $usuario = Auth::user();
-            
+
             if (!$usuario) {
                 $this->redirect('/login');
                 return;
             }
 
             $dashboardUrl = Auth::getDashboardUrl();
-            
+
             // Configurar mensaje de bienvenida personalizado
             $this->configurarMensajeBienvenida($usuario);
-            
-            $this->redirect($dashboardUrl);
 
+            $this->redirect($dashboardUrl);
         } catch (Exception $e) {
             $this->setFlash('error', 'Error al determinar el dashboard: ' . $e->getMessage());
             $this->redirect('/login');
@@ -156,17 +153,17 @@ class LoginController extends Controller
                 $mensaje = "$saludo, $nombre. Bienvenido al panel de administración.";
                 $submensaje = "Tienes acceso completo a todas las funcionalidades del sistema.";
                 break;
-            
+
             case 'operador':
                 $mensaje = "$saludo, $nombre. Bienvenido al panel operativo.";
                 $submensaje = "Gestiona conductores, vehículos, viajes y operaciones diarias.";
                 break;
-            
+
             case 'conductor':
                 $mensaje = "$saludo, $nombre. Bienvenido a tu panel de conductor.";
                 $submensaje = "Administra tus viajes y revisa tu información.";
                 break;
-            
+
             default:
                 $mensaje = "$saludo, $nombre. Bienvenido al sistema.";
                 $submensaje = "";
@@ -176,7 +173,7 @@ class LoginController extends Controller
         $_SESSION['mensaje_bienvenida'] = $mensaje;
         $_SESSION['submensaje_bienvenida'] = $submensaje;
         $_SESSION['ultimo_acceso'] = $usuario['ultimo_acceso'] ?? null;
-        
+
         $this->setFlash('success', $mensaje);
     }
 
@@ -225,13 +222,12 @@ class LoginController extends Controller
 
             // Generar token de recuperación
             $token = $this->generarTokenRecuperacion($usuarioData['id']);
-            
+
             // Enviar email (implementar según necesidades)
             $this->enviarEmailRecuperacion($usuarioData, $token);
-            
+
             $this->setFlash('success', 'Se han enviado las instrucciones de recuperación');
             $this->redirect('/login');
-
         } catch (Exception $e) {
             $this->setFlash('error', $e->getMessage());
             $this->redirect('/recuperar');
@@ -251,7 +247,7 @@ class LoginController extends Controller
 
         // Verificar token
         $resetData = $this->verificarTokenRecuperacion($token);
-        
+
         if (!$resetData) {
             $this->setFlash('error', 'Token expirado o no válido');
             $this->redirect('/login');
@@ -292,13 +288,12 @@ class LoginController extends Controller
 
             // Actualizar contraseña
             $this->usuario->actualizarPassword($usuarioId, $password);
-            
+
             // Invalidar token
             $this->invalidarTokenRecuperacion($token);
-            
+
             $this->setFlash('success', 'Contraseña actualizada exitosamente');
             $this->redirect('/login');
-
         } catch (Exception $e) {
             $this->setFlash('error', $e->getMessage());
             $this->redirect('/reset/' . $token);
@@ -337,13 +332,12 @@ class LoginController extends Controller
         try {
             // Extender tiempo de sesión
             $_SESSION['ultima_actividad'] = time();
-            
+
             $this->jsonResponse([
                 'success' => true,
                 'tiempo_restante' => $this->obtenerTiempoRestanteSesion(),
                 'mensaje' => 'Sesión extendida'
             ]);
-
         } catch (Exception $e) {
             $this->jsonResponse(['error' => $e->getMessage()], 500);
         }
@@ -383,10 +377,9 @@ class LoginController extends Controller
 
                 // Actualizar contraseña
                 $this->usuario->actualizarPassword($usuario['id'], $passwordNuevo);
-                
+
                 $this->setFlash('success', 'Contraseña actualizada exitosamente');
                 $this->redirect(Auth::getDashboardUrl());
-
             } catch (Exception $e) {
                 $this->setFlash('error', $e->getMessage());
                 $this->redirect('/cambiar-password');
@@ -413,7 +406,6 @@ class LoginController extends Controller
             ];
 
             Database::getInstance()->insert('logs_acceso', $datos);
-            
         } catch (Exception $e) {
             // Fallar silenciosamente para no interrumpir el login
             error_log("Error al registrar acceso exitoso: " . $e->getMessage());
@@ -436,7 +428,6 @@ class LoginController extends Controller
             ];
 
             Database::getInstance()->insert('logs_acceso', $datos);
-            
         } catch (Exception $e) {
             error_log("Error al registrar intento fallido: " . $e->getMessage());
         }
@@ -456,7 +447,6 @@ class LoginController extends Controller
             ];
 
             Database::getInstance()->insert('logs_acceso', $datos);
-            
         } catch (Exception $e) {
             error_log("Error al registrar logout: " . $e->getMessage());
         }
@@ -479,7 +469,7 @@ class LoginController extends Controller
         ];
 
         Database::getInstance()->insert('tokens_recuperacion', $datos);
-        
+
         return $token;
     }
 
@@ -489,11 +479,11 @@ class LoginController extends Controller
     private function verificarTokenRecuperacion($token)
     {
         $hashedToken = hash('sha256', $token);
-        
+
         $sql = "SELECT * FROM tokens_recuperacion 
                 WHERE token = ? AND usado = 0 AND expiracion > NOW() 
                 LIMIT 1";
-        
+
         return Database::getInstance()->fetch($sql, [$hashedToken]);
     }
 
@@ -503,7 +493,7 @@ class LoginController extends Controller
     private function invalidarTokenRecuperacion($token)
     {
         $hashedToken = hash('sha256', $token);
-        
+
         $sql = "UPDATE tokens_recuperacion SET usado = 1 WHERE token = ?";
         Database::getInstance()->execute($sql, [$hashedToken]);
     }
@@ -516,11 +506,11 @@ class LoginController extends Controller
         // Implementar envío de email según configuración
         // Por ahora solo guardar en logs para desarrollo
         $url = "http://" . $_SERVER['HTTP_HOST'] . "/reset/" . $token;
-        
+
         $mensaje = "Enlace de recuperación: " . $url;
-        
+
         error_log("Recuperación de contraseña para {$usuario['email']}: $mensaje");
-        
+
         // Aquí se integraría con servicio de email (PHPMailer, etc.)
     }
 
@@ -533,7 +523,7 @@ class LoginController extends Controller
         $ultimaActividad = $_SESSION['ultima_actividad'] ?? time();
         $tiempoTranscurrido = time() - $ultimaActividad;
         $tiempoRestante = max(0, $tiempoExpiracion - $tiempoTranscurrido);
-        
+
         return round($tiempoRestante / 60); // Retornar en minutos
     }
 }
