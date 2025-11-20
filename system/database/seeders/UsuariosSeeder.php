@@ -49,7 +49,7 @@ class UsuariosSeeder extends Seeder
                 'password' => $password,
                 'telefono' => '3018765432',
                 'direccion' => 'Avenida Principal #88-42',
-                'rol_id' => 4, // supervisor
+                'rol_id' => 1, // administrador (era supervisor)
                 'estado' => 'activo',
                 'created_at' => now(),
                 'updated_at' => now()
@@ -61,7 +61,7 @@ class UsuariosSeeder extends Seeder
                 'password' => $password,
                 'telefono' => '3012345678',
                 'direccion' => 'Barrio La Esperanza - Calle 8 #12-34',
-                'rol_id' => 3, // conductor
+                'rol_id' => 2, // operador (era conductor)
                 'estado' => 'activo',
                 'created_at' => now(),
                 'updated_at' => now()
@@ -73,7 +73,7 @@ class UsuariosSeeder extends Seeder
                 'password' => $password,
                 'telefono' => '3154567890',
                 'direccion' => 'Sector El Progreso - Carrera 20 #15-40',
-                'rol_id' => 3, // conductor
+                'rol_id' => 2, // operador (era conductor)
                 'estado' => 'activo',
                 'created_at' => now(),
                 'updated_at' => now()
@@ -85,7 +85,7 @@ class UsuariosSeeder extends Seeder
                 'password' => $password,
                 'telefono' => '3176543210',
                 'direccion' => 'Barrio San Jose - Calle 25 #18-60',
-                'rol_id' => 3, // conductor
+                'rol_id' => 2, // operador (era conductor)
                 'estado' => 'activo',
                 'created_at' => now(),
                 'updated_at' => now()
@@ -97,7 +97,7 @@ class UsuariosSeeder extends Seeder
                 'password' => $password,
                 'telefono' => '3198765432',
                 'direccion' => 'Sector Villa Nueva - Carrera 8 #32-14',
-                'rol_id' => 3, // conductor
+                'rol_id' => 2, // operador (era conductor)
                 'estado' => 'activo',
                 'created_at' => now(),
                 'updated_at' => now()
