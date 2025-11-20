@@ -35,7 +35,7 @@ return new class extends Migration
             $table->tinyInteger('calificacion')->nullable()->check('calificacion >= 1 AND calificacion <= 5');
             $table->text('comentario_cliente')->nullable();
             $table->timestamps();
-            
+
             $table->index('conductor_id');
             $table->index('vehiculo_id');
             $table->index('cliente_id');

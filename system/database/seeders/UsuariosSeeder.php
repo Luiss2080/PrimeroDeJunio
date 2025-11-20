@@ -16,7 +16,7 @@ class UsuariosSeeder extends Seeder
     {
         // Contraseña por defecto: mototaxi123 (cambiar inmediatamente en producción)
         $password = Hash::make('mototaxi123');
-        
+
         DB::table('users')->insert([
             [
                 'nombre' => 'Administrador',

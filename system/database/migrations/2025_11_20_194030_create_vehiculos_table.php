@@ -34,7 +34,7 @@ return new class extends Migration
             $table->enum('estado', ['activo', 'mantenimiento', 'inactivo', 'vendido'])->default('activo');
             $table->text('observaciones')->nullable();
             $table->timestamps();
-            
+
             $table->index('placa');
             $table->index('propietario_cedula');
             $table->index('estado');

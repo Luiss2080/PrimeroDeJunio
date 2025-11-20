@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('permisos')->nullable(); // JSON con permisos básicos
             $table->enum('estado', ['activo', 'inactivo'])->default('activo');
             $table->timestamps();
-            
+
             $table->index('nombre');
             $table->index('estado');
         });

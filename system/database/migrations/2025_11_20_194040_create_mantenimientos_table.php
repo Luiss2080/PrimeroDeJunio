@@ -27,7 +27,7 @@ return new class extends Migration
             $table->integer('proximo_mantenimiento_km')->nullable();
             $table->date('proximo_mantenimiento_fecha')->nullable();
             $table->timestamps();
-            
+
             $table->index('vehiculo_id');
             $table->index('fecha_programada');
             $table->index('estado');

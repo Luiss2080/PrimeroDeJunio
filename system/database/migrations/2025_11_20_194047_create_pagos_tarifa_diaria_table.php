@@ -23,7 +23,7 @@ return new class extends Migration
             $table->datetime('fecha_registro')->default(now());
             $table->datetime('fecha_actualizacion')->default(now());
             $table->timestamps();
-            
+
             $table->unique(['conductor_id', 'fecha_pago'], 'unique_conductor_fecha');
             $table->index(['conductor_id', 'fecha_pago']);
             $table->index(['fecha_pago', 'estado']);

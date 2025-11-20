@@ -29,7 +29,7 @@ return new class extends Migration
             $table->date('fecha_vigencia_inicio')->default(now()->toDateString());
             $table->date('fecha_vigencia_fin')->nullable();
             $table->timestamps();
-            
+
             $table->index('estado');
             $table->index(['fecha_vigencia_inicio', 'fecha_vigencia_fin']);
         });

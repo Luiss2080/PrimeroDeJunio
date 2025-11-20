@@ -19,7 +19,7 @@ return new class extends Migration
             $table->enum('tipo', ['string', 'number', 'boolean', 'json'])->default('string');
             $table->string('categoria', 50)->default('general');
             $table->timestamps();
-            
+
             $table->index('clave');
             $table->index('categoria');
         });

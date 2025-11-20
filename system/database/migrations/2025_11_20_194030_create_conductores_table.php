@@ -29,7 +29,7 @@ return new class extends Migration
             $table->date('fecha_ingreso')->default(now()->toDateString());
             $table->text('observaciones')->nullable();
             $table->timestamps();
-            
+
             $table->index('cedula');
             $table->index('licencia_numero');
             $table->index('estado');

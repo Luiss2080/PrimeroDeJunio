@@ -23,7 +23,7 @@ return new class extends Migration
             $table->text('observaciones')->nullable();
             $table->decimal('descuento_porcentaje', 5, 2)->default(0.00);
             $table->timestamps();
-            
+
             $table->index('telefono');
             $table->index('email');
             $table->index('tipo_cliente');

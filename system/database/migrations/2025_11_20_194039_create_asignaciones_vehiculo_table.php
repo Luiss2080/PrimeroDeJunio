@@ -24,7 +24,7 @@ return new class extends Migration
             $table->enum('estado', ['activa', 'terminada', 'suspendida'])->default('activa');
             $table->text('observaciones')->nullable();
             $table->timestamps();
-            
+
             $table->index('conductor_id');
             $table->index('vehiculo_id');
             $table->index('fecha_inicio');
