@@ -1,0 +1,52 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('vehiculos', function (Blueprint $table) {
+            $table->id();
+            $table->string('placa', 10)->unique();
+            $table->string('marca', 50);
+            $table->string('modelo', 50);
+            $table->string('color', 30);
+            $table->integer('ano');
+            $table->integer('cilindraje');
+            $table->string('numero_motor', 50)->unique()->nullable();
+            $table->string('numero_chasis', 50)->unique()->nullable();
+            $table->string('propietario_nombre', 100);
+            $table->string('propietario_cedula', 20);
+            $table->string('propietario_telefono', 20)->nullable();
+            $table->string('seguro_numero', 50)->nullable();
+            $table->date('seguro_vigencia')->nullable();
+            $table->string('soat_numero', 50)->nullable();
+            $table->date('soat_vigencia')->nullable();
+            $table->string('tecnicomecanica_numero', 50)->nullable();
+            $table->date('tecnicomecanica_vigencia')->nullable();
+            $table->string('tarjeta_propiedad', 50)->nullable();
+            $table->enum('estado', ['activo', 'mantenimiento', 'inactivo', 'vendido'])->default('activo');
+            $table->text('observaciones')->nullable();
+            $table->timestamps();
+            
+            $table->index('placa');
+            $table->index('propietario_cedula');
+            $table->index('estado');
+            $table->index(['marca', 'modelo']);
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('vehiculos');
+    }
+};
