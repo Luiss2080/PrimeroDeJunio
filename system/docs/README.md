@@ -2,40 +2,40 @@
 
 ## Documentación Técnica
 
-### 🚀 [Instalación](./instalacion.md)
+### 🚀 [01 - Instalación Básica](./01-instalacion-basica.md)
 
 -   Requisitos del sistema
 -   Instalación de dependencias
 -   Configuración inicial
 -   Setup de base de datos
 
-### 🖥️ [Servidor de Desarrollo](./servidor.md)
+### ⚡ [02 - Comandos Principales](./02-comandos-principales.md)
 
--   Iniciar servidor Laravel
--   Configurar Vite (assets)
--   Scripts de inicio automático
--   URLs y puertos del sistema
+-   Comandos básicos de Laravel
+-   Generadores de código
+-   Cache y optimización
+-   Debugging y mantenimiento
 
-### 💾 [Base de Datos](./base-datos.md)
-
--   Acceso vía Tinker y MySQL CLI
--   Comandos de migraciones
--   Manejo de seeders
--   Consultas útiles y troubleshooting
-
-### 🏗️ [Estructura del Proyecto](./estructura.md)
+### 🏗️ [03 - Arquitectura del Proyecto](./03-arquitectura-proyecto.md)
 
 -   Arquitectura general
 -   Modelos y relaciones
 -   Comandos de desarrollo
 -   Testing y frontend
 
-### ⚡ [Comandos Artisan](./comandos.md)
+### 💾 [04 - Base de Datos](./04-base-datos.md)
 
--   Comandos básicos de Laravel
--   Generadores de código
--   Cache y optimización
--   Debugging y mantenimiento
+-   Acceso vía Tinker y MySQL CLI
+-   Comandos de migraciones
+-   Manejo de seeders
+-   Consultas útiles y troubleshooting
+
+### 🖥️ [05 - Inicio Rápido](./05-inicio-rapido.md)
+
+-   Iniciar servidor Laravel
+-   Configurar Vite (assets)
+-   Scripts de inicio automático
+-   URLs y puertos del sistema
 
 ## Información del Proyecto
 
