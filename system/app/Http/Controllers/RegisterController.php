@@ -63,7 +63,7 @@ class RegisterController extends Controller
 
         // Generar código de verificación
         $verificationCode = $this->generateVerificationCode();
-        
+
         // Guardar datos temporalmente en sesión
         Session::put('registration_data', [
             'nombre' => $request->nombre,
@@ -84,7 +84,7 @@ class RegisterController extends Controller
         $this->sendVerificationEmail($request->email, $verificationCode);
 
         return redirect()->route('register.show', ['step' => 'verify'])
-                         ->with('success', 'Te hemos enviado un código de verificación a tu email.');
+            ->with('success', 'Te hemos enviado un código de verificación a tu email.');
     }
 
     /**
@@ -106,10 +106,10 @@ class RegisterController extends Controller
         }
 
         $registrationData = Session::get('registration_data');
-        
+
         if (!$registrationData) {
             return redirect()->route('register.show')
-                           ->withErrors(['general' => 'Sesión expirada. Por favor, inicia el registro nuevamente.']);
+                ->withErrors(['general' => 'Sesión expirada. Por favor, inicia el registro nuevamente.']);
         }
 
         // Verificar si el código ha expirado
@@ -138,7 +138,7 @@ class RegisterController extends Controller
         Session::put('user_name', $registrationData['nombre'] . ' ' . $registrationData['apellido']);
 
         return redirect()->route('dashboard')
-                         ->with('success', '¡Bienvenido a la Asociación 1ro de Junio! Tu registro se ha completado exitosamente.');
+            ->with('success', '¡Bienvenido a la Asociación 1ro de Junio! Tu registro se ha completado exitosamente.');
     }
 
     /**
@@ -147,7 +147,7 @@ class RegisterController extends Controller
     public function resendCode(Request $request)
     {
         $registrationData = Session::get('registration_data');
-        
+
         if (!$registrationData) {
             return response()->json([
                 'success' => false,
@@ -157,7 +157,7 @@ class RegisterController extends Controller
 
         // Generar nuevo código
         $newCode = $this->generateVerificationCode();
-        
+
         // Actualizar datos en sesión
         $registrationData['verification_code'] = $newCode;
         $registrationData['code_expires_at'] = now()->addMinutes(10);
@@ -185,7 +185,7 @@ class RegisterController extends Controller
             'conductor@asociacion.com',
             'test@asociacion.com'
         ];
-        
+
         return in_array(strtolower($email), $existingEmails);
     }
 
@@ -204,9 +204,9 @@ class RegisterController extends Controller
     {
         // En una implementación real, aquí se enviaría el email
         // Por ahora solo loggear para debugging
-        
+
         Log::info("Código de verificación para {$email}: {$code}");
-        
+
         return true;
     }
 
@@ -217,7 +217,7 @@ class RegisterController extends Controller
     {
         // En una implementación real, aquí se guardaría en la base de datos
         Log::info("Usuario registrado: {$data['email']}");
-        
+
         return true;
     }
 }
