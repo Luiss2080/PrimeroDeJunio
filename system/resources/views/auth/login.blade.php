@@ -50,8 +50,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acceso Profesional - NEXORIUM Trading Academy</title>
-    <link rel="icon" type="image/png" href="http://localhost/Nexorium/website/public/images/LogoNexorium.png">
+    <title>Acceso Sistema - Asociación 1ro de Junio</title>
+    <link rel="icon" type="image/png" href="http://localhost/PrimeroDeJunio/website/public/images/LogoAsociacion.png">
 
     <!-- Precargar fuentes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -59,16 +59,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <!-- CSS del login -->
-    <link rel="stylesheet" href="http://localhost/Nexorium/system/public/assets/css/login.css">
+    <link rel="stylesheet" href="http://localhost/PrimeroDeJunio/system/resources/css/login.css">
 
     <!-- Meta tags para SEO -->
-    <meta name="description" content="Accede a tu cuenta en NEXORIUM Trading Academy. Plataforma profesional de trading y educación financiera.">
-    <meta name="keywords" content="login, nexorium, trading, academia, iniciar sesión">
+    <meta name="description" content="Accede a tu cuenta en la Asociación 1ro de Junio. Sistema administrativo para gestión de conductores y servicios de mototaxi.">
+    <meta name="keywords" content="login, asociación, mototaxi, conductores, gestión, sistema">
     <meta name="robots" content="noindex, nofollow">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Iniciar Sesión - NEXORIUM Trading Academy">
-    <meta property="og:description" content="Accede a tu cuenta en NEXORIUM Trading Academy">
+    <meta property="og:title" content="Iniciar Sesión - Asociación 1ro de Junio">
+    <meta property="og:description" content="Accede a tu cuenta en la Asociación 1ro de Junio">
     <meta property="og:type" content="website">
     <meta property="og:url" content="<?php echo $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; ?>">
 </head>
@@ -106,12 +106,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="brand-section">
                         <div class="logo-container">
                             <div class="logo-backdrop"></div>
-                            <img src="http://localhost/Nexorium/website/public/images/LogoNexorium.png" alt="NEXORIUM" class="brand-logo">
+                            <img src="http://localhost/PrimeroDeJunio/website/public/images/LogoAsociacion.png" alt="ASOCIACIÓN 1RO DE JUNIO" class="brand-logo">
                         </div>
                         <div class="brand-text">
-                            <h1 class="brand-title">NEXORIUM</h1>
+                            <h1 class="brand-title">1RO DE JUNIO</h1>
                             <div class="brand-line"></div>
-                            <span class="brand-subtitle">TRADING ACADEMY</span>
+                            <span class="brand-subtitle">ASOCIACIÓN DE MOTOTAXIS</span>
                         </div>
                     </div>
 
@@ -119,13 +119,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="welcome-section">
                         <h2 class="welcome-title">¡Bienvenido!</h2>
                         <p class="welcome-description">
-                            Inicia sesión con tu cuenta académica y accede a la plataforma profesional de trading diseñada para traders de élite que buscan excelencia en los mercados financieros.
+                            Inicia sesión con tu cuenta y accede al sistema administrativo de la Asociación 1ro de Junio. Plataforma diseñada para la gestión integral de conductores, servicios de mototaxi y administración de la asociación.
                         </p>
                     </div>
 
                     <!-- Sección de redes sociales -->
                     <div class="social-section">
-                        <p class="social-text">¿Tienes dudas o quieres saber más?</p>
+                        <p class="social-text">¿Tienes dudas sobre nuestros servicios?</p>
                         <p class="social-title">¡Contáctate con nosotros!</p>
                         <div class="social-media-links">
                             <a href="#" class="social-link tiktok" title="TikTok">
@@ -240,12 +240,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <span class="checkbox-custom"></span>
                                 <span class="checkbox-text">Recordarme</span>
                             </label>
-                            <a href="http://localhost/Nexorium/system/app/auth/recuperar.php" class="forgot-password" id="forgotPasswordLink">¿Olvidaste tu contraseña?</a>
+                            <a href="http://localhost/PrimeroDeJunio/system/resources/views/auth/recuperar.php" class="forgot-password" id="forgotPasswordLink">¿Olvidaste tu contraseña?</a>
                         </div>
 
                         <!-- Botón de submit -->
                         <button type="submit" class="login-button btn-nexorium" id="loginButton">
-                            <span class="button-text">ACCESO TRADING</span>
+                            <span class="button-text">ACCESO SISTEMA</span>
                             <span class="button-loader" id="buttonLoader">
                                 <div class="loader-spinner"></div>
                             </span>
@@ -256,8 +256,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <!-- Footer del formulario -->
                     <div class="form-footer">
                         <p class="register-text">
-                            ¿Quieres unirte a la élite del trading?
-                            <span class="highlight"><a href="#" class="register-link" id="registerLink">¡Solicita tu acceso VIP!</a></span>
+                            ¿Quieres unirte a nuestra asociación?
+                            <span class="highlight"><a href="#" class="register-link" id="registerLink">¡Solicita tu registro!</a></span>
                         </p>
 
                         <!-- Social Media Links -->
@@ -282,8 +282,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                         <!-- Register Link -->
                         <div class="register-section">
-                            <p class="no-account-text">¿No tienes cuenta de trading?
-                                <span class="highlight"><a href="#" class="register-link-main" id="registerMainLink">¡Solicita acceso exclusivo!</a></span>
+                            <p class="no-account-text">¿No tienes cuenta en el sistema?
+                                <span class="highlight"><a href="#" class="register-link-main" id="registerMainLink">¡Solicita tu acceso!</a></span>
                             </p>
                         </div>
 
@@ -296,12 +296,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
     <!-- JavaScript -->
-    <script src="http://localhost/Nexorium/system/public/assets/js/login.js"></script>
+    <script src="http://localhost/PrimeroDeJunio/system/resources/js/login.js"></script>
 
     <!-- Analytics (opcional) -->
     <script>
         // Google Analytics o similar
-        console.log('🔐 NEXORIUM Login: Página cargada correctamente');
+        console.log('🔐 ASOCIACIÓN 1RO DE JUNIO Login: Página cargada correctamente');
     </script>
 
 </body>

@@ -1,9 +1,9 @@
 /**
- * NEXORIUM LOGIN - JAVASCRIPT OPTIMIZADO
+ * ASOCIACIÓN 1RO DE JUNIO - SISTEMA LOGIN - JAVASCRIPT OPTIMIZADO
  * Solo las funciones esenciales usadas en login.php
  */
 
-class NexoriumLogin {
+class AsociacionLogin {
     constructor() {
         this.form = null;
         this.inputs = {};
@@ -264,16 +264,16 @@ class NexoriumLogin {
         const socialType = e.currentTarget.classList;
 
         if (socialType.contains("tiktok")) {
-            this.showMessage("Abriendo TikTok de NEXORIUM...", "info");
-            // window.open('https://tiktok.com/@nexorium', '_blank');
+            this.showMessage("Abriendo TikTok de la Asociación...", "info");
+            // window.open('https://tiktok.com/@asociacion1junio', '_blank');
         } else if (socialType.contains("facebook")) {
-            this.showMessage("Abriendo Facebook de NEXORIUM...", "info");
-            // window.open('https://facebook.com/nexorium', '_blank');
+            this.showMessage("Abriendo Facebook de la Asociación...", "info");
+            // window.open('https://facebook.com/asociacion1junio', '_blank');
         } else if (socialType.contains("instagram")) {
-            this.showMessage("Abriendo Instagram de NEXORIUM...", "info");
-            // window.open('https://instagram.com/nexorium', '_blank');
+            this.showMessage("Abriendo Instagram de la Asociación...", "info");
+            // window.open('https://instagram.com/asociacion1junio', '_blank');
         } else if (socialType.contains("whatsapp")) {
-            this.showMessage("Abriendo WhatsApp de NEXORIUM...", "info");
+            this.showMessage("Abriendo WhatsApp de la Asociación...", "info");
             // window.open('https://wa.me/1234567890', '_blank');
         }
     }
@@ -284,16 +284,16 @@ class NexoriumLogin {
         const linkText = e.currentTarget.querySelector("span").textContent;
 
         switch (linkText) {
-            case "Señales VIP":
-                this.showMessage("Redirigiendo a Señales VIP...", "info");
+            case "Gestión":
+                this.showMessage("Redirigiendo a Gestión de Conductores...", "info");
                 break;
-            case "Academia Pro":
-                this.showMessage("Accediendo a la Academia...", "info");
+            case "Servicios":
+                this.showMessage("Accediendo a Servicios de Mototaxi...", "info");
                 break;
-            case "Comunidad":
-                this.showMessage("Conectando con la Comunidad...", "info");
+            case "Asociación":
+                this.showMessage("Conectando con la Asociación...", "info");
                 break;
-            case "Soporte 24/7":
+            case "Soporte":
                 this.showMessage("Abriendo canal de soporte...", "info");
                 break;
         }
@@ -301,7 +301,7 @@ class NexoriumLogin {
 
     handleRegisterClick(e) {
         e.preventDefault();
-        this.showMessage("Redirigiendo al registro VIP...", "info");
+        this.showMessage("Redirigiendo al registro de la Asociación...", "info");
         // Agregar lógica de redirección al registro
     }
 
@@ -314,7 +314,7 @@ class NexoriumLogin {
 
         setTimeout(() => {
             window.location.href =
-                "http://localhost/Nexorium/system/app/auth/recuperar.php";
+                "http://localhost/PrimeroDeJunio/system/resources/views/auth/recuperar.php";
         }, 1000);
     }
 
@@ -350,4 +350,4 @@ class NexoriumLogin {
 }
 
 // ===== INICIALIZAR ===== //
-const nexoriumLogin = new NexoriumLogin();
+const asociacionLogin = new AsociacionLogin();
