@@ -150,6 +150,11 @@ npm --version
 .\iniciar-desarrollo.ps1
 ```
 
+**Esto iniciará automáticamente:**
+- 🚀 **Servidor Laravel** en: `http://127.0.0.1:8000`
+- 🚀 **Servidor React** en: `http://localhost:3000`
+- 🌐 **Navegador** se abrirá automáticamente con ambas URLs
+
 #### Para Windows CMD:
 
 ```cmd
@@ -157,12 +162,24 @@ npm --version
 iniciar-desarrollo.bat
 ```
 
+**Esto iniciará automáticamente:**
+- 🚀 **Servidor Laravel** en: `http://127.0.0.1:8000`
+- 🚀 **Servidor React** en: `http://localhost:3000`
+- 🌐 **Navegador** se abrirá automáticamente con ambas URLs
+
 ### Método 2: Manual
 
-#### Terminal 1 - Backend (XAMPP):
+#### Terminal 1 - Backend (Laravel):
 
-1. Iniciar Apache y MySQL en XAMPP Control Panel
-2. Verificar: `http://localhost/PrimeroDeJunio/`
+```bash
+# Navegar al directorio del sistema
+cd C:\xampp\htdocs\PrimeroDeJunio\system
+
+# Iniciar servidor Laravel
+php artisan serve --host=127.0.0.1 --port=8000
+```
+
+**Verificar:** `http://127.0.0.1:8000/login`
 
 #### Terminal 2 - Frontend (React):
 
@@ -174,28 +191,39 @@ cd C:\xampp\htdocs\PrimeroDeJunio\website
 npm run dev
 ```
 
+**Verificar:** `http://localhost:3000`
+
+> **💡 Tip:** Los scripts automáticos (recomendados) hacen esto por ti automáticamente.
+
 ---
 
 ## ✅ Verificación Final
 
-### 1. **Backend funcionando**
+### 1. **Backend funcionando (Laravel)**
 
-- 🌐 URL: `http://localhost/PrimeroDeJunio/`
-- ✅ **Esperar**: Página de login del sistema
+- 🌐 **URL**: `http://127.0.0.1:8000/login`
+- ✅ **Esperar**: Página de login de la Asociación 1ro de Junio
 - 📝 **Credenciales de prueba**:
-  - Usuario: `admin`
+  - Email: `admin@asociacion.com`
   - Contraseña: `admin123`
 
-### 2. **Frontend funcionando**
+### 2. **Frontend funcionando (React)**
 
-- 🌐 URL: `http://localhost:3000/`
-- ✅ **Esperar**: Página principal del website
-- 🎨 **Debe verse**: Diseño moderno con React
+- 🌐 **URL**: `http://localhost:3000/`
+- ✅ **Esperar**: Página principal del website de la asociación
+- 🎨 **Debe verse**: Diseño moderno con React y colores verdes
 
 ### 3. **Base de Datos funcionando**
 
-- 🌐 URL: `http://localhost/phpmyadmin/`
+- 🌐 **URL**: `http://localhost/phpmyadmin/`
 - ✅ **Verificar**: Base de datos `primero_de_junio` con tablas creadas
+
+### 4. **URLs importantes**
+
+- 🏠 **Website principal**: `http://localhost:3000`
+- 🔐 **Sistema de login**: `http://127.0.0.1:8000/login`
+- 🔑 **Recuperar contraseña**: `http://127.0.0.1:8000/password/reset`
+- 🗃️ **Administrador de BD**: `http://localhost/phpmyadmin/`
 
 ---
 
