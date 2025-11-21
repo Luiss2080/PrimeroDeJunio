@@ -298,12 +298,12 @@ class AsociacionLogin {
     }
 
     handleRegisterClick(e) {
-        e.preventDefault();
+        // Permitir que el enlace funcione normalmente (eliminamos preventDefault)
         this.showMessage(
             "Redirigiendo al registro de la Asociación...",
             "info"
         );
-        // Agregar lógica de redirección al registro
+        // El enlace redirigirá automáticamente a route('register.show')
     }
 
     // ===== EFECTOS DEL BRANDING ===== //

@@ -3,6 +3,27 @@ echo ===============================================
 echo     PRIMERO DE JUNIO - DESARROLLO WEB
 echo ===============================================
 echo.
+
+REM Limpiar procesos anteriores para evitar conflictos
+echo 🧹 Limpiando procesos anteriores...
+
+REM Detener procesos PHP de Laravel anteriores que usen puerto 8000
+for /f "tokens=5" %%a in ('netstat -ano ^| findstr ":8000"') do (
+    if not "%%a"=="0" (
+        taskkill /PID %%a /F >nul 2>&1
+    )
+)
+
+REM Detener procesos Node.js que usen puerto 3000
+for /f "tokens=5" %%a in ('netstat -ano ^| findstr ":3000"') do (
+    if not "%%a"=="0" (
+        taskkill /PID %%a /F >nul 2>&1
+    )
+)
+
+echo    ✓ Puertos 8000 y 3000 liberados
+echo.
+
 echo Verificando directorios del proyecto...
 echo.
 
@@ -43,9 +64,23 @@ echo.
 
 REM Iniciar Laravel Server en segundo plano
 echo 🚀 Iniciando servidor Laravel...
-start "Laravel Server" cmd /c "cd /d \"%~dp0system\" && php artisan serve --host=127.0.0.1 --port=8000"
-echo    → Laravel ejecutandose en: http://127.0.0.1:8000
-echo    → Login disponible en: http://127.0.0.1:8000/login
+start "Laravel Server" cmd /k "cd /d \"%~dp0system\" && echo Iniciando Laravel desde: %CD% && php artisan serve --host=127.0.0.1 --port=8000"
+
+REM Esperar unos segundos para que Laravel inicie
+echo    → Esperando que Laravel inicie...
+timeout /t 4 /nobreak > nul
+
+REM Verificar que Laravel esté ejecutándose
+netstat -ano | findstr ":8000" > nul
+if errorlevel 1 (
+    echo    ❌ ERROR: Laravel no pudo iniciar en puerto 8000
+    echo    Verifica que XAMPP esté ejecutándose y que PHP esté disponible
+    pause
+    exit /b 1
+) else (
+    echo    ✓ Laravel ejecutándose en: http://127.0.0.1:8000
+    echo    ✓ Login disponible en: http://127.0.0.1:8000/login
+)
 echo.
 
 REM Cambiar al directorio website para React

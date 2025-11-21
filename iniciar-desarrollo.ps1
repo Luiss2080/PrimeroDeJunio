@@ -6,6 +6,37 @@ Write-Host "     PRIMERO DE JUNIO - DESARROLLO WEB" -ForegroundColor Green
 Write-Host "===============================================" -ForegroundColor Green
 Write-Host ""
 
+# Limpiar procesos anteriores para evitar conflictos
+Write-Host "🧹 Limpiando procesos anteriores..." -ForegroundColor Yellow
+
+# Detener procesos PHP de Laravel anteriores
+$phpProcesses = Get-Process -Name "php" -ErrorAction SilentlyContinue | Where-Object {
+    $_.CommandLine -like "*artisan serve*" -or 
+    $_.MainWindowTitle -like "*Laravel Server*"
+}
+if ($phpProcesses) {
+    $phpProcesses | Stop-Process -Force -ErrorAction SilentlyContinue
+    Write-Host "   ✅ Procesos PHP anteriores detenidos" -ForegroundColor Green
+}
+
+# Verificar si puerto 8000 está libre
+$port8000 = Get-NetTCPConnection -LocalPort 8000 -ErrorAction SilentlyContinue
+if ($port8000) {
+    Write-Host "   ⚠️ Puerto 8000 ocupado, intentando liberar..." -ForegroundColor Yellow
+    $port8000 | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force -ErrorAction SilentlyContinue }
+}
+
+# Verificar si puerto 3000 está libre
+$port3000 = Get-NetTCPConnection -LocalPort 3000 -ErrorAction SilentlyContinue
+if ($port3000) {
+    Write-Host "   ⚠️ Puerto 3000 ocupado, intentando liberar..." -ForegroundColor Yellow
+    $port3000 | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force -ErrorAction SilentlyContinue }
+}
+
+Start-Sleep -Seconds 1
+Write-Host "   ✅ Puertos verificados y liberados" -ForegroundColor Green
+Write-Host ""
+
 # Obtener la ubicación del script
 $scriptPath = Split-Path -Parent $MyInvocation.MyCommand.Path
 $websitePath = Join-Path $scriptPath "website"
@@ -50,14 +81,40 @@ Write-Host ""
 
 # Iniciar Laravel Server en segundo plano
 Write-Host "🚀 Iniciando servidor Laravel..." -ForegroundColor Cyan
-$laravelJob = Start-Job -ScriptBlock {
+
+# Crear job con manejo de errores mejorado
+$laravelJob = Start-Job -Name "LaravelServer" -ScriptBlock {
     param($systemPath)
-    Set-Location $systemPath
-    php artisan serve --host=127.0.0.1 --port=8000
+    try {
+        Set-Location $systemPath
+        # Verificar que estamos en el directorio correcto
+        if (-not (Test-Path "artisan")) {
+            throw "Archivo artisan no encontrado en $systemPath"
+        }
+        php artisan serve --host=127.0.0.1 --port=8000 2>&1
+    }
+    catch {
+        Write-Error "Error iniciando Laravel: $($_.Exception.Message)"
+        return $false
+    }
 } -ArgumentList $systemPath
 
-Write-Host "   → Laravel ejecutándose en: http://127.0.0.1:8000" -ForegroundColor Green
-Write-Host "   → Login disponible en: http://127.0.0.1:8000/login" -ForegroundColor Green
+# Esperar un momento para verificar que Laravel inició correctamente
+Start-Sleep -Seconds 3
+
+# Verificar que el job está ejecutándose
+if ($laravelJob.State -eq "Running") {
+    Write-Host "   ✅ Laravel ejecutándose en: http://127.0.0.1:8000" -ForegroundColor Green
+    Write-Host "   ✅ Login disponible en: http://127.0.0.1:8000/login" -ForegroundColor Green
+} else {
+    Write-Host "   ❌ Error: Laravel no pudo iniciar" -ForegroundColor Red
+    $jobOutput = Receive-Job $laravelJob -ErrorAction SilentlyContinue
+    Write-Host "   Error: $jobOutput" -ForegroundColor Red
+    Stop-Job $laravelJob -ErrorAction SilentlyContinue
+    Remove-Job $laravelJob -Force -ErrorAction SilentlyContinue
+    Read-Host "Presiona Enter para salir"
+    exit 1
+}
 Write-Host ""
 
 # Cambiar al directorio website para React
