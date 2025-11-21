@@ -151,6 +151,7 @@ npm --version
 ```
 
 **Esto iniciará automáticamente:**
+
 - 🚀 **Servidor Laravel** en: `http://127.0.0.1:8000`
 - 🚀 **Servidor React** en: `http://localhost:3000`
 - 🌐 **Navegador** se abrirá automáticamente con ambas URLs
@@ -163,6 +164,7 @@ iniciar-desarrollo.bat
 ```
 
 **Esto iniciará automáticamente:**
+
 - 🚀 **Servidor Laravel** en: `http://127.0.0.1:8000`
 - 🚀 **Servidor React** en: `http://localhost:3000`
 - 🌐 **Navegador** se abrirá automáticamente con ambas URLs
