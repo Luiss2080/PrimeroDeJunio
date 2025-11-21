@@ -136,17 +136,17 @@
 
                     <!-- Mensajes de error/éxito -->
                     @if($errors->any())
-                        <div class="alert alert-error">
-                            <div class="alert-icon">⚠️</div>
-                            <div class="alert-message">{{ $errors->first() }}</div>
-                        </div>
+                    <div class="alert alert-error">
+                        <div class="alert-icon">⚠️</div>
+                        <div class="alert-message">{{ $errors->first() }}</div>
+                    </div>
                     @endif
 
                     @if(session('success'))
-                        <div class="alert alert-success">
-                            <div class="alert-icon">✅</div>
-                            <div class="alert-message">{{ session('success') }}</div>
-                        </div>
+                    <div class="alert alert-success">
+                        <div class="alert-icon">✅</div>
+                        <div class="alert-message">{{ session('success') }}</div>
+                    </div>
                     @endif
 
                     <!-- Formulario de login -->
