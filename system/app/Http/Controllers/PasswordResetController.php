@@ -36,7 +36,7 @@ class PasswordResetController extends Controller
         if ($email === 'admin@asociacion.com') {
             Session::put('recovery_email', $email);
             Session::put('recovery_code', '123456'); // En producción, generar código aleatorio
-            
+
             return view('auth.recuperar')
                 ->with('step', 'code')
                 ->with('success', 'Se ha enviado un código de verificación a tu correo electrónico.');
@@ -62,7 +62,7 @@ class PasswordResetController extends Controller
         }
 
         Session::put('recovery_code_verified', true);
-        
+
         return view('auth.recuperar')
             ->with('step', 'password')
             ->with('success', 'Código verificado correctamente. Ahora puedes establecer tu nueva contraseña.');
@@ -89,10 +89,10 @@ class PasswordResetController extends Controller
         }
 
         // En producción, aquí se actualizaría la contraseña en la base de datos
-        
+
         // Limpiar sesión
         Session::forget(['recovery_email', 'recovery_code', 'recovery_code_verified']);
-        
+
         return view('auth.recuperar')
             ->with('step', 'success')
             ->with('success', '¡Contraseña actualizada correctamente! Ya puedes iniciar sesión con tu nueva contraseña.');
@@ -104,14 +104,14 @@ class PasswordResetController extends Controller
     public function resendCode()
     {
         $email = Session::get('recovery_email');
-        
+
         if (!$email) {
             return redirect()->route('password.request');
         }
 
         // Simular reenvío de código
         Session::put('recovery_code', '123456'); // En producción, generar nuevo código
-        
+
         return back()->with('success', 'Se ha reenviado el código de verificación a tu correo electrónico.');
     }
 }

@@ -132,33 +132,33 @@
                     <!-- Header del formulario -->
                     <div class="form-header">
                         @if($step === 'email')
-                            <h2 class="form-title">Recuperar Contraseña</h2>
-                            <p class="form-subtitle">Ingresa tu correo electrónico para continuar</p>
+                        <h2 class="form-title">Recuperar Contraseña</h2>
+                        <p class="form-subtitle">Ingresa tu correo electrónico para continuar</p>
                         @elseif($step === 'code')
-                            <h2 class="form-title">Verificar Código</h2>
-                            <p class="form-subtitle">Ingresa el código enviado a tu correo</p>
+                        <h2 class="form-title">Verificar Código</h2>
+                        <p class="form-subtitle">Ingresa el código enviado a tu correo</p>
                         @elseif($step === 'password')
-                            <h2 class="form-title">Nueva Contraseña</h2>
-                            <p class="form-subtitle">Establece tu nueva contraseña segura</p>
+                        <h2 class="form-title">Nueva Contraseña</h2>
+                        <p class="form-subtitle">Establece tu nueva contraseña segura</p>
                         @else
-                            <h2 class="form-title">¡Listo!</h2>
-                            <p class="form-subtitle">Tu contraseña ha sido actualizada</p>
+                        <h2 class="form-title">¡Listo!</h2>
+                        <p class="form-subtitle">Tu contraseña ha sido actualizada</p>
                         @endif
                     </div>
 
                     <!-- Mensajes de error/éxito -->
                     @if($errors->any())
-                        <div class="alert alert-error">
-                            <div class="alert-icon">⚠️</div>
-                            <div class="alert-message">{{ $errors->first() }}</div>
-                        </div>
+                    <div class="alert alert-error">
+                        <div class="alert-icon">⚠️</div>
+                        <div class="alert-message">{{ $errors->first() }}</div>
+                    </div>
                     @endif
 
                     @if(session('success'))
-                        <div class="alert alert-success">
-                            <div class="alert-icon">✅</div>
-                            <div class="alert-message">{{ session('success') }}</div>
-                        </div>
+                    <div class="alert alert-success">
+                        <div class="alert-icon">✅</div>
+                        <div class="alert-message">{{ session('success') }}</div>
+                    </div>
                     @endif
 
                     <?php if ($step !== 'success'): ?>
