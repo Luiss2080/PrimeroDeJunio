@@ -496,7 +496,7 @@ class AsociacionRegistration {
         } else if (socialType.contains("facebook")) {
             this.showMessage("Abriendo Facebook de la Asociación...", "info");
         } else if (socialType.contains("instagram")) {
-            this.showMessage("Abriendo Instagram de NEXORIUM...", "info");
+            this.showMessage("Abriendo Instagram de la Asociación...", "info");
         } else if (socialType.contains("whatsapp")) {
             this.showMessage("Contactando por WhatsApp...", "info");
         }

@@ -7,11 +7,7 @@
     --green-secondary: #00ff66;
     --white: #ffffff;
     --gray-light: #cccccc;
-    --gradient-main: linear-gradient(
-        135deg,
-        #00ff88 0%,
-        #00ff66 100%
-    );
+    --gradient-main: linear-gradient(135deg, #00ff88 0%, #00ff66 100%);
     --glass-dark: rgba(0, 0, 0, 0.8);
     --glass-light: rgba(255, 255, 255, 0.05);
     --glass-border: rgba(255, 255, 255, 0.1);
