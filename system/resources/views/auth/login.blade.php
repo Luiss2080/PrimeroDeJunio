@@ -212,7 +212,7 @@
                     <div class="form-footer">
                         <p class="register-text">
                             ¿Quieres unirte a nuestra asociación?
-                            <span class="highlight"><a href="#" class="register-link" id="registerLink">¡Solicita tu registro!</a></span>
+                            <span class="highlight"><a href="{{ route('register.show') }}" class="register-link" id="registerLink">¡Solicita tu registro!</a></span>
                         </p>
 
                         <!-- Social Media Links -->
@@ -237,8 +237,8 @@
 
                         <!-- Register Link -->
                         <div class="register-section">
-                            <p class="no-account-text">¿No tienes cuenta en el sistema?
-                                <span class="highlight"><a href="#" class="register-link-main" id="registerMainLink">¡Solicita tu acceso!</a></span>
+                            <p class="no-account-text">¿Quieres unirte a nuestra asociación?
+                                <span class="highlight"><a href="{{ route('register.show') }}" class="register-link-main" id="registerMainLink">¡Solicita tu registro!</a></span>
                             </p>
                         </div>
 
