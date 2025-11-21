@@ -156,7 +156,7 @@ const Header = ({ currentView, changeView }) => {
           <div className="header-actions">
             <div className="auth-buttons">
               <a
-                href="http://localhost/PrimeroDeJunio/system/app/auth/login.php?force=1"
+                href="http://localhost/PrimeroDeJunio/system/public/login"
                 className="btn btn-ghost"
               >
                 <span>Iniciar Sesión</span>

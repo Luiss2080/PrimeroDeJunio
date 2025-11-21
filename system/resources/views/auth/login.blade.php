@@ -1,49 +1,3 @@
-<?php
-
-/**
- * NEXORIUM TRADING ACADEMY - LOGIN SYSTEM
- * Página de inicio de sesión que conecta website con system
- */
-
-session_start();
-
-// Verificar si ya está logueado (solo redirigir si no se fuerza el login)
-$force_login = isset($_GET['force']) && $_GET['force'] == '1';
-if (isset($_SESSION['user_id']) && !$force_login) {
-    header('Location: http://localhost/Nexorium/system/app/views/dashboard/');
-    exit;
-} // Variables para el formulario
-$error_message = '';
-$success_message = '';
-
-// Procesar el login si se envía el formulario
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = trim($_POST['email'] ?? '');
-    $password = $_POST['password'] ?? '';
-
-    // Validaciones básicas
-    if (empty($email) || empty($password)) {
-        $error_message = 'Por favor, completa todos los campos.';
-    } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $error_message = 'Por favor, ingresa un email válido.';
-    } else {
-        // Aquí iría la lógica de autenticación con la base de datos
-        // Por ahora, usaremos credenciales de ejemplo
-        if ($email === 'admin@nexorium.com' && $password === 'admin123') {
-            $_SESSION['user_id'] = 1;
-            $_SESSION['user_email'] = $email;
-            $_SESSION['user_name'] = 'Administrador';
-            $_SESSION['user_role'] = 'admin';
-
-            // Redireccionar al dashboard
-            header('Location: http://localhost/Nexorium/system/app/views/dashboard/');
-            exit;
-        } else {
-            $error_message = 'Credenciales incorrectas. Inténtalo nuevamente.';
-        }
-    }
-}
-?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -51,7 +5,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acceso Sistema - Asociación 1ro de Junio</title>
-    <link rel="icon" type="image/png" href="http://localhost/PrimeroDeJunio/website/public/images/LogoAsociacion.png">
+    <link rel="icon" type="image/png" href="{{ asset('images/LogoAsociacion.png') }}">
 
     <!-- Precargar fuentes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -59,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <!-- CSS del login -->
-    <link rel="stylesheet" href="http://localhost/PrimeroDeJunio/system/resources/css/login.css">
+    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
 
     <!-- Meta tags para SEO -->
     <meta name="description" content="Accede a tu cuenta en la Asociación 1ro de Junio. Sistema administrativo para gestión de conductores y servicios de mototaxi.">
@@ -70,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta property="og:title" content="Iniciar Sesión - Asociación 1ro de Junio">
     <meta property="og:description" content="Accede a tu cuenta en la Asociación 1ro de Junio">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="<?php echo $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; ?>">
+    <meta property="og:url" content="{{ url()->current() }}">
 </head>
 
 <body>
@@ -106,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="brand-section">
                         <div class="logo-container">
                             <div class="logo-backdrop"></div>
-                            <img src="http://localhost/PrimeroDeJunio/website/public/images/LogoAsociacion.png" alt="ASOCIACIÓN 1RO DE JUNIO" class="brand-logo">
+                            <img src="{{ asset('images/LogoAsociacion.png') }}" alt="ASOCIACIÓN 1RO DE JUNIO" class="brand-logo">
                         </div>
                         <div class="brand-text">
                             <h1 class="brand-title">1RO DE JUNIO</h1>
@@ -181,22 +135,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
 
                     <!-- Mensajes de error/éxito -->
-                    <?php if (!empty($error_message)): ?>
+                    @if($errors->any())
                         <div class="alert alert-error">
                             <div class="alert-icon">⚠️</div>
-                            <div class="alert-message"><?php echo htmlspecialchars($error_message); ?></div>
+                            <div class="alert-message">{{ $errors->first() }}</div>
                         </div>
-                    <?php endif; ?>
+                    @endif
 
-                    <?php if (!empty($success_message)): ?>
+                    @if(session('success'))
                         <div class="alert alert-success">
                             <div class="alert-icon">✅</div>
-                            <div class="alert-message"><?php echo htmlspecialchars($success_message); ?></div>
+                            <div class="alert-message">{{ session('success') }}</div>
                         </div>
-                    <?php endif; ?>
+                    @endif
 
                     <!-- Formulario de login -->
-                    <form class="login-form" method="POST" action="" id="loginForm">
+                    <form class="login-form" method="POST" action="{{ route('login') }}" id="loginForm">
+                        @csrf
 
                         <!-- Campo Email -->
                         <div class="input-group">
@@ -209,7 +164,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     name="email"
                                     class="form-input"
                                     placeholder="Escribe tu email aquí..."
-                                    value="<?php echo htmlspecialchars($email ?? ''); ?>"
+                                    value="{{ old('email') }}"
                                     required
                                     autocomplete="email">
                             </div>
@@ -240,7 +195,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <span class="checkbox-custom"></span>
                                 <span class="checkbox-text">Recordarme</span>
                             </label>
-                            <a href="http://localhost/PrimeroDeJunio/system/resources/views/auth/recuperar.php" class="forgot-password" id="forgotPasswordLink">¿Olvidaste tu contraseña?</a>
+                            <a href="{{ route('password.request') }}" class="forgot-password" id="forgotPasswordLink">¿Olvidaste tu contraseña?</a>
                         </div>
 
                         <!-- Botón de submit -->
@@ -296,7 +251,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
     <!-- JavaScript -->
-    <script src="http://localhost/PrimeroDeJunio/system/resources/js/login.js"></script>
+    <script src="{{ asset('js/login.js') }}"></script>
 
     <!-- Analytics (opcional) -->
     <script>
