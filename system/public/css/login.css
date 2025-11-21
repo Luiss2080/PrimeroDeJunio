@@ -3,18 +3,26 @@
 
 /* ===== VARIABLES ESENCIALES ===== */
 :root {
-    --red-primary: #ff0000;
-    --orange-primary: #ff6600;
+    --green-primary: #00ff88;
+    --green-secondary: #00ff66;
+    --green-light: #00ff9a;
     --white: #ffffff;
     --gray-light: #cccccc;
     --gradient-main: linear-gradient(
         135deg,
-        var(--red-primary) 0%,
-        var(--orange-primary) 100%
+        var(--green-primary) 0%,
+        var(--green-secondary) 100%
+    );
+    --gradient-animated: linear-gradient(
+        135deg,
+        #00ff88 0%,
+        #00ff66 50%,
+        #00ff88 100%
     );
     --glass-dark: rgba(0, 0, 0, 0.8);
-    --glass-light: rgba(255, 255, 255, 0.05);
-    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-light: rgba(0, 255, 136, 0.05);
+    --glass-border: rgba(0, 255, 136, 0.1);
+    --glow-green: 0 0 20px rgba(0, 255, 136, 0.3);
     --shadow-main: 0 8px 32px rgba(0, 0, 0, 0.4);
     --font-body: "Inter", sans-serif;
     --font-heading: "Montserrat", sans-serif;
@@ -26,6 +34,34 @@
     --radius-md: 12px;
     --radius-lg: 16px;
     --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ===== ANIMACIONES ===== */
+@keyframes gradientShift {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 40px rgba(0, 255, 136, 0.6);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
 }
 
 /* ===== RESET BÁSICO ===== */
@@ -279,10 +315,12 @@ body {
     font-family: var(--font-heading);
     font-size: 2.5rem;
     font-weight: 900;
-    background: var(--gradient-main);
+    background: var(--gradient-animated);
+    background-size: 200% 200%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    animation: gradientShift 3s ease-in-out infinite;
     margin: 0;
     letter-spacing: -0.02em;
     text-align: center;
@@ -379,8 +417,8 @@ body {
 }
 
 .social-link.tiktok:hover {
-    border-color: #ff0050;
-    box-shadow: 0 8px 25px rgba(255, 0, 80, 0.3);
+    border-color: var(--green-primary);
+    box-shadow: 0 8px 25px rgba(0, 255, 136, 0.3);
 }
 
 .social-link.facebook:hover {
@@ -558,18 +596,20 @@ body {
     padding: 1rem;
     background: var(--gradient-main);
     border: none;
-    border-radius: var(--radius-sm);
-    color: var(--white);
-    font-family: var(--font-body);
-    font-size: 0.9rem;
-    font-weight: 700;
+    border-radius: var(--radius-md);
+    color: #ffffff;
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
     cursor: pointer;
     transition: all var(--transition);
     margin-bottom: 1rem;
     position: relative;
     overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 255, 136, 0.3);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .login-button::before {
@@ -659,9 +699,9 @@ body {
 }
 
 .alert-success {
-    background: rgba(34, 197, 94, 0.1);
-    border: 1px solid rgba(34, 197, 94, 0.3);
-    color: #86efac;
+    background: rgba(0, 255, 136, 0.1);
+    border: 1px solid rgba(0, 255, 136, 0.3);
+    color: var(--green-primary);
 }
 
 .alert-icon {
@@ -763,16 +803,16 @@ body {
 }
 
 .trading-signals .social-icon {
-    color: #22c55e;
+    color: var(--green-primary);
 }
 .academy .social-icon {
-    color: #8b5cf6;
+    color: var(--green-secondary);
 }
 .community .social-icon {
-    color: #3b82f6;
+    color: var(--green-light);
 }
 .support .social-icon {
-    color: #f59e0b;
+    color: var(--green-primary);
 }
 
 /* ===== REGISTRO SECTION ===== */
