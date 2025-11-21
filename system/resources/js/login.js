@@ -285,10 +285,16 @@ class AsociacionLogin {
 
         switch (linkText) {
             case "Gestión":
-                this.showMessage("Redirigiendo a Gestión de Conductores...", "info");
+                this.showMessage(
+                    "Redirigiendo a Gestión de Conductores...",
+                    "info"
+                );
                 break;
             case "Servicios":
-                this.showMessage("Accediendo a Servicios de Mototaxi...", "info");
+                this.showMessage(
+                    "Accediendo a Servicios de Mototaxi...",
+                    "info"
+                );
                 break;
             case "Asociación":
                 this.showMessage("Conectando con la Asociación...", "info");
@@ -301,7 +307,10 @@ class AsociacionLogin {
 
     handleRegisterClick(e) {
         e.preventDefault();
-        this.showMessage("Redirigiendo al registro de la Asociación...", "info");
+        this.showMessage(
+            "Redirigiendo al registro de la Asociación...",
+            "info"
+        );
         // Agregar lógica de redirección al registro
     }
 
