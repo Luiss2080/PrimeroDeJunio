@@ -19,6 +19,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // Configurar la nueva ruta de las vistas
+        config(['view.paths' => [base_path('views')]]);
     }
 }
