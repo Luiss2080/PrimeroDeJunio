@@ -88,14 +88,6 @@ class AsociacionLogin {
             link.addEventListener("click", (e) => this.handleRegisterClick(e));
         });
 
-        // Enlace de contraseña olvidada
-        const forgotLink = document.getElementById("forgotPasswordLink");
-        if (forgotLink) {
-            forgotLink.addEventListener("click", (e) =>
-                this.handleForgotPassword(e)
-            );
-        }
-
         // Efectos adicionales para el branding
         this.initBrandingEffects();
     }
@@ -312,19 +304,6 @@ class AsociacionLogin {
             "info"
         );
         // Agregar lógica de redirección al registro
-    }
-
-    handleForgotPassword(e) {
-        e.preventDefault();
-        this.showMessage(
-            "Redirigiendo a recuperación de contraseña...",
-            "info"
-        );
-
-        setTimeout(() => {
-            window.location.href =
-                "http://localhost/PrimeroDeJunio/system/resources/views/auth/recuperar.php";
-        }, 1000);
     }
 
     // ===== EFECTOS DEL BRANDING ===== //
