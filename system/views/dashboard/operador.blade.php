@@ -1,408 +1,320 @@
-@extends('layouts.auth')
+@extends('layouts.dashboard')
 
-@section('title', 'Dashboard Operador - Asociación 1ro de Junio')
+@section('title', 'Dashboard Operador')
 
-@section('styles')
-    <!-- CSS específico del dashboard -->
-    <link rel="stylesheet" href="{{ asset('css/components/dashboard.css') }}">
+@push('styles')
     <style>
-        /* Estilos específicos para operador */
-        .operator-dashboard .stats-card {
-            border-top: 3px solid #3b82f6;
+        /* Estilos específicos para el dashboard del operador */
+        .operador-dashboard {
+            padding: 30px;
         }
         
-        .operator-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 12px;
-            background: rgba(59, 130, 246, 0.1);
-            color: #3b82f6;
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            border-radius: var(--border-radius);
-            font-size: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        .welcome-section {
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(0, 0, 0, 0.05) 100%);
-            border: 1px solid rgba(59, 130, 246, 0.2);
-            border-radius: var(--border-radius-large);
+        .dashboard-welcome {
+            background: linear-gradient(135deg, rgba(0, 123, 255, 0.1) 0%, rgba(0, 0, 0, 0.05) 100%);
+            border: 1px solid rgba(0, 123, 255, 0.2);
+            border-radius: 12px;
             padding: 30px;
             margin-bottom: 30px;
         }
         
-        .dashboard-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        
-        .dashboard-title {
-            display: flex;
-            align-items: center;
-            gap: 12px;
+        .welcome-title {
             font-size: 28px;
             font-weight: 700;
             color: var(--text-primary);
-            margin: 0;
+            margin: 0 0 10px 0;
         }
         
-        .dashboard-actions {
-            display: flex;
-            gap: 12px;
+        .welcome-subtitle {
+            color: var(--text-secondary);
+            margin: 0 0 20px 0;
         }
         
-        .quick-action-btn {
+        .operador-badge {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 10px 16px;
-            border: none;
-            border-radius: var(--border-radius);
+            gap: 6px;
+            padding: 6px 12px;
+            background: rgba(0, 123, 255, 0.1);
+            color: #007bff;
+            border: 1px solid rgba(0, 123, 255, 0.3);
+            border-radius: 6px;
+            font-size: 12px;
             font-weight: 600;
-            text-decoration: none;
-            transition: var(--transition-fast);
-            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 15px;
         }
         
-        .quick-action-btn.primary {
-            background: #3b82f6;
-            color: var(--white);
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
         }
         
-        .quick-action-btn.primary:hover {
-            background: #2563eb;
+        .stats-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px;
+            transition: var(--transition-normal);
+            border-top: 3px solid #007bff;
+        }
+        
+        .stats-card:hover {
+            border-color: #007bff;
             transform: translateY(-2px);
         }
         
-        .quick-action-btn.secondary {
-            background: transparent;
+        .stat-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(0, 123, 255, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #007bff;
+        }
+        
+        .stat-number {
+            font-size: 32px;
+            font-weight: 800;
             color: var(--text-primary);
-            border: 1px solid var(--border-color);
+            line-height: 1;
         }
         
-        .quick-action-btn.secondary:hover {
-            background: var(--hover-bg);
-            border-color: #3b82f6;
-        }
-        
-        .operator-restricted {
-            opacity: 0.6;
-            pointer-events: none;
-            position: relative;
-        }
-        
-        .operator-restricted::after {
-            content: 'Acceso restringido';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 11px;
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 14px;
             font-weight: 600;
-            opacity: 0;
-            transition: opacity 0.3s;
+            margin-top: 5px;
         }
         
-        .operator-restricted:hover::after {
-            opacity: 1;
+        .stat-change {
+            font-size: 12px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+        
+        .stat-change.positive {
+            color: var(--success);
+            background: rgba(0, 255, 102, 0.1);
+        }
+        
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .action-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            transition: var(--transition-normal);
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .action-card:hover {
+            border-color: #007bff;
+            transform: translateY(-2px);
+            text-decoration: none;
+        }
+        
+        .action-icon {
+            width: 64px;
+            height: 64px;
+            background: rgba(0, 123, 255, 0.1);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            color: #007bff;
+        }
+        
+        .action-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 0 0 8px 0;
+        }
+        
+        .action-description {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin: 0;
+        }
+        
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 40px 0 20px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .operador-dashboard {
+                padding: 20px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .quick-actions {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
-@endsection
+@endpush
 
 @section('content')
-<div class="dashboard-container operator-dashboard">
-    <!-- Dashboard Header -->
-    <div class="dashboard-header">
-        <h1 class="dashboard-title">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm9 7h-6v13h-2v-6h-2v6H9V9H3V7h18v2z"/>
+<div class="operador-dashboard">
+    
+    <!-- Sección de Bienvenida -->
+    <div class="dashboard-welcome">
+        <span class="operador-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
             </svg>
-            Dashboard Operador
-        </h1>
-        <div class="dashboard-actions">
-            <button class="quick-action-btn primary" data-action="export">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
-                </svg>
-                Exportar
-            </button>
-            <button class="quick-action-btn secondary" data-action="refresh">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M17.65,6.35C16.2,4.9 14.21,4 12,4c-4.42,0 -7.99,3.58 -7.99,8s3.57,8 7.99,8c3.73,0 6.84,-2.55 7.73,-6h-2.08c-0.82,2.33 -3.04,4 -5.65,4c-3.31,0 -6,-2.69 -6,-6s2.69,-6 6,-6c1.66,0 3.14,0.69 4.22,1.78L13,11h7V4L17.65,6.35z"/>
-                </svg>
-                Actualizar
-            </button>
-        </div>
+            Operador
+        </span>
+        <h1 class="welcome-title">¡Bienvenido, {{ session('user_name', 'Operador') }}!</h1>
+        <p class="welcome-subtitle">Panel de operaciones diarias. Gestiona viajes, conductores y servicios.</p>
     </div>
     
-    <!-- Welcome Section -->
-    <div class="welcome-section">
-        <h2 style="margin: 0 0 12px 0; font-size: 20px; color: var(--text-primary);">Bienvenido, {{ session('user_name') }}</h2>
-        <p style="margin: 0 0 16px 0; color: var(--text-secondary);">Panel operativo para gestión diaria de conductores, vehículos y viajes.</p>
-        <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
-            <span class="operator-badge">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm9 7h-6v13h-2v-6h-2v6H9V9H3V7h18v2z"/>
-                </svg>
-                Operador
-            </span>
-            <span style="font-size: 14px; color: var(--text-secondary);">
-                Último acceso: {{ now()->format('d/m/Y H:i') }}
-            </span>
+    <!-- Estadísticas Principales -->
+    <div class="stats-grid">
+        <div class="stats-card">
+            <div class="stat-header">
+                <div class="stat-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20 6h-2.18c.11-.31.18-.65.18-1a2.996 2.996 0 0 0-5.5-1.65l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1z"/>
+                    </svg>
+                </div>
+                <span class="stat-change positive">+12</span>
+            </div>
+            <div class="stat-number">{{ \App\Models\Viaje::whereDate('created_at', today())->count() }}</div>
+            <div class="stat-label">Viajes de Hoy</div>
         </div>
-    </div>
-
-    <!-- Stats Cards -->
-    <div class="dashboard-stats">
-        <div class="stats-grid">
-            <div class="stats-card" data-card-type="trips-today">
-                <div class="stats-header">
-                    <div class="stats-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                        </svg>
-                    </div>
-                    <div class="stats-meta">
-                        <h3 class="stats-title">Viajes de Hoy</h3>
-                        <span class="stats-trend positive">+5.2%</span>
-                    </div>
+        
+        <div class="stats-card">
+            <div class="stat-header">
+                <div class="stat-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                    </svg>
                 </div>
-                <div class="stats-content">
-                    <div class="stats-value" data-counter="47">47</div>
-                    <div class="stats-subtitle">Completados: 42</div>
-                </div>
-                <div class="status-indicators">
-                    <div class="status-indicator" data-status="completed" style="background: var(--primary-green);"></div>
-                    <div class="status-indicator" data-status="progress" style="background: #ffa500;"></div>
-                    <div class="status-indicator" data-status="pending" style="background: var(--gray-medium);"></div>
-                </div>
+                <span class="stat-change positive">Activos</span>
             </div>
-
-            <div class="stats-card" data-card-type="active-drivers">
-                <div class="stats-header">
-                    <div class="stats-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm9 7h-6v13h-2v-6h-2v6H9V9H3V7h18v2z"/>
-                        </svg>
-                    </div>
-                    <div class="stats-meta">
-                        <h3 class="stats-title">Conductores Activos</h3>
-                        <span class="stats-trend positive">+2.1%</span>
-                    </div>
-                </div>
-                <div class="stats-content">
-                    <div class="stats-value" data-counter="28">28</div>
-                    <div class="stats-subtitle">En servicio</div>
-                </div>
-                <div class="driver-status-chart"></div>
-            </div>
-
-            <div class="stats-card" data-card-type="available-vehicles">
-                <div class="stats-header">
-                    <div class="stats-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.22.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99z"/>
-                        </svg>
-                    </div>
-                    <div class="stats-meta">
-                        <h3 class="stats-title">Vehículos</h3>
-                        <span class="stats-trend neutral">0%</span>
-                    </div>
-                </div>
-                <div class="stats-content">
-                    <div class="stats-value" data-counter="65">65</div>
-                    <div class="stats-subtitle">Disponibles: 23</div>
-                </div>
-                <div class="vehicle-status"></div>
-            </div>
-
-            <div class="stats-card" data-card-type="daily-revenue">
-                <div class="stats-header">
-                    <div class="stats-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/>
-                        </svg>
-                    </div>
-                    <div class="stats-meta">
-                        <h3 class="stats-title">Ingresos de Hoy</h3>
-                        <span class="stats-trend positive">+8.5%</span>
-                    </div>
-                </div>
-                <div class="stats-content">
-                    <div class="stats-value" data-counter="125000">$125,000</div>
-                    <div class="stats-subtitle">Meta: $150,000</div>
-                </div>
-                <div class="revenue-progress" style="width: 100%; height: 4px; background: var(--border-color); border-radius: 2px; margin-top: 8px;">
-                    <div style="width: 83%; height: 100%; background: #3b82f6; border-radius: 2px; transition: width 0.5s ease;"></div>
-                </div>
-            </div>
+            <div class="stat-number">{{ \App\Models\Conductor::where('estado', 'activo')->count() }}</div>
+            <div class="stat-label">Conductores Disponibles</div>
         </div>
-    </div>
-
-    <!-- Quick Actions Dashboard -->
-    <div class="dashboard-actions-section">
-        <h2 class="section-title">Operaciones Diarias</h2>
-        <div class="actions-grid">
-            <a href="{{ route('conductores.index') }}" class="action-card operator-action">
-                <div class="card-icon">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm9 7h-6v13h-2v-6h-2v6H9V9H3V7h18v2z"/>
+        
+        <div class="stats-card">
+            <div class="stat-header">
+                <div class="stat-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.22.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
                     </svg>
                 </div>
-                <div class="card-content">
-                    <h3>Conductores</h3>
-                    <p>Ver y editar información de conductores</p>
-                </div>
-                <div class="card-arrow">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/>
-                    </svg>
-                </div>
-            </a>
-            
-            <a href="{{ route('vehiculos.index') }}" class="action-card operator-action">
-                <div class="card-icon">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.22.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99z"/>
-                    </svg>
-                </div>
-                <div class="card-content">
-                    <h3>Vehículos</h3>
-                    <p>Administrar parque automotor</p>
-                </div>
-                <div class="card-arrow">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/>
-                    </svg>
-                </div>
-            </a>
-            
-            <a href="{{ route('viajes.index') }}" class="action-card operator-action">
-                <div class="card-icon">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                    </svg>
-                </div>
-                <div class="card-content">
-                    <h3>Control de Viajes</h3>
-                    <p>Gestión de servicios y rutas</p>
-                </div>
-                <div class="card-arrow">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/>
-                    </svg>
-                </div>
-            </a>
-            
-            <a href="{{ route('clientes.index') }}" class="action-card operator-action">
-                <div class="card-icon">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63A1.5 1.5 0 0 0 18.54 8H16c-.8 0-1.54.37-2.01.99L12 11l-1.99-2.01A2.5 2.5 0 0 0 8 8H5.46c-.8 0-1.49.59-1.42 1.37L6 16.5V22h2v-6h2v6h8z"/>
-                    </svg>
-                </div>
-                <div class="card-content">
-                    <h3>Clientes</h3>
-                    <p>Administrar base de clientes</p>
-                </div>
-                <div class="card-arrow">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/>
-                    </svg>
-                </div>
-            </a>
-            
-            <a href="{{ route('tarifas.index') }}" class="action-card operator-action">
-                <div class="card-icon">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                <span class="stat-change positive">En servicio</span>
+            </div>
+            <div class="stat-number">{{ \App\Models\Vehiculo::where('estado', 'disponible')->count() }}</div>
+            <div class="stat-label">Vehículos Disponibles</div>
+        </div>
+        
+        <div class="stats-card">
+            <div class="stat-header">
+                <div class="stat-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/>
                     </svg>
                 </div>
-                <div class="card-content">
-                    <h3>Consultar Tarifas</h3>
-                    <p>Ver precios y tarifas vigentes</p>
-                </div>
-                <div class="card-arrow">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/>
-                    </svg>
-                </div>
-            </a>
-            
-            <div class="action-card operator-restricted">
-                <div class="card-icon">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.74,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.82,11.69,4.82,12s0.02,0.64,0.07,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.44-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z"/>
-                    </svg>
-                </div>
-                <div class="card-content">
-                    <h3>Configuración Avanzada</h3>
-                    <p>Solo para administradores</p>
-                </div>
-                <div class="card-arrow">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                    </svg>
-                </div>
+                <span class="stat-change positive">Bs.</span>
             </div>
+            <div class="stat-number">2,450</div>
+            <div class="stat-label">Ingresos de Hoy</div>
         </div>
     </div>
-
-    <!-- Recent Activity -->
-    <div class="recent-activity">
-        <h2 class="section-title">Actividad Operativa Reciente</h2>
-        <div class="activity-list">
-            <div class="activity-item">
-                <div class="activity-icon operator-activity">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                    </svg>
-                </div>
-                <div class="activity-content">
-                    <p><strong>Viaje completado</strong> - Carlos Méndez - Ruta Centro</p>
-                    <span>Hace 8 minutos</span>
-                </div>
+    
+    <!-- Acciones Rápidas -->
+    <h2 class="section-title">Operaciones Diarias</h2>
+    <div class="quick-actions">
+        
+        <a href="/viajes" class="action-card">
+            <div class="action-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20 6h-2.18c.11-.31.18-.65.18-1a2.996 2.996 0 0 0-5.5-1.65l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1z"/>
+                </svg>
             </div>
-            
-            <div class="activity-item">
-                <div class="activity-icon operator-activity">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm9 7h-6v13h-2v-6h-2v6H9V9H3V7h18v2z"/>
-                    </svg>
-                </div>
-                <div class="activity-content">
-                    <p><strong>Conductor conectado</strong> - Ana Rodríguez</p>
-                    <span>Hace 12 minutos</span>
-                </div>
+            <h3 class="action-title">Gestión de Viajes</h3>
+            <p class="action-description">Monitoreo y control de servicios</p>
+        </a>
+        
+        <a href="/conductores" class="action-card">
+            <div class="action-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                </svg>
             </div>
-            
-            <div class="activity-item">
-                <div class="activity-icon operator-activity">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.22.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99z"/>
-                    </svg>
-                </div>
-                <div class="activity-content">
-                    <p><strong>Vehículo en mantenimiento</strong> - Placa ABC-123</p>
-                    <span>Hace 1 hora</span>
-                </div>
+            <h3 class="action-title">Control de Conductores</h3>
+            <p class="action-description">Estado y disponibilidad</p>
+        </a>
+        
+        <a href="/vehiculos" class="action-card">
+            <div class="action-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.22.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
+                </svg>
             </div>
-        </div>
+            <h3 class="action-title">Estado de Vehículos</h3>
+            <p class="action-description">Monitoreo del parque automotor</p>
+        </a>
+        
+        <a href="/clientes" class="action-card">
+            <div class="action-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zM4 18v-4.8c0-.7.33-1.35.85-1.78L12 6c.55-.37 1.3-.37 1.85 0l7.15 5.42c.52.43.85 1.08.85 1.78V18c0 1.11-.89 2-2 2H6c-1.11 0-2-.89-2-2z"/>
+                </svg>
+            </div>
+            <h3 class="action-title">Atención al Cliente</h3>
+            <p class="action-description">Registro y seguimiento</p>
+        </a>
+        
+        <a href="/reportes" class="action-card">
+            <div class="action-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+                </svg>
+            </div>
+            <h3 class="action-title">Reportes Diarios</h3>
+            <p class="action-description">Estadísticas operacionales</p>
+        </a>
+        
+        <a href="/tarifas" class="action-card">
+            <div class="action-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/>
+                </svg>
+            </div>
+            <h3 class="action-title">Tarifas y Precios</h3>
+            <p class="action-description">Consulta de tarifario actual</p>
+        </a>
     </div>
+    
 </div>
-@endsection
-
-@section('scripts')
-    <!-- JS específico del dashboard -->
-    <script src="{{ asset('js/components/dashboard.js') }}"></script>
 @endsection
