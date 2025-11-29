@@ -47,7 +47,7 @@ class LoginController extends Controller
             Session::put('user_name', 'Administrador');
             Session::put('user_role', 'admin');
 
-            return redirect('http://localhost/PrimeroDeJunio/system/dashboard/');
+            return redirect()->route('dashboard');
         } else {
             return back()->withErrors(['error' => 'Credenciales incorrectas. Inténtalo nuevamente.']);
         }
