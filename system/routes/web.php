@@ -6,7 +6,19 @@ use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\RegisterController;
 
 Route::get('/', function () {
-    return view('welcome');
+    // Si el usuario ya está autenticado, redirigir al dashboard correspondiente
+    if (session('user_id')) {
+        $userRole = session('user_role');
+        
+        if ($userRole === 'administrador') {
+            return redirect()->route('dashboard.administrador');
+        } elseif ($userRole === 'operador') {
+            return redirect()->route('dashboard.operador');
+        }
+    }
+    
+    // Si no está autenticado, redirigir al login
+    return redirect()->route('login');
 });
 
 // Rutas de autenticación
@@ -50,19 +62,17 @@ Route::get('/dashboard', function () {
 
 // Dashboard específico para administrador
 Route::get('/dashboard/administrador', function () {
-    if (!session('user_id') || session('user_role') !== 'administrador') {
-        return redirect()->route('login');
-    }
     return view('dashboard.administrador');
-})->name('dashboard.administrador');
+})->middleware(['web', 'auth.check', 'admin.check'])->name('dashboard.administrador');
 
-// Dashboard específico para operador
+// Dashboard específico para operador  
 Route::get('/dashboard/operador', function () {
-    if (!session('user_id') || session('user_role') !== 'operador') {
-        return redirect()->route('login');
+    // Verificar que sea operador o administrador
+    if (session('user_role') !== 'operador' && session('user_role') !== 'administrador') {
+        return redirect()->route('login')->with('error', 'No tienes permisos para acceder a esta sección.');
     }
     return view('dashboard.operador');
-})->name('dashboard.operador');
+})->middleware(['web', 'auth.check'])->name('dashboard.operador');
 
 // Rutas de módulos del sistema (requieren autenticación)
 Route::middleware(['web', 'auth.check'])->group(function () {
