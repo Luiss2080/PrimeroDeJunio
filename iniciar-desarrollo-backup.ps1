@@ -7,7 +7,7 @@ Write-Host "===============================================" -ForegroundColor Gr
 Write-Host ""
 
 # Limpiar procesos anteriores para evitar conflictos
-Write-Host "Limpiando procesos anteriores..." -ForegroundColor Yellow
+Write-Host "🧹 Limpiando procesos anteriores..." -ForegroundColor Yellow
 
 # Detener procesos PHP de Laravel anteriores
 $phpProcesses = Get-Process -Name "php" -ErrorAction SilentlyContinue | Where-Object {
@@ -16,25 +16,25 @@ $phpProcesses = Get-Process -Name "php" -ErrorAction SilentlyContinue | Where-Ob
 }
 if ($phpProcesses) {
     $phpProcesses | Stop-Process -Force -ErrorAction SilentlyContinue
-    Write-Host "   Procesos PHP anteriores detenidos" -ForegroundColor Green
+    Write-Host "   ✅ Procesos PHP anteriores detenidos" -ForegroundColor Green
 }
 
 # Verificar si puerto 8000 está libre
 $port8000 = Get-NetTCPConnection -LocalPort 8000 -ErrorAction SilentlyContinue
 if ($port8000) {
-    Write-Host "   Puerto 8000 ocupado, intentando liberar..." -ForegroundColor Yellow
+    Write-Host "   ⚠️ Puerto 8000 ocupado, intentando liberar..." -ForegroundColor Yellow
     $port8000 | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force -ErrorAction SilentlyContinue }
 }
 
 # Verificar si puerto 3000 está libre
 $port3000 = Get-NetTCPConnection -LocalPort 3000 -ErrorAction SilentlyContinue
 if ($port3000) {
-    Write-Host "   Puerto 3000 ocupado, intentando liberar..." -ForegroundColor Yellow
+    Write-Host "   ⚠️ Puerto 3000 ocupado, intentando liberar..." -ForegroundColor Yellow
     $port3000 | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force -ErrorAction SilentlyContinue }
 }
 
 Start-Sleep -Seconds 1
-Write-Host "   Puertos verificados y liberados" -ForegroundColor Green
+Write-Host "   ✅ Puertos verificados y liberados" -ForegroundColor Green
 Write-Host ""
 
 # Obtener la ubicación del script
@@ -76,11 +76,11 @@ if (-not (Test-Path "artisan")) {
     exit 1
 }
 
-Write-Host "Verificaciones completadas exitosamente" -ForegroundColor Green
+Write-Host "✅ Verificaciones completadas exitosamente" -ForegroundColor Green
 Write-Host ""
 
 # Iniciar Laravel Server en segundo plano
-Write-Host "Iniciando servidor Laravel..." -ForegroundColor Cyan
+Write-Host "🚀 Iniciando servidor Laravel..." -ForegroundColor Cyan
 
 # Crear job con manejo de errores mejorado
 $laravelJob = Start-Job -Name "LaravelServer" -ScriptBlock {
@@ -104,10 +104,10 @@ Start-Sleep -Seconds 3
 
 # Verificar que el job está ejecutándose
 if ($laravelJob.State -eq "Running") {
-    Write-Host "   Laravel ejecutandose en: http://127.0.0.1:8000" -ForegroundColor Green
-    Write-Host "   Login disponible en: http://127.0.0.1:8000/login" -ForegroundColor Green
+    Write-Host "   ✅ Laravel ejecutándose en: http://127.0.0.1:8000" -ForegroundColor Green
+    Write-Host "   ✅ Login disponible en: http://127.0.0.1:8000/login" -ForegroundColor Green
 } else {
-    Write-Host "   ERROR: Laravel no pudo iniciar" -ForegroundColor Red
+    Write-Host "   ❌ Error: Laravel no pudo iniciar" -ForegroundColor Red
     $jobOutput = Receive-Job $laravelJob -ErrorAction SilentlyContinue
     Write-Host "   Error: $jobOutput" -ForegroundColor Red
     Stop-Job $laravelJob -ErrorAction SilentlyContinue
@@ -118,11 +118,13 @@ if ($laravelJob.State -eq "Running") {
 Write-Host ""
 
 # Cambiar al directorio website para React
+
+# Cambiar al directorio website para React
 Set-Location $websitePath
 Write-Host "Directorio actual para React: $(Get-Location)" -ForegroundColor Cyan
 
 # Iniciar procesos en segundo plano para abrir navegadores
-Write-Host "Programando apertura de navegadores en 8 segundos..." -ForegroundColor Yellow
+Write-Host "🌐 Programando apertura de navegadores en 8 segundos..." -ForegroundColor Yellow
 Start-Job -ScriptBlock {
     Start-Sleep -Seconds 8
     # Abrir React
@@ -133,11 +135,11 @@ Start-Job -ScriptBlock {
 } | Out-Null
 
 # Ejecutar npm run dev para React
-Write-Host "Iniciando servidor React..." -ForegroundColor Cyan
-Write-Host "   React ejecutandose en: http://localhost:3000" -ForegroundColor Green
+Write-Host "🚀 Iniciando servidor React..." -ForegroundColor Cyan
+Write-Host "   → React ejecutándose en: http://localhost:3000" -ForegroundColor Green
 Write-Host ""
-Write-Host "Presiona Ctrl+C para detener ambos servidores" -ForegroundColor Yellow
-Write-Host "URLs disponibles:" -ForegroundColor White
+Write-Host "⚡ Presiona Ctrl+C para detener ambos servidores" -ForegroundColor Yellow
+Write-Host "📝 URLs disponibles:" -ForegroundColor White
 Write-Host "   • Website (React): http://localhost:3000" -ForegroundColor White
 Write-Host "   • Sistema (Laravel): http://127.0.0.1:8000/login" -ForegroundColor White
 Write-Host ""
@@ -153,9 +155,9 @@ catch {
 finally {
     # Detener el job de Laravel al finalizar
     Write-Host ""
-    Write-Host "Deteniendo servidor Laravel..." -ForegroundColor Yellow
+    Write-Host "🛑 Deteniendo servidor Laravel..." -ForegroundColor Yellow
     Stop-Job $laravelJob -ErrorAction SilentlyContinue
     Remove-Job $laravelJob -Force -ErrorAction SilentlyContinue
-    Write-Host "Servidores detenidos" -ForegroundColor Green
+    Write-Host "✅ Servidores detenidos" -ForegroundColor Green
     Read-Host "Presiona Enter para salir"
 }
