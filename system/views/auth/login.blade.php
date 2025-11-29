@@ -84,25 +84,25 @@
                         <div class="social-media-links">
                             <a href="#" class="social-link tiktok" title="TikTok">
                                 <div class="social-icon">
-                                    <img src="http://localhost/Nexorium/website/public/images/tiktok.webp" alt="TikTok" class="social-logo">
+                                    <img src="{{ asset('images/tiktok.webp') }}" alt="TikTok" class="social-logo">
                                 </div>
                                 <span>TikTok</span>
                             </a>
                             <a href="#" class="social-link facebook" title="Facebook">
                                 <div class="social-icon">
-                                    <img src="http://localhost/Nexorium/website/public/images/facebook.webp" alt="Facebook" class="social-logo">
+                                    <img src="{{ asset('images/facebook.webp') }}" alt="Facebook" class="social-logo">
                                 </div>
                                 <span>Facebook</span>
                             </a>
                             <a href="#" class="social-link instagram" title="Instagram">
                                 <div class="social-icon">
-                                    <img src="http://localhost/Nexorium/website/public/images/Instagram.webp" alt="Instagram" class="social-logo">
+                                    <img src="{{ asset('images/Instagram.webp') }}" alt="Instagram" class="social-logo">
                                 </div>
                                 <span>Instagram</span>
                             </a>
                             <a href="#" class="social-link whatsapp" title="WhatsApp">
                                 <div class="social-icon">
-                                    <img src="http://localhost/Nexorium/website/public/images/wpps.webp" alt="WhatsApp" class="social-logo">
+                                    <img src="{{ asset('images/wpps.webp') }}" alt="WhatsApp" class="social-logo">
                                 </div>
                                 <span>WhatsApp</span>
                             </a>
@@ -217,17 +217,17 @@
 
                         <!-- Social Media Links -->
                         <div class="social-media-links">
-                            <a href="#" class="social-link trading-signals" title="Señales de Trading">
-                                <div class="social-icon">📊</div>
-                                <span>Señales VIP</span>
+                            <a href="#" class="social-link mototaxi" title="Servicios de Mototaxi">
+                                <div class="social-icon">🏍️</div>
+                                <span>Servicios</span>
                             </a>
-                            <a href="#" class="social-link academy" title="Academia">
-                                <div class="social-icon">🎓</div>
-                                <span>Academia Pro</span>
+                            <a href="#" class="social-link conductores" title="Conductores">
+                                <div class="social-icon">👨‍🎓</div>
+                                <span>Conductores</span>
                             </a>
-                            <a href="#" class="social-link community" title="Comunidad">
-                                <div class="social-icon">👥</div>
-                                <span>Comunidad</span>
+                            <a href="#" class="social-link tarifas" title="Tarifas">
+                                <div class="social-icon">💰</div>
+                                <span>Tarifas</span>
                             </a>
                             <a href="#" class="social-link support" title="Soporte">
                                 <div class="social-icon">💬</div>
