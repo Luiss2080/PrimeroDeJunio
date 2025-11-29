@@ -16,9 +16,9 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
-        // Si ya está logueado y no se fuerza el login, redirigir al dashboard
-        $force_login = request()->get('force') == '1';
-        if (Session::has('user_id') && !$force_login) {
+        // Solo redirigir al dashboard si se solicita explícitamente no mostrar login
+        $skip_login = request()->get('skip') == '1';
+        if (Session::has('user_id') && $skip_login) {
             return redirect()->route('dashboard');
         }
 

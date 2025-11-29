@@ -131,17 +131,14 @@ Write-Host ""
 Set-Location $websitePath
 Write-Host "Directorio actual para React: $(Get-Location)" -ForegroundColor Cyan
 
-# Iniciar procesos en segundo plano para abrir navegadores
-Write-Host "Programando apertura de navegadores en 8 segundos..." -ForegroundColor Yellow
+# Iniciar proceso en segundo plano para abrir solo React
+Write-Host "Programando apertura de React en 8 segundos..." -ForegroundColor Yellow
 Start-Job -ScriptBlock {
-    param($reactPort, $laravelPort)
+    param($reactPort)
     Start-Sleep -Seconds 8
-    # Abrir React
+    # Abrir solo React
     Start-Process "http://localhost:$reactPort"
-    Start-Sleep -Seconds 2
-    # Abrir Laravel
-    Start-Process "http://127.0.0.1:$laravelPort/login"
-} -ArgumentList $reactPort, $laravelPort | Out-Null
+} -ArgumentList $reactPort | Out-Null
 
 # Ejecutar npm run dev para React con puerto específico
 Write-Host "Iniciando servidor React..." -ForegroundColor Cyan
