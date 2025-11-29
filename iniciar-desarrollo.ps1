@@ -6,35 +6,45 @@ Write-Host "     PRIMERO DE JUNIO - DESARROLLO WEB" -ForegroundColor Green
 Write-Host "===============================================" -ForegroundColor Green
 Write-Host ""
 
-# Limpiar procesos anteriores para evitar conflictos
-Write-Host "Limpiando procesos anteriores..." -ForegroundColor Yellow
-
-# Detener procesos PHP de Laravel anteriores
-$phpProcesses = Get-Process -Name "php" -ErrorAction SilentlyContinue | Where-Object {
-    $_.CommandLine -like "*artisan serve*" -or 
-    $_.MainWindowTitle -like "*Laravel Server*"
-}
-if ($phpProcesses) {
-    $phpProcesses | Stop-Process -Force -ErrorAction SilentlyContinue
-    Write-Host "   Procesos PHP anteriores detenidos" -ForegroundColor Green
-}
-
-# Verificar si puerto 8000 está libre
-$port8000 = Get-NetTCPConnection -LocalPort 8000 -ErrorAction SilentlyContinue
-if ($port8000) {
-    Write-Host "   Puerto 8000 ocupado, intentando liberar..." -ForegroundColor Yellow
-    $port8000 | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force -ErrorAction SilentlyContinue }
+# Función para encontrar puerto libre
+function Find-FreePort {
+    param(
+        [int]$StartPort = 3000,
+        [int]$EndPort = 9999
+    )
+    
+    for ($port = $StartPort; $port -le $EndPort; $port++) {
+        $connection = Get-NetTCPConnection -LocalPort $port -ErrorAction SilentlyContinue
+        if (-not $connection) {
+            return $port
+        }
+    }
+    return $null
 }
 
-# Verificar si puerto 3000 está libre
-$port3000 = Get-NetTCPConnection -LocalPort 3000 -ErrorAction SilentlyContinue
-if ($port3000) {
-    Write-Host "   Puerto 3000 ocupado, intentando liberar..." -ForegroundColor Yellow
-    $port3000 | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force -ErrorAction SilentlyContinue }
+Write-Host "Buscando puertos libres..." -ForegroundColor Yellow
+
+# Buscar puerto libre para Laravel (empezar desde 8000)
+$laravelPort = Find-FreePort -StartPort 8000
+if ($laravelPort -eq $null) {
+    Write-Host "ERROR: No se pudo encontrar un puerto libre para Laravel" -ForegroundColor Red
+    Read-Host "Presiona Enter para salir"
+    exit 1
 }
 
-Start-Sleep -Seconds 1
-Write-Host "   Puertos verificados y liberados" -ForegroundColor Green
+# Buscar puerto libre para React (empezar desde 3000, evitar el puerto de Laravel)
+$reactPort = Find-FreePort -StartPort 3000
+if ($reactPort -eq $laravelPort) {
+    $reactPort = Find-FreePort -StartPort ($laravelPort + 1)
+}
+if ($reactPort -eq $null) {
+    Write-Host "ERROR: No se pudo encontrar un puerto libre para React" -ForegroundColor Red
+    Read-Host "Presiona Enter para salir"
+    exit 1
+}
+
+Write-Host "   Laravel usara puerto: $laravelPort" -ForegroundColor Green
+Write-Host "   React usara puerto: $reactPort" -ForegroundColor Green
 Write-Host ""
 
 # Obtener la ubicación del script
@@ -84,28 +94,28 @@ Write-Host "Iniciando servidor Laravel..." -ForegroundColor Cyan
 
 # Crear job con manejo de errores mejorado
 $laravelJob = Start-Job -Name "LaravelServer" -ScriptBlock {
-    param($systemPath)
+    param($systemPath, $port)
     try {
         Set-Location $systemPath
         # Verificar que estamos en el directorio correcto
         if (-not (Test-Path "artisan")) {
             throw "Archivo artisan no encontrado en $systemPath"
         }
-        php artisan serve --host=127.0.0.1 --port=8000 2>&1
+        php artisan serve --host=127.0.0.1 --port=$port 2>&1
     }
     catch {
         Write-Error "Error iniciando Laravel: $($_.Exception.Message)"
         return $false
     }
-} -ArgumentList $systemPath
+} -ArgumentList $systemPath, $laravelPort
 
 # Esperar un momento para verificar que Laravel inició correctamente
 Start-Sleep -Seconds 3
 
 # Verificar que el job está ejecutándose
 if ($laravelJob.State -eq "Running") {
-    Write-Host "   Laravel ejecutandose en: http://127.0.0.1:8000" -ForegroundColor Green
-    Write-Host "   Login disponible en: http://127.0.0.1:8000/login" -ForegroundColor Green
+    Write-Host "   Laravel ejecutandose en: http://127.0.0.1:$laravelPort" -ForegroundColor Green
+    Write-Host "   Login disponible en: http://127.0.0.1:$laravelPort/login" -ForegroundColor Green
 } else {
     Write-Host "   ERROR: Laravel no pudo iniciar" -ForegroundColor Red
     $jobOutput = Receive-Job $laravelJob -ErrorAction SilentlyContinue
@@ -124,26 +134,28 @@ Write-Host "Directorio actual para React: $(Get-Location)" -ForegroundColor Cyan
 # Iniciar procesos en segundo plano para abrir navegadores
 Write-Host "Programando apertura de navegadores en 8 segundos..." -ForegroundColor Yellow
 Start-Job -ScriptBlock {
+    param($reactPort, $laravelPort)
     Start-Sleep -Seconds 8
     # Abrir React
-    Start-Process "http://localhost:3000"
+    Start-Process "http://localhost:$reactPort"
     Start-Sleep -Seconds 2
     # Abrir Laravel
-    Start-Process "http://127.0.0.1:8000/login"
-} | Out-Null
+    Start-Process "http://127.0.0.1:$laravelPort/login"
+} -ArgumentList $reactPort, $laravelPort | Out-Null
 
-# Ejecutar npm run dev para React
+# Ejecutar npm run dev para React con puerto específico
 Write-Host "Iniciando servidor React..." -ForegroundColor Cyan
-Write-Host "   React ejecutandose en: http://localhost:3000" -ForegroundColor Green
+Write-Host "   React ejecutandose en: http://localhost:$reactPort" -ForegroundColor Green
 Write-Host ""
 Write-Host "Presiona Ctrl+C para detener ambos servidores" -ForegroundColor Yellow
 Write-Host "URLs disponibles:" -ForegroundColor White
-Write-Host "   • Website (React): http://localhost:3000" -ForegroundColor White
-Write-Host "   • Sistema (Laravel): http://127.0.0.1:8000/login" -ForegroundColor White
+Write-Host "   • Website (React): http://localhost:$reactPort" -ForegroundColor White
+Write-Host "   • Sistema (Laravel): http://127.0.0.1:$laravelPort/login" -ForegroundColor White
 Write-Host ""
 
 try {
-    npm run dev
+    # Para Vite, usar el flag --port directamente
+    npm run dev -- --port $reactPort
 }
 catch {
     Write-Host ""
