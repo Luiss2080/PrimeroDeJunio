@@ -17,6 +17,50 @@ const Header = ({ currentView, changeView }) => {
     };
   }, []);
 
+  // Detectar automáticamente el puerto de Laravel
+  useEffect(() => {
+    const findLaravelServer = () => {
+      const ports = [8001, 8000, 8002, 8003, 8080]; // Puertos más comunes
+      let portFound = false;
+      
+      ports.forEach(port => {
+        const img = new Image();
+        img.onload = () => {
+          if (!portFound) {
+            portFound = true;
+            setLaravelUrl(`http://127.0.0.1:${port}/login`);
+            console.log(`✅ Laravel detectado en puerto ${port}`);
+          }
+        };
+        img.onerror = () => {
+          // Si no es una imagen, pero el servidor responde, intentar con una petición diferente
+          const link = document.createElement('link');
+          link.rel = 'prefetch';
+          link.href = `http://127.0.0.1:${port}/login`;
+          link.onload = () => {
+            if (!portFound) {
+              portFound = true;
+              setLaravelUrl(`http://127.0.0.1:${port}/login`);
+              console.log(`✅ Laravel detectado en puerto ${port}`);
+            }
+            document.head.removeChild(link);
+          };
+          link.onerror = () => {
+            console.log(`❌ Puerto ${port} no disponible`);
+            if (link.parentNode) {
+              document.head.removeChild(link);
+            }
+          };
+          document.head.appendChild(link);
+        };
+        // Intentar cargar favicon o cualquier recurso del servidor
+        img.src = `http://127.0.0.1:${port}/favicon.ico?t=${Date.now()}`;
+      });
+    };
+
+    findLaravelServer();
+  }, []);
+
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
 
@@ -156,7 +200,7 @@ const Header = ({ currentView, changeView }) => {
           {/* Acciones del Header */}
           <div className="header-actions">
             <div className="auth-buttons">
-              <a href="/api/login" className="btn btn-ghost">
+              <a href={laravelUrl} className="btn btn-ghost" target="_blank" rel="noopener noreferrer">
                 <span>Iniciar Sesión</span>
               </a>
               <a href="#registro" className="btn btn-primary">
