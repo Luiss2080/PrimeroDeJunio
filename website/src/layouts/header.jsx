@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 const Header = ({ currentView, changeView }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [laravelUrl, setLaravelUrl] = useState('http://127.0.0.1:8000/login');
 
   useEffect(() => {
     const handleScroll = () => {
