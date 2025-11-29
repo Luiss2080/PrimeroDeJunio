@@ -20,7 +20,7 @@
     <link rel="icon" type="image/x-icon" href="{{ asset('images/favicon.ico') }}">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="{{ asset('css/registro.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/auth/registro.css') }}">
 </head>
 
 <body>
@@ -477,7 +477,7 @@
     </div>
 
     <!-- JavaScript -->
-    <script src="{{ asset('js/registro.js') }}"></script>
+    <script src="{{ asset('js/auth/registro.js') }}"></script>
 </body>
 
 </html>

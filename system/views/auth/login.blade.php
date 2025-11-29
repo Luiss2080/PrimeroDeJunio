@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <!-- CSS del login -->
-    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/auth/login.css') }}">
 
     <!-- Meta tags para SEO -->
     <meta name="description" content="Accede a tu cuenta en la Asociación 1ro de Junio. Sistema administrativo para gestión de conductores y servicios de mototaxi.">
@@ -251,7 +251,7 @@
     </div>
 
     <!-- JavaScript -->
-    <script src="{{ asset('js/login.js') }}"></script>
+    <script src="{{ asset('js/auth/login.js') }}"></script>
 
     <!-- Analytics (opcional) -->
     <script>
