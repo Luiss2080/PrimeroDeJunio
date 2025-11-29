@@ -17,13 +17,18 @@ class DatabaseSeeder extends Seeder
     {
         // Seeders en orden correcto respetando las dependencias
         $this->call([
-            RolesSeeder::class,           // 1. Primero los roles
-            UsuariosSeeder::class,        // 2. Usuarios (depende de roles)
-            TarifasSeeder::class,         // 3. Tarifas (independiente)
-            ConfiguracionesSeeder::class, // 4. Configuraciones (independiente)
-            ConductoresSeeder::class,     // 5. Conductores (depende de usuarios)
-            VehiculosSeeder::class,       // 6. Vehículos (independiente)
-            ClientesSeeder::class,        // 7. Clientes (independiente)
+            RolesSeeder::class,                // 1. Primero los roles
+            UsuariosSeeder::class,             // 2. Usuarios (depende de roles)
+            TarifasSeeder::class,              // 3. Tarifas (independiente)
+            ConfiguracionesSeeder::class,      // 4. Configuraciones (independiente)
+            ConductoresSeeder::class,          // 5. Conductores (depende de usuarios)
+            VehiculosSeeder::class,            // 6. Vehículos (independiente)
+            ClientesSeeder::class,             // 7. Clientes (independiente)
+            AsignacionesVehiculoSeeder::class, // 8. Asignaciones (depende de conductores y vehículos)
+            ViajesSeeder::class,               // 9. Viajes (depende de conductores, clientes, vehículos)
+            MantenimientosSeeder::class,       // 10. Mantenimientos (depende de vehículos)
+            PagosTarifaDiariaSeeder::class,    // 11. Pagos (depende de conductores)
+            LogsSeeder::class,                 // 12. Logs (depende de usuarios)
         ]);
     }
 }
