@@ -52,6 +52,9 @@ class LoginController extends Controller
                 ->first();
 
             if (!$user) {
+                if ($request->expectsJson()) {
+                    return response()->json(['success' => false, 'message' => 'Usuario no encontrado o inactivo.']);
+                }
                 return back()->withErrors(['error' => 'Usuario no encontrado o inactivo.']);
             }
 
@@ -69,12 +72,21 @@ class LoginController extends Controller
                     ->where('id', $user->id)
                     ->update(['ultimo_acceso' => now()]);
 
+                if ($request->expectsJson()) {
+                    return response()->json(['success' => true, 'redirect' => route('dashboard')]);
+                }
                 return redirect()->route('dashboard');
             } else {
+                if ($request->expectsJson()) {
+                    return response()->json(['success' => false, 'message' => 'Credenciales incorrectas. Inténtalo nuevamente.']);
+                }
                 return back()->withErrors(['error' => 'Credenciales incorrectas. Inténtalo nuevamente.']);
             }
         } catch (\Exception $e) {
             Log::error('Error en login: ' . $e->getMessage());
+            if ($request->expectsJson()) {
+                return response()->json(['success' => false, 'message' => 'Error de conexión. Intenta de nuevo.']);
+            }
             return back()->withErrors(['error' => 'Error de conexión. Intenta de nuevo.']);
         }
     }

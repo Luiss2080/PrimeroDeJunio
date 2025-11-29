@@ -158,8 +158,12 @@ class AsociacionLogin {
         try {
             const formData = new FormData(this.form);
 
-            const response = await fetch("", {
+            const response = await fetch("/login", {
                 method: "POST",
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Accept': 'application/json',
+                },
                 body: formData,
             });
 
