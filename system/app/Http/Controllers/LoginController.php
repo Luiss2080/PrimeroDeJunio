@@ -16,7 +16,7 @@ class LoginController extends Controller
         // Si ya está logueado y no se fuerza el login, redirigir al dashboard
         $force_login = request()->get('force') == '1';
         if (Session::has('user_id') && !$force_login) {
-            return redirect('http://localhost/PrimeroDeJunio/system/dashboard/');
+            return redirect()->route('dashboard');
         }
 
         return view('auth.login');
