@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class LoginController extends Controller
 {
@@ -39,17 +42,40 @@ class LoginController extends Controller
             return back()->withErrors(['error' => 'Por favor, ingresa un email válido.']);
         }
 
-        // Aquí iría la lógica de autenticación con la base de datos
-        // Por ahora, usaremos credenciales de ejemplo
-        if ($email === 'admin@asociacion.com' && $password === 'admin123') {
-            Session::put('user_id', 1);
-            Session::put('user_email', $email);
-            Session::put('user_name', 'Administrador');
-            Session::put('user_role', 'admin');
+        try {
+            // Buscar usuario en la base de datos
+            $user = DB::table('users')
+                ->join('roles', 'users.rol_id', '=', 'roles.id')
+                ->select('users.*', 'roles.nombre as rol_nombre')
+                ->where('users.email', $email)
+                ->where('users.estado', 'activo')
+                ->first();
 
-            return redirect()->route('dashboard');
-        } else {
-            return back()->withErrors(['error' => 'Credenciales incorrectas. Inténtalo nuevamente.']);
+            if (!$user) {
+                return back()->withErrors(['error' => 'Usuario no encontrado o inactivo.']);
+            }
+
+            // Verificar contraseña
+            if (Hash::check($password, $user->password)) {
+                // Login exitoso
+                Session::put('user_id', $user->id);
+                Session::put('user_email', $user->email);
+                Session::put('user_name', $user->nombre . ' ' . $user->apellido);
+                Session::put('user_role', $user->rol_nombre);
+                Session::put('user_rol_id', $user->rol_id);
+
+                // Actualizar último acceso
+                DB::table('users')
+                    ->where('id', $user->id)
+                    ->update(['ultimo_acceso' => now()]);
+
+                return redirect()->route('dashboard');
+            } else {
+                return back()->withErrors(['error' => 'Credenciales incorrectas. Inténtalo nuevamente.']);
+            }
+        } catch (\Exception $e) {
+            Log::error('Error en login: ' . $e->getMessage());
+            return back()->withErrors(['error' => 'Error de conexión. Intenta de nuevo.']);
         }
     }
 
