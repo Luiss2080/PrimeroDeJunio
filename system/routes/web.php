@@ -13,6 +13,7 @@ Route::get('/', function () {
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('/logout', [LoginController::class, 'logout'])->name('auth.logout');
 
 // Rutas de registro
 Route::get('/register', [RegisterController::class, 'showRegisterForm'])->name('register.show');
@@ -27,13 +28,40 @@ Route::post('/password/verify', [PasswordResetController::class, 'verifyCode'])-
 Route::post('/password/update', [PasswordResetController::class, 'resetPassword'])->name('password.update');
 Route::post('/password/resend', [PasswordResetController::class, 'resendCode'])->name('password.resend');
 
-// Ruta temporal para dashboard
+// Rutas de dashboard
 Route::get('/dashboard', function () {
     if (!session('user_id')) {
         return redirect()->route('login');
     }
-    return view('dashboard.index');
+    
+    // Redirección según el rol del usuario
+    $userRole = session('user_role');
+    
+    if ($userRole === 'administrador') {
+        return redirect()->route('dashboard.administrador');
+    } elseif ($userRole === 'operador') {
+        return redirect()->route('dashboard.operador');
+    } else {
+        // Si no tiene un rol válido, mostrar página de redirección
+        return view('dashboard.index');
+    }
 })->name('dashboard');
+
+// Dashboard específico para administrador
+Route::get('/dashboard/administrador', function () {
+    if (!session('user_id') || session('user_role') !== 'administrador') {
+        return redirect()->route('login');
+    }
+    return view('dashboard.administrador');
+})->name('dashboard.administrador');
+
+// Dashboard específico para operador
+Route::get('/dashboard/operador', function () {
+    if (!session('user_id') || session('user_role') !== 'operador') {
+        return redirect()->route('login');
+    }
+    return view('dashboard.operador');
+})->name('dashboard.operador');
 
 // Ruta temporal para contacto
 Route::get('/contact', function () {

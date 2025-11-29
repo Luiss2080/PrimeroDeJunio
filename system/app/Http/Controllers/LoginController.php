@@ -72,10 +72,19 @@ class LoginController extends Controller
                     ->where('id', $user->id)
                     ->update(['ultimo_acceso' => now()]);
 
-                if ($request->expectsJson()) {
-                    return response()->json(['success' => true, 'redirect' => route('dashboard')]);
+                // Redirección según el rol del usuario
+                $redirectRoute = 'dashboard'; // Por defecto
+                
+                if ($user->rol_nombre === 'administrador') {
+                    $redirectRoute = 'dashboard.administrador';
+                } elseif ($user->rol_nombre === 'operador') {
+                    $redirectRoute = 'dashboard.operador';
                 }
-                return redirect()->route('dashboard');
+
+                if ($request->expectsJson()) {
+                    return response()->json(['success' => true, 'redirect' => route($redirectRoute)]);
+                }
+                return redirect()->route($redirectRoute);
             } else {
                 if ($request->expectsJson()) {
                     return response()->json(['success' => false, 'message' => 'Credenciales incorrectas. Inténtalo nuevamente.']);
