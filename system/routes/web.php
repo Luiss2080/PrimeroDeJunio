@@ -63,6 +63,52 @@ Route::get('/dashboard/operador', function () {
     return view('dashboard.operador');
 })->name('dashboard.operador');
 
+// Rutas de módulos del sistema (requieren autenticación)
+Route::middleware(['web', 'auth.check'])->group(function () {
+    // Conductores
+    Route::get('/conductores', function () {
+        return view('conductores.index');
+    })->name('conductores.index');
+    
+    // Vehículos
+    Route::get('/vehiculos', function () {
+        return view('vehiculos.index');
+    })->name('vehiculos.index');
+    
+    // Viajes
+    Route::get('/viajes', function () {
+        return view('viajes.index');
+    })->name('viajes.index');
+    
+    // Clientes
+    Route::get('/clientes', function () {
+        return view('clientes.index');
+    })->name('clientes.index');
+    
+    // Tarifas
+    Route::get('/tarifas', function () {
+        return view('tarifas.index');
+    })->name('tarifas.index');
+    
+    // Reportes
+    Route::get('/reportes', function () {
+        return view('reportes.index');
+    })->name('reportes.index');
+    
+    // Rutas solo para administradores
+    Route::middleware(['admin.check'])->group(function () {
+        // Usuarios
+        Route::get('/usuarios', function () {
+            return view('usuarios.index');
+        })->name('usuarios.index');
+        
+        // Configuración
+        Route::get('/configuracion', function () {
+            return view('configuraciones.index');
+        })->name('configuraciones.index');
+    });
+});
+
 // Ruta temporal para contacto
 Route::get('/contact', function () {
     return redirect()->route('register.show')->with('info', '¡Completa el formulario de registro para unirte a la asociación!');
