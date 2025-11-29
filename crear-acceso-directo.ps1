@@ -3,10 +3,11 @@ param(
     [string]$DesktopPath = [Environment]::GetFolderPath("Desktop")
 )
 
+$scriptPath = Split-Path -Parent $MyInvocation.MyCommand.Path
 $WshShell = New-Object -comObject WScript.Shell
 $Shortcut = $WshShell.CreateShortcut("$DesktopPath\Primero de Junio - Desarrollo.lnk")
-$Shortcut.TargetPath = "C:\laragon\www\PrimeroDeJunio\iniciar-desarrollo.bat"
-$Shortcut.WorkingDirectory = "C:\laragon\www\PrimeroDeJunio"
+$Shortcut.TargetPath = Join-Path $scriptPath "iniciar-desarrollo.bat"
+$Shortcut.WorkingDirectory = $scriptPath
 $Shortcut.Description = "Inicia el servidor de desarrollo de Primero de Junio"
 $Shortcut.IconLocation = "C:\Windows\System32\shell32.dll,14"
 $Shortcut.Save()
