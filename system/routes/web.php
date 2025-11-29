@@ -34,7 +34,7 @@ Route::get('/dashboard', function () {
         return redirect()->route('login');
     }
     
-    // Redirección según el rol del usuario
+    // Redirección directa según el rol del usuario
     $userRole = session('user_role');
     
     if ($userRole === 'administrador') {
@@ -42,8 +42,9 @@ Route::get('/dashboard', function () {
     } elseif ($userRole === 'operador') {
         return redirect()->route('dashboard.operador');
     } else {
-        // Si no tiene un rol válido, mostrar página de redirección
-        return view('dashboard.index');
+        // Si no tiene un rol válido, cerrar sesión y redirigir al login
+        session()->flush();
+        return redirect()->route('login')->withErrors(['error' => 'Rol de usuario no válido. Por favor, contacta al administrador.']);
     }
 })->name('dashboard');
 
