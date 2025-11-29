@@ -9,12 +9,12 @@ $dbHost = "localhost"
 $dbUser = "root"
 $dbPass = ""
 $dbName = "primero_de_junio"
-$mysqlPath = "C:\xampp\mysql\bin\mysql.exe"
+$mysqlPath = "mysql"
 
 # Verificar que MySQL esté disponible
 if (-not (Test-Path $mysqlPath)) {
     Write-Host "ERROR: No se encontró MySQL en la ruta especificada" -ForegroundColor Red
-    Write-Host "Verifique que XAMPP esté instalado correctamente" -ForegroundColor Red
+    Write-Host "Verifique que Laragon esté instalado correctamente" -ForegroundColor Red
     Read-Host "Presione Enter para salir"
     exit 1
 }
@@ -26,7 +26,7 @@ try {
 }
 catch {
     Write-Host "ERROR: No se pudo conectar a MySQL" -ForegroundColor Red
-    Write-Host "Verifique que XAMPP esté ejecutándose" -ForegroundColor Red
+    Write-Host "Verifique que Laragon esté ejecutándose" -ForegroundColor Red
     Read-Host "Presione Enter para salir"
     exit 1
 }

@@ -74,7 +74,7 @@ REM Verificar que Laravel esté ejecutándose
 netstat -ano | findstr ":8000" > nul
 if errorlevel 1 (
     echo    ❌ ERROR: Laravel no pudo iniciar en puerto 8000
-    echo    Verifica que XAMPP esté ejecutándose y que PHP esté disponible
+    echo    Verifica que Laragon esté ejecutándose y que PHP esté disponible
     pause
     exit /b 1
 ) else (

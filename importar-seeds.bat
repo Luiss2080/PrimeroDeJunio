@@ -9,13 +9,13 @@ set DB_HOST=localhost
 set DB_USER=root
 set DB_PASS=
 set DB_NAME=primero_de_junio
-set MYSQL_PATH="C:\xampp\mysql\bin\mysql.exe"
+set MYSQL_PATH=mysql
 
 echo Verificando conexion a la base de datos...
 %MYSQL_PATH% -h%DB_HOST% -u%DB_USER% -p%DB_PASS% -e "SELECT 1;" >nul 2>&1
 if errorlevel 1 (
     echo ERROR: No se pudo conectar a MySQL
-    echo Verifique que XAMPP este ejecutandose
+    echo Verifique que Laragon este ejecutandose
     pause
     exit /b 1
 )
