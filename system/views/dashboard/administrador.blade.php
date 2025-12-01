@@ -17,6 +17,7 @@
     
     <!-- CSS del Dashboard -->
     <link rel="stylesheet" href="{{ asset('css/dashboard/dashboard.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/components/sidebar.css') }}">
     
     @stack('styles')
 </head>
