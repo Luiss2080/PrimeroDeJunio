@@ -19,9 +19,14 @@
     <!-- CSS Externo del Dashboard -->
     <link rel="stylesheet" href="{{ asset('css/dashboard/dashboard.css') }}">
     
-    <!-- Estilos mínimos específicos del layout -->
+    <!-- Estilos específicos del layout -->
     <style>
-        /* Solo estilos específicos necesarios para el layout */
+        /* Layout específico */
+        .dashboard-layout {
+            display: flex;
+            min-height: 100vh;
+        }
+        
         .main-content {
             margin-left: 280px;
             transition: margin-left 0.3s ease;
@@ -35,6 +40,48 @@
             padding-top: 80px;
             padding-bottom: 60px;
             overflow-y: auto;
+        }
+        
+        /* Sidebar fijo */
+        .dashboard-sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 280px;
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid rgba(0, 255, 102, 0.2);
+            z-index: 1001;
+            transition: transform 0.3s ease;
+        }
+        
+        /* Header fijo */
+        .dashboard-header {
+            position: fixed;
+            top: 0;
+            left: 280px;
+            right: 0;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 255, 102, 0.2);
+            z-index: 1000;
+            transition: left 0.3s ease;
+        }
+        
+        /* Footer fijo */
+        .dashboard-footer {
+            position: fixed;
+            bottom: 0;
+            left: 280px;
+            right: 0;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border-top: 1px solid rgba(0, 255, 102, 0.2);
+            z-index: 999;
+            transition: left 0.3s ease;
         }
         
         /* Estos estilos específicos del sidebar ya están en dashboard.css */
@@ -622,6 +669,9 @@
         
         console.log('🚀 DASHBOARD: Sistema cargado correctamente');
     </script>
+    
+    <!-- JavaScript externo del Dashboard -->
+    <script src="{{ asset('js/dashboard/dashboard.js') }}"></script>
     
     <!-- Scripts específicos de la página -->
     @stack('scripts')
