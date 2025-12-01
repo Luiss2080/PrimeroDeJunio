@@ -67,10 +67,6 @@ Route::get('/dashboard/administrador', function () {
 
 // Dashboard específico para operador  
 Route::get('/dashboard/operador', function () {
-    // Verificar que sea operador o administrador
-    if (session('user_role') !== 'operador' && session('user_role') !== 'administrador') {
-        return redirect()->route('login')->with('error', 'No tienes permisos para acceder a esta sección.');
-    }
     return view('dashboard.operador');
 })->middleware(['web', 'auth.check'])->name('dashboard.operador');
 

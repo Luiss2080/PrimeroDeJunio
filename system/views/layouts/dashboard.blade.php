@@ -16,46 +16,18 @@
     <meta name="description" content="@yield('description', 'Dashboard administrativo de la Asociación 1ro de Junio. Gestión profesional de mototaxis.')">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     
+    <!-- CSS Externo del Dashboard -->
+    <link rel="stylesheet" href="{{ asset('css/dashboard/dashboard.css') }}">
+    
+    <!-- Estilos mínimos específicos del layout -->
     <style>
-        /* Variables globales con estilo de la web */
-        :root {
-            --primary-green: #00ff66;
-            --primary-green-dark: #00e055;
-            --bg-dark: #000;
-            --bg-dark-secondary: #1a1a1a;
-            --text-white: #ffffff;
-            --text-white-secondary: rgba(255, 255, 255, 0.8);
-            --text-white-muted: rgba(255, 255, 255, 0.6);
-            --glass-bg: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --green-glow: rgba(0, 255, 102, 0.3);
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-dark-secondary) 100%);
-            color: var(--text-white);
-            min-height: 100vh;
-        }
-        
-        /* Layout del Dashboard */
-        .dashboard-layout {
-            display: flex;
-            min-height: 100vh;
-        }
-        
+        /* Solo estilos específicos necesarios para el layout */
         .main-content {
+            margin-left: 280px;
+            transition: margin-left 0.3s ease;
             flex: 1;
             display: flex;
             flex-direction: column;
-            margin-left: 280px;
-            transition: margin-left 0.3s ease;
         }
         
         .content-wrapper {
@@ -65,180 +37,7 @@
             overflow-y: auto;
         }
         
-        /* Sidebar Moderno */
-        .dashboard-sidebar {
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 280px;
-            height: 100vh;
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border-right: 1px solid rgba(0, 255, 102, 0.2);
-            z-index: 1001;
-            transition: transform 0.3s ease;
-        }
-        
-        .sidebar-content {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            padding: 0;
-        }
-        
-        .sidebar-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 25px 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        
-        .logo-icon {
-            width: 45px;
-            height: 45px;
-            background: linear-gradient(135deg, var(--primary-green), var(--primary-green-dark));
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 8px;
-        }
-        
-        .logo-icon img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-        
-        .logo-text h2 {
-            font-size: 16px;
-            font-weight: 800;
-            color: var(--text-white);
-            margin: 0;
-            font-family: 'Montserrat', sans-serif;
-        }
-        
-        .logo-text span {
-            font-size: 12px;
-            color: var(--text-white-muted);
-            font-weight: 500;
-        }
-        
-        .sidebar-toggle {
-            background: none;
-            border: none;
-            color: var(--text-white-muted);
-            cursor: pointer;
-            padding: 8px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-        
-        .sidebar-toggle:hover {
-            background: rgba(0, 255, 102, 0.2);
-            color: var(--primary-green);
-        }
-        
-        /* Navegación del Sidebar */
-        .sidebar-nav {
-            flex: 1;
-            padding: 20px 0;
-            overflow-y: auto;
-        }
-        
-        .nav-section {
-            margin-bottom: 30px;
-            padding: 0 20px;
-        }
-        
-        .nav-title {
-            font-size: 11px;
-            font-weight: 700;
-            color: var(--text-white-muted);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 15px;
-            padding-left: 16px;
-        }
-        
-        .nav-menu {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        
-        .nav-item {
-            margin-bottom: 4px;
-        }
-        
-        .nav-link {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 14px 16px;
-            color: var(--text-white-secondary);
-            text-decoration: none;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            font-size: 14px;
-            font-weight: 500;
-        }
-        
-        .nav-link:hover {
-            background: rgba(0, 255, 102, 0.1);
-            color: var(--text-white);
-            transform: translateX(4px);
-            text-decoration: none;
-        }
-        
-        .nav-item.active .nav-link {
-            background: linear-gradient(135deg, rgba(0, 255, 102, 0.2), rgba(0, 224, 85, 0.1));
-            color: var(--primary-green);
-            border-left: 3px solid var(--primary-green);
-            padding-left: 13px;
-        }
-        
-        .nav-link svg {
-            width: 20px;
-            height: 20px;
-            flex-shrink: 0;
-        }
-        
-        /* Footer del Sidebar */
-        .sidebar-footer {
-            padding: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .user-profile {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .user-avatar-sidebar {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--primary-green), var(--primary-green-dark));
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            font-weight: 700;
-            color: #000;
-        }
+        /* Estos estilos específicos del sidebar ya están en dashboard.css */
         
         .user-profile .user-details {
             flex: 1;
