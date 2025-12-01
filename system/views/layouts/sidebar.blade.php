@@ -38,6 +38,7 @@
                         </svg>
                     </div>
                     <span class="nav-text">Conductores</span>
+                    <span class="nav-badge">4</span>
                 </a>
             </li>
 
@@ -50,6 +51,7 @@
                         </svg>
                     </div>
                     <span class="nav-text">Usuarios</span>
+                    <span class="nav-badge blue">28</span>
                 </a>
             </li>
 
@@ -79,6 +81,7 @@
                         </svg>
                     </div>
                     <span class="nav-text">Viajes</span>
+                    <span class="nav-badge green">12</span>
                 </a>
             </li>
 
@@ -177,32 +180,33 @@
         </ul>
     </nav>
 
-    <!-- Usuario Info en Sidebar -->
-    <div class="sidebar-user">
-        <div class="user-avatar">
-            <img src="{{ asset('images/user-avatar.png') }}" alt="Usuario">
+    <!-- Footer Action Section -->
+    <div class="sidebar-footer">
+        <div class="action-card">
+            <span class="action-icon-large">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                </svg>
+            </span>
+            <span class="action-text">Sitio Web</span>
+            <a href="/" target="_blank" class="action-btn-small">
+                Visitar
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+            </a>
         </div>
-        <div class="user-details">
-            <span class="user-name">{{ Auth::user()->name ?? 'Usuario' }}</span>
-            <span class="user-status online">En línea</span>
-        </div>
-        <button class="user-options-btn">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
-            </svg>
-        </button>
-    </div>
 
-    <!-- Toggle del Sidebar -->
-    <button class="sidebar-toggle" id="sidebarToggle">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
-        </svg>
-    </button>
+        <div class="theme-toggle-mini" id="themeToggle">
+            <span class="theme-label">Modo Oscuro</span>
+            <div class="toggle-switch"></div>
+        </div>
+    </div>
 </aside>
 
 
 <!-- Incluir CSS del Sidebar -->
 <link rel="stylesheet" href="{{ asset('css/components/sidebar.css') }}">
-
 <!-- Incluir JS del Sidebar -->
