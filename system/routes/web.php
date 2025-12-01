@@ -97,13 +97,35 @@ Route::middleware(['web', 'auth.check'])->group(function () {
         return view('tarifas.index');
     })->name('tarifas.index');
     
+    // Pagos
+    Route::get('/pagos', function () {
+        return view('pagos.index');
+    })->name('pagos.index');
+    
     // Reportes
     Route::get('/reportes', function () {
         return view('reportes.index');
     })->name('reportes.index');
+
+    Route::get('/reportes/conductores', function () {
+        return view('reportes.conductores');
+    })->name('reportes.conductores');
+
+    Route::get('/reportes/viajes', function () {
+        return view('reportes.viajes');
+    })->name('reportes.viajes');
+
+    Route::get('/reportes/ingresos', function () {
+        return view('reportes.index'); // Fallback to index as ingresos view doesn't exist yet
+    })->name('reportes.ingresos');
     
     // Rutas solo para administradores
     Route::middleware(['admin.check'])->group(function () {
+        // Permisos
+        Route::get('/permisos', function () {
+            return view('permisos.index');
+        })->name('permisos.index');
+
         // Usuarios
         Route::get('/usuarios', function () {
             return view('usuarios.index');
