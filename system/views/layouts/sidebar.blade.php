@@ -1,5 +1,4 @@
-{{-- Sidebar del Sistema - Asociación 1ro de Junio --}}
-<aside class="system-sidebar" id="systemSidebar">
+<aside class="dashboard-sidebar" id="systemSidebar">
     <!-- Logo del Sidebar -->
     <div class="sidebar-logo">
         <img src="{{ asset('images/LogoAsociacion.png') }}" alt="Logo Asociación" class="sidebar-logo-image">
@@ -22,7 +21,6 @@
                         </svg>
                     </div>
                     <span class="nav-text">Dashboard</span>
-                    <div class="nav-indicator"></div>
                 </a>
             </li>
 
@@ -40,8 +38,6 @@
                         </svg>
                     </div>
                     <span class="nav-text">Conductores</span>
-                    <div class="nav-badge">{{ \App\Models\Conductor::count() }}</div>
-                    <div class="nav-indicator"></div>
                 </a>
             </li>
 
@@ -54,8 +50,6 @@
                         </svg>
                     </div>
                     <span class="nav-text">Usuarios</span>
-                    <div class="nav-badge">{{ \App\Models\User::count() }}</div>
-                    <div class="nav-indicator"></div>
                 </a>
             </li>
 
@@ -73,8 +67,6 @@
                         </svg>
                     </div>
                     <span class="nav-text">Vehículos</span>
-                    <div class="nav-badge">{{ \App\Models\Vehiculo::count() }}</div>
-                    <div class="nav-indicator"></div>
                 </a>
             </li>
 
@@ -87,7 +79,6 @@
                         </svg>
                     </div>
                     <span class="nav-text">Viajes</span>
-                    <div class="nav-indicator"></div>
                 </a>
             </li>
 
@@ -105,8 +96,6 @@
                         </svg>
                     </div>
                     <span class="nav-text">Clientes</span>
-                    <div class="nav-badge">{{ \App\Models\Cliente::count() }}</div>
-                    <div class="nav-indicator"></div>
                 </a>
             </li>
 
@@ -119,7 +108,6 @@
                         </svg>
                     </div>
                     <span class="nav-text">Tarifas</span>
-                    <div class="nav-indicator"></div>
                 </a>
             </li>
 
@@ -132,7 +120,6 @@
                         </svg>
                     </div>
                     <span class="nav-text">Pagos</span>
-                    <div class="nav-indicator"></div>
                 </a>
             </li>
 
@@ -150,12 +137,6 @@
                         </svg>
                     </div>
                     <span class="nav-text">Reportes</span>
-                    <div class="nav-arrow">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/>
-                        </svg>
-                    </div>
-                    <div class="nav-indicator"></div>
                 </a>
                 <ul class="submenu">
                     <li><a href="{{ route('reportes.conductores') }}" class="submenu-link {{ request()->routeIs('reportes.conductores') ? 'active' : '' }}">Conductores</a></li>
@@ -178,7 +159,6 @@
                         </svg>
                     </div>
                     <span class="nav-text">Permisos</span>
-                    <div class="nav-indicator"></div>
                 </a>
             </li>
 
@@ -191,7 +171,6 @@
                         </svg>
                     </div>
                     <span class="nav-text">Configuración</span>
-                    <div class="nav-indicator"></div>
                 </a>
             </li>
 
@@ -222,11 +201,8 @@
     </button>
 </aside>
 
-<!-- Overlay para dispositivos móviles -->
-<div class="sidebar-overlay" id="sidebarOverlay"></div>
 
 <!-- Incluir CSS del Sidebar -->
 <link rel="stylesheet" href="{{ asset('css/components/sidebar.css') }}">
 
 <!-- Incluir JS del Sidebar -->
-<script src="{{ asset('js/components/sidebar.js') }}"></script>
