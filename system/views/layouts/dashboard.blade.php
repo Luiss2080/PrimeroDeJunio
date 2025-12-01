@@ -590,7 +590,7 @@
                         <h3 class="nav-title">Principal</h3>
                         <ul class="nav-menu">
                             <li class="nav-item {{ request()->routeIs('dashboard.*') ? 'active' : '' }}">
-                                <a href="{{ auth()->user()->rol === 'administrador' ? route('dashboard.administrador') : route('dashboard.operador') }}" class="nav-link">
+                                <a href="{{ session('user_role') === 'administrador' ? route('dashboard.administrador') : route('dashboard.operador') }}" class="nav-link">
                                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                                         <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
                                     </svg>
@@ -632,7 +632,7 @@
                         </ul>
                     </div>
                     
-                    @if(auth()->user() && auth()->user()->rol === 'administrador')
+                    @if(session('user_role') === 'administrador')
                     <div class="nav-section">
                         <h3 class="nav-title">Administración</h3>
                         <ul class="nav-menu">
@@ -677,11 +677,11 @@
                 <div class="sidebar-footer">
                     <div class="user-profile">
                         <div class="user-avatar-sidebar">
-                            {{ substr(auth()->user()->nombre, 0, 1) . substr(auth()->user()->apellido, 0, 1) }}
+                            {{ substr(session('user_name'), 0, 2) }}
                         </div>
                         <div class="user-details">
-                            <h4>{{ auth()->user()->nombre }} {{ auth()->user()->apellido }}</h4>
-                            <p>{{ ucfirst(auth()->user()->rol) }}</p>
+                            <h4>{{ session('user_name') }}</h4>
+                            <p>{{ ucfirst(session('user_role')) }}</p>
                         </div>
                         <form action="/logout" method="POST" class="logout-form">
                             @csrf
@@ -729,11 +729,11 @@
                         <div class="user-menu">
                             <div class="user-info">
                                 <div class="user-avatar">
-                                    {{ substr(auth()->user()->nombre, 0, 1) . substr(auth()->user()->apellido, 0, 1) }}
+                                    {{ substr(session('user_name'), 0, 2) }}
                                 </div>
                                 <div class="user-details">
-                                    <h4>{{ auth()->user()->nombre }}</h4>
-                                    <p>{{ ucfirst(auth()->user()->rol) }}</p>
+                                    <h4>{{ session('user_name') }}</h4>
+                                    <p>{{ ucfirst(session('user_role')) }}</p>
                                 </div>
                             </div>
                         </div>
@@ -779,9 +779,9 @@
             baseUrl: '{{ url("/") }}',
             locale: '{{ app()->getLocale() }}',
             user: {
-                id: '{{ auth()->user() ? auth()->user()->id : null }}',
-                name: '{{ auth()->user() ? auth()->user()->nombre : "" }}',
-                role: '{{ auth()->user() ? auth()->user()->rol : "" }}'
+                id: '{{ session("user_id") }}',
+                name: '{{ session("user_name") }}',
+                role: '{{ session("user_role") }}'
             }
         };
         
