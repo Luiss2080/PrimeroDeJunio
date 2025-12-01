@@ -14,6 +14,22 @@
     --border-color: rgba(255, 255, 255, 0.1);
 }
 
+/* Ensure Layout is Grid */
+.dashboard-layout {
+    display: grid !important;
+    grid-template-columns: 280px 1fr !important;
+    min-height: 100vh;
+    width: 100%;
+}
+
+/* Ensure Main Content is Visible */
+.main-content {
+    grid-column: 2;
+    position: relative;
+    z-index: 1;
+    min-width: 0; /* Prevent grid blowout */
+}
+
 /* Sidebar Container */
 .dashboard-sidebar {
     width: 100%; /* Fill the grid column */
