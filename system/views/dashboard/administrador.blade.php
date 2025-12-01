@@ -218,193 +218,117 @@
             gap: 30px;
         }
         
-        .main-content {
-            display: flex;
-            flex-direction: column;
-            gap: 32px;
-        }
-        
-        .sidebar-content {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
-        
-        /* Sección de análisis con estilo de la web */
-        .analytics-section {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(0, 255, 102, 0.2);
-            border-radius: 24px;
-            padding: 30px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .analytics-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #00ff66, #00e055);
-        }
-        
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 24px;
-        }
-        
-        .section-title {
-            font-size: 22px;
-            font-weight: 800;
-            color: white;
-            margin: 0;
-            font-family: 'Montserrat', sans-serif;
-        }
-        
-        .chart-placeholder {
-            height: 320px;
-            background: linear-gradient(135deg, rgba(0, 255, 102, 0.1) 0%, rgba(0, 0, 0, 0.8) 100%);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: rgba(255, 255, 255, 0.8);
-            font-weight: 600;
-            border: 2px dashed rgba(0, 255, 102, 0.3);
-            transition: all 0.3s ease;
-        }
-        
-        .chart-placeholder:hover {
-            border-color: #00ff66;
-            background: linear-gradient(135deg, rgba(0, 255, 102, 0.15) 0%, rgba(0, 0, 0, 0.9) 100%);
-        }
-        
-        /* Colaboración y proyectos con estilo de la web */
-        .team-section,
-        .projects-section,
-        .reminders-section {
-            background: rgba(255, 255, 255, 0.05);
+        .action-card {
+            background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 25px;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-        
-        .team-section::before,
-        .projects-section::before,
-        .reminders-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, rgba(0, 255, 102, 0.6), rgba(0, 224, 85, 0.4));
-        }
-        
-        .team-section:hover,
-        .projects-section:hover,
-        .reminders-section:hover {
-            border-color: rgba(0, 255, 102, 0.3);
-            background: rgba(255, 255, 255, 0.08);
-            transform: translateY(-2px);
-        }
-        
-        .team-member {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            padding: 16px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.2s ease;
-        }
-        
-        .team-member:last-child {
-            border-bottom: none;
-        }
-        
-        .team-member:hover {
-            background: rgba(0, 255, 102, 0.05);
-            border-radius: 12px;
-            margin: 0 -12px;
-            padding: 16px 12px;
-        }
-        
-        .member-avatar {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #00ff66, #00e055);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #000;
-            font-weight: 700;
-            box-shadow: 0 4px 15px rgba(0, 255, 102, 0.3);
-            transition: all 0.3s ease;
-        }
-        
-        .team-member:hover .member-avatar {
-            transform: scale(1.1);
-            box-shadow: 0 6px 20px rgba(0, 255, 102, 0.5);
-        }
-        
-        .member-info h4 {
-            margin: 0;
-            font-size: 15px;
-            font-weight: 700;
-            color: white;
-            font-family: 'Montserrat', sans-serif;
-        }
-        
-        .member-info p {
-            margin: 4px 0 0 0;
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.7);
-        }
-        
-        .progress-bar {
-            width: 100%;
-            height: 10px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            overflow: hidden;
-            margin: 20px 0;
-            position: relative;
-        }
-        
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #00ff66, #00e055);
-            border-radius: 20px;
-            transition: width 0.8s ease;
+            border-radius: 24px;
+            padding: 35px;
+            text-align: center;
+            transition: all 0.5s ease;
             position: relative;
             overflow: hidden;
         }
         
-        .progress-fill::after {
+        .action-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-            animation: shimmer 2s infinite;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 102, 0.1), transparent);
+            transition: left 0.6s ease;
         }
         
-        @keyframes shimmer {
-            0% { left: -100%; }
-            100% { left: 100%; }
+        .action-card:hover::before {
+            left: 100%;
         }
+        
+        .action-card:hover {
+            transform: translateY(-12px);
+            border-color: rgba(0, 255, 102, 0.4);
+            box-shadow: 0 25px 50px rgba(0, 255, 102, 0.15);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .action-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #00ff66, #00e055);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            color: #000;
+            box-shadow: 0 12px 30px rgba(0, 255, 102, 0.4);
+            transition: all 0.3s ease;
+        }
+        
+        .action-card:hover .action-icon {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(0, 255, 102, 0.6);
+        }
+        
+        .action-title {
+            font-size: 20px;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 12px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .action-description {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 15px;
+            margin-bottom: 28px;
+            line-height: 1.5;
+        }
+        
+        .action-btn {
+            background: linear-gradient(135deg, #00ff66, #00e055);
+            color: #000;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 255, 102, 0.3);
+        }
+        
+        .action-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .action-btn:hover::before {
+            left: 100%;
+        }
+        
+        .action-btn:hover {
+            transform: translateY(-3px);
+            color: #000;
+            text-decoration: none;
+            box-shadow: 0 12px 30px rgba(0, 255, 102, 0.5);
+        }
+        
+
+        
+
+        
+
         
         @media (max-width: 768px) {
             .admin-dashboard {

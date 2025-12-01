@@ -143,6 +143,11 @@
             border: 1px solid rgba(0, 255, 102, 0.3);
         }
         
+        /* Sección de acciones rápidas */
+        .quick-actions-section {
+            margin-top: 40px;
+        }
+        
         .quick-actions {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -316,8 +321,9 @@
     </div>
     
     <!-- Acciones Rápidas -->
-    <h2 class="section-title">Operaciones Diarias</h2>
-    <div class="quick-actions">
+    <div class="quick-actions-section">
+        <h2 class="section-title">Operaciones Diarias</h2>
+        <div class="quick-actions">
         
         <a href="/viajes" class="action-card">
             <div class="action-icon">
@@ -378,6 +384,7 @@
             <h3 class="action-title">Tarifas y Precios</h3>
             <p class="action-description">Consulta de tarifario actual</p>
         </a>
+        </div>
     </div>
     
 </div>
