@@ -33,7 +33,7 @@
         <div class="main-content">
             
             <!-- Header Component -->
-            @include('layouts.header')
+            @include('layouts.header', ['header_title' => 'Dashboard Operador'])
             
             <!-- Contenido principal -->
             <div class="dashboard-content">

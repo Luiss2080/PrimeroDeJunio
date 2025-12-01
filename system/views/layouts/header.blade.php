@@ -5,7 +5,7 @@
     <!-- Left: Brand & Search -->
     <div class="header-left">
         <div class="header-brand">
-            <h1 class="brand-text">1RO DE JUNIO</h1>
+            <h1 class="brand-text">{{ $header_title ?? '1RO DE JUNIO' }}</h1>
         </div>
         <div class="header-search">
             <form action="#" method="GET" class="search-form">
