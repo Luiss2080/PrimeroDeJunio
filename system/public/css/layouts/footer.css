@@ -1,0 +1,54 @@
+/* ============================================
+   FOOTER (PIE DE PÁGINA)
+   ============================================ */
+.dashboard-footer {
+    margin-top: auto;
+    padding: 1.5rem 2rem;
+    border-top: 1px solid var(--border-color);
+    background: rgba(255, 255, 255, 0.02);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.footer-container {
+    max-width: 100%;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.footer-copyright span {
+    font-weight: 500;
+}
+
+.footer-links {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.footer-link {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+    color: var(--primary-green);
+}
+
+.separator {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+}
