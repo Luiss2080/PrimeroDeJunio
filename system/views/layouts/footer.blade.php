@@ -89,7 +89,8 @@
             <!-- Brand -->
             <div class="footer-brand-section">
                 <div class="brand-logo-container">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="M12 8v4"></path><path d="M12 16h.01"></path></svg>
+                    <!-- Icono de Moto -->
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="18.5" cy="17.5" r="3.5"/><path d="M15 6h5l-3 13"/><path d="M9 17.5l-3-11h13"/><path d="M9 17.5L12 6"/></svg>
                 </div>
                 <div class="brand-text">
                     <span class="brand-title">1RO DE JUNIO</span>
