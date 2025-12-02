@@ -40,28 +40,17 @@
 .toolbar-left {
     flex: 1;
     min-width: 300px;
+    display: flex; /* Ensure it behaves as a flex container */
 }
 
 .search-box {
     position: relative;
     width: 100%;
+    flex: 1; /* Force it to fill the space */
 }
 
 .search-input {
     width: 100%;
-    background: rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 0.8rem 1rem 0.8rem 2.8rem;
-    border-radius: 12px;
-    color: #fff;
-    font-size: 0.95rem;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease,
-        background 0.3s ease;
-}
-
-.search-input:focus {
-    border-color: var(--primary-green);
-    box-shadow: 0 0 15px rgba(0, 255, 102, 0.15);
     outline: none;
     background: rgba(0, 0, 0, 0.3);
 }
