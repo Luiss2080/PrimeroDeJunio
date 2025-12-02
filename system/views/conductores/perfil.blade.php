@@ -17,7 +17,7 @@
                 </a>
                 <div class="header-title-group">
                     <h1 class="page-title">Perfil de Conductor</h1>
-                    <span class="conductor-id">ID: #CND-2024-001</span>
+                    <span class="conductor-id">ID: #CND-{{ str_pad($conductor->id, 3, '0', STR_PAD_LEFT) }}</span>
                 </div>
             </div>
             <div class="header-actions">
@@ -25,7 +25,7 @@
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                     <span>Exportar</span>
                 </button>
-                <a href="{{ url('/conductores/editar') }}" class="btn-primary">
+                <a href="{{ route('conductores.edit', $conductor->id) }}" class="btn-primary">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
                     <span>Editar Perfil</span>
                 </a>
@@ -38,14 +38,16 @@
                 <div class="profile-card">
                     <div class="profile-header">
                         <div class="avatar-container">
-                            <img src="https://ui-avatars.com/api/?name=Juan+Perez&background=00ff66&color=000&size=256" alt="Avatar" class="profile-avatar">
-                            <div class="status-indicator active" title="Activo"></div>
+                            <img src="https://ui-avatars.com/api/?name={{ urlencode($conductor->nombre . ' ' . $conductor->apellido) }}&background=00ff66&color=000&size=256" alt="Avatar" class="profile-avatar">
+                            <div class="status-indicator {{ $conductor->estado === 'activo' ? 'active' : '' }}" title="{{ ucfirst($conductor->estado) }}"></div>
                         </div>
-                        <h2 class="profile-name">Juan Pérez</h2>
+                        <h2 class="profile-name">{{ $conductor->nombre }} {{ $conductor->apellido }}</h2>
                         <div class="profile-role">Conductor Profesional</div>
                         <div class="profile-badges">
-                            <span class="badge badge-success">Activo</span>
-                            <span class="badge badge-outline">Turno Mañana</span>
+                            <span class="badge badge-success">{{ ucfirst($conductor->estado) }}</span>
+                            @if($conductor->vehiculoActual && $conductor->vehiculoActual->asignacion)
+                                <span class="badge badge-outline">Turno {{ ucfirst($conductor->vehiculoActual->asignacion->turno ?? 'Completo') }}</span>
+                            @endif
                         </div>
                     </div>
                     
@@ -54,21 +56,21 @@
                             <div class="stat-icon">
                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                             </div>
-                            <span class="stat-value">4.8</span>
+                            <span class="stat-value">{{ number_format($conductor->rating, 1) }}</span>
                             <span class="stat-label">Rating</span>
                         </div>
                         <div class="stat-item">
                             <div class="stat-icon">
                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                             </div>
-                            <span class="stat-value">1,240</span>
+                            <span class="stat-value">{{ number_format($conductor->total_viajes) }}</span>
                             <span class="stat-label">Viajes</span>
                         </div>
                         <div class="stat-item">
                             <div class="stat-icon">
                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                             </div>
-                            <span class="stat-value">3A</span>
+                            <span class="stat-value">{{ $conductor->experiencia_anos }}A</span>
                             <span class="stat-label">Antigüedad</span>
                         </div>
                     </div>
@@ -80,7 +82,7 @@
                             </div>
                             <div class="contact-details">
                                 <span class="contact-label">Teléfono</span>
-                                <span class="contact-value">+591 700-12345</span>
+                                <span class="contact-value">{{ $conductor->telefono }}</span>
                             </div>
                         </div>
                         <div class="contact-item">
@@ -89,7 +91,7 @@
                             </div>
                             <div class="contact-details">
                                 <span class="contact-label">Email</span>
-                                <span class="contact-value">juan.perez@email.com</span>
+                                <span class="contact-value">{{ $conductor->email ?? 'No registrado' }}</span>
                             </div>
                         </div>
                         <div class="contact-item">
@@ -98,7 +100,7 @@
                             </div>
                             <div class="contact-details">
                                 <span class="contact-label">Dirección</span>
-                                <span class="contact-value">Av. Principal #123, Zona Norte</span>
+                                <span class="contact-value">{{ $conductor->direccion }}</span>
                             </div>
                         </div>
                     </div>
@@ -140,23 +142,28 @@
                     <!-- Vehicle Card -->
                     <div class="content-section">
                         <h3 class="section-title">Vehículo Asignado</h3>
+                        @if($conductor->vehiculoActual)
                         <div class="vehicle-card-large">
                             <div class="vehicle-image">
                                 <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
                             </div>
                             <div class="vehicle-info-main">
-                                <h4>Toyota Corolla</h4>
-                                <span class="vehicle-model">Modelo 2018 - Sedán</span>
+                                <h4>{{ $conductor->vehiculoActual->marca }} {{ $conductor->vehiculoActual->modelo }}</h4>
+                                <span class="vehicle-model">Modelo {{ $conductor->vehiculoActual->ano }} - {{ $conductor->vehiculoActual->color }}</span>
                                 <div class="vehicle-tags">
-                                    <span class="v-tag">Aire Acondicionado</span>
-                                    <span class="v-tag">4 Pasajeros</span>
+                                    <span class="v-tag">Cilindraje {{ $conductor->vehiculoActual->cilindraje }}cc</span>
                                 </div>
                             </div>
                             <div class="vehicle-plate-display">
-                                <span class="plate-number">2024-ABC</span>
+                                <span class="plate-number">{{ $conductor->vehiculoActual->placa }}</span>
                                 <span class="plate-country">BOLIVIA</span>
                             </div>
                         </div>
+                        @else
+                        <div class="empty-state-container">
+                            <p class="text-muted">No tiene vehículo asignado actualmente.</p>
+                        </div>
+                        @endif
                     </div>
 
                     <!-- Performance Stats -->
@@ -174,8 +181,8 @@
                                 <span class="perf-trend positive">↑ 5% vs mes anterior</span>
                             </div>
                             <div class="perf-card">
-                                <span class="perf-label">Horas Conectado</span>
-                                <span class="perf-value">180h</span>
+                                <span class="perf-label">Asistencia</span>
+                                <span class="perf-value">{{ $conductor->asistencia_porcentaje }}%</span>
                                 <span class="perf-trend neutral">-- Igual que mes anterior</span>
                             </div>
                         </div>
@@ -201,7 +208,7 @@
                                 </div>
                                 <div class="doc-details">
                                     <h4>Licencia de Conducir</h4>
-                                    <span class="doc-meta">Categoría C • Expira 12/2026</span>
+                                    <span class="doc-meta">Categoría {{ $conductor->licencia_categoria }} • Expira {{ \Carbon\Carbon::parse($conductor->licencia_vigencia)->format('d/m/Y') }}</span>
                                 </div>
                                 <div class="doc-status-badge valid">Vigente</div>
                                 <button class="btn-icon-sm"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
@@ -227,7 +234,7 @@
                                 </div>
                                 <div class="doc-details">
                                     <h4>Antecedentes Penales</h4>
-                                    <span class="doc-meta">Verificado el 15/01/2024</span>
+                                    <span class="doc-meta">Verificado el {{ \Carbon\Carbon::parse($conductor->antecedentes_verificados_at)->format('d/m/Y') }}</span>
                                 </div>
                                 <div class="doc-status-badge valid">Verificado</div>
                                 <button class="btn-icon-sm"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
@@ -265,20 +272,6 @@
                                         <td>Ventura Mall</td>
                                         <td>Bs. 15.00</td>
                                         <td><span class="status-dot completed">Completado</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>01 Dic, 18:45</td>
-                                        <td>Aeropuerto Viru Viru</td>
-                                        <td>Hotel Los Tajibos</td>
-                                        <td>Bs. 80.00</td>
-                                        <td><span class="status-dot completed">Completado</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>01 Dic, 09:20</td>
-                                        <td>Barrio Sirari</td>
-                                        <td>Parque Urbano</td>
-                                        <td>Bs. 20.00</td>
-                                        <td><span class="status-dot cancelled">Cancelado</span></td>
                                     </tr>
                                 </tbody>
                             </table>

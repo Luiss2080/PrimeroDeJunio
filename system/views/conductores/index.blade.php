@@ -115,29 +115,51 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Row 1 -->
+                    @forelse($conductores as $conductor)
                     <tr>
-                        <td><input type="checkbox" class="custom-checkbox row-checkbox"></td>
                         <td>
-                            <div class="user-info">
-                                <img src="https://ui-avatars.com/api/?name=Juan+Perez&background=00ff66&color=000" alt="Avatar" class="user-avatar">
-                                <div class="user-details">
-                                    <span class="user-name">Juan Pérez</span>
-                                    <span class="user-email">juan.perez@email.com</span>
+                            <input type="checkbox" class="row-checkbox">
+                        </td>
+                        <td>
+                            <div class="driver-info">
+                                <img src="https://ui-avatars.com/api/?name={{ urlencode($conductor->nombre . ' ' . $conductor->apellido) }}&background=00ff66&color=000" alt="Avatar" class="driver-avatar">
+                                <div>
+                                    <span class="driver-name">{{ $conductor->nombre }} {{ $conductor->apellido }}</span>
+                                    <span class="driver-id">ID: #{{ $conductor->id }}</span>
                                 </div>
                             </div>
                         </td>
-                        <td>1234567 SC</td>
-                        <td>1234567-C</td>
-                        <td>+591 700-12345</td>
-                        <td><span class="status-badge status-active"><span class="dot">●</span> Activo</span></td>
-                        <td>Toyota Corolla (2024-ABC)</td>
+                        <td>
+                            <div>{{ $conductor->cedula }}</div>
+                        </td>
+                        <td>
+                            <div>{{ $conductor->licencia_numero }}</div>
+                            <small class="text-muted">Cat. {{ $conductor->licencia_categoria }}</small>
+                        </td>
+                        <td>
+                            <span class="contact-text">{{ $conductor->telefono }}</span>
+                        </td>
+                        <td>
+                            <span class="status-badge status-{{ $conductor->estado }}">
+                                {{ ucfirst($conductor->estado) }}
+                            </span>
+                        </td>
+                        <td>
+                            <div class="vehicle-info">
+                                @if($conductor->vehiculoActual)
+                                    <span class="vehicle-plate">{{ $conductor->vehiculoActual->placa }}</span>
+                                    <span class="vehicle-model">{{ $conductor->vehiculoActual->marca }} {{ $conductor->vehiculoActual->modelo }}</span>
+                                @else
+                                    <span class="text-muted">Sin vehículo</span>
+                                @endif
+                            </div>
+                        </td>
                         <td>
                             <div class="action-buttons">
-                                <a href="{{ url('/conductores/perfil') }}" class="btn-icon btn-view" title="Ver Perfil">
+                                <a href="{{ route('conductores.show', $conductor->id) }}" class="btn-icon" title="Ver Perfil">
                                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
                                 </a>
-                                <a href="{{ url('/conductores/editar') }}" class="btn-icon btn-edit" title="Editar">
+                                <a href="{{ route('conductores.edit', $conductor->id) }}" class="btn-icon" title="Editar">
                                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
                                 </a>
                                 <button class="btn-icon btn-delete" title="Eliminar">
@@ -146,75 +168,20 @@
                             </div>
                         </td>
                     </tr>
-
-                    <!-- Row 2 -->
+                    @empty
                     <tr>
-                        <td><input type="checkbox" class="custom-checkbox row-checkbox"></td>
-                        <td>
-                            <div class="user-info">
-                                <img src="https://ui-avatars.com/api/?name=Carlos+Mamani&background=random" alt="Avatar" class="user-avatar">
-                                <div class="user-details">
-                                    <span class="user-name">Carlos Mamani</span>
-                                    <span class="user-email">carlos.m@email.com</span>
-                                </div>
-                            </div>
-                        </td>
-                        <td>7654321 LP</td>
-                        <td>7654321-A</td>
-                        <td>+591 600-54321</td>
-                        <td><span class="status-badge status-inactive"><span class="dot">●</span> Inactivo</span></td>
-                        <td>Nissan Versa (4050-XYZ)</td>
-                        <td>
-                            <div class="action-buttons">
-                                <a href="{{ url('/conductores/perfil') }}" class="btn-icon btn-view" title="Ver Perfil">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                                </a>
-                                <a href="{{ url('/conductores/editar') }}" class="btn-icon btn-edit" title="Editar">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-                                </a>
-                                <button class="btn-icon btn-delete" title="Eliminar">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
-                                </button>
+                        <td colspan="8" class="text-center py-4">
+                            <div class="empty-state-container">
+                                <p class="text-muted">No hay conductores registrados.</p>
                             </div>
                         </td>
                     </tr>
-
-                    <!-- Row 3 -->
-                    <tr>
-                        <td><input type="checkbox" class="custom-checkbox row-checkbox"></td>
-                        <td>
-                            <div class="user-info">
-                                <img src="https://ui-avatars.com/api/?name=Roberto+Gomez&background=random" alt="Avatar" class="user-avatar">
-                                <div class="user-details">
-                                    <span class="user-name">Roberto Gomez</span>
-                                    <span class="user-email">roberto.g@email.com</span>
-                                </div>
-                            </div>
-                        </td>
-                        <td>9876543 SC</td>
-                        <td>9876543-B</td>
-                        <td>+591 777-88899</td>
-                        <td><span class="status-badge status-pending"><span class="dot">●</span> Pendiente</span></td>
-                        <td><span style="color: var(--text-muted); font-style: italic;">Sin asignar</span></td>
-                        <td>
-                            <div class="action-buttons">
-                                <a href="{{ url('/conductores/perfil') }}" class="btn-icon btn-view" title="Ver Perfil">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                                </a>
-                                <a href="{{ url('/conductores/editar') }}" class="btn-icon btn-edit" title="Editar">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-                                </a>
-                                <button class="btn-icon btn-delete" title="Eliminar">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
+                    @endforelse
                 </tbody>
             </table>
-
-            <!-- Empty State -->
-            <div class="empty-state" id="emptyState">
+            
+            <!-- Empty State (Hidden by default via JS if rows exist, but handled by blade above too) -->
+            <div class="empty-state" id="emptyState" style="display: none;">
                 <svg class="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <circle cx="11" cy="11" r="8"></circle>
                     <line x1="21" y1="21" x2="16.65" y2="16.65"></line>

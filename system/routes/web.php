@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\ConductorController;
 
 Route::get('/', function () {
     // Si el usuario ya está autenticado, redirigir al dashboard correspondiente
@@ -73,21 +74,14 @@ Route::get('/dashboard/operador', function () {
 // Rutas de módulos del sistema (requieren autenticación)
 Route::middleware(['web', 'auth.check'])->group(function () {
     // Conductores
-    Route::get('/conductores', function () {
-        return view('conductores.index');
-    })->name('conductores.index');
-
-    Route::get('/conductores/crear', function () {
-        return view('conductores.crear');
-    })->name('conductores.crear');
-
-    Route::get('/conductores/editar', function () {
-        return view('conductores.editar');
-    })->name('conductores.editar');
-
-    Route::get('/conductores/perfil', function () {
-        return view('conductores.perfil');
-    })->name('conductores.perfil');
+    // Conductores
+    Route::get('/conductores', [ConductorController::class, 'index'])->name('conductores.index');
+    Route::get('/conductores/crear', [ConductorController::class, 'create'])->name('conductores.create');
+    Route::post('/conductores', [ConductorController::class, 'store'])->name('conductores.store');
+    Route::get('/conductores/{id}', [ConductorController::class, 'show'])->name('conductores.show');
+    Route::get('/conductores/{id}/editar', [ConductorController::class, 'edit'])->name('conductores.edit');
+    Route::put('/conductores/{id}', [ConductorController::class, 'update'])->name('conductores.update');
+    Route::delete('/conductores/{id}', [ConductorController::class, 'destroy'])->name('conductores.destroy');
     
     // Vehículos
     Route::get('/vehiculos', function () {
