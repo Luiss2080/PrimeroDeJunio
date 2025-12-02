@@ -139,27 +139,79 @@
 .rows-selector {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.8rem;
     color: var(--text-muted);
     font-size: 0.9rem;
-    background: rgba(255, 255, 255, 0.05);
-    padding: 0.4rem 0.8rem;
-    border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.rows-select {
-    background: transparent;
-    border: none;
+.custom-dropdown {
+    position: relative;
+    min-width: 70px;
+}
+
+.dropdown-trigger {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.5rem 0.8rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
     color: #fff;
     font-weight: 700;
-    cursor: pointer;
-    outline: none;
 }
 
-.rows-select option {
-    background: #1a1a1a;
-    color: #fff;
+.dropdown-trigger:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.dropdown-options {
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 0;
+    width: 100%;
+    background: rgba(20, 20, 20, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 100;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.custom-dropdown.active .dropdown-options {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.custom-dropdown.active .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+.dropdown-arrow {
+    transition: transform 0.2s ease;
+}
+
+.dropdown-option {
+    padding: 0.6rem 0.8rem;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: all 0.2s ease;
+    font-weight: 600;
+    text-align: center;
+}
+
+.dropdown-option:hover {
+    background: rgba(0, 255, 102, 0.1);
+    color: var(--primary-green);
 }
 
 /* --- Filter Panel --- */

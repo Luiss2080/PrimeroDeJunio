@@ -28,11 +28,17 @@
                 <!-- Rows Selector -->
                 <div class="rows-selector">
                     <span>Mostrar:</span>
-                    <select class="rows-select">
-                        <option value="10">10</option>
-                        <option value="25">25</option>
-                        <option value="50">50</option>
-                    </select>
+                    <div class="custom-dropdown" id="rowsDropdown">
+                        <div class="dropdown-trigger">
+                            <span class="selected-value">10</span>
+                            <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                        </div>
+                        <div class="dropdown-options">
+                            <div class="dropdown-option" data-value="10">10</div>
+                            <div class="dropdown-option" data-value="25">25</div>
+                            <div class="dropdown-option" data-value="50">50</div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="toolbar-divider"></div>

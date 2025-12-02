@@ -121,6 +121,40 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    // --- Custom Dropdown Logic ---
+    const dropdown = document.getElementById("rowsDropdown");
+
+    if (dropdown) {
+        const trigger = dropdown.querySelector(".dropdown-trigger");
+        const selectedValue = dropdown.querySelector(".selected-value");
+        const options = dropdown.querySelectorAll(".dropdown-option");
+
+        // Toggle Dropdown
+        trigger.addEventListener("click", function (e) {
+            e.stopPropagation();
+            dropdown.classList.toggle("active");
+        });
+
+        // Select Option
+        options.forEach((option) => {
+            option.addEventListener("click", function () {
+                const value = this.dataset.value;
+                selectedValue.textContent = value;
+                dropdown.classList.remove("active");
+
+                // Here you would trigger the actual row limit change
+                console.log(`Showing ${value} rows`);
+            });
+        });
+
+        // Close when clicking outside
+        document.addEventListener("click", function (e) {
+            if (!dropdown.contains(e.target)) {
+                dropdown.classList.remove("active");
+            }
+        });
+    }
+
     // --- Actions ---
     const btnExport = document.getElementById("btnExport");
     if (btnExport) {
