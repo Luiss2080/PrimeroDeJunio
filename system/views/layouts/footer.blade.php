@@ -101,10 +101,6 @@
                 </div>
 
                 <div class="brand-logo-container">
-                    <!-- Pin Icon -->
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-                    <!-- Helmet Icon -->
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2a10 10 0 0 0-10 10c0 1.33.27 2.6.75 3.75.19.45.51.84.92 1.11L5 18v2a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-2l1.33-1.14c.41-.27.73-.66.92-1.11.48-1.15.75-2.42.75-3.75a10 10 0 0 0-10-10zM6 12a6 6 0 1 1 12 0v1.5h-2.5v-1a3.5 3.5 0 1 0-7 0v1H6V12z"/></svg>
                 </div>
                 <div class="brand-text">
                     <span class="brand-title">1RO DE JUNIO</span>

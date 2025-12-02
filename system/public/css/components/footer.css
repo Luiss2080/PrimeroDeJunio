@@ -148,20 +148,6 @@
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-.badge svg {
-    color: var(--primary-green);
-}
-
-.badge span {
-    color: #fff;
-    font-weight: 600;
-    font-size: 0.95rem;
-}
-
-.system-version-container {
-    margin-top: 1rem;
-}
-
 .system-version {
     background: var(--primary-green);
     color: #000;
