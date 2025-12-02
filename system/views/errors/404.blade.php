@@ -17,22 +17,23 @@
 <body>
     <div class="error-container">
         <div class="error-content">
-            <div class="error-code" id="errorCode">404</div>
-            <h1 class="error-title">Página No Encontrada</h1>
-            <p class="error-message">Parece que te has desviado del camino. La página que buscas no existe o ha sido movida.</p>
+            <h1 class="error-title">
+                <span class="title-line">ERROR</span>
+                <span class="highlight-wrapper">
+                    <span class="highlight">404</span>
+                </span>
+            </h1>
+            
+            <p class="error-subtitle">PÁGINA NO ENCONTRADA</p>
+            
+            <p class="error-message">Lo sentimos, la página que buscas no existe o ha sido movida.</p>
             
             <div class="error-actions">
                 <a href="{{ url('/') }}" class="btn-home">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
-                    </svg>
                     Volver al Inicio
                 </a>
             </div>
         </div>
-        
-        <div class="decoration-circle circle-1"></div>
-        <div class="decoration-circle circle-2"></div>
     </div>
 
     <script src="{{ asset('js/errors/404.js') }}"></script>
