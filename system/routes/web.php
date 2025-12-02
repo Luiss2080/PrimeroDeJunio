@@ -76,6 +76,18 @@ Route::middleware(['web', 'auth.check'])->group(function () {
     Route::get('/conductores', function () {
         return view('conductores.index');
     })->name('conductores.index');
+
+    Route::get('/conductores/crear', function () {
+        return view('conductores.crear');
+    })->name('conductores.crear');
+
+    Route::get('/conductores/editar', function () {
+        return view('conductores.editar');
+    })->name('conductores.editar');
+
+    Route::get('/conductores/perfil', function () {
+        return view('conductores.perfil');
+    })->name('conductores.perfil');
     
     // Vehículos
     Route::get('/vehiculos', function () {
