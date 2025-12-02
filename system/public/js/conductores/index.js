@@ -1,14 +1,3 @@
-/* ============================================
-   CONDUCTORES - INDEX JS
-   ============================================ */
-
-document.addEventListener("DOMContentLoaded", function () {
-    // Search Functionality
-    const searchInput = document.getElementById("searchDriver");
-    const tableRows = document.querySelectorAll(".data-table tbody tr");
-
-    if (searchInput) {
-        searchInput.addEventListener("keyup", function (e) {
             const searchTerm = e.target.value.toLowerCase();
 
             tableRows.forEach((row) => {

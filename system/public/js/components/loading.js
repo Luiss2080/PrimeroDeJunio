@@ -104,22 +104,6 @@ const LoadingScreen = {
 document.addEventListener("DOMContentLoaded", () => {
     LoadingScreen.init();
 
-    // Intercept links to show loading simulation
-    document.querySelectorAll("a").forEach((link) => {
-        link.addEventListener("click", function (e) {
-            const href = this.getAttribute("href");
-            // Don't simulate for hash links, javascript calls, or target blank
-            if (
-                href &&
-                href !== "#" &&
-                !href.startsWith("javascript") &&
-                this.getAttribute("target") !== "_blank"
-            ) {
-                e.preventDefault();
-                LoadingScreen.simulate(2000, () => {
-                    window.location.href = href;
-                });
-            }
-        });
-    });
+    // Link interception removed to prevent navigation issues
+    // document.querySelectorAll("a").forEach((link) => { ... });
 });
