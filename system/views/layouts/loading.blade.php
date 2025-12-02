@@ -1,11 +1,9 @@
 <div class="loading-overlay" id="loadingOverlay">
     <div class="loading-content">
         <h1 class="loading-title">
-            <span class="title-line">BIENVENIDO A LA</span>
-            <span class="title-line">ASOCIACIÓN</span>
+            <span class="title-line">Cargando datos</span>
             <span class="highlight-wrapper">
-                <span class="highlight">PRIMERO DE</span>
-                <span class="highlight">JUNIO</span>
+                <span class="highlight" style="font-size: 2.5rem;">por favor espere un momento…</span>
             </span>
         </h1>
         
