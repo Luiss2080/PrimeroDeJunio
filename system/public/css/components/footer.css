@@ -170,13 +170,19 @@
 .brand-logo-container {
     width: 48px;
     height: 48px;
-    background: #ff4757; /* Red background kept as requested */
+    background: var(--primary-green); /* Green background */
     border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #fff;
-    box-shadow: 0 5px 15px rgba(255, 71, 87, 0.4);
+    color: #000; /* Black icon for contrast */
+    box-shadow: 0 5px 15px rgba(0, 255, 102, 0.4);
+    transition: all 0.3s ease;
+}
+
+.brand-logo-container:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 255, 102, 0.6);
 }
 
 .brand-text {
@@ -211,17 +217,17 @@
     align-items: center;
     justify-content: center;
     color: var(--text-muted);
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Smooth bounce effect */
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .social-link:hover {
-    transform: translateY(-3px);
+    transform: translateY(-5px) scale(1.1);
     background: var(--primary-green);
     color: #000;
     border-color: var(--primary-green);
-    box-shadow: 0 5px 15px rgba(0, 255, 102, 0.3);
+    box-shadow: 0 10px 20px rgba(0, 255, 102, 0.3);
 }
 
 /* Legal Section */
