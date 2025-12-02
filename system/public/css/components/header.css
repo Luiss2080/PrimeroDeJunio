@@ -71,7 +71,6 @@
     color: var(--text-light);
     font-size: 0.9rem;
     width: 280px;
-    transition: var(--transition);
 }
 
 .search-input:focus {
@@ -79,7 +78,6 @@
     border-color: var(--primary-green);
     background: rgba(255, 255, 255, 0.1);
     box-shadow: 0 0 0 4px rgba(0, 255, 102, 0.1);
-    width: 320px;
 }
 
 .search-input:focus + svg {
