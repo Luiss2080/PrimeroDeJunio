@@ -3,29 +3,32 @@
    ============================================ */
 
 document.addEventListener("DOMContentLoaded", () => {
-    const lockIcon = document.getElementById("lockIcon");
+    const highlight = document.querySelector(".highlight");
 
-    // Shake animation function
-    function shakeLock() {
-        lockIcon.style.transform = "rotate(10deg)";
-        setTimeout(() => {
-            lockIcon.style.transform = "rotate(-10deg)";
+    if (highlight) {
+        // Shake animation function
+        function shakeElement() {
+            highlight.style.transition = "transform 0.1s";
+            highlight.style.transform = "translateX(5px)";
             setTimeout(() => {
-                lockIcon.style.transform = "rotate(5deg)";
+                highlight.style.transform = "translateX(-5px)";
                 setTimeout(() => {
-                    lockIcon.style.transform = "rotate(-5deg)";
+                    highlight.style.transform = "translateX(5px)";
                     setTimeout(() => {
-                        lockIcon.style.transform = "rotate(0deg)";
+                        highlight.style.transform = "translateX(-5px)";
+                        setTimeout(() => {
+                            highlight.style.transform = "translateX(0)";
+                        }, 100);
                     }, 100);
                 }, 100);
             }, 100);
-        }, 100);
+        }
+
+        // Shake on load
+        setTimeout(shakeElement, 500);
+
+        // Shake on click/hover
+        highlight.addEventListener("mouseover", shakeElement);
+        highlight.addEventListener("click", shakeElement);
     }
-
-    // Shake on load
-    setTimeout(shakeLock, 500);
-
-    // Shake on click/hover
-    lockIcon.addEventListener("mouseover", shakeLock);
-    lockIcon.addEventListener("click", shakeLock);
 });

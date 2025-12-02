@@ -3,22 +3,21 @@
    ============================================ */
 
 document.addEventListener("DOMContentLoaded", () => {
-    const errorCode = document.getElementById("errorCode");
+    const highlight = document.querySelector(".highlight");
+    const container = document.querySelector(".error-container");
 
-    // Parallax effect on mouse move
-    document.addEventListener("mousemove", (e) => {
-        const x = (window.innerWidth - e.pageX * 2) / 50;
-        const y = (window.innerHeight - e.pageY * 2) / 50;
+    if (highlight && container) {
+        // Parallax effect on mouse move
+        container.addEventListener("mousemove", (e) => {
+            const x = (window.innerWidth - e.pageX * 2) / 50;
+            const y = (window.innerHeight - e.pageY * 2) / 50;
 
-        errorCode.style.transform = `translateX(${x}px) translateY(${y}px)`;
-    });
+            highlight.style.transform = `translateX(${x}px) translateY(${y}px)`;
+        });
 
-    // Glitch effect on hover
-    errorCode.addEventListener("mouseover", () => {
-        errorCode.style.textShadow =
-            "2px 2px 0px #ff0000, -2px -2px 0px #0000ff";
-        setTimeout(() => {
-            errorCode.style.textShadow = "0 0 30px rgba(0, 255, 102, 0.3)";
-        }, 200);
-    });
+        // Reset on mouse leave
+        container.addEventListener("mouseleave", () => {
+            highlight.style.transform = "translateX(0) translateY(0)";
+        });
+    }
 });
