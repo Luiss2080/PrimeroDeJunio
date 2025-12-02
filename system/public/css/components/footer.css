@@ -216,18 +216,22 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--text-muted);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Smooth bounce effect */
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    /* Default State: Green */
+    background: var(--primary-green);
+    color: #000;
+    border: 1px solid var(--primary-green);
+    box-shadow: 0 5px 15px rgba(0, 255, 102, 0.2);
 }
 
 .social-link:hover {
+    /* Hover State: Gray/Muted */
     transform: translateY(-5px) scale(1.1);
-    background: var(--primary-green);
-    color: #000;
-    border-color: var(--primary-green);
-    box-shadow: 0 10px 20px rgba(0, 255, 102, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-muted);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: none;
 }
 
 /* Legal Section */

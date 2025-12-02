@@ -89,8 +89,8 @@
             <!-- Brand -->
             <div class="footer-brand-section">
                 <div class="brand-logo-container">
-                    <!-- Icono de Moto -->
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="18.5" cy="17.5" r="3.5"/><path d="M15 6h5l-3 13"/><path d="M9 17.5l-3-11h13"/><path d="M9 17.5L12 6"/></svg>
+                    <!-- Icono de Casco -->
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10a9 9 0 0 1 18 0v2a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-2a4 4 0 0 0-8 0v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><path d="M12 10v4"></path><path d="M12 14a2 2 0 0 0 2 2h2"></path></svg>
                 </div>
                 <div class="brand-text">
                     <span class="brand-title">1RO DE JUNIO</span>
