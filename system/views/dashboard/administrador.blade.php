@@ -18,11 +18,15 @@
     <!-- CSS del Dashboard -->
     <link rel="stylesheet" href="{{ asset('css/dashboard/dashboard.css') }}">
     <link rel="stylesheet" href="{{ asset('css/components/sidebar.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/components/loading.css') }}">
     
     @stack('styles')
 </head>
 
 <body>
+    
+    <!-- Loading Screen -->
+    @include('layouts.loading')
     
     <!-- Layout del Dashboard -->
     <div class="dashboard-layout">
@@ -189,6 +193,7 @@
     </script>
     
     <!-- JavaScript del Dashboard -->
+    <script src="{{ asset('js/components/loading.js') }}"></script>
     <script src="{{ asset('js/dashboard/dashboard.js') }}"></script>
     
     @stack('scripts')
