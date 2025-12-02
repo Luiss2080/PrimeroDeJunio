@@ -4,9 +4,10 @@
 .dashboard-footer {
     margin: 0 1rem 1rem 1rem;
     padding: 3rem 2rem 1.5rem;
-    border: 1px solid #1a1a1a;
+    border: 1px solid var(--border-color);
     border-radius: 24px;
-    background: #0a0a0a;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
     font-size: 0.9rem;
     color: var(--text-muted);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
@@ -49,16 +50,17 @@
     display: flex;
     align-items: center;
     gap: 1rem;
-    background: #111;
+    background: rgba(255, 255, 255, 0.03);
     padding: 1rem 1.2rem;
     border-radius: 8px;
-    border: 1px solid #222;
+    border: 1px solid rgba(255, 255, 255, 0.05);
     transition: all 0.3s ease;
 }
 
 .contact-card:hover {
     border-color: var(--primary-green);
     transform: translateX(5px);
+    background: rgba(255, 255, 255, 0.05);
 }
 
 .card-icon {
@@ -80,7 +82,7 @@
 
 .card-label {
     font-size: 0.7rem;
-    color: #666;
+    color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 0.5px;
     margin-bottom: 2px;
@@ -94,14 +96,14 @@
 
 .card-sub {
     font-size: 0.8rem;
-    color: #888;
+    color: var(--text-muted);
 }
 
 /* Info Column */
 .footer-description {
     line-height: 1.6;
     margin-bottom: 2rem;
-    color: #888;
+    color: var(--text-muted);
     font-size: 0.9rem;
 }
 
@@ -149,7 +151,7 @@
 
 /* Footer Bottom */
 .footer-bottom {
-    border-top: 1px solid #222;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
     padding-top: 2rem;
     display: flex;
     justify-content: space-between;
@@ -168,7 +170,7 @@
 .brand-logo-container {
     width: 48px;
     height: 48px;
-    background: #ff4757; /* Red background like example */
+    background: #ff4757; /* Red background kept as requested */
     border-radius: 12px;
     display: flex;
     align-items: center;
@@ -191,7 +193,7 @@
 }
 
 .brand-subtitle {
-    color: #888;
+    color: var(--text-muted);
     font-size: 0.75rem;
 }
 
@@ -208,41 +210,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #fff;
+    color: var(--text-muted);
     transition: all 0.3s ease;
-    background: #222;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .social-link:hover {
     transform: translateY(-3px);
-}
-
-/* Social Colors */
-.social-link.facebook {
-    background: #1877f2;
-}
-.social-link.instagram {
-    background: linear-gradient(
-        45deg,
-        #405de6,
-        #5851db,
-        #833ab4,
-        #c13584,
-        #e1306c,
-        #fd1d1d
-    );
-}
-.social-link.twitter {
-    background: #1da1f2;
-}
-.social-link.whatsapp {
-    background: #25d366;
-}
-.social-link.linkedin {
-    background: #0a66c2;
-}
-.social-link.youtube {
-    background: #ff0000;
+    background: var(--primary-green);
+    color: #000;
+    border-color: var(--primary-green);
+    box-shadow: 0 5px 15px rgba(0, 255, 102, 0.3);
 }
 
 /* Legal Section */
@@ -254,7 +233,7 @@
 }
 
 .footer-copyright {
-    color: #666;
+    color: var(--text-muted);
     font-size: 0.85rem;
     font-weight: 600;
 }
@@ -266,7 +245,7 @@
 }
 
 .footer-links-row a {
-    color: #888;
+    color: var(--text-muted);
     text-decoration: none;
     font-size: 0.8rem;
     transition: color 0.2s;
@@ -277,7 +256,7 @@
 }
 
 .sep {
-    color: #333;
+    color: rgba(255, 255, 255, 0.2);
 }
 
 /* Responsive */
