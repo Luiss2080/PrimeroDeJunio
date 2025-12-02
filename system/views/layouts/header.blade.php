@@ -1,5 +1,5 @@
 {{-- Header del Sistema - Asociación 1ro de Junio --}}
-<link rel="stylesheet" href="{{ asset('css/layouts/header.css') }}">
+<link rel="stylesheet" href="{{ asset('css/components/header.css') }}">
 
 <header class="dashboard-header">
     <!-- Left: Brand & Search -->

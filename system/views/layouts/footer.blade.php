@@ -1,5 +1,5 @@
 {{-- Footer del Sistema - Asociación 1ro de Junio --}}
-<link rel="stylesheet" href="{{ asset('css/layouts/footer.css') }}">
+<link rel="stylesheet" href="{{ asset('css/components/footer.css') }}">
 
 <footer class="dashboard-footer" id="systemFooter">
     <div class="footer-container">
