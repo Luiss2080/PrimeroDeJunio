@@ -197,16 +197,30 @@
     gap: 1rem;
 }
 
+/* New Logo Image */
+.brand-image-container {
+    height: 48px;
+    display: flex;
+    align-items: center;
+}
+
+.brand-logo-img {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 0 5px rgba(0, 255, 102, 0.3));
+}
+
 .brand-logo-container {
     height: 48px;
-    padding: 0 12px; /* Horizontal padding for wider container */
-    background: var(--primary-green); /* Green background */
+    padding: 0 12px;
+    background: var(--primary-green);
     border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 4px; /* Space between icons */
-    color: #000; /* Black icons */
+    gap: 4px;
+    color: #000;
     box-shadow: 0 5px 15px rgba(0, 255, 102, 0.4);
     transition: all 0.3s ease;
 }
