@@ -15,7 +15,9 @@ class ConductorController extends Controller
 
     public function show($id)
     {
-        $conductor = Conductor::with('asignaciones.vehiculo')->findOrFail($id);
+        $conductor = Conductor::with(['asignaciones.vehiculo', 'viajes' => function($query) {
+            $query->latest('fecha_hora_inicio')->take(10);
+        }])->findOrFail($id);
         return view('conductores.perfil', compact('conductor'));
     }
     

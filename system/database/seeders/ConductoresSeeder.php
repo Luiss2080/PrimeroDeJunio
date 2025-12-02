@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use App\Models\Conductor;
 use App\Models\Vehiculo;
 use App\Models\AsignacionVehiculo;
+use App\Models\Viaje;
 use Carbon\Carbon;
 
 class ConductoresSeeder extends Seeder
@@ -58,6 +59,59 @@ class ConductoresSeeder extends Seeder
             'fecha_inicio' => Carbon::now()->subMonths(6),
             'turno' => 'manana',
             'estado' => 'activa',
+        ]);
+
+        // 4. Crear Viajes de Prueba
+
+        // Viaje 1
+        Viaje::create([
+            'conductor_id' => $conductor->id,
+            'vehiculo_id' => $vehiculo->id,
+            'origen' => 'Av. Banzer 4to Anillo',
+            'destino' => 'Plaza 24 de Septiembre',
+            'valor_base' => 25.00,
+            'valor_total' => 25.00,
+            'estado' => 'completado',
+            'fecha_hora_inicio' => Carbon::parse('2024-12-02 14:30:00'),
+            'fecha_hora_fin' => Carbon::parse('2024-12-02 14:50:00'),
+        ]);
+
+        // Viaje 2
+        Viaje::create([
+            'conductor_id' => $conductor->id,
+            'vehiculo_id' => $vehiculo->id,
+            'origen' => 'Equipetrol Norte',
+            'destino' => 'Ventura Mall',
+            'valor_base' => 15.00,
+            'valor_total' => 15.00,
+            'estado' => 'completado',
+            'fecha_hora_inicio' => Carbon::parse('2024-12-02 12:15:00'),
+            'fecha_hora_fin' => Carbon::parse('2024-12-02 12:30:00'),
+        ]);
+
+        // Viaje 3
+        Viaje::create([
+            'conductor_id' => $conductor->id,
+            'vehiculo_id' => $vehiculo->id,
+            'origen' => 'Aeropuerto Viru Viru',
+            'destino' => 'Hotel Los Tajibos',
+            'valor_base' => 80.00,
+            'valor_total' => 80.00,
+            'estado' => 'completado',
+            'fecha_hora_inicio' => Carbon::parse('2024-12-01 18:45:00'),
+            'fecha_hora_fin' => Carbon::parse('2024-12-01 19:30:00'),
+        ]);
+
+        // Viaje 4
+        Viaje::create([
+            'conductor_id' => $conductor->id,
+            'vehiculo_id' => $vehiculo->id,
+            'origen' => 'Barrio Sirari',
+            'destino' => 'Parque Urbano',
+            'valor_base' => 20.00,
+            'valor_total' => 20.00,
+            'estado' => 'cancelado',
+            'fecha_hora_inicio' => Carbon::parse('2024-12-01 09:20:00'),
         ]);
     }
 }

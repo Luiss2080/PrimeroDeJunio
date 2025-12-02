@@ -50,4 +50,12 @@ class Conductor extends Model
             'vehiculo_id' // Local key on asignaciones_vehiculo table...
         )->where('asignaciones_vehiculo.estado', 'activa');
     }
+
+    /**
+     * Relación con Viajes
+     */
+    public function viajes()
+    {
+        return $this->hasMany(Viaje::class, 'conductor_id');
+    }
 }
