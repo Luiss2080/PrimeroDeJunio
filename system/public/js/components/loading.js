@@ -9,13 +9,16 @@ const LoadingScreen = {
     progress: 0,
     interval: null,
 
+    // Mensajes contextuales del sistema de transporte
     messages: [
-        "Iniciando sistema...",
-        "Cargando recursos...",
-        "Verificando credenciales...",
-        "Conectando con el servidor...",
-        "Preparando interfaz...",
-        "Casi listo...",
+        "Estableciendo conexión segura...",
+        "Cargando módulo de conductores...",
+        "Sincronizando flota de vehículos...",
+        "Verificando rutas y horarios...",
+        "Cargando historial de viajes...",
+        "Actualizando reportes en tiempo real...",
+        "Configurando panel de administración...",
+        "Finalizando configuración...",
     ],
 
     init: function () {
@@ -28,9 +31,6 @@ const LoadingScreen = {
         window.showLoading = this.show.bind(this);
         window.hideLoading = this.hide.bind(this);
         window.simulateLoading = this.simulate.bind(this);
-
-        // Optional: Auto-simulate on load for demo purposes if needed
-        // this.simulate();
     },
 
     show: function () {
@@ -74,7 +74,7 @@ const LoadingScreen = {
         }
     },
 
-    simulate: function (duration = 2000, callback) {
+    simulate: function (duration = 2500, callback) {
         this.show();
         this.progress = 0;
 
@@ -83,7 +83,7 @@ const LoadingScreen = {
         this.interval = setInterval(() => {
             this.progress += step;
 
-            // Add some randomness to speed
+            // Add some randomness to speed for realism
             if (Math.random() > 0.7) this.progress += step * 0.5;
 
             if (this.progress >= 100) {
@@ -108,9 +108,15 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll("a").forEach((link) => {
         link.addEventListener("click", function (e) {
             const href = this.getAttribute("href");
-            if (href && href !== "#" && !href.startsWith("javascript")) {
+            // Don't simulate for hash links, javascript calls, or target blank
+            if (
+                href &&
+                href !== "#" &&
+                !href.startsWith("javascript") &&
+                this.getAttribute("target") !== "_blank"
+            ) {
                 e.preventDefault();
-                LoadingScreen.simulate(1500, () => {
+                LoadingScreen.simulate(2000, () => {
                     window.location.href = href;
                 });
             }

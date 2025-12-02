@@ -1,8 +1,12 @@
 <div class="loading-overlay" id="loadingOverlay">
     <div class="loading-content">
         <h1 class="loading-title">
-            Bienvenido a la asociación
-            <span class="highlight">Primero de Junio</span>
+            <span class="title-line">BIENVENIDO A LA</span>
+            <span class="title-line">ASOCIACIÓN</span>
+            <span class="highlight-wrapper">
+                <span class="highlight">PRIMERO DE</span>
+                <span class="highlight">JUNIO</span>
+            </span>
         </h1>
         
         <div class="progress-container">
