@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('numero_chasis', 50)->unique()->nullable();
             $table->string('propietario_nombre', 100);
             $table->string('propietario_cedula', 20);
-            $table->string('propietario_telefono', 20)->nullable();
+            $table->string('propietario_telefono', 50)->nullable();
             $table->enum('estado', ['activo', 'mantenimiento', 'inactivo', 'vendido'])->default('activo');
             $table->text('observaciones')->nullable();
             $table->timestamps();

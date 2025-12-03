@@ -20,14 +20,18 @@ class ConductoresSeeder extends Seeder
             return;
         }
 
-        // Create users for conductors first
-        $users = User::factory()->count(15)->create([
-            'rol_id' => $roleConductor->id,
-        ]);
+        try {
+            // Create users for conductors first
+            $users = User::factory()->count(15)->create([
+                'rol_id' => $roleConductor->id,
+            ]);
+        } catch (\Exception $e) {
+            dump('Error creating users: ' . $e->getMessage());
+            throw $e;
+        }
 
-        \Illuminate\Database\Eloquent\Model::unguard();
         foreach ($users as $user) {
-            Conductor::factory()->create([
+            \Illuminate\Support\Facades\DB::table('conductores')->insert([
                 'usuario_id' => $user->id,
                 'nombre' => $user->nombre,
                 'apellido' => $user->apellido,
@@ -35,8 +39,13 @@ class ConductoresSeeder extends Seeder
                 'telefono' => $user->telefono ?? '0000000000',
                 'direccion' => $user->direccion,
                 'fecha_nacimiento' => '1990-01-01',
+                'email' => $user->email,
+                'estado' => 'activo',
+                'estado_pago' => 'al_dia',
+                'fecha_ingreso' => now(),
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
         }
-        \Illuminate\Database\Eloquent\Model::reguard();
     }
 }
