@@ -38,7 +38,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->index('cedula');
-            $table->index('licencia_numero');
+
             $table->index('estado');
             $table->index('usuario_id');
         });

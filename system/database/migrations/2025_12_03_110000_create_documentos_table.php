@@ -23,7 +23,7 @@ return new class extends Migration
             $table->text('observaciones')->nullable();
             $table->timestamps();
 
-            $table->index(['documentable_type', 'documentable_id']);
+
             $table->index('tipo_documento');
             $table->index('fecha_vencimiento');
             $table->index('estado');

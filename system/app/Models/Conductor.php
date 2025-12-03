@@ -6,8 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Conductor extends Model
 {
+    use \Illuminate\Database\Eloquent\Factories\HasFactory;
+
     protected $table = 'conductores';
     protected $fillable = [
+        'usuario_id',
         'nombre',
         'apellido',
         'cedula',
@@ -15,11 +18,14 @@ class Conductor extends Model
         'email',
         'direccion',
         'fecha_nacimiento',
-        'licencia_numero',
-        'licencia_vigencia',
+        'grupo_sanguineo',
+        'contacto_emergencia_nombre',
+        'contacto_emergencia_telefono',
+        'antecedentes_penales',
         'experiencia_anos',
         'foto',
         'estado',
+        'estado_pago',
         'rating',
         'total_viajes',
         'asistencia_porcentaje',
