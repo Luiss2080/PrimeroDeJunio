@@ -12,10 +12,10 @@ class Tarifa extends Model
     protected $fillable = [
         'nombre',
         'descripcion',
-        'costo_base',
-        'costo_km',
-        'costo_minuto',
-        'costo_minima',
+        'tarifa_base',
+        'tarifa_por_km',
+        'tarifa_por_minuto',
+        'tarifa_minima',
         'recargo_nocturno',
         'recargo_festivo',
         'estado'

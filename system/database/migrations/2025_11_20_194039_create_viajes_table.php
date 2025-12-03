@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('vehiculo_id')->constrained('vehiculos')->restrictOnDelete();
             $table->foreignId('cliente_id')->nullable()->constrained('clientes')->nullOnDelete();
             $table->string('cliente_nombre', 100)->nullable();
-            $table->string('cliente_telefono', 20)->nullable();
+            $table->string('cliente_telefono', 50)->nullable();
             $table->text('origen');
             $table->text('destino');
             $table->decimal('distancia_km', 8, 2)->nullable();

@@ -18,12 +18,13 @@ class TarifaFactory extends Factory
     {
         return [
             'nombre' => $this->faker->words(3, true),
-            'costo_base' => $this->faker->numberBetween(3000, 10000),
-            'costo_km' => $this->faker->numberBetween(1000, 3000),
-            'costo_minuto' => $this->faker->numberBetween(200, 500),
-            'horario_inicio' => '06:00:00',
-            'horario_fin' => '22:00:00',
-            'estado' => 'activo',
+            'tarifa_base' => $this->faker->numberBetween(3000, 10000),
+            'tarifa_por_km' => $this->faker->numberBetween(1000, 3000),
+            'tarifa_por_minuto' => $this->faker->numberBetween(200, 500),
+            'tarifa_minima' => $this->faker->numberBetween(5000, 12000),
+            'hora_inicio_nocturno' => '18:00:00',
+            'hora_fin_nocturno' => '06:00:00',
+            'estado' => 'activa',
         ];
     }
 }
