@@ -26,26 +26,27 @@ class ConductoresSeeder extends Seeder
                 'rol_id' => $roleConductor->id,
             ]);
         } catch (\Exception $e) {
-            dump('Error creating users: ' . $e->getMessage());
+            echo 'Error creating users: ' . $e->getMessage() . PHP_EOL;
             throw $e;
         }
 
+        \Illuminate\Database\Eloquent\Model::unguard();
         foreach ($users as $user) {
-            \Illuminate\Support\Facades\DB::table('conductores')->insert([
-                'usuario_id' => $user->id,
-                'nombre' => $user->nombre,
-                'apellido' => $user->apellido,
-                'cedula' => $user->cedula ?? \Illuminate\Support\Str::numerify('##########'),
-                'telefono' => $user->telefono ?? '0000000000',
-                'direccion' => $user->direccion,
-                'fecha_nacimiento' => '1990-01-01',
-                'email' => $user->email,
-                'estado' => 'activo',
-                'estado_pago' => 'al_dia',
-                'fecha_ingreso' => now(),
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
+            try {
+                Conductor::factory()->create([
+                    'usuario_id' => $user->id,
+                    'nombre' => $user->nombre,
+                    'apellido' => $user->apellido,
+                    'cedula' => $user->cedula ?? \Illuminate\Support\Str::numerify('##########'),
+                    'telefono' => $user->telefono ?? '0000000000',
+                    'direccion' => $user->direccion,
+                    'fecha_nacimiento' => '1990-01-01',
+                ]);
+            } catch (\Exception $e) {
+                echo 'Error creating conductor for user ' . $user->id . ': ' . $e->getMessage() . PHP_EOL;
+                throw $e;
+            }
         }
+        \Illuminate\Database\Eloquent\Model::reguard();
     }
 }
