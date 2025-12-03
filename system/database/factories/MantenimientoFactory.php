@@ -17,6 +17,7 @@ class MantenimientoFactory extends Factory
     public function definition(): array
     {
         return [
+            'vehiculo_id' => \App\Models\Vehiculo::factory(),
             'tipo' => $this->faker->randomElement(['preventivo', 'correctivo', 'lavado']),
             'descripcion' => $this->faker->sentence(),
             'fecha_ingreso' => $this->faker->dateTimeBetween('-6 months', 'now'),

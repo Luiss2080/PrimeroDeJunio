@@ -17,6 +17,8 @@ class TurnoFactory extends Factory
     public function definition(): array
     {
         return [
+            'conductor_id' => \App\Models\Conductor::factory(),
+            'vehiculo_id' => \App\Models\Vehiculo::factory(),
             'fecha_hora_inicio' => $this->faker->dateTimeBetween('-1 month', 'now'),
             'fecha_hora_fin' => function (array $attributes) {
                 return $this->faker->dateTimeInInterval($attributes['fecha_hora_inicio'], '+8 hours');

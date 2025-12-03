@@ -21,6 +21,10 @@ class ViajeFactory extends Factory
         $descuentos = $this->faker->randomElement([0, 0, 0, 1000]);
         
         return [
+            'conductor_id' => \App\Models\Conductor::factory(),
+            'vehiculo_id' => \App\Models\Vehiculo::factory(),
+            'cliente_id' => \App\Models\Cliente::factory(),
+            'tarifa_aplicada_id' => \App\Models\Tarifa::factory(),
             'cliente_nombre' => $this->faker->name(), // Fallback if no cliente_id
             'cliente_telefono' => $this->faker->phoneNumber(),
             'origen' => $this->faker->address(),

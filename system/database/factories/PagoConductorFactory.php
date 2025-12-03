@@ -17,6 +17,7 @@ class PagoConductorFactory extends Factory
     public function definition(): array
     {
         return [
+            'conductor_id' => \App\Models\Conductor::factory(),
             'fecha_pago' => $this->faker->dateTimeBetween('-1 month', 'now'),
             'monto' => $this->faker->randomFloat(2, 50000, 100000),
             'tipo' => $this->faker->randomElement(['tarifa_diaria', 'tarifa_diaria', 'multa', 'abono_deuda']),

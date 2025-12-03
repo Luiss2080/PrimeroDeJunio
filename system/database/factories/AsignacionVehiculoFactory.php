@@ -17,6 +17,8 @@ class AsignacionVehiculoFactory extends Factory
     public function definition(): array
     {
         return [
+            'conductor_id' => \App\Models\Conductor::factory(),
+            'vehiculo_id' => \App\Models\Vehiculo::factory(),
             'fecha_inicio' => $this->faker->dateTimeBetween('-1 year', '-1 month'),
             'fecha_fin' => null,
             'estado' => 'activo',

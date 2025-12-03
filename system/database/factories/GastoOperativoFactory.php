@@ -17,6 +17,7 @@ class GastoOperativoFactory extends Factory
     public function definition(): array
     {
         return [
+            'vehiculo_id' => \App\Models\Vehiculo::factory(),
             'tipo_gasto' => $this->faker->randomElement(['combustible', 'mantenimiento', 'lavado', 'peaje', 'impuesto', 'seguro']),
             'monto' => $this->faker->randomFloat(2, 10000, 500000),
             'fecha' => $this->faker->dateTimeBetween('-6 months', 'now'),

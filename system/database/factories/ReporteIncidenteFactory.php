@@ -17,6 +17,9 @@ class ReporteIncidenteFactory extends Factory
     public function definition(): array
     {
         return [
+            'usuario_reporta_id' => \App\Models\User::factory(),
+            'viaje_id' => \App\Models\Viaje::factory(),
+            'vehiculo_id' => \App\Models\Vehiculo::factory(),
             'tipo' => $this->faker->randomElement(['accidente', 'falla_mecanica', 'queja_cliente', 'objeto_olvidado']),
             'descripcion' => $this->faker->paragraph(),
             'nivel_gravedad' => $this->faker->randomElement(['bajo', 'medio', 'alto']),
