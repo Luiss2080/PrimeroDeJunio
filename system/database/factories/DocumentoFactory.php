@@ -18,6 +18,7 @@ class DocumentoFactory extends Factory
     {
         $fechaExpedicion = $this->faker->date();
         return [
+            'tipo_documento' => $this->faker->randomElement(['Licencia', 'SOAT', 'Tecnomecanica', 'Tarjeta de Propiedad']),
             'numero' => $this->faker->bothify('DOC-#####'),
             'fecha_expedicion' => $fechaExpedicion,
             'fecha_vencimiento' => $this->faker->dateTimeBetween($fechaExpedicion, '+5 years'),
