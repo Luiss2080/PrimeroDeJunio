@@ -37,7 +37,7 @@ class ConductoresSeeder extends Seeder
                     'usuario_id' => $user->id,
                     'nombre' => $user->nombre,
                     'apellido' => $user->apellido,
-                    'cedula' => $user->cedula ?? \Illuminate\Support\Str::numerify('##########'),
+                    'cedula' => $user->cedula ?? fake()->numerify('##########'),
                     'telefono' => $user->telefono ?? '0000000000',
                     'direccion' => $user->direccion,
                     'fecha_nacimiento' => '1990-01-01',
