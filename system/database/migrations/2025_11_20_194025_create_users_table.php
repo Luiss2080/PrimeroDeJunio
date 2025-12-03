@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('apellido', 100);
             $table->string('email', 150)->unique();
             $table->string('password');
-            $table->string('telefono', 20)->nullable();
+            $table->string('telefono', 50)->nullable();
             $table->text('direccion')->nullable();
             $table->date('fecha_nacimiento')->nullable();
             $table->string('avatar')->nullable();

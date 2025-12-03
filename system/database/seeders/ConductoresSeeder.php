@@ -27,7 +27,7 @@ class ConductoresSeeder extends Seeder
 
         \Illuminate\Database\Eloquent\Model::unguard();
         foreach ($users as $user) {
-            $data = [
+            Conductor::factory()->create([
                 'usuario_id' => $user->id,
                 'nombre' => $user->nombre,
                 'apellido' => $user->apellido,
@@ -35,9 +35,7 @@ class ConductoresSeeder extends Seeder
                 'telefono' => $user->telefono ?? '0000000000',
                 'direccion' => $user->direccion,
                 'fecha_nacimiento' => '1990-01-01',
-            ];
-            dump($data);
-            Conductor::factory()->create($data);
+            ]);
         }
         \Illuminate\Database\Eloquent\Model::reguard();
     }
