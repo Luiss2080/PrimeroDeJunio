@@ -49,18 +49,6 @@ class RolesSeeder extends Seeder
                 ],
                 'estado' => 'activo',
             ],
-            [
-                'nombre' => 'conductor',
-                'descripcion' => 'Conductor de vehículo',
-                'permisos' => [],
-                'estado' => 'activo',
-            ],
-            [
-                'nombre' => 'cliente',
-                'descripcion' => 'Cliente del servicio',
-                'permisos' => [],
-                'estado' => 'activo',
-            ]
         ];
 
         foreach ($roles as $role) {

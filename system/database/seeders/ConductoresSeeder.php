@@ -14,7 +14,7 @@ class ConductoresSeeder extends Seeder
      */
     public function run(): void
     {
-        $roleConductor = Role::where('nombre', 'conductor')->first();
+        $roleConductor = Role::where('nombre', 'operador')->first();
         
         if (!$roleConductor) {
             return;
