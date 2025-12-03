@@ -32,7 +32,6 @@ class ConductoresSeeder extends Seeder
                 'apellido' => $user->apellido,
                 'telefono' => $user->telefono ?? '0000000000',
                 'direccion' => $user->direccion,
-                'email' => $user->email, // Assuming we add email to conductors or use user's
             ]);
         }
     }
