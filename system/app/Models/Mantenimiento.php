@@ -12,14 +12,18 @@ class Mantenimiento extends Model
     protected $table = 'mantenimientos';
     protected $fillable = [
         'vehiculo_id',
-        'tipo',
+        'tipo_mantenimiento',
         'descripcion',
+        'kilometraje_actual',
         'costo',
-        'fecha_inicio',
-        'fecha_fin',
-        'taller',
-        'factura_numero',
-        'observaciones'
+        'taller_nombre',
+        'taller_telefono',
+        'fecha_programada',
+        'fecha_realizada',
+        'estado',
+        'observaciones',
+        'proximo_mantenimiento_km',
+        'proximo_mantenimiento_fecha'
     ];
 
     public function vehiculo()

@@ -18,11 +18,11 @@ class MantenimientoFactory extends Factory
     {
         return [
             'vehiculo_id' => \App\Models\Vehiculo::factory(),
-            'tipo' => $this->faker->randomElement(['preventivo', 'correctivo', 'lavado']),
+            'tipo_mantenimiento' => $this->faker->randomElement(['preventivo', 'correctivo', 'revision', 'emergencia']),
             'descripcion' => $this->faker->sentence(),
-            'fecha_ingreso' => $this->faker->dateTimeBetween('-6 months', 'now'),
-            'fecha_salida' => function (array $attributes) {
-                return $this->faker->dateTimeInInterval($attributes['fecha_ingreso'], '+2 days');
+            'fecha_programada' => $this->faker->dateTimeBetween('-6 months', 'now'),
+            'fecha_realizada' => function (array $attributes) {
+                return $this->faker->dateTimeInInterval($attributes['fecha_programada'], '+2 days');
             },
             'costo' => $this->faker->randomFloat(2, 50000, 500000),
             'taller_nombre' => $this->faker->company(),

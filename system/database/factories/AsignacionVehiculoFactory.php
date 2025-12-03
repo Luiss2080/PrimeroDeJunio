@@ -21,7 +21,7 @@ class AsignacionVehiculoFactory extends Factory
             'vehiculo_id' => \App\Models\Vehiculo::factory(),
             'fecha_inicio' => $this->faker->dateTimeBetween('-1 year', '-1 month'),
             'fecha_fin' => null,
-            'estado' => 'activo',
+            'estado' => 'activa',
             'observaciones' => $this->faker->sentence(),
         ];
     }
