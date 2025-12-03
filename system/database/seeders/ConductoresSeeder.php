@@ -25,14 +25,20 @@ class ConductoresSeeder extends Seeder
             'rol_id' => $roleConductor->id,
         ]);
 
+        \Illuminate\Database\Eloquent\Model::unguard();
         foreach ($users as $user) {
-            Conductor::factory()->create([
+            $data = [
                 'usuario_id' => $user->id,
                 'nombre' => $user->nombre,
                 'apellido' => $user->apellido,
+                'cedula' => $user->cedula ?? \Illuminate\Support\Str::numerify('##########'),
                 'telefono' => $user->telefono ?? '0000000000',
                 'direccion' => $user->direccion,
-            ]);
+                'fecha_nacimiento' => '1990-01-01',
+            ];
+            dump($data);
+            Conductor::factory()->create($data);
         }
+        \Illuminate\Database\Eloquent\Model::reguard();
     }
 }
