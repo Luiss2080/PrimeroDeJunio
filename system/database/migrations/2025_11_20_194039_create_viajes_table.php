@@ -22,6 +22,8 @@ return new class extends Migration
             $table->text('destino');
             $table->decimal('distancia_km', 8, 2)->nullable();
             $table->integer('duracion_minutos')->nullable();
+            $table->integer('tiempo_espera_minutos')->default(0);
+            $table->decimal('costo_tiempo_espera', 10, 2)->default(0.00);
             $table->foreignId('tarifa_aplicada_id')->nullable()->constrained('tarifas')->nullOnDelete();
             $table->decimal('valor_base', 10, 2);
             $table->decimal('recargos', 10, 2)->default(0.00);

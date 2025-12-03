@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('color', 30);
             $table->integer('ano');
             $table->integer('cilindraje');
+            $table->enum('tipo_combustible', ['Gasolina', 'Gas', 'Diesel', 'Electrico', 'Hibrido'])->default('Gasolina');
+            $table->integer('capacidad_pasajeros')->default(4);
             $table->string('numero_motor', 50)->unique()->nullable();
             $table->string('numero_chasis', 50)->unique()->nullable();
             $table->string('propietario_nombre', 100);

@@ -20,6 +20,10 @@ return new class extends Migration
             $table->string('telefono', 20);
             $table->text('direccion')->nullable();
             $table->date('fecha_nacimiento');
+            $table->string('grupo_sanguineo', 5)->nullable();
+            $table->string('contacto_emergencia_nombre', 100)->nullable();
+            $table->string('contacto_emergencia_telefono', 20)->nullable();
+            $table->boolean('antecedentes_penales')->default(false);
             $table->string('licencia_numero', 50)->unique();
             $table->string('licencia_categoria', 10);
             $table->date('licencia_vigencia');

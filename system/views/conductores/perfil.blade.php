@@ -253,32 +253,6 @@
                                     <tr>
                                         <th>Fecha</th>
                                         <th>Origen</th>
-                                        <th>Destino</th>
-                                        <th>Monto</th>
-                                        <th>Estado</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>02 Dic, 14:30</td>
-                                        <td>Av. Banzer 4to Anillo</td>
-                                        <td>Plaza 24 de Septiembre</td>
-                                        <td>Bs. 25.00</td>
-                                        <td><span class="status-dot completed">Completado</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>02 Dic, 12:15</td>
-                                        <td>Equipetrol Norte</td>
-                                        <td>Ventura Mall</td>
-                                        <td>Bs. 15.00</td>
-                                        <td><span class="status-dot completed">Completado</span></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </main>
         </div>
     </div>
 

@@ -24,6 +24,7 @@ return new class extends Migration
             $table->foreignId('rol_id')->constrained('roles')->restrictOnDelete();
             $table->enum('estado', ['activo', 'inactivo', 'pendiente'])->default('activo');
             $table->timestamp('ultimo_acceso')->nullable();
+            $table->string('last_login_ip', 45)->nullable();
             $table->string('token_recuperacion')->nullable();
             $table->timestamp('token_expiracion')->nullable();
             $table->timestamp('email_verified_at')->nullable(); // Para Laravel

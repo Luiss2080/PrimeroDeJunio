@@ -53,6 +53,22 @@ class RolesSeeder extends Seeder
                 'estado' => 'activo',
                 'created_at' => now(),
                 'updated_at' => now()
+            ],
+            [
+                'nombre' => 'conductor',
+                'descripcion' => 'Conductor de vehículo',
+                'permisos' => json_encode([]),
+                'estado' => 'activo',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'nombre' => 'cliente',
+                'descripcion' => 'Cliente del servicio',
+                'permisos' => json_encode([]),
+                'estado' => 'activo',
+                'created_at' => now(),
+                'updated_at' => now()
             ]
         ]);
     }
