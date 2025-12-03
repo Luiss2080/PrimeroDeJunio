@@ -14,12 +14,11 @@ $seeders = [
     Database\Seeders\AsignacionesVehiculoSeeder::class,
     Database\Seeders\ViajesSeeder::class,
     Database\Seeders\MantenimientosSeeder::class,
-    Database\Seeders\PagosTarifaDiariaSeeder::class,
+    Database\Seeders\DocumentosSeeder::class,
+    Database\Seeders\GastosOperativosSeeder::class,
+    Database\Seeders\PagosConductoresSeeder::class,
     Database\Seeders\TurnosSeeder::class,
     Database\Seeders\ReportesIncidentesSeeder::class,
-    Database\Seeders\CampanasSeeder::class,
-    Database\Seeders\AudiosSeeder::class,
-    Database\Seeders\HistorialReproduccionesSeeder::class,
 ];
 
 foreach ($seeders as $seeder) {

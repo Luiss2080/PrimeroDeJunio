@@ -26,13 +26,6 @@ return new class extends Migration
             $table->string('propietario_nombre', 100);
             $table->string('propietario_cedula', 20);
             $table->string('propietario_telefono', 20)->nullable();
-            $table->string('seguro_numero', 50)->nullable();
-            $table->date('seguro_vigencia')->nullable();
-            $table->string('soat_numero', 50)->nullable();
-            $table->date('soat_vigencia')->nullable();
-            $table->string('tecnicomecanica_numero', 50)->nullable();
-            $table->date('tecnicomecanica_vigencia')->nullable();
-            $table->string('tarjeta_propiedad', 50)->nullable();
             $table->enum('estado', ['activo', 'mantenimiento', 'inactivo', 'vendido'])->default('activo');
             $table->text('observaciones')->nullable();
             $table->timestamps();

@@ -21,12 +21,11 @@ class DatabaseSeeder extends Seeder
             AsignacionesVehiculoSeeder::class,
             ViajesSeeder::class,
             MantenimientosSeeder::class,
-            PagosTarifaDiariaSeeder::class,
+            DocumentosSeeder::class, // New
+            GastosOperativosSeeder::class, // New
+            PagosConductoresSeeder::class, // Renamed
             TurnosSeeder::class,
             ReportesIncidentesSeeder::class,
-            CampanasSeeder::class,
-            AudiosSeeder::class,
-            HistorialReproduccionesSeeder::class,
         ]);
     }
 }

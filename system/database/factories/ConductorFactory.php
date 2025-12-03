@@ -27,11 +27,9 @@ class ConductorFactory extends Factory
             'contacto_emergencia_nombre' => $this->faker->name(),
             'contacto_emergencia_telefono' => $this->faker->phoneNumber(),
             'antecedentes_penales' => $this->faker->boolean(10), // 10% chance of having records (for testing)
-            'licencia_numero' => $this->faker->unique()->bothify('LIC-#####'),
-            'licencia_categoria' => $this->faker->randomElement(['A1', 'A2', 'B1', 'C1']),
-            'licencia_vigencia' => $this->faker->dateTimeBetween('now', '+5 years'),
             'experiencia_anos' => $this->faker->numberBetween(1, 20),
             'estado' => $this->faker->randomElement(['activo', 'activo', 'activo', 'inactivo', 'suspendido']),
+            'estado_pago' => $this->faker->randomElement(['al_dia', 'al_dia', 'mora', 'pendiente']),
             'fecha_ingreso' => $this->faker->date(),
             'observaciones' => $this->faker->sentence(),
         ];

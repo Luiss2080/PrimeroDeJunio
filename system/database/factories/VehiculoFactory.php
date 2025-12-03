@@ -30,12 +30,6 @@ class VehiculoFactory extends Factory
             'propietario_nombre' => $this->faker->name(),
             'propietario_cedula' => $this->faker->numerify('##########'),
             'propietario_telefono' => $this->faker->phoneNumber(),
-            'seguro_numero' => $this->faker->bothify('SEG-#####'),
-            'seguro_vigencia' => $this->faker->dateTimeBetween('now', '+1 year'),
-            'soat_numero' => $this->faker->bothify('SOAT-#####'),
-            'soat_vigencia' => $this->faker->dateTimeBetween('now', '+1 year'),
-            'tecnicomecanica_numero' => $this->faker->bothify('TM-#####'),
-            'tecnicomecanica_vigencia' => $this->faker->dateTimeBetween('now', '+1 year'),
             'estado' => $this->faker->randomElement(['activo', 'activo', 'mantenimiento', 'inactivo']),
         ];
     }

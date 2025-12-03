@@ -2,26 +2,24 @@
 
 namespace Database\Seeders;
 
-use App\Models\PagoTarifaDiaria;
+use App\Models\PagoConductor;
 use App\Models\Conductor;
-use App\Models\Vehiculo;
 use Illuminate\Database\Seeder;
 
-class PagosTarifaDiariaSeeder extends Seeder
+class PagosConductoresSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        if (Conductor::count() == 0 || Vehiculo::count() == 0) {
+        if (Conductor::count() == 0) {
             return;
         }
 
-        PagoTarifaDiaria::factory()
-            ->count(30)
+        PagoConductor::factory()
+            ->count(40)
             ->recycle(Conductor::all())
-            ->recycle(Vehiculo::all())
             ->create();
     }
 }
