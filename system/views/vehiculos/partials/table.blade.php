@@ -59,7 +59,7 @@
                 </td>
                 <td>
                     <div class="driver-info">
-                        <img src="https://ui-avatars.com/api/?name={{ urlencode($vehiculo->propietario_nombre) }}&background=random&color=fff" alt="Avatar" class="driver-avatar">
+                        <img src="https://ui-avatars.com/api/?name={{ urlencode($vehiculo->propietario_nombre) }}&background=00ff66&color=000" alt="Avatar" class="driver-avatar">
                         <div>
                             <span class="driver-name">{{ $vehiculo->propietario_nombre }}</span>
                             <span class="secondary-text">{{ $vehiculo->propietario_telefono }}</span>
