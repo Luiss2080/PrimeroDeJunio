@@ -93,7 +93,7 @@
                         </div>
                         <div class="mini-detail">
                             <span class="mini-label">Licencia</span>
-                            <span class="mini-value">CAT-P</span>
+                            <span class="mini-value">{{ $conductor->getDocumento('licencia_conducir')?->numero ?? 'N/A' }}</span>
                         </div>
                     </div>
 
@@ -122,9 +122,23 @@
                             </div>
                             <div class="contact-details">
                                 <span class="contact-label">Domicilio</span>
-                                <span class="contact-value">{{ Str::limit($conductor->direccion, 25) }}</span>
+                                <span class="contact-value">{{ Str::limit($conductor->direccion, 25) ?? 'No registrado' }}</span>
                             </div>
                         </div>
+                        @if($conductor->contacto_emergencia_nombre)
+                        <div class="contact-item emergency">
+                            <div class="contact-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                            </div>
+                            <div class="contact-details">
+                                <span class="contact-label">Contacto de Emergencia</span>
+                                <span class="contact-value">{{ $conductor->contacto_emergencia_nombre }}</span>
+                                @if($conductor->contacto_emergencia_telefono)
+                                    <span class="contact-subvalue">{{ $conductor->contacto_emergencia_telefono }}</span>
+                                @endif
+                            </div>
+                        </div>
+                        @endif
                     </div>
 
                     <div class="profile-actions">
@@ -194,18 +208,58 @@
                         <div class="performance-grid">
                             <div class="perf-card">
                                 <span class="perf-label">Viajes Completados</span>
-                                <span class="perf-value">145</span>
-                                <span class="perf-trend positive">↑ 12% vs mes anterior</span>
+                                <span class="perf-value">{{ number_format($estadisticasActuales['viajes_completados']) }}</span>
+                                <span class="perf-trend {{ $cambioViajes > 0 ? 'positive' : ($cambioViajes < 0 ? 'negative' : 'neutral') }}">
+                                    @if($cambioViajes > 0)
+                                        ↑ {{ $cambioViajes }}% vs mes anterior
+                                    @elseif($cambioViajes < 0)
+                                        ↓ {{ abs($cambioViajes) }}% vs mes anterior
+                                    @else
+                                        -- Igual que mes anterior
+                                    @endif
+                                </span>
                             </div>
                             <div class="perf-card">
                                 <span class="perf-label">Ingresos Generados</span>
-                                <span class="perf-value">Bs. 4,500</span>
-                                <span class="perf-trend positive">↑ 5% vs mes anterior</span>
+                                <span class="perf-value">Bs. {{ number_format($estadisticasActuales['ingresos_generados'], 2) }}</span>
+                                <span class="perf-trend {{ $cambioIngresos > 0 ? 'positive' : ($cambioIngresos < 0 ? 'negative' : 'neutral') }}">
+                                    @if($cambioIngresos > 0)
+                                        ↑ {{ $cambioIngresos }}% vs mes anterior
+                                    @elseif($cambioIngresos < 0)
+                                        ↓ {{ abs($cambioIngresos) }}% vs mes anterior
+                                    @else
+                                        -- Igual que mes anterior
+                                    @endif
+                                </span>
                             </div>
                             <div class="perf-card">
-                                <span class="perf-label">Asistencia</span>
-                                <span class="perf-value">{{ $conductor->asistencia_porcentaje }}%</span>
-                                <span class="perf-trend neutral">-- Igual que mes anterior</span>
+                                <span class="perf-label">Calificación Promedio</span>
+                                <span class="perf-value">{{ number_format($estadisticasActuales['calificacion_promedio'], 1) }} ⭐</span>
+                                <span class="perf-trend {{ $cambioCalificacion > 0 ? 'positive' : ($cambioCalificacion < 0 ? 'negative' : 'neutral') }}">
+                                    @if($cambioCalificacion > 0)
+                                        ↑ {{ $cambioCalificacion }}% vs mes anterior
+                                    @elseif($cambioCalificacion < 0)
+                                        ↓ {{ abs($cambioCalificacion) }}% vs mes anterior
+                                    @else
+                                        -- Igual que mes anterior
+                                    @endif
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <!-- Estadísticas Adicionales -->
+                        <div class="additional-stats">
+                            <div class="stat-row">
+                                <span class="stat-label">Distancia Total (Este Mes):</span>
+                                <span class="stat-value">{{ number_format($estadisticasActuales['distancia_total'], 1) }} km</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-label">Porcentaje de Asistencia:</span>
+                                <span class="stat-value">{{ $conductor->asistencia_porcentaje ?? 0 }}%</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-label">Fecha de Ingreso:</span>
+                                <span class="stat-value">{{ $conductor->fecha_ingreso ? \Carbon\Carbon::parse($conductor->fecha_ingreso)->format('d/m/Y') : 'No registrada' }}</span>
                             </div>
                         </div>
                     </div>
@@ -223,18 +277,60 @@
                         </div>
                         
                         <div class="documents-grid">
-                            <!-- Antecedentes -->
+                            @forelse($conductor->documentos as $documento)
                             <div class="doc-card">
                                 <div class="doc-icon-wrapper">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
                                 </div>
                                 <div class="doc-details">
-                                    <h4>Antecedentes Penales</h4>
-                                    <span class="doc-meta">Verificado el {{ \Carbon\Carbon::parse($conductor->antecedentes_verificados_at)->format('d/m/Y') }}</span>
+                                    <h4>{{ ucwords(str_replace('_', ' ', $documento->tipo_documento)) }}</h4>
+                                    @if($documento->numero)
+                                        <span class="doc-meta">No. {{ $documento->numero }}</span>
+                                    @endif
+                                    @if($documento->fecha_vencimiento)
+                                        <span class="doc-meta">Vence: {{ \Carbon\Carbon::parse($documento->fecha_vencimiento)->format('d/m/Y') }}</span>
+                                    @endif
+                                    @if($documento->fecha_expedicion)
+                                        <span class="doc-meta">Expedido: {{ \Carbon\Carbon::parse($documento->fecha_expedicion)->format('d/m/Y') }}</span>
+                                    @endif
                                 </div>
-                                <div class="doc-status-badge valid">Verificado</div>
-                                <button class="btn-icon-sm"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+                                <div class="doc-status-badge {{ $documento->estado === 'vigente' ? 'valid' : ($documento->estado === 'vencido' ? 'expired' : 'pending') }}">
+                                    {{ ucfirst($documento->estado) }}
+                                </div>
+                                @if($documento->archivo_ruta)
+                                <button class="btn-icon-sm" onclick="window.open('{{ asset('storage/' . $documento->archivo_ruta) }}', '_blank')">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                                </button>
+                                @endif
                             </div>
+                            @empty
+                            <div class="empty-state-container">
+                                <p class="text-muted">No hay documentos registrados para este conductor.</p>
+                                <button class="btn-primary-glow btn-sm mt-2">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                                    Agregar Documento
+                                </button>
+                            </div>
+                            @endforelse
+                            
+                            <!-- Sección especial para antecedentes penales si no está como documento -->
+                            @if(!$conductor->documentos->where('tipo_documento', 'antecedentes_penales')->count())
+                            <div class="doc-card">
+                                <div class="doc-icon-wrapper">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><path d="M21 12c-1 0-3-1-3-3s2-3 3-3 3 1 3 3-2 3-3 3"/><path d="M3 12c1 0 3-1 3-3s-2-3-3-3-3 1-3 3 2 3 3 3"/></svg>
+                                </div>
+                                <div class="doc-details">
+                                    <h4>Antecedentes Penales</h4>
+                                    <span class="doc-meta">Estado: {{ $conductor->antecedentes_penales ? 'Con antecedentes' : 'Limpios' }}</span>
+                                    @if($conductor->antecedentes_verificados_at)
+                                        <span class="doc-meta">Verificado el {{ \Carbon\Carbon::parse($conductor->antecedentes_verificados_at)->format('d/m/Y') }}</span>
+                                    @endif
+                                </div>
+                                <div class="doc-status-badge {{ !$conductor->antecedentes_penales ? 'valid' : 'pending' }}">
+                                    {{ !$conductor->antecedentes_penales ? 'Verificado' : 'Requiere revisión' }}
+                                </div>
+                            </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -261,11 +357,11 @@
                                         <td>{{ Str::limit($viaje->origen, 20) }}</td>
                                         <td>{{ Str::limit($viaje->destino, 20) }}</td>
                                         <td><span class="badge-status {{ $viaje->estado }}">{{ ucfirst($viaje->estado) }}</span></td>
-                                        <td>Bs. {{ number_format($viaje->costo, 2) }}</td>
+                                        <td>Bs. {{ number_format($viaje->valor_total, 2) }}</td>
                                     </tr>
                                     @empty
                                     <tr>
-                                        <td colspan="5" class="text-center">No hay viajes recientes.</td>
+                                        <td colspan="5" class="text-center text-muted">No hay viajes recientes registrados.</td>
                                     </tr>
                                     @endforelse
                                 </tbody>

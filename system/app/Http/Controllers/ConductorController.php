@@ -15,10 +15,42 @@ class ConductorController extends Controller
 
     public function show($id)
     {
-        $conductor = Conductor::with(['asignaciones.vehiculo', 'viajes' => function($query) {
-            $query->latest('fecha_hora_inicio')->take(10);
-        }])->findOrFail($id);
-        return view('conductores.perfil', compact('conductor'));
+        $conductor = Conductor::with([
+            'asignaciones.vehiculo', 
+            'viajes' => function($query) {
+                $query->latest('fecha_hora_inicio')->take(10);
+            },
+            'documentos'
+        ])->findOrFail($id);
+
+        // Obtener estadísticas del conductor
+        $estadisticasActuales = $conductor->estadisticasDelMes();
+        $estadisticasAnteriores = $conductor->estadisticasDelMesAnterior();
+
+        // Calcular cambios porcentuales
+        $cambioViajes = $conductor->calcularCambio(
+            $estadisticasActuales['viajes_completados'], 
+            $estadisticasAnteriores['viajes_completados']
+        );
+        
+        $cambioIngresos = $conductor->calcularCambio(
+            $estadisticasActuales['ingresos_generados'], 
+            $estadisticasAnteriores['ingresos_generados']
+        );
+
+        $cambioCalificacion = $conductor->calcularCambio(
+            $estadisticasActuales['calificacion_promedio'], 
+            $estadisticasAnteriores['calificacion_promedio']
+        );
+
+        return view('conductores.perfil', compact(
+            'conductor', 
+            'estadisticasActuales', 
+            'estadisticasAnteriores',
+            'cambioViajes',
+            'cambioIngresos', 
+            'cambioCalificacion'
+        ));
     }
     
     public function create()
