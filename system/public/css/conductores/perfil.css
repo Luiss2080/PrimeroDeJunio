@@ -679,30 +679,30 @@
         rgba(20, 20, 20, 0.95)
     );
     border: 1px solid var(--glass-border);
-    padding: 1.2rem;
+    padding: 1.5rem;
     border-radius: 16px;
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 1.2rem;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
-    min-width: 300px; /* Ensure enough width */
+    min-width: 300px;
 }
 
 /* ... (hover effects remain same) ... */
 
 .doc-details {
     flex: 1;
-    min-width: 0; /* Critical for text-overflow to work in flex child */
+    min-width: 0;
     display: flex;
     flex-direction: column;
-    gap: 0.3rem;
+    gap: 0.4rem;
     padding-right: 0.5rem;
 }
 
 .doc-details h4 {
-    font-size: 1rem;
+    font-size: 1.05rem;
     margin: 0;
     color: #fff;
     white-space: nowrap;
