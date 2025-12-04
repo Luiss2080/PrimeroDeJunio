@@ -82,7 +82,26 @@ class ViajeController extends Controller
 
     public function store(Request $request)
     {
-        // Validación y creación
+        $request->validate([
+            'cliente_nombre' => 'required|string|max:255',
+            'cliente_telefono' => 'required|string|max:20',
+            'origen' => 'required|string|max:255',
+            'destino' => 'required|string|max:255',
+            'distancia_km' => 'nullable|numeric|min:0',
+            'tiempo_estimado_min' => 'nullable|integer|min:0',
+            'conductor_id' => 'nullable|exists:conductores,id',
+            'vehiculo_id' => 'nullable|exists:vehiculos,id',
+            'valor_total' => 'required|numeric|min:0',
+            'metodo_pago' => 'required|in:efectivo,qr,transferencia',
+            'estado' => 'required|in:pendiente,en_curso,completado,cancelado',
+            'observaciones' => 'nullable|string',
+        ]);
+
+        $viaje = new Viaje($request->all());
+        $viaje->fecha_hora_inicio = now(); // Asumimos inicio al crear, o podría ser un campo del form
+        $viaje->save();
+
+        return redirect()->route('viajes.index')->with('success', 'Viaje registrado exitosamente.');
     }
 
     public function show($id)
@@ -99,7 +118,25 @@ class ViajeController extends Controller
 
     public function update(Request $request, $id)
     {
-        // Validación y actualización
+        $request->validate([
+            'cliente_nombre' => 'required|string|max:255',
+            'cliente_telefono' => 'required|string|max:20',
+            'origen' => 'required|string|max:255',
+            'destino' => 'required|string|max:255',
+            'distancia_km' => 'nullable|numeric|min:0',
+            'tiempo_estimado_min' => 'nullable|integer|min:0',
+            'conductor_id' => 'nullable|exists:conductores,id',
+            'vehiculo_id' => 'nullable|exists:vehiculos,id',
+            'valor_total' => 'required|numeric|min:0',
+            'metodo_pago' => 'required|in:efectivo,qr,transferencia',
+            'estado' => 'required|in:pendiente,en_curso,completado,cancelado',
+            'observaciones' => 'nullable|string',
+        ]);
+
+        $viaje = Viaje::findOrFail($id);
+        $viaje->update($request->all());
+
+        return redirect()->route('viajes.index')->with('success', 'Viaje actualizado correctamente.');
     }
 
     public function destroy($id)

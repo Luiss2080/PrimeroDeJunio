@@ -563,36 +563,6 @@
     color: var(--text-secondary);
     display: flex;
     align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.2s;
-}
-
-.btn-icon:hover {
-    transform: translateY(-2px);
-    color: #fff;
-}
-
-.btn-view:hover {
-    background: rgba(0, 204, 255, 0.2);
-    border-color: rgba(0, 204, 255, 0.3);
-    color: #00ccff;
-}
-.btn-edit:hover {
-    background: rgba(255, 204, 0, 0.2);
-    border-color: rgba(255, 204, 0, 0.3);
-    color: #ffcc00;
-}
-.btn-delete:hover {
-    background: rgba(255, 71, 87, 0.2);
-    border-color: rgba(255, 71, 87, 0.3);
-    color: #ff4757;
-}
-
-/* --- Mobile Cards --- */
-.mobile-cards-view {
-    display: none;
-    flex-direction: column;
     gap: 1rem;
 }
 
