@@ -100,7 +100,22 @@ class VehiculoController extends Controller
     public function show($id)
     {
         $vehiculo = \App\Models\Vehiculo::findOrFail($id);
-        return view('vehiculos.perfil', compact('vehiculo'));
+        
+        // Estadísticas
+        $estadisticasActuales = $vehiculo->estadisticasDelMes();
+        $estadisticasAnteriores = $vehiculo->estadisticasDelMesAnterior();
+
+        $cambioViajes = $vehiculo->calcularCambio($estadisticasActuales['viajes_completados'], $estadisticasAnteriores['viajes_completados']);
+        $cambioIngresos = $vehiculo->calcularCambio($estadisticasActuales['ingresos_generados'], $estadisticasAnteriores['ingresos_generados']);
+        $cambioCalificacion = $vehiculo->calcularCambio($estadisticasActuales['calificacion_promedio'], $estadisticasAnteriores['calificacion_promedio']);
+
+        return view('vehiculos.perfil', compact(
+            'vehiculo', 
+            'estadisticasActuales', 
+            'cambioViajes', 
+            'cambioIngresos', 
+            'cambioCalificacion'
+        ));
     }
 
     public function edit($id)
