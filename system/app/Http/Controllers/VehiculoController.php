@@ -83,7 +83,12 @@ class VehiculoController extends Controller
             'ano' => 'required|integer|min:1900|max:' . (date('Y') + 1),
             'color' => 'required',
             'estado' => 'required|in:activo,inactivo,mantenimiento',
-            // Add other fields as needed
+            'propietario_nombre' => 'required',
+            'propietario_cedula' => 'nullable',
+            'propietario_telefono' => 'required',
+            'tipo_combustible' => 'nullable',
+            'capacidad_pasajeros' => 'nullable|integer',
+            'observaciones' => 'nullable',
         ]);
 
         \App\Models\Vehiculo::create($request->all());
@@ -112,8 +117,15 @@ class VehiculoController extends Controller
             'placa' => 'required|max:10|unique:vehiculos,placa,' . $id,
             'marca' => 'required',
             'modelo' => 'required',
-            'ano' => 'required|integer',
+            'ano' => 'required|integer|min:1900|max:' . (date('Y') + 1),
+            'color' => 'required',
             'estado' => 'required|in:activo,inactivo,mantenimiento',
+            'propietario_nombre' => 'required',
+            'propietario_cedula' => 'nullable',
+            'propietario_telefono' => 'required',
+            'tipo_combustible' => 'nullable',
+            'capacidad_pasajeros' => 'nullable|integer',
+            'observaciones' => 'nullable',
         ]);
 
         $vehiculo->update($request->all());
