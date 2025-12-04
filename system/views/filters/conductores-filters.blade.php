@@ -23,31 +23,49 @@
                 <div class="filters-grid">
                     <div class="filter-group">
                         <label class="filter-label">Estado del Conductor</label>
-                        <select name="estado" class="filter-select">
-                            <option value="">Todos los estados</option>
-                            <option value="activo">Activo</option>
-                            <option value="inactivo">Inactivo</option>
-                            <option value="suspendido">Suspendido</option>
-                        </select>
+                        <div class="custom-dropdown filter-dropdown" data-name="estado">
+                            <div class="dropdown-trigger">
+                                <span class="selected-value">Todos los estados</span>
+                                <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                            </div>
+                            <div class="dropdown-options">
+                                <div class="dropdown-option" data-value="">Todos los estados</div>
+                                <div class="dropdown-option" data-value="activo">Activo</div>
+                                <div class="dropdown-option" data-value="inactivo">Inactivo</div>
+                                <div class="dropdown-option" data-value="suspendido">Suspendido</div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="filter-group">
                         <label class="filter-label">Estado de Pago</label>
-                        <select name="estado_pago" class="filter-select">
-                            <option value="">Todos</option>
-                            <option value="al_dia">Al Día</option>
-                            <option value="mora">En Mora</option>
-                            <option value="pendiente">Pendiente</option>
-                        </select>
+                        <div class="custom-dropdown filter-dropdown" data-name="estado_pago">
+                            <div class="dropdown-trigger">
+                                <span class="selected-value">Todos</span>
+                                <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                            </div>
+                            <div class="dropdown-options">
+                                <div class="dropdown-option" data-value="">Todos</div>
+                                <div class="dropdown-option" data-value="al_dia">Al Día</div>
+                                <div class="dropdown-option" data-value="mora">En Mora</div>
+                                <div class="dropdown-option" data-value="pendiente">Pendiente</div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="filter-group">
                         <label class="filter-label">Asignación de Vehículo</label>
-                        <select name="vehiculo" class="filter-select">
-                            <option value="">Todos</option>
-                            <option value="asignado">Con Vehículo Asignado</option>
-                            <option value="sin_asignar">Sin Vehículo</option>
-                        </select>
+                        <div class="custom-dropdown filter-dropdown" data-name="vehiculo">
+                            <div class="dropdown-trigger">
+                                <span class="selected-value">Todos</span>
+                                <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                            </div>
+                            <div class="dropdown-options">
+                                <div class="dropdown-option" data-value="">Todos</div>
+                                <div class="dropdown-option" data-value="asignado">Con Vehículo Asignado</div>
+                                <div class="dropdown-option" data-value="sin_asignar">Sin Vehículo</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -58,24 +76,36 @@
                 <div class="filters-grid">
                     <div class="filter-group">
                         <label class="filter-label">Rating Mínimo</label>
-                        <select name="rating_min" class="filter-select">
-                            <option value="">Cualquier rating</option>
-                            <option value="4.5">4.5 estrellas o más</option>
-                            <option value="4.0">4.0 estrellas o más</option>
-                            <option value="3.5">3.5 estrellas o más</option>
-                            <option value="3.0">3.0 estrellas o más</option>
-                        </select>
+                        <div class="custom-dropdown filter-dropdown" data-name="rating_min">
+                            <div class="dropdown-trigger">
+                                <span class="selected-value">Cualquier rating</span>
+                                <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                            </div>
+                            <div class="dropdown-options">
+                                <div class="dropdown-option" data-value="">Cualquier rating</div>
+                                <div class="dropdown-option" data-value="4.5">4.5 estrellas o más</div>
+                                <div class="dropdown-option" data-value="4.0">4.0 estrellas o más</div>
+                                <div class="dropdown-option" data-value="3.5">3.5 estrellas o más</div>
+                                <div class="dropdown-option" data-value="3.0">3.0 estrellas o más</div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="filter-group">
                         <label class="filter-label">Experiencia</label>
-                        <select name="experiencia" class="filter-select">
-                            <option value="">Cualquier experiencia</option>
-                            <option value="0-1">0-1 años</option>
-                            <option value="2-5">2-5 años</option>
-                            <option value="5-10">5-10 años</option>
-                            <option value="10+">Más de 10 años</option>
-                        </select>
+                        <div class="custom-dropdown filter-dropdown" data-name="experiencia">
+                            <div class="dropdown-trigger">
+                                <span class="selected-value">Cualquier experiencia</span>
+                                <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                            </div>
+                            <div class="dropdown-options">
+                                <div class="dropdown-option" data-value="">Cualquier experiencia</div>
+                                <div class="dropdown-option" data-value="0-1">0-1 años</div>
+                                <div class="dropdown-option" data-value="2-5">2-5 años</div>
+                                <div class="dropdown-option" data-value="5-10">5-10 años</div>
+                                <div class="dropdown-option" data-value="10+">Más de 10 años</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -102,29 +132,41 @@
                 <div class="filters-grid">
                     <div class="filter-group">
                         <label class="filter-label">Grupo Sanguíneo</label>
-                        <select name="grupo_sanguineo" class="filter-select">
-                            <option value="">Todos</option>
-                            <option value="O+">O+</option>
-                            <option value="O-">O-</option>
-                            <option value="A+">A+</option>
-                            <option value="A-">A-</option>
-                            <option value="B+">B+</option>
-                            <option value="B-">B-</option>
-                            <option value="AB+">AB+</option>
-                            <option value="AB-">AB-</option>
-                        </select>
+                        <div class="custom-dropdown filter-dropdown" data-name="grupo_sanguineo">
+                            <div class="dropdown-trigger">
+                                <span class="selected-value">Todos</span>
+                                <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                            </div>
+                            <div class="dropdown-options">
+                                <div class="dropdown-option" data-value="">Todos</div>
+                                <div class="dropdown-option" data-value="O+">O+</div>
+                                <div class="dropdown-option" data-value="O-">O-</div>
+                                <div class="dropdown-option" data-value="A+">A+</div>
+                                <div class="dropdown-option" data-value="A-">A-</div>
+                                <div class="dropdown-option" data-value="B+">B+</div>
+                                <div class="dropdown-option" data-value="B-">B-</div>
+                                <div class="dropdown-option" data-value="AB+">AB+</div>
+                                <div class="dropdown-option" data-value="AB-">AB-</div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="filter-group">
                         <label class="filter-label">Rango de Edad</label>
-                        <select name="edad" class="filter-select">
-                            <option value="">Cualquier edad</option>
-                            <option value="18-25">18-25 años</option>
-                            <option value="26-35">26-35 años</option>
-                            <option value="36-45">36-45 años</option>
-                            <option value="46-55">46-55 años</option>
-                            <option value="55+">Más de 55 años</option>
-                        </select>
+                        <div class="custom-dropdown filter-dropdown" data-name="edad">
+                            <div class="dropdown-trigger">
+                                <span class="selected-value">Cualquier edad</span>
+                                <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                            </div>
+                            <div class="dropdown-options">
+                                <div class="dropdown-option" data-value="">Cualquier edad</div>
+                                <div class="dropdown-option" data-value="18-25">18-25 años</div>
+                                <div class="dropdown-option" data-value="26-35">26-35 años</div>
+                                <div class="dropdown-option" data-value="36-45">36-45 años</div>
+                                <div class="dropdown-option" data-value="46-55">46-55 años</div>
+                                <div class="dropdown-option" data-value="55+">Más de 55 años</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

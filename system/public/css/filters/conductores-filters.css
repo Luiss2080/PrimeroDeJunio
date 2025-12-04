@@ -160,6 +160,90 @@
     padding: 0.5rem;
 }
 
+/* --- Custom Dropdowns en Modal --- */
+.filters-content .filter-dropdown {
+    position: relative;
+    width: 100%;
+}
+
+.filters-content .filter-dropdown .dropdown-trigger {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    color: #ffffff;
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+    outline: none;
+}
+
+.filters-content .filter-dropdown .dropdown-trigger:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.filters-content .filter-dropdown.active .dropdown-trigger {
+    border-color: #00ff66;
+    box-shadow: 0 0 0 2px rgba(0, 255, 102, 0.2);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.filters-content .filter-dropdown .dropdown-arrow {
+    transition: transform 0.2s ease;
+    opacity: 0.7;
+}
+
+.filters-content .filter-dropdown.active .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+.filters-content .filter-dropdown .dropdown-options {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    width: 100%;
+    background: #1a1a1a;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.filters-content .filter-dropdown.active .dropdown-options {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.filters-content .filter-dropdown .dropdown-option {
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.8);
+    transition: all 0.2s;
+    font-size: 0.875rem;
+}
+
+.filters-content .filter-dropdown .dropdown-option:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
+}
+
+.filters-content .filter-dropdown .dropdown-option.selected {
+    background: rgba(0, 255, 102, 0.1);
+    color: #00ff66;
+}
+
 /* --- Filtros Activos --- */
 .active-filters {
     background: rgba(0, 255, 102, 0.05);
@@ -326,7 +410,9 @@
 }
 
 .filters-indicator[data-count="0"]::after {
-    display: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* --- Ordenamiento --- */
