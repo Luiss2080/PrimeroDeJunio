@@ -146,9 +146,13 @@ Route::middleware(['web', 'auth.check'])->group(function () {
         })->name('permisos.index');
 
         // Usuarios
-        Route::get('/usuarios', function () {
-            return view('usuarios.index');
-        })->name('usuarios.index');
+        Route::get('/usuarios', [App\Http\Controllers\UserController::class, 'index'])->name('usuarios.index');
+        Route::get('/usuarios/crear', [App\Http\Controllers\UserController::class, 'create'])->name('usuarios.create');
+        Route::post('/usuarios', [App\Http\Controllers\UserController::class, 'store'])->name('usuarios.store');
+        Route::get('/usuarios/{user}', [App\Http\Controllers\UserController::class, 'show'])->name('usuarios.show');
+        Route::get('/usuarios/{user}/editar', [App\Http\Controllers\UserController::class, 'edit'])->name('usuarios.edit');
+        Route::put('/usuarios/{user}', [App\Http\Controllers\UserController::class, 'update'])->name('usuarios.update');
+        Route::delete('/usuarios/{user}', [App\Http\Controllers\UserController::class, 'destroy'])->name('usuarios.destroy');
         
         // Configuración
         Route::get('/configuracion', function () {
