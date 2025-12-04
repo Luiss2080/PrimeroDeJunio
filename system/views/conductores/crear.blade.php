@@ -58,42 +58,72 @@
                     </div>
                 </div>
 
+                <!-- Información del Sistema -->
+                <div class="glass-card mt-4">
+                    <h3 class="card-title">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v6m0 6v6m-6-6h6m6 0h-6"/></svg>
+                        Valores Automáticos
+                    </h3>
+                    <div class="system-info-list">
+                        <div class="sys-item">
+                            <span class="sys-label">Rating Inicial</span>
+                            <span class="sys-value">5.0 ⭐</span>
+                        </div>
+                        <div class="sys-item">
+                            <span class="sys-label">Viajes Iniciales</span>
+                            <span class="sys-value">0</span>
+                        </div>
+                        <div class="sys-item">
+                            <span class="sys-label">Asistencia</span>
+                            <span class="sys-value">100%</span>
+                        </div>
+                        <div class="sys-item">
+                            <span class="sys-label">Estado de Pago</span>
+                            <span class="sys-value">Al Día</span>
+                        </div>
+                        <div class="sys-item">
+                            <span class="sys-label">Fecha de Ingreso</span>
+                            <span class="sys-value">{{ now()->format('d/m/Y') }}</span>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Documentación Necesaria -->
                 <div class="glass-card mt-4">
                     <h3 class="card-title">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-                        Requisitos
+                        Próximos Pasos
                     </h3>
                     <ul class="doc-checklist">
                         <li class="doc-item">
                             <div class="doc-icon">
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                             </div>
-                            <span>Cédula de Identidad</span>
+                            <span>Datos Personales Completos</span>
                         </li>
                         <li class="doc-item">
                             <div class="doc-icon">
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                             </div>
-                            <span>Licencia de Conducir</span>
+                            <span>Información de Contacto</span>
                         </li>
                         <li class="doc-item">
                             <div class="doc-icon">
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                             </div>
-                            <span>Antecedentes Penales</span>
+                            <span>Contacto de Emergencia</span>
                         </li>
                         <li class="doc-item">
                             <div class="doc-icon">
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                             </div>
-                            <span>Croquis de Domicilio</span>
+                            <span>Experiencia y Referencias</span>
                         </li>
-                        <li class="doc-item">
+                        <li class="doc-item required">
                             <div class="doc-icon">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
                             </div>
-                            <span>Garantía (Opcional)</span>
+                            <span>Documentos posteriores</span>
                         </li>
                     </ul>
                 </div>
@@ -124,8 +154,8 @@
                             <input type="text" id="cedula" name="cedula" class="form-input" placeholder="Ej: 1234567 SC" required>
                         </div>
                         <div class="form-group">
-                            <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento</label>
-                            <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" class="form-input">
+                            <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento *</label>
+                            <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" class="form-input" required>
                         </div>
                         <div class="form-group">
                             <label for="grupo_sanguineo" class="form-label">Grupo Sanguíneo</label>
@@ -177,25 +207,13 @@
                     </h3>
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="licencia" class="form-label">Número de Licencia *</label>
-                            <input type="text" id="licencia" name="licencia" class="form-input" placeholder="Ej: 1234567-C" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="categoria" class="form-label">Categoría</label>
-                            <div class="select-wrapper">
-                                <select id="categoria" name="categoria" class="form-select">
-                                    <option value="P">Categoría P (Profesional)</option>
-                                    <option value="A">Categoría A</option>
-                                    <option value="B">Categoría B</option>
-                                    <option value="C">Categoría C</option>
-                                </select>
-                                <svg class="select-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-                            </div>
+                            <label for="experiencia_anos" class="form-label">Años de Experiencia</label>
+                            <input type="number" id="experiencia_anos" name="experiencia_anos" class="form-input" placeholder="Ej: 5" min="0" max="50" value="0">
                         </div>
                     </div>
                     <div class="form-group full-width">
                         <label for="observaciones" class="form-label">Observaciones Adicionales</label>
-                        <textarea id="observaciones" name="observaciones" class="form-textarea" placeholder="Información adicional relevante..."></textarea>
+                        <textarea id="observaciones" name="observaciones" class="form-textarea" placeholder="Información adicional relevante..." rows="3"></textarea>
                     </div>
                 </div>
 
@@ -223,4 +241,57 @@
 
     <!-- JS Específico -->
     <script src="{{ asset('js/conductores/crear.js') }}"></script>
+    <script>
+        // Validación adicional del formulario
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('createForm');
+            const previewImg = document.getElementById('photoPreview');
+            const photoInput = document.getElementById('photoInput');
+            const nombreInput = document.getElementById('nombre');
+            const apellidoInput = document.getElementById('apellido');
+
+            // Actualizar preview del avatar cuando cambien nombre/apellido
+            function updateAvatarPreview() {
+                const nombre = nombreInput.value || 'Nuevo';
+                const apellido = apellidoInput.value || 'Conductor';
+                const initials = `${nombre}+${apellido}`;
+                previewImg.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(initials)}&background=00ff66&color=000&size=256`;
+            }
+
+            nombreInput.addEventListener('input', updateAvatarPreview);
+            apellidoInput.addEventListener('input', updateAvatarPreview);
+
+            // Preview de imagen subida
+            photoInput.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        previewImg.src = e.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // Validación antes de enviar
+            form.addEventListener('submit', function(e) {
+                const requiredFields = form.querySelectorAll('[required]');
+                let hasErrors = false;
+
+                requiredFields.forEach(field => {
+                    if (!field.value.trim()) {
+                        field.classList.add('error');
+                        hasErrors = true;
+                    } else {
+                        field.classList.remove('error');
+                    }
+                });
+
+                if (hasErrors) {
+                    e.preventDefault();
+                    alert('Por favor, complete todos los campos obligatorios marcados con (*)');
+                }
+            });
+        });
+    </script>
 @endsection
