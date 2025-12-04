@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ConductorController;
+use App\Http\Controllers\ChalecoController;
 
 Route::get('/', function () {
     // Si el usuario ya está autenticado, redirigir al dashboard correspondiente
@@ -82,6 +83,18 @@ Route::middleware(['web', 'auth.check'])->group(function () {
     Route::get('/conductores/{id}/editar', [ConductorController::class, 'edit'])->name('conductores.edit');
     Route::put('/conductores/{id}', [ConductorController::class, 'update'])->name('conductores.update');
     Route::delete('/conductores/{id}', [ConductorController::class, 'destroy'])->name('conductores.destroy');
+    
+    // Chalecos
+    Route::get('/chalecos', [ChalecoController::class, 'index'])->name('chalecos.index');
+    Route::get('/chalecos/crear', [ChalecoController::class, 'create'])->name('chalecos.create');
+    Route::post('/chalecos', [ChalecoController::class, 'store'])->name('chalecos.store');
+    Route::get('/chalecos/{chaleco}', [ChalecoController::class, 'show'])->name('chalecos.show');
+    Route::get('/chalecos/{chaleco}/editar', [ChalecoController::class, 'edit'])->name('chalecos.edit');
+    Route::put('/chalecos/{chaleco}', [ChalecoController::class, 'update'])->name('chalecos.update');
+    Route::delete('/chalecos/{chaleco}', [ChalecoController::class, 'destroy'])->name('chalecos.destroy');
+    Route::post('/chalecos/asignar', [ChalecoController::class, 'asignar'])->name('chalecos.asignar');
+    Route::post('/chalecos/{chaleco}/liberar', [ChalecoController::class, 'liberar'])->name('chalecos.liberar');
+    Route::get('/api/chalecos/disponibles', [ChalecoController::class, 'disponibles'])->name('api.chalecos.disponibles');
     
     // Vehículos
     Route::get('/vehiculos', function () {

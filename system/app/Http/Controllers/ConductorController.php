@@ -9,7 +9,7 @@ class ConductorController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Conductor::with(['asignaciones.vehiculo', 'viajes']);
+        $query = Conductor::with(['asignaciones.vehiculo', 'viajes', 'chaleco']);
 
         // Búsqueda
         if ($request->has('search') && $request->search) {
@@ -89,7 +89,8 @@ class ConductorController extends Controller
             'viajes' => function($query) {
                 $query->latest('fecha_hora_inicio')->take(10);
             },
-            'documentos'
+            'documentos',
+            'chaleco'
         ])->findOrFail($id);
 
         // Obtener estadísticas del conductor
