@@ -1,19 +1,6 @@
 @extends('layouts.dashboard')
 
 @section('title', 'Viajes - 1ro de Junio')
-
-@push('styles')
-    <!-- CSS Específico -->
-    <link rel="stylesheet" href="{{ asset('css/viajes/index.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/filters/viajes-filters.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/mod/confirmar.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/mod/advertencia.css') }}">
-@endpush
-
-@section('content')
-
-    <div class="viajes-index-container">
-        
         <!-- Header -->
         <div class="page-header">
             <h1 class="page-title">Gestión de Viajes</h1>

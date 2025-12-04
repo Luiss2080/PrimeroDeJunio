@@ -129,5 +129,5 @@
 
 
 <div class="pagination-container">
-    {{ $viajes->appends(request()->except('page'))->links('vendor.pagination.custom') }}
+    {{ $viajes->appends(request()->except('page'))->links('pages.viajes') }}
 </div>
