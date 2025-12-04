@@ -187,21 +187,5 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    const deleteButtons = document.querySelectorAll(".btn-delete");
-    deleteButtons.forEach((btn) => {
-        btn.addEventListener("click", function (e) {
-            if (
-                confirm("¿Estás seguro de que deseas eliminar este conductor?")
-            ) {
-                showToast("Conductor eliminado correctamente", "success");
-
-                // Remove row or card
-                const row = this.closest("tr");
-                const card = this.closest(".driver-card");
-
-                if (row) row.style.display = "none";
-                if (card) card.style.display = "none";
-            }
-        });
-    });
+    // Delete logic is now handled by mod/confirmar.js and inline onclick events
 });

@@ -2,10 +2,13 @@
 
 @section('title', 'Conductores - 1ro de Junio')
 
-@section('content')
+@push('styles')
     <!-- CSS Específico -->
     <link rel="stylesheet" href="{{ asset('css/conductores/index.css') }}">
     <link rel="stylesheet" href="{{ asset('css/mod/confirmar.css') }}">
+@endpush
+
+@section('content')
 
     <div class="conductores-index-container">
         
@@ -293,9 +296,12 @@
 
     </div>
 
-    <!-- JS Específico -->
-    <script src="{{ asset('js/conductores/index.js') }}"></script>
-    <script src="{{ asset('js/mod/confirmar.js') }}"></script>
 @endsection
 
 @include('mod.eliminar')
+
+@push('scripts')
+    <!-- JS Específico -->
+    <script src="{{ asset('js/conductores/index.js') }}"></script>
+    <script src="{{ asset('js/mod/confirmar.js') }}"></script>
+@endpush
