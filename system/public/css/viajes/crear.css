@@ -141,19 +141,6 @@
     padding-bottom: 0.8rem;
 }
 
-/* --- Sidebar Specifics --- */
-.sidebar-name {
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: #fff;
-    margin-bottom: 0.3rem;
-}
-
-.sidebar-role {
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-}
-
 /* --- Forms --- */
 .form-row {
     display: grid;
