@@ -15,7 +15,6 @@ class ConductoresFilters {
 
     init() {
         this.bindEvents();
-        this.bindModalDropdowns();
         this.loadInitialData();
     }
 
@@ -147,70 +146,6 @@ class ConductoresFilters {
         });
     }
 
-    bindModalDropdowns() {
-        const modalDropdowns = document.querySelectorAll('.filters-content .filter-dropdown');
-        
-        modalDropdowns.forEach(dropdown => {
-            const trigger = dropdown.querySelector('.dropdown-trigger');
-            const options = dropdown.querySelectorAll('.dropdown-option');
-            const selectedValue = dropdown.querySelector('.selected-value');
-            const filterName = dropdown.getAttribute('data-name');
-            
-            // Toggle dropdown al hacer clic en el trigger
-            trigger?.addEventListener('click', (e) => {
-                e.stopPropagation();
-                
-                // Cerrar otros dropdowns
-                modalDropdowns.forEach(otherDropdown => {
-                    if (otherDropdown !== dropdown) {
-                        otherDropdown.classList.remove('active');
-                    }
-                });
-                
-                dropdown.classList.toggle('active');
-            });
-            
-            // Manejo de selección de opciones
-            options.forEach(option => {
-                option.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    
-                    const value = option.getAttribute('data-value');
-                    const text = option.textContent;
-                    
-                    // Actualizar el texto seleccionado
-                    selectedValue.textContent = text;
-                    
-                    // Marcar opción como seleccionada
-                    options.forEach(opt => opt.classList.remove('selected'));
-                    option.classList.add('selected');
-                    
-                    // Guardar filtro
-                    if (value) {
-                        this.currentFilters[filterName] = value;
-                    } else {
-                        delete this.currentFilters[filterName];
-                    }
-                    
-                    // Cerrar dropdown
-                    dropdown.classList.remove('active');
-                    
-                    // Actualizar contador de filtros
-                    this.updateFiltersCount();
-                });
-            });
-        });
-        
-        // Cerrar dropdowns al hacer clic fuera
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.filter-dropdown')) {
-                modalDropdowns.forEach(dropdown => {
-                    dropdown.classList.remove('active');
-                });
-            }
-        });
-    }
-
     bindQuickFilters() {
         const quickFilters = document.querySelectorAll('.filter-panel .filter-input, .filter-panel .filter-select');
         
@@ -252,27 +187,9 @@ class ConductoresFilters {
 
         // Poblar el formulario con filtros actuales
         Object.keys(this.currentFilters).forEach(key => {
-            // Manejar inputs de fecha
-            const input = form.querySelector(`input[name="${key}"]`);
+            const input = form.querySelector(`[name="${key}"]`);
             if (input && this.currentFilters[key]) {
                 input.value = this.currentFilters[key];
-            }
-            
-            // Manejar custom dropdowns
-            const dropdown = form.querySelector(`.filter-dropdown[data-name="${key}"]`);
-            if (dropdown && this.currentFilters[key]) {
-                const selectedValue = dropdown.querySelector('.selected-value');
-                const option = dropdown.querySelector(`.dropdown-option[data-value="${this.currentFilters[key]}"]`);
-                
-                if (selectedValue && option) {
-                    selectedValue.textContent = option.textContent;
-                    
-                    // Marcar como seleccionado
-                    dropdown.querySelectorAll('.dropdown-option').forEach(opt => {
-                        opt.classList.remove('selected');
-                    });
-                    option.classList.add('selected');
-                }
             }
         });
 
@@ -325,28 +242,11 @@ class ConductoresFilters {
         this.currentFilters = {};
         this.currentPage = 1;
 
-        // Limpiar inputs de fecha
+        // Limpiar formulario de filtros
         const form = document.getElementById('filtersForm');
         if (form) {
-            const dateInputs = form.querySelectorAll('input[type="date"]');
-            dateInputs.forEach(input => input.value = '');
+            form.reset();
         }
-
-        // Limpiar custom dropdowns del modal
-        const modalDropdowns = document.querySelectorAll('.filters-content .filter-dropdown');
-        modalDropdowns.forEach(dropdown => {
-            const selectedValue = dropdown.querySelector('.selected-value');
-            const firstOption = dropdown.querySelector('.dropdown-option[data-value=""]');
-            const options = dropdown.querySelectorAll('.dropdown-option');
-            
-            if (selectedValue && firstOption) {
-                selectedValue.textContent = firstOption.textContent;
-                
-                // Limpiar selección
-                options.forEach(opt => opt.classList.remove('selected'));
-                firstOption.classList.add('selected');
-            }
-        });
 
         // Limpiar panel de filtros rápidos
         const panel = document.querySelector('.filter-panel');
@@ -364,9 +264,6 @@ class ConductoresFilters {
         this.loadData();
         this.updateFiltersIndicator();
         this.updateActiveFiltersDisplay();
-        
-        // Cerrar modal después de limpiar
-        this.closeFiltersModal();
     }
 
     updateActiveFiltersDisplay() {
@@ -430,18 +327,13 @@ class ConductoresFilters {
 
         const filterCount = Object.keys(this.currentFilters).filter(key => key !== 'search').length;
         
-        // Siempre mostrar el contador, incluso cuando es 0
-        filterBtn.setAttribute('data-count', filterCount);
-        
         if (filterCount > 0) {
             filterBtn.classList.add('filters-active');
+            filterBtn.setAttribute('data-count', filterCount);
         } else {
             filterBtn.classList.remove('filters-active');
+            filterBtn.setAttribute('data-count', '0');
         }
-    }
-    
-    updateFiltersCount() {
-        this.updateFiltersIndicator();
     }
 
     updateSortUI() {
