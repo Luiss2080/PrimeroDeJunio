@@ -53,7 +53,7 @@ class UserController extends Controller
         if ($request->ajax()) {
             return response()->json([
                 'html' => view('usuarios.partials.table', compact('usuarios'))->render(),
-                'pagination' => (string) $usuarios->appends($request->except('page'))->links(),
+                'pagination' => (string) $usuarios->appends($request->except('page'))->links('vendor.pagination.custom'),
                 'total' => $usuarios->total(),
                 'showing' => [
                     'from' => $usuarios->firstItem() ?: 0,

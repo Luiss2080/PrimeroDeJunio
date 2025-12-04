@@ -189,7 +189,7 @@
         Mostrando {{ $usuarios->firstItem() ?? 0 }} a {{ $usuarios->lastItem() ?? 0 }} de {{ $usuarios->total() }} usuarios
     </div>
     <div class="pagination-links">
-        {{ $usuarios->appends(request()->except('page'))->links() }}
+        {{ $usuarios->appends(request()->except('page'))->links('vendor.pagination.custom') }}
     </div>
 </div>
 
