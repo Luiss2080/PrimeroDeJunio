@@ -29,10 +29,11 @@
 .profile-page-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end; /* Align to bottom so title aligns with buttons */
     margin-bottom: 2rem;
-    flex-wrap: wrap;
-    gap: 1.5rem;
+    gap: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .profile-header-left {
@@ -47,56 +48,64 @@
     gap: 0.5rem;
     color: var(--text-secondary);
     text-decoration: none;
-    font-size: 0.9rem;
-    transition: color 0.2s;
-    font-weight: 500;
+    font-size: 0.85rem;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: fit-content;
+    transition: all 0.2s;
 }
 
 .btn-back:hover {
+    background: rgba(255, 255, 255, 0.1);
     color: #fff;
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateX(-2px);
 }
 
 .header-title-group {
     display: flex;
-    align-items: baseline;
+    align-items: center;
     gap: 1rem;
-    flex-wrap: wrap;
 }
 
 .page-title {
-    font-size: 2rem;
+    font-size: 2.2rem;
     font-weight: 800;
-    background: linear-gradient(to right, #fff, #a0a0a0);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #fff;
     margin: 0;
-    line-height: 1.2;
+    line-height: 1;
+    letter-spacing: -0.5px;
 }
 
 .conductor-id {
     font-family: "Monaco", monospace;
     background: rgba(0, 255, 102, 0.1);
     color: var(--primary-green);
-    padding: 0.2rem 0.6rem;
+    padding: 0.3rem 0.6rem;
     border-radius: 6px;
     font-size: 0.9rem;
     border: 1px solid rgba(0, 255, 102, 0.2);
     white-space: nowrap;
+    font-weight: 600;
 }
 
 .profile-header-actions {
     display: flex;
     gap: 1rem;
     align-items: center;
+    margin-bottom: 0.2rem; /* Slight adjustment for visual alignment */
 }
 
 /* --- Buttons --- */
 .system-btn-secondary {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: var(--text-secondary);
-    padding: 0.8rem 1.2rem;
-    border-radius: 12px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    padding: 0.7rem 1.5rem;
+    border-radius: 50px; /* Pill shape like dashboard */
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -104,23 +113,25 @@
     cursor: pointer;
     transition: all 0.2s;
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     text-decoration: none;
     white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .system-btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.1);
-    color: #fff;
-    border-color: rgba(255, 255, 255, 0.2);
+    background: var(--primary-green);
+    color: #000;
+    border-color: var(--primary-green);
     transform: translateY(-2px);
 }
 
 .btn-primary-glow {
     background: var(--primary-green);
     color: #000;
-    padding: 0.8rem 1.5rem;
-    border-radius: 12px;
+    padding: 0.7rem 1.5rem;
+    border-radius: 50px; /* Pill shape */
     font-weight: 700;
     display: inline-flex;
     align-items: center;
@@ -128,15 +139,18 @@
     gap: 0.6rem;
     text-decoration: none;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 15px rgba(0, 255, 102, 0.2);
-    border: 1px solid rgba(0, 255, 102, 0.3);
+    box-shadow: 0 4px 15px rgba(0, 255, 102, 0.3);
+    border: none;
     white-space: nowrap;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .btn-primary-glow:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 255, 102, 0.4);
-    filter: brightness(1.1);
+    box-shadow: 0 8px 25px rgba(0, 255, 102, 0.5);
+    background: #00e055;
 }
 
 /* --- Profile Sidebar (Left) --- */
