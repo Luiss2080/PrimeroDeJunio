@@ -6,6 +6,7 @@ use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ConductorController;
 use App\Http\Controllers\ChalecoController;
+use App\Http\Controllers\VehiculoController;
 
 Route::get('/', function () {
     // Si el usuario ya está autenticado, redirigir al dashboard correspondiente
@@ -97,9 +98,14 @@ Route::middleware(['web', 'auth.check'])->group(function () {
     Route::get('/api/chalecos/disponibles', [ChalecoController::class, 'disponibles'])->name('api.chalecos.disponibles');
     
     // Vehículos
-    Route::get('/vehiculos', function () {
-        return view('vehiculos.index');
-    })->name('vehiculos.index');
+    // Vehículos
+    Route::get('/vehiculos', [VehiculoController::class, 'index'])->name('vehiculos.index');
+    Route::get('/vehiculos/crear', [VehiculoController::class, 'create'])->name('vehiculos.create');
+    Route::post('/vehiculos', [VehiculoController::class, 'store'])->name('vehiculos.store');
+    Route::get('/vehiculos/{vehiculo}', [VehiculoController::class, 'show'])->name('vehiculos.show');
+    Route::get('/vehiculos/{vehiculo}/editar', [VehiculoController::class, 'edit'])->name('vehiculos.edit');
+    Route::put('/vehiculos/{vehiculo}', [VehiculoController::class, 'update'])->name('vehiculos.update');
+    Route::delete('/vehiculos/{vehiculo}', [VehiculoController::class, 'destroy'])->name('vehiculos.destroy');
     
     // Viajes
     Route::get('/viajes', function () {
