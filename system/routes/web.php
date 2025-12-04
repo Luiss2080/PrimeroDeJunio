@@ -108,9 +108,13 @@ Route::middleware(['web', 'auth.check'])->group(function () {
     Route::delete('/vehiculos/{vehiculo}', [VehiculoController::class, 'destroy'])->name('vehiculos.destroy');
     
     // Viajes
-    Route::get('/viajes', function () {
-        return view('viajes.index');
-    })->name('viajes.index');
+    Route::get('/viajes', [App\Http\Controllers\ViajeController::class, 'index'])->name('viajes.index');
+    Route::get('/viajes/crear', [App\Http\Controllers\ViajeController::class, 'create'])->name('viajes.create');
+    Route::post('/viajes', [App\Http\Controllers\ViajeController::class, 'store'])->name('viajes.store');
+    Route::get('/viajes/{viaje}', [App\Http\Controllers\ViajeController::class, 'show'])->name('viajes.show');
+    Route::get('/viajes/{viaje}/editar', [App\Http\Controllers\ViajeController::class, 'edit'])->name('viajes.edit');
+    Route::put('/viajes/{viaje}', [App\Http\Controllers\ViajeController::class, 'update'])->name('viajes.update');
+    Route::delete('/viajes/{viaje}', [App\Http\Controllers\ViajeController::class, 'destroy'])->name('viajes.destroy');
     
     // Clientes
     Route::get('/clientes', function () {
