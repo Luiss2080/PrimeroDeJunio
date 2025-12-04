@@ -50,11 +50,41 @@
 
                     <div class="form-group full-width mt-4">
                         <label for="estado" class="form-label">Estado del Conductor</label>
-                        <select id="estado" name="estado" class="form-select status-select">
-                            <option value="activo" {{ $conductor->estado == 'activo' ? 'selected' : '' }}>Activo</option>
-                            <option value="inactivo" {{ $conductor->estado == 'inactivo' ? 'selected' : '' }}>Inactivo</option>
-                            <option value="suspendido" {{ $conductor->estado == 'suspendido' ? 'selected' : '' }}>Suspendido</option>
-                        </select>
+                        <div class="select-wrapper">
+                            <select id="estado" name="estado" class="form-select status-select">
+                                <option value="activo" {{ $conductor->estado == 'activo' ? 'selected' : '' }}>Activo</option>
+                                <option value="inactivo" {{ $conductor->estado == 'inactivo' ? 'selected' : '' }}>Inactivo</option>
+                                <option value="suspendido" {{ $conductor->estado == 'suspendido' ? 'selected' : '' }}>Suspendido</option>
+                            </select>
+                            <svg class="select-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- System Information Card (New) -->
+                <div class="glass-card">
+                    <h3 class="card-title-sm">Información del Sistema</h3>
+                    <div class="system-info-list">
+                        <div class="sys-item">
+                            <span class="sys-label">Fecha de Ingreso</span>
+                            <span class="sys-value">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+                                {{ $conductor->fecha_ingreso ? \Carbon\Carbon::parse($conductor->fecha_ingreso)->format('d/m/Y') : 'No registrada' }}
+                            </span>
+                        </div>
+                        <div class="sys-item">
+                            <span class="sys-label">Última Actualización</span>
+                            <span class="sys-value">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg>
+                                {{ $conductor->updated_at ? $conductor->updated_at->diffForHumans() : 'N/A' }}
+                            </span>
+                        </div>
+                        <div class="sys-item">
+                            <span class="sys-label">Verificación de Antecedentes</span>
+                            <span class="sys-badge {{ $conductor->antecedentes_verificados_at ? 'verified' : 'pending' }}">
+                                {{ $conductor->antecedentes_verificados_at ? 'Verificado' : 'Pendiente' }}
+                            </span>
+                        </div>
                     </div>
                 </div>
             </aside>
@@ -89,17 +119,20 @@
                         </div>
                         <div class="form-group">
                             <label for="grupo_sanguineo" class="form-label">Grupo Sanguíneo</label>
-                            <select id="grupo_sanguineo" name="grupo_sanguineo" class="form-select">
-                                <option value="">Seleccionar</option>
-                                <option value="O+" {{ $conductor->grupo_sanguineo == 'O+' ? 'selected' : '' }}>O+</option>
-                                <option value="O-" {{ $conductor->grupo_sanguineo == 'O-' ? 'selected' : '' }}>O-</option>
-                                <option value="A+" {{ $conductor->grupo_sanguineo == 'A+' ? 'selected' : '' }}>A+</option>
-                                <option value="A-" {{ $conductor->grupo_sanguineo == 'A-' ? 'selected' : '' }}>A-</option>
-                                <option value="B+" {{ $conductor->grupo_sanguineo == 'B+' ? 'selected' : '' }}>B+</option>
-                                <option value="B-" {{ $conductor->grupo_sanguineo == 'B-' ? 'selected' : '' }}>B-</option>
-                                <option value="AB+" {{ $conductor->grupo_sanguineo == 'AB+' ? 'selected' : '' }}>AB+</option>
-                                <option value="AB-" {{ $conductor->grupo_sanguineo == 'AB-' ? 'selected' : '' }}>AB-</option>
-                            </select>
+                            <div class="select-wrapper">
+                                <select id="grupo_sanguineo" name="grupo_sanguineo" class="form-select">
+                                    <option value="">Seleccionar</option>
+                                    <option value="O+" {{ $conductor->grupo_sanguineo == 'O+' ? 'selected' : '' }}>O+</option>
+                                    <option value="O-" {{ $conductor->grupo_sanguineo == 'O-' ? 'selected' : '' }}>O-</option>
+                                    <option value="A+" {{ $conductor->grupo_sanguineo == 'A+' ? 'selected' : '' }}>A+</option>
+                                    <option value="A-" {{ $conductor->grupo_sanguineo == 'A-' ? 'selected' : '' }}>A-</option>
+                                    <option value="B+" {{ $conductor->grupo_sanguineo == 'B+' ? 'selected' : '' }}>B+</option>
+                                    <option value="B-" {{ $conductor->grupo_sanguineo == 'B-' ? 'selected' : '' }}>B-</option>
+                                    <option value="AB+" {{ $conductor->grupo_sanguineo == 'AB+' ? 'selected' : '' }}>AB+</option>
+                                    <option value="AB-" {{ $conductor->grupo_sanguineo == 'AB-' ? 'selected' : '' }}>AB-</option>
+                                </select>
+                                <svg class="select-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                            </div>
                         </div>
                     </div>
                 </div>
