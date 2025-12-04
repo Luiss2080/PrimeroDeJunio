@@ -11,6 +11,12 @@
         <!-- Header -->
         <div class="page-header">
             <h1 class="page-title">Gestión de Conductores</h1>
+            <div class="header-actions">
+                <a href="{{ url('/conductores/crear') }}" class="btn-primary-glow">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+                    <span>Nuevo Conductor</span>
+                </a>
+            </div>
         </div>
 
         <!-- Enhanced Toolbar -->
@@ -19,7 +25,7 @@
             <div class="toolbar-left">
                 <div class="search-box">
                     <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-                    <input type="text" id="searchDriver" class="module-search-input" placeholder="Buscar por nombre, licencia o teléfono...">
+                    <input type="text" id="searchDriver" class="module-search-input" placeholder="Buscar conductor...">
                 </div>
             </div>
 
@@ -27,7 +33,7 @@
             <div class="toolbar-right">
                 <!-- Rows Selector -->
                 <div class="rows-selector">
-                    <span>Mostrar:</span>
+                    <span class="selector-label">Mostrar:</span>
                     <div class="custom-dropdown" id="rowsDropdown">
                         <div class="dropdown-trigger">
                             <span class="selected-value">10</span>
@@ -44,61 +50,57 @@
                 <div class="toolbar-divider"></div>
 
                 <!-- Filters Button -->
-                <button class="btn-toolbar btn-secondary" id="btnFilter">
+                <button class="btn-toolbar btn-secondary" id="btnFilter" title="Filtros Avanzados">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
-                    Filtros
+                    <span class="btn-text">Filtros</span>
                 </button>
 
                 <!-- Export Button -->
-                <button class="btn-toolbar btn-secondary" id="btnExport">
+                <button class="btn-toolbar btn-secondary" id="btnExport" title="Exportar Datos">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                    Exportar
+                    <span class="btn-text">Exportar</span>
                 </button>
-
-                <!-- Add Button -->
-                <a href="{{ url('/conductores/crear') }}" class="btn-toolbar btn-primary">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-                    Nuevo Conductor
-                </a>
             </div>
         </div>
 
         <!-- Filter Panel (Collapsible) -->
         <div class="filter-panel" id="filterPanel">
-            <div class="filter-group">
-                <label class="filter-label">Estado</label>
-                <select class="filter-input">
-                    <option value="">Todos</option>
-                    <option value="activo">Activo</option>
-                    <option value="inactivo">Inactivo</option>
-                    <option value="pendiente">Pendiente</option>
-                </select>
-            </div>
-            <div class="filter-group">
-                <label class="filter-label">Categoría Licencia</label>
-                <select class="filter-input">
-                    <option value="">Todas</option>
-                    <option value="A">Categoría A</option>
-                    <option value="B">Categoría B</option>
-                    <option value="C">Categoría C</option>
-                </select>
-            </div>
-            <div class="filter-group">
-                <label class="filter-label">Fecha Registro</label>
-                <input type="date" class="filter-input">
-            </div>
-            <div class="filter-group">
-                <label class="filter-label">Vehículo</label>
-                <select class="filter-input">
-                    <option value="">Todos</option>
-                    <option value="asignado">Con Vehículo</option>
-                    <option value="sin_asignar">Sin Vehículo</option>
-                </select>
+            <div class="filter-grid">
+                <div class="filter-group">
+                    <label class="filter-label">Estado</label>
+                    <select class="filter-input">
+                        <option value="">Todos</option>
+                        <option value="activo">Activo</option>
+                        <option value="inactivo">Inactivo</option>
+                        <option value="pendiente">Pendiente</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">Categoría Licencia</label>
+                    <select class="filter-input">
+                        <option value="">Todas</option>
+                        <option value="A">Categoría A</option>
+                        <option value="B">Categoría B</option>
+                        <option value="C">Categoría C</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">Fecha Registro</label>
+                    <input type="date" class="filter-input">
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">Vehículo</label>
+                    <select class="filter-input">
+                        <option value="">Todos</option>
+                        <option value="asignado">Con Vehículo</option>
+                        <option value="sin_asignar">Sin Vehículo</option>
+                    </select>
+                </div>
             </div>
         </div>
 
-        <!-- Enhanced Table -->
-        <div class="table-container">
+        <!-- Desktop Table View -->
+        <div class="table-container desktop-view">
             <table class="data-table">
                 <thead>
                     <tr>
@@ -110,8 +112,8 @@
                         <th>Licencia</th>
                         <th>Teléfono</th>
                         <th>Estado</th>
-                        <th>Vehículo Asignado</th>
-                        <th>Acciones</th>
+                        <th>Vehículo</th>
+                        <th class="text-right">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -125,76 +127,151 @@
                                 <img src="https://ui-avatars.com/api/?name={{ urlencode($conductor->nombre . ' ' . $conductor->apellido) }}&background=00ff66&color=000" alt="Avatar" class="driver-avatar">
                                 <div>
                                     <span class="driver-name">{{ $conductor->nombre }} {{ $conductor->apellido }}</span>
-                                    <span class="driver-id">ID: #{{ $conductor->id }}</span>
+                                    <span class="driver-role">Conductor</span>
                                 </div>
                             </div>
                         </td>
                         <td>
-                            <div>{{ $conductor->cedula }}</div>
+                            <div class="info-cell">
+                                <span class="primary-text">{{ $conductor->cedula }}</span>
+                                <span class="secondary-text">ID: #{{ $conductor->id }}</span>
+                            </div>
                         </td>
                         <td>
-                            <div>{{ $conductor->licencia_numero }}</div>
-                            <small class="text-muted">Cat. {{ $conductor->licencia_categoria }}</small>
+                            <div class="info-cell">
+                                <span class="primary-text">{{ $conductor->licencia_numero }}</span>
+                                <span class="badge-category">Cat. {{ $conductor->licencia_categoria }}</span>
+                            </div>
                         </td>
                         <td>
                             <span class="contact-text">{{ $conductor->telefono }}</span>
                         </td>
                         <td>
                             <span class="status-badge status-{{ $conductor->estado }}">
+                                <span class="status-dot"></span>
                                 {{ ucfirst($conductor->estado) }}
                             </span>
                         </td>
                         <td>
-                            <div class="vehicle-info">
-                                @if($conductor->vehiculoActual)
+                            @if($conductor->vehiculoActual)
+                                <div class="vehicle-info-cell">
                                     <span class="vehicle-plate">{{ $conductor->vehiculoActual->placa }}</span>
-                                    <span class="vehicle-model">{{ $conductor->vehiculoActual->marca }} {{ $conductor->vehiculoActual->modelo }}</span>
-                                @else
-                                    <span class="text-muted">Sin vehículo</span>
-                                @endif
-                            </div>
+                                    <span class="vehicle-desc">{{ $conductor->vehiculoActual->marca }}</span>
+                                </div>
+                            @else
+                                <span class="no-vehicle">Sin asignar</span>
+                            @endif
                         </td>
                         <td>
-                            <div class="action-buttons">
-                                <a href="{{ route('conductores.show', $conductor->id) }}" class="btn-icon" title="Ver Perfil">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                                </a>
-                                <a href="{{ route('conductores.edit', $conductor->id) }}" class="btn-icon" title="Editar">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-                                </a>
-                                <button class="btn-icon btn-delete" title="Eliminar">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
-                                </button>
+                            <div class="action-buttons justify-end">
+                                <div class="dropdown-action">
+                                    <button class="btn-icon-more" type="button">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+                                    </button>
+                                    <div class="dropdown-menu-actions">
+                                        <a href="{{ route('conductores.show', $conductor->id) }}" class="dropdown-item">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                                            Ver Perfil
+                                        </a>
+                                        <a href="{{ route('conductores.edit', $conductor->id) }}" class="dropdown-item">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                                            Editar
+                                        </a>
+                                        <button class="dropdown-item text-danger btn-delete">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+                                            Eliminar
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </td>
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="8" class="text-center py-4">
+                        <td colspan="8" class="text-center py-5">
                             <div class="empty-state-container">
-                                <p class="text-muted">No hay conductores registrados.</p>
+                                <div class="empty-icon-wrapper">
+                                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                                </div>
+                                <h3 class="empty-title">No hay conductores registrados</h3>
+                                <p class="empty-desc">Comienza agregando un nuevo conductor al sistema.</p>
+                                <a href="{{ url('/conductores/crear') }}" class="btn-primary-glow mt-3">
+                                    Nuevo Conductor
+                                </a>
                             </div>
                         </td>
                     </tr>
                     @endforelse
                 </tbody>
             </table>
-            
-            <!-- Empty State (Hidden by default via JS if rows exist, but handled by blade above too) -->
-            <div class="empty-state" id="emptyState" style="display: none;">
-                <svg class="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <circle cx="11" cy="11" r="8"></circle>
-                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                </svg>
-                <p class="empty-text">No se encontraron conductores</p>
+        </div>
+
+        <!-- Mobile Card View -->
+        <div class="mobile-cards-view">
+            @forelse($conductores as $conductor)
+            <div class="driver-card">
+                <div class="card-header">
+                    <div class="driver-main-info">
+                        <img src="https://ui-avatars.com/api/?name={{ urlencode($conductor->nombre . ' ' . $conductor->apellido) }}&background=00ff66&color=000" alt="Avatar" class="card-avatar">
+                        <div>
+                            <h3 class="card-name">{{ $conductor->nombre }} {{ $conductor->apellido }}</h3>
+                            <span class="card-id">ID: #{{ $conductor->id }}</span>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn-icon-more mobile-action-trigger">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+                        </button>
+                        <!-- Mobile Dropdown Menu (Hidden by default) -->
+                        <div class="mobile-dropdown-menu">
+                            <a href="{{ route('conductores.show', $conductor->id) }}" class="mobile-menu-item">Ver Perfil</a>
+                            <a href="{{ route('conductores.edit', $conductor->id) }}" class="mobile-menu-item">Editar</a>
+                            <button class="mobile-menu-item text-danger btn-delete">Eliminar</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card-body">
+                    <div class="card-row">
+                        <span class="card-label">Estado</span>
+                        <span class="status-badge status-{{ $conductor->estado }} sm">
+                            <span class="status-dot"></span>
+                            {{ ucfirst($conductor->estado) }}
+                        </span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Licencia</span>
+                        <span class="card-value">{{ $conductor->licencia_numero }} <span class="badge-category-sm">{{ $conductor->licencia_categoria }}</span></span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Teléfono</span>
+                        <span class="card-value">{{ $conductor->telefono }}</span>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Vehículo</span>
+                        @if($conductor->vehiculoActual)
+                            <span class="card-value highlight">{{ $conductor->vehiculoActual->placa }}</span>
+                        @else
+                            <span class="card-value text-muted">Sin asignar</span>
+                        @endif
+                    </div>
+                </div>
             </div>
+            @empty
+            <div class="empty-state-mobile">
+                <div class="empty-icon-wrapper">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                </div>
+                <p>No se encontraron conductores</p>
+            </div>
+            @endforelse
         </div>
 
         <!-- Pagination -->
         <div class="pagination-container">
-            <span>Mostrando 1-10 de 50 conductores</span>
+            <span class="pagination-info">Mostrando 1-10 de 50 conductores</span>
             <div class="pagination-links">
-                <a href="#" class="page-link"><</a>
+                <a href="#" class="page-link disabled"><</a>
                 <a href="#" class="page-link active">1</a>
                 <a href="#" class="page-link">2</a>
                 <a href="#" class="page-link">3</a>

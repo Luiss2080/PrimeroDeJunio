@@ -44,39 +44,62 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 3000);
     }
 
-    // --- Search Functionality ---
+    // --- Search Functionality (Desktop & Mobile) ---
     const searchInput = document.getElementById("searchDriver");
     const tableRows = document.querySelectorAll(".data-table tbody tr");
-    const emptyState = document.getElementById("emptyState");
+    const mobileCards = document.querySelectorAll(".driver-card");
+    const emptyStateTable = document.getElementById("emptyState"); // For table
+    const emptyStateMobile = document.querySelector(".empty-state-mobile"); // For mobile
     const tableHead = document.querySelector(".data-table thead");
 
     if (searchInput) {
         searchInput.addEventListener("keyup", function (e) {
             const searchTerm = e.target.value.toLowerCase();
-            let visibleCount = 0;
+            let visibleCountTable = 0;
+            let visibleCountMobile = 0;
 
+            // Filter Table Rows
             tableRows.forEach((row) => {
                 const text = row.textContent.toLowerCase();
                 if (text.includes(searchTerm)) {
                     row.style.display = "";
-                    visibleCount++;
+                    visibleCountTable++;
                 } else {
                     row.style.display = "none";
                 }
             });
 
-            // Show/Hide Empty State
-            if (visibleCount === 0) {
-                emptyState.style.display = "flex";
-                tableHead.style.display = "none";
+            // Filter Mobile Cards
+            mobileCards.forEach((card) => {
+                const text = card.textContent.toLowerCase();
+                if (text.includes(searchTerm)) {
+                    card.style.display = "flex"; // Cards are flex containers
+                    visibleCountMobile++;
+                } else {
+                    card.style.display = "none";
+                }
+            });
+
+            // Handle Empty States
+            // Table View
+            if (visibleCountTable === 0 && tableRows.length > 0) {
+                if (emptyStateTable) emptyStateTable.style.display = "flex";
+                if (tableHead) tableHead.style.display = "none";
             } else {
-                emptyState.style.display = "none";
-                tableHead.style.display = "";
+                if (emptyStateTable) emptyStateTable.style.display = "none";
+                if (tableHead) tableHead.style.display = "";
+            }
+
+            // Mobile View
+            if (visibleCountMobile === 0 && mobileCards.length > 0) {
+                if (emptyStateMobile) emptyStateMobile.style.display = "flex";
+            } else {
+                if (emptyStateMobile) emptyStateMobile.style.display = "none";
             }
         });
     }
 
-    // --- Bulk Selection ---
+    // --- Bulk Selection (Desktop Only) ---
     const selectAll = document.getElementById("selectAll");
     const rowCheckboxes = document.querySelectorAll(".row-checkbox");
 
@@ -121,7 +144,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // --- Custom Dropdown Logic ---
+    // --- Custom Dropdown Logic (Rows Selector) ---
     const dropdown = document.getElementById("rowsDropdown");
 
     if (dropdown) {
@@ -141,8 +164,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 const value = this.dataset.value;
                 selectedValue.textContent = value;
                 dropdown.classList.remove("active");
-
-                // Here you would trigger the actual row limit change
                 console.log(`Showing ${value} rows`);
             });
         });
@@ -155,7 +176,46 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // --- Actions ---
+    // --- Action Dropdowns (Desktop & Mobile) ---
+    // Desktop Dropdowns
+    const actionButtons = document.querySelectorAll(".btn-icon-more");
+
+    actionButtons.forEach((btn) => {
+        btn.addEventListener("click", function (e) {
+            e.stopPropagation();
+            // Close all other dropdowns first
+            closeAllDropdowns();
+
+            // Toggle current
+            const parent =
+                this.closest(".dropdown-action") ||
+                this.closest(".card-actions");
+
+            if (parent.classList.contains("dropdown-action")) {
+                parent.classList.toggle("active");
+            } else {
+                // Mobile logic
+                const menu = parent.querySelector(".mobile-dropdown-menu");
+                menu.classList.toggle("show");
+            }
+        });
+    });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener("click", function () {
+        closeAllDropdowns();
+    });
+
+    function closeAllDropdowns() {
+        document
+            .querySelectorAll(".dropdown-action")
+            .forEach((el) => el.classList.remove("active"));
+        document
+            .querySelectorAll(".mobile-dropdown-menu")
+            .forEach((el) => el.classList.remove("show"));
+    }
+
+    // --- Actions (Export & Delete) ---
     const btnExport = document.getElementById("btnExport");
     if (btnExport) {
         btnExport.addEventListener("click", function () {
@@ -173,8 +233,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 confirm("¿Estás seguro de que deseas eliminar este conductor?")
             ) {
                 showToast("Conductor eliminado correctamente", "success");
-                // Simulate removal
-                this.closest("tr").style.display = "none";
+
+                // Remove row or card
+                const row = this.closest("tr");
+                const card = this.closest(".driver-card");
+
+                if (row) row.style.display = "none";
+                if (card) card.style.display = "none";
             }
         });
     });
