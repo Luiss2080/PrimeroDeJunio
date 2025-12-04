@@ -49,6 +49,15 @@
                             <option value="sin_asignar">Sin Vehículo</option>
                         </select>
                     </div>
+
+                    <div class="filter-group">
+                        <label class="filter-label">Asignación de Chaleco</label>
+                        <select name="chaleco" class="filter-select">
+                            <option value="">Todos</option>
+                            <option value="asignado">Con Chaleco Asignado</option>
+                            <option value="sin_asignar">Sin Chaleco</option>
+                        </select>
+                    </div>
                 </div>
             </div>
 

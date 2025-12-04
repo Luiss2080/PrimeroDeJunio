@@ -31,7 +31,7 @@
             <div class="toolbar-left">
                 <div class="search-box">
                     <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-                    <input type="text" id="searchDriver" class="module-search-input" placeholder="Buscar por nombre, apellido, cédula, teléfono..." value="{{ request('search') }}">
+                    <input type="text" id="searchDriver" class="module-search-input" placeholder="Buscar por nombre, apellido, cédula, teléfono, chaleco..." value="{{ request('search') }}">
                     @if(request('search'))
                     <button class="search-clear" id="clearSearch" title="Limpiar búsqueda">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>

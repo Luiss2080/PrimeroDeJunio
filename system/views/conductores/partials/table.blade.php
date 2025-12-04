@@ -3,9 +3,6 @@
     <table class="data-table">
         <thead>
             <tr>
-                <th style="width: 40px;">
-                    <input type="checkbox" class="custom-checkbox" id="selectAll">
-                </th>
                 <th>
                     <span class="sortable-header" data-sort="nombre">
                         Conductor 
@@ -15,6 +12,14 @@
                     </span>
                 </th>
                 <th>ID / CI</th>
+                <th>
+                    <span class="sortable-header" data-sort="chaleco_id">
+                        Chaleco
+                        <svg class="sort-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </span>
+                </th>
                 <th>
                     <span class="sortable-header" data-sort="rating">
                         Desempeño
@@ -48,9 +53,6 @@
             @forelse($conductores as $conductor)
             <tr class="conductor-row" data-id="{{ $conductor->id }}">
                 <td>
-                    <input type="checkbox" class="row-checkbox" value="{{ $conductor->id }}">
-                </td>
-                <td>
                     <div class="driver-info">
                         <img src="https://ui-avatars.com/api/?name={{ urlencode($conductor->nombre . ' ' . $conductor->apellido) }}&background=00ff66&color=000" alt="Avatar" class="driver-avatar">
                         <div>
@@ -63,6 +65,30 @@
                     <div class="info-cell">
                         <span class="primary-text">{{ $conductor->cedula }}</span>
                         <span class="secondary-text">ID: #{{ str_pad($conductor->id, 3, '0', STR_PAD_LEFT) }}</span>
+                    </div>
+                </td>
+                <td>
+                    <div class="chaleco-cell">
+                        @if($conductor->chaleco)
+                            <span class="chaleco-badge chaleco-asignado">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path>
+                                    <line x1="16" y1="8" x2="2" y2="22"></line>
+                                    <line x1="17.5" y1="15" x2="9" y2="15"></line>
+                                </svg>
+                                {{ $conductor->chaleco->cod_chaleco }}
+                            </span>
+                            <span class="secondary-text">Asignado {{ $conductor->fecha_asignacion_chaleco ? $conductor->fecha_asignacion_chaleco->diffForHumans() : '' }}</span>
+                        @else
+                            <span class="chaleco-badge chaleco-sin-asignar">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="15" y1="9" x2="9" y2="15"></line>
+                                    <line x1="9" y1="9" x2="15" y2="15"></line>
+                                </svg>
+                                Sin asignar
+                            </span>
+                        @endif
                     </div>
                 </td>
                 <td>
@@ -184,6 +210,21 @@
                 @if($conductor->asignaciones->where('estado', 'activa')->first())
                     @php $vehiculo = $conductor->asignaciones->where('estado', 'activa')->first()->vehiculo; @endphp
                     <span class="card-value highlight">{{ $vehiculo->placa }}</span>
+                @else
+                    <span class="card-value text-muted">Sin asignar</span>
+                @endif
+            </div>
+            <div class="card-row">
+                <span class="card-label">Chaleco</span>
+                @if($conductor->chaleco)
+                    <span class="card-value chaleco-asignado">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path>
+                            <line x1="16" y1="8" x2="2" y2="22"></line>
+                            <line x1="17.5" y1="15" x2="9" y2="15"></line>
+                        </svg>
+                        {{ $conductor->chaleco->cod_chaleco }}
+                    </span>
                 @else
                     <span class="card-value text-muted">Sin asignar</span>
                 @endif

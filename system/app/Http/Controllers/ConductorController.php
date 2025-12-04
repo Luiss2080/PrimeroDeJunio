@@ -19,7 +19,10 @@ class ConductorController extends Controller
                   ->orWhere('apellido', 'LIKE', "%{$searchTerm}%")
                   ->orWhere('cedula', 'LIKE', "%{$searchTerm}%")
                   ->orWhere('telefono', 'LIKE', "%{$searchTerm}%")
-                  ->orWhere('email', 'LIKE', "%{$searchTerm}%");
+                  ->orWhere('email', 'LIKE', "%{$searchTerm}%")
+                  ->orWhereHas('chaleco', function($qc) use ($searchTerm) {
+                      $qc->where('cod_chaleco', 'LIKE', "%{$searchTerm}%");
+                  });
             });
         }
 
@@ -41,6 +44,14 @@ class ConductorController extends Controller
                 $query->whereDoesntHave('asignaciones', function($q) {
                     $q->where('estado', 'activa');
                 });
+            }
+        }
+
+        if ($request->has('chaleco') && $request->chaleco) {
+            if ($request->chaleco === 'asignado') {
+                $query->whereNotNull('chaleco_id');
+            } elseif ($request->chaleco === 'sin_asignar') {
+                $query->whereNull('chaleco_id');
             }
         }
 
