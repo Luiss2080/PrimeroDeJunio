@@ -298,7 +298,7 @@
                                     {{ ucfirst($documento->estado) }}
                                 </div>
                                 @if($documento->archivo_ruta)
-                                <button class="btn-icon-sm" onclick="window.open('{{ asset('storage/' . $documento->archivo_ruta) }}', '_blank')">
+                                <button class="btn-icon-sm" data-documento-url="{{ asset('storage/' . $documento->archivo_ruta) }}">
                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
                                 </button>
                                 @endif
@@ -375,4 +375,15 @@
 
     <!-- JS Específico -->
     <script src="{{ asset('js/conductores/perfil.js') }}"></script>
+    <script>
+        // Manejar clicks en botones de documentos
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.btn-icon-sm[data-documento-url]').forEach(button => {
+                button.addEventListener('click', function() {
+                    const url = this.getAttribute('data-documento-url');
+                    window.open(url, '_blank');
+                });
+            });
+        });
+    </script>
 @endsection

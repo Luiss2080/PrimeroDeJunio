@@ -177,6 +177,47 @@
                     </div>
                 </div>
 
+                <!-- Professional Information -->
+                <div class="glass-card">
+                    <h3 class="card-title">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/></svg>
+                        Información Profesional
+                    </h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="experiencia_anos" class="form-label">Años de Experiencia</label>
+                            <input type="number" id="experiencia_anos" name="experiencia_anos" class="form-input" value="{{ $conductor->experiencia_anos }}" min="0" max="50">
+                        </div>
+                        <div class="form-group">
+                            <label for="estado_pago" class="form-label">Estado de Pago</label>
+                            <div class="select-wrapper">
+                                <select id="estado_pago" name="estado_pago" class="form-select">
+                                    <option value="al_dia" {{ $conductor->estado_pago == 'al_dia' ? 'selected' : '' }}>Al Día</option>
+                                    <option value="mora" {{ $conductor->estado_pago == 'mora' ? 'selected' : '' }}>En Mora</option>
+                                    <option value="pendiente" {{ $conductor->estado_pago == 'pendiente' ? 'selected' : '' }}>Pendiente</option>
+                                </select>
+                                <svg class="select-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="asistencia_porcentaje" class="form-label">Porcentaje de Asistencia (%)</label>
+                            <input type="number" id="asistencia_porcentaje" name="asistencia_porcentaje" class="form-input" value="{{ $conductor->asistencia_porcentaje }}" min="0" max="100">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Information -->
+                <div class="glass-card">
+                    <h3 class="card-title">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9a2 2 0 0 1-2 2H6l-4-4 4-4h6a2 2 0 0 1 2 2v4z"/><path d="M18 9h4l-4 4-4-4h4z"/></svg>
+                        Información Adicional
+                    </h3>
+                    <div class="form-group full-width">
+                        <label for="observaciones" class="form-label">Observaciones</label>
+                        <textarea id="observaciones" name="observaciones" class="form-textarea" rows="4" placeholder="Notas adicionales sobre el conductor...">{{ $conductor->observaciones }}</textarea>
+                    </div>
+                </div>
+
             </div>
         </form>
     </div>

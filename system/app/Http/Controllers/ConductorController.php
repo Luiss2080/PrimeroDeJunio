@@ -58,11 +58,70 @@ class ConductorController extends Controller
         return view('conductores.crear');
     }
 
+    public function store(Request $request)
+    {
+        $validatedData = $request->validate([
+            'nombre' => 'required|string|max:100',
+            'apellido' => 'required|string|max:100',
+            'cedula' => 'required|string|max:20|unique:conductores,cedula',
+            'telefono' => 'required|string|max:50',
+            'email' => 'nullable|email|max:100',
+            'direccion' => 'nullable|string',
+            'fecha_nacimiento' => 'required|date',
+            'grupo_sanguineo' => 'nullable|string|max:5',
+            'contacto_emergencia_nombre' => 'nullable|string|max:100',
+            'contacto_emergencia_telefono' => 'nullable|string|max:20',
+            'experiencia_anos' => 'nullable|integer|min:0',
+            'estado' => 'required|in:activo,inactivo,suspendido',
+            'observaciones' => 'nullable|string'
+        ]);
+
+        // Establecer valores por defecto
+        $validatedData['rating'] = 5.0;
+        $validatedData['total_viajes'] = 0;
+        $validatedData['asistencia_porcentaje'] = 100;
+        $validatedData['antecedentes_penales'] = false;
+        $validatedData['estado_pago'] = 'al_dia';
+        $validatedData['fecha_ingreso'] = now()->toDateString();
+
+        $conductor = Conductor::create($validatedData);
+
+        return redirect()->route('conductores.index')->with('success', 'Conductor creado correctamente.');
+    }
+
     public function edit($id)
     {
         $conductor = Conductor::findOrFail($id);
         return view('conductores.editar', compact('conductor'));
     }
+
+    public function update(Request $request, $id)
+    {
+        $conductor = Conductor::findOrFail($id);
+
+        $validatedData = $request->validate([
+            'nombre' => 'required|string|max:100',
+            'apellido' => 'required|string|max:100',
+            'cedula' => 'required|string|max:20|unique:conductores,cedula,' . $conductor->id,
+            'telefono' => 'required|string|max:50',
+            'email' => 'nullable|email|max:100',
+            'direccion' => 'nullable|string',
+            'fecha_nacimiento' => 'required|date',
+            'grupo_sanguineo' => 'nullable|string|max:5',
+            'contacto_emergencia_nombre' => 'nullable|string|max:100',
+            'contacto_emergencia_telefono' => 'nullable|string|max:20',
+            'experiencia_anos' => 'nullable|integer|min:0',
+            'estado' => 'required|in:activo,inactivo,suspendido',
+            'estado_pago' => 'required|in:al_dia,mora,pendiente',
+            'asistencia_porcentaje' => 'nullable|integer|min:0|max:100',
+            'observaciones' => 'nullable|string'
+        ]);
+
+        $conductor->update($validatedData);
+
+        return redirect()->route('conductores.show', $conductor->id)->with('success', 'Conductor actualizado correctamente.');
+    }
+
     public function destroy($id)
     {
         try {
