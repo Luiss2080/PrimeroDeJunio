@@ -9,26 +9,29 @@
     <div class="conductores-profile-container">
         
         <!-- Header with Back Button and Actions -->
-        <div class="page-header">
-            <div class="header-left">
+        <div class="profile-header-container">
+            <div class="header-top">
                 <a href="{{ route('conductores.index') }}" class="btn-back">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
                     <span>Volver</span>
                 </a>
+            </div>
+            
+            <div class="header-main-row">
                 <div class="header-title-group">
                     <h1 class="page-title">Perfil de Conductor</h1>
                     <span class="conductor-id">ID: #CND-{{ str_pad($conductor->id, 3, '0', STR_PAD_LEFT) }}</span>
                 </div>
-            </div>
-            <div class="header-actions">
-                <button class="btn-secondary" title="Exportar Ficha">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                    <span>Exportar</span>
-                </button>
-                <a href="{{ route('conductores.edit', $conductor->id) }}" class="btn-primary-glow">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-                    <span>Editar Perfil</span>
-                </a>
+                <div class="header-actions-group">
+                    <button class="system-btn-secondary" title="Exportar Ficha">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        <span>Exportar</span>
+                    </button>
+                    <a href="{{ route('conductores.edit', $conductor->id) }}" class="btn-primary-glow">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                        <span>Editar Perfil</span>
+                    </a>
+                </div>
             </div>
         </div>
 
@@ -78,13 +81,29 @@
                         </div>
                     </div>
 
+                    <!-- New Mini Details Row -->
+                    <div class="mini-details-row">
+                        <div class="mini-detail">
+                            <span class="mini-label">Edad</span>
+                            <span class="mini-value">{{ \Carbon\Carbon::parse($conductor->fecha_nacimiento)->age }} Años</span>
+                        </div>
+                        <div class="mini-detail">
+                            <span class="mini-label">Sangre</span>
+                            <span class="mini-value">{{ $conductor->grupo_sanguineo ?? 'N/A' }}</span>
+                        </div>
+                        <div class="mini-detail">
+                            <span class="mini-label">Licencia</span>
+                            <span class="mini-value">CAT-P</span>
+                        </div>
+                    </div>
+
                     <div class="profile-contact-info">
                         <div class="contact-item">
                             <div class="contact-icon">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                             </div>
                             <div class="contact-details">
-                                <span class="contact-label">Teléfono</span>
+                                <span class="contact-label">Móvil Personal</span>
                                 <span class="contact-value">{{ $conductor->telefono }}</span>
                             </div>
                         </div>
@@ -93,7 +112,7 @@
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                             </div>
                             <div class="contact-details">
-                                <span class="contact-label">Email</span>
+                                <span class="contact-label">Correo Electrónico</span>
                                 <span class="contact-value">{{ $conductor->email ?? 'No registrado' }}</span>
                             </div>
                         </div>
@@ -102,20 +121,20 @@
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
                             </div>
                             <div class="contact-details">
-                                <span class="contact-label">Dirección</span>
-                                <span class="contact-value">{{ $conductor->direccion }}</span>
+                                <span class="contact-label">Domicilio</span>
+                                <span class="contact-value">{{ Str::limit($conductor->direccion, 25) }}</span>
                             </div>
                         </div>
                     </div>
 
                     <div class="profile-actions">
-                        <button class="btn-action-icon" title="Llamar">
+                        <button class="btn-action-icon call" title="Llamar">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                         </button>
-                        <button class="btn-action-icon" title="Enviar Email">
+                        <button class="btn-action-icon email" title="Enviar Email">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                         </button>
-                        <button class="btn-action-icon" title="WhatsApp">
+                        <button class="btn-action-icon whatsapp" title="WhatsApp">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
                         </button>
                     </div>

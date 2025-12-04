@@ -27,19 +27,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // --- Quick Actions (Demo) ---
-    const actionBtns = document.querySelectorAll(".btn-action-icon");
-    actionBtns.forEach((btn) => {
-        btn.addEventListener("click", function () {
-            const action = this.getAttribute("title");
-            // Here you would implement the actual action (e.g., open modal, trigger call)
-            console.log(`Action triggered: ${action}`);
-
-            // Simple visual feedback
-            this.style.transform = "scale(0.95)";
-            setTimeout(() => {
-                this.style.transform = "";
-            }, 100);
-        });
-    });
+    // --- Quick Actions Logic (Optional) ---
+    // You can add specific handlers here if needed in the future
 });
