@@ -54,7 +54,7 @@
                         </div>
                         <div class="user-details">
                             <span class="user-name">{{ $usuario->nombre }} {{ $usuario->apellido }}</span>
-                            <span class="user-role-text">{{ ucfirst($usuario->rol_id ?? 'Usuario') }}</span>
+                            <span class="user-role-text">{{ ucfirst($usuario->rol->nombre ?? 'Usuario') }}</span>
                         </div>
                     </div>
                 </td>
@@ -71,8 +71,8 @@
                     <span class="secondary-text">{{ $usuario->fecha_nacimiento ? \Carbon\Carbon::parse($usuario->fecha_nacimiento)->format('d/m/Y') : 'N/A' }}</span>
                 </td>
                 <td>
-                    <span class="role-badge role-{{ strtolower($usuario->rol_id ?? 'usuario') }}">
-                        {{ ucfirst($usuario->rol_id ?? 'Usuario') }}
+                    <span class="role-badge role-{{ strtolower($usuario->rol->nombre ?? 'usuario') }}">
+                        {{ ucfirst($usuario->rol->nombre ?? 'Usuario') }}
                     </span>
                 </td>
                 <td>
@@ -128,7 +128,7 @@
                 </div>
                 <div>
                     <h3 class="card-name">{{ $usuario->nombre }} {{ $usuario->apellido }}</h3>
-                    <span class="card-role">{{ ucfirst($usuario->rol_id ?? 'Usuario') }}</span>
+                    <span class="card-role">{{ ucfirst($usuario->rol->nombre ?? 'Usuario') }}</span>
                 </div>
             </div>
             <div class="card-actions-direct">
