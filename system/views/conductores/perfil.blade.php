@@ -4,7 +4,7 @@
 
 @section('content')
     <!-- CSS Específico -->
-    <link rel="stylesheet" href="{{ asset('css/conductores/perfil.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/conductores/perfil.css') }}?v={{ time() }}">
 
     <div class="conductores-profile-container">
         
