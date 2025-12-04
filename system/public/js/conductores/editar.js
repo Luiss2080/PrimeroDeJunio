@@ -1,12 +1,11 @@
 /* ============================================
    CONDUCTORES - EDITAR JS
    ============================================ */
-/* Reusing logic from crear.js */
+
 document.addEventListener("DOMContentLoaded", function () {
-    // Image Preview
+    // Image Preview Logic
     const photoInput = document.getElementById("photoInput");
     const photoPreview = document.getElementById("photoPreview");
-    const uploadContainer = document.querySelector(".photo-upload-container");
 
     if (photoInput && photoPreview) {
         photoInput.addEventListener("change", function (e) {
@@ -22,11 +21,18 @@ document.addEventListener("DOMContentLoaded", function () {
                 reader.readAsDataURL(file);
             }
         });
+    }
 
-        if (uploadContainer) {
-            uploadContainer.addEventListener("click", function () {
-                photoInput.click();
-            });
-        }
+    // Optional: Add form submission animation or validation here
+    const form = document.getElementById("editForm");
+    if (form) {
+        form.addEventListener("submit", function () {
+            const btn = this.querySelector('button[type="submit"]');
+            if (btn) {
+                btn.innerHTML =
+                    '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Guardando...';
+                btn.disabled = true;
+            }
+        });
     }
 });
