@@ -218,6 +218,28 @@ document.addEventListener("DOMContentLoaded", function () {
                 minute: "2-digit",
             }).format(new Date(date));
         },
+        // ============================================
+        // RESPONSIVE MENU
+        // ============================================
+        setupResponsiveMenu: function () {
+            const menuToggle = document.querySelector(".menu-toggle");
+            const sidebar = document.querySelector(".dashboard-sidebar");
+            const overlay = document.querySelector(".sidebar-overlay");
+
+            if (menuToggle && sidebar) {
+                menuToggle.addEventListener("click", () => {
+                    sidebar.classList.toggle("active");
+                    if (overlay) overlay.classList.toggle("active");
+                });
+            }
+
+            if (overlay) {
+                overlay.addEventListener("click", () => {
+                    sidebar.classList.remove("active");
+                    overlay.classList.remove("active");
+                });
+            }
+        },
     };
 
     // ============================================

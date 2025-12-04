@@ -14,9 +14,12 @@ window.addEventListener("load", function () {
 
 document.addEventListener("DOMContentLoaded", function () {
     // --- Toast Notification System ---
-    const toastContainer = document.getElementById("toastContainer");
+    // --- Toast Notification System ---
+    // Made global to be accessible from Blade views
+    window.showToast = function (message, type = "success") {
+        const toastContainer = document.getElementById("toastContainer");
+        if (!toastContainer) return;
 
-    function showToast(message, type = "success") {
         const toast = document.createElement("div");
         toast.className = `toast toast-${type}`;
 
@@ -42,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
             toast.style.transform = "translateX(50px)";
             setTimeout(() => toast.remove(), 300);
         }, 3000);
-    }
+    };
 
     // --- Search Functionality (Desktop & Mobile) ---
     const searchInput = document.getElementById("searchDriver");

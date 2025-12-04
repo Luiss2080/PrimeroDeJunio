@@ -7,18 +7,20 @@
     height: 100%;
     background: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(5px);
-    z-index: 1000;
+    z-index: 9999; /* High z-index to stay on top */
     display: flex;
     align-items: center;
     justify-content: center;
     opacity: 0;
     visibility: hidden;
+    pointer-events: none; /* Prevent clicks when hidden */
     transition: all 0.3s ease;
 }
 
 .modal-overlay.active {
     opacity: 1;
     visibility: visible;
+    pointer-events: auto; /* Enable clicks when visible */
 }
 
 /* Modal Container */

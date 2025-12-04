@@ -1,8 +1,17 @@
 document.addEventListener("DOMContentLoaded", function () {
+    // Prevent multiple initializations
+    if (window.modalInitialized) return;
+    window.modalInitialized = true;
+
     const modal = document.getElementById("deleteModal");
     const cancelBtn = document.getElementById("cancelDeleteBtn");
     const confirmBtn = document.getElementById("confirmDeleteBtn");
     const deleteForm = document.getElementById("deleteForm");
+
+    if (!modal) {
+        console.error("Modal deleteModal not found");
+        return;
+    }
 
     // Function to open modal
     window.openDeleteModal = function (actionUrl, itemName = "este elemento") {
@@ -18,18 +27,24 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         // Show modal
+        console.log("Opening delete modal for:", actionUrl);
         modal.classList.add("active");
+        document.body.style.overflow = "hidden"; // Prevent background scrolling
     };
 
     // Function to close modal
     window.closeDeleteModal = function () {
         if (!modal) return;
         modal.classList.remove("active");
+        document.body.style.overflow = ""; // Restore scrolling
     };
 
     // Event Listeners
     if (cancelBtn) {
-        cancelBtn.addEventListener("click", window.closeDeleteModal);
+        // Remove existing listeners to be safe (though cloning is better, this is simple)
+        const newCancelBtn = cancelBtn.cloneNode(true);
+        cancelBtn.parentNode.replaceChild(newCancelBtn, cancelBtn);
+        newCancelBtn.addEventListener("click", window.closeDeleteModal);
     }
 
     // Close on click outside
