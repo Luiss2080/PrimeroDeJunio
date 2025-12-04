@@ -78,7 +78,9 @@
                                 </svg>
                                 {{ $conductor->chaleco->cod_chaleco }}
                             </span>
-                            <span class="secondary-text">Asignado {{ $conductor->fecha_asignacion_chaleco ? $conductor->fecha_asignacion_chaleco->diffForHumans() : '' }}</span>
+                            <span class="secondary-text">
+                                Asignado {{ $conductor->fecha_asignacion_chaleco && $conductor->fecha_asignacion_chaleco instanceof \Carbon\Carbon ? $conductor->fecha_asignacion_chaleco->diffForHumans() : 'recientemente' }}
+                            </span>
                         @else
                             <span class="chaleco-badge chaleco-sin-asignar">
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

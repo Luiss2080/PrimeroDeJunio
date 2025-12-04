@@ -36,6 +36,13 @@ class Conductor extends Model
         'observaciones'
     ];
 
+    protected $casts = [
+        'fecha_asignacion_chaleco' => 'datetime',
+        'fecha_nacimiento' => 'date',
+        'fecha_ingreso' => 'date',
+        'antecedentes_verificados_at' => 'datetime'
+    ];
+
     /**
      * Relación con Usuario
      */
