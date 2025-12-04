@@ -176,45 +176,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // --- Action Dropdowns (Desktop & Mobile) ---
-    // Desktop Dropdowns
-    const actionButtons = document.querySelectorAll(".btn-icon-more");
-
-    actionButtons.forEach((btn) => {
-        btn.addEventListener("click", function (e) {
-            e.stopPropagation();
-            // Close all other dropdowns first
-            closeAllDropdowns();
-
-            // Toggle current
-            const parent =
-                this.closest(".dropdown-action") ||
-                this.closest(".card-actions");
-
-            if (parent.classList.contains("dropdown-action")) {
-                parent.classList.toggle("active");
-            } else {
-                // Mobile logic
-                const menu = parent.querySelector(".mobile-dropdown-menu");
-                menu.classList.toggle("show");
-            }
-        });
-    });
-
-    // Close dropdowns when clicking outside
-    document.addEventListener("click", function () {
-        closeAllDropdowns();
-    });
-
-    function closeAllDropdowns() {
-        document
-            .querySelectorAll(".dropdown-action")
-            .forEach((el) => el.classList.remove("active"));
-        document
-            .querySelectorAll(".mobile-dropdown-menu")
-            .forEach((el) => el.classList.remove("show"));
-    }
-
     // --- Actions (Export & Delete) ---
     const btnExport = document.getElementById("btnExport");
     if (btnExport) {

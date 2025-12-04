@@ -10,6 +10,7 @@
     --text-primary: #ffffff;
     --text-secondary: #a0a0a0;
     --card-bg: rgba(30, 30, 30, 0.6);
+    --primary-green: #00ff66;
 }
 
 /* --- Header & Toolbar --- */
@@ -306,6 +307,16 @@
     border-bottom: none;
 }
 
+.data-table tbody tr {
+    transition: all 0.2s ease;
+    border-left: 3px solid transparent;
+}
+
+.data-table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.03);
+    border-left: 3px solid var(--primary-green); /* Green Accent on Hover */
+}
+
 .data-table tr:hover td {
     background: rgba(255, 255, 255, 0.03);
 }
@@ -354,14 +365,27 @@
     color: var(--text-secondary);
 }
 
-.badge-category {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 0.2rem 0.6rem;
-    border-radius: 6px;
-    font-size: 0.75rem;
+/* Rating Cell */
+.rating-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.star-rating {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    color: #ffcc00; /* Gold for star */
+}
+
+.star-icon {
+    font-size: 1.1rem;
+}
+
+.rating-value {
     font-weight: 700;
     color: #fff;
-    display: inline-block;
 }
 
 /* Status Badges */
@@ -390,7 +414,8 @@
     border: 1px solid rgba(0, 255, 102, 0.2);
 }
 
-.status-inactivo {
+.status-inactivo,
+.status-suspendido {
     background: rgba(255, 59, 48, 0.1);
     color: #ff3b30;
     border: 1px solid rgba(255, 59, 48, 0.2);
@@ -400,6 +425,28 @@
     background: rgba(255, 204, 0, 0.1);
     color: #ffcc00;
     border: 1px solid rgba(255, 204, 0, 0.2);
+}
+
+/* Payment Badges */
+.payment-badge {
+    padding: 0.3rem 0.8rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.status-al_dia {
+    background: rgba(0, 122, 255, 0.15);
+    color: #007aff;
+    border: 1px solid rgba(0, 122, 255, 0.3);
+}
+
+.status-mora {
+    background: rgba(255, 59, 48, 0.15);
+    color: #ff3b30;
+    border: 1px solid rgba(255, 59, 48, 0.3);
 }
 
 /* Vehicle Info */
@@ -431,10 +478,11 @@
     font-size: 0.9rem;
 }
 
-/* Action Buttons */
+/* Action Buttons (Direct Icons) */
 .action-buttons {
     display: flex;
-    gap: 0.5rem;
+    gap: 0.8rem;
+    align-items: center;
 }
 
 .justify-end {
@@ -452,96 +500,31 @@
     background: rgba(255, 255, 255, 0.05);
     color: var(--text-secondary);
     transition: all 0.2s;
+    text-decoration: none;
 }
 
 .btn-icon:hover {
-    background: #fff;
-    color: #000;
     transform: translateY(-2px);
+    border-color: currentColor;
+}
+
+/* Specific Action Colors */
+.btn-view:hover {
+    color: #007aff; /* Blue */
+    background: rgba(0, 122, 255, 0.1);
+    box-shadow: 0 4px 10px rgba(0, 122, 255, 0.2);
+}
+
+.btn-edit:hover {
+    color: #ffcc00; /* Orange/Yellow */
+    background: rgba(255, 204, 0, 0.1);
+    box-shadow: 0 4px 10px rgba(255, 204, 0, 0.2);
 }
 
 .btn-delete:hover {
-    background: #ff3b30;
-    color: #fff;
-    border-color: #ff3b30;
-}
-
-/* Dropdown Actions */
-.dropdown-action {
-    position: relative;
-}
-
-.btn-icon-more {
-    width: 36px;
-    height: 36px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: transparent;
-    border: none;
-    color: var(--text-secondary);
-    cursor: pointer;
-    transition: all 0.2s;
-}
-
-.btn-icon-more:hover {
-    background: rgba(255, 255, 255, 0.1);
-    color: #fff;
-}
-
-.dropdown-menu-actions {
-    position: absolute;
-    right: 0;
-    top: 100%;
-    width: 160px;
-    background: #1a1a1a;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    padding: 0.5rem;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(10px);
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 50;
-}
-
-.dropdown-action:hover .dropdown-menu-actions,
-.dropdown-action.active .dropdown-menu-actions {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-.dropdown-item {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    padding: 0.8rem;
-    border-radius: 8px;
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-    text-decoration: none;
-    transition: all 0.2s;
-    background: transparent;
-    border: none;
-    width: 100%;
-    text-align: left;
-    cursor: pointer;
-}
-
-.dropdown-item:hover {
-    background: rgba(255, 255, 255, 0.05);
-    color: #fff;
-}
-
-.text-danger {
-    color: #ff3b30 !important;
-}
-
-.text-danger:hover {
-    background: rgba(255, 59, 48, 0.1) !important;
+    color: #ff3b30; /* Red */
+    background: rgba(255, 59, 48, 0.1);
+    box-shadow: 0 4px 10px rgba(255, 59, 48, 0.2);
 }
 
 /* --- Mobile Card View --- */
@@ -557,6 +540,25 @@
     border-radius: 20px;
     padding: 1.5rem;
     transition: transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Green Accent for Cards */
+.driver-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--primary-green);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.driver-card:hover::before {
+    opacity: 1;
 }
 
 .driver-card:hover {
@@ -601,6 +603,29 @@
     border-radius: 6px;
 }
 
+/* Mobile Direct Actions */
+.card-actions-direct {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.btn-icon-sm {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-secondary);
+    transition: all 0.2s;
+}
+
+.btn-icon-sm:hover {
+    transform: translateY(-2px);
+}
+
 .card-body {
     display: flex;
     flex-direction: column;
@@ -641,44 +666,6 @@
     border-radius: 4px;
     font-size: 0.7rem;
     margin-left: 0.5rem;
-}
-
-/* Mobile Dropdown */
-.mobile-dropdown-menu {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background: #252525;
-    border-radius: 12px;
-    padding: 0.5rem;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
-    z-index: 10;
-    min-width: 150px;
-    display: none;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.mobile-dropdown-menu.show {
-    display: block;
-    animation: fadeIn 0.2s ease;
-}
-
-.mobile-menu-item {
-    display: block;
-    padding: 0.8rem 1rem;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    transition: background 0.2s;
-    background: transparent;
-    border: none;
-    width: 100%;
-    text-align: left;
-}
-
-.mobile-menu-item:hover {
-    background: rgba(255, 255, 255, 0.1);
 }
 
 /* Pagination */

@@ -109,7 +109,8 @@
                         </th>
                         <th>Conductor</th>
                         <th>ID / CI</th>
-                        <th>Licencia</th>
+                        <th>Desempeño</th>
+                        <th>Estado Pago</th>
                         <th>Teléfono</th>
                         <th>Estado</th>
                         <th>Vehículo</th>
@@ -138,10 +139,18 @@
                             </div>
                         </td>
                         <td>
-                            <div class="info-cell">
-                                <span class="primary-text">{{ $conductor->licencia_numero }}</span>
-                                <span class="badge-category">Cat. {{ $conductor->licencia_categoria }}</span>
+                            <div class="rating-cell">
+                                <div class="star-rating">
+                                    <span class="star-icon">★</span>
+                                    <span class="rating-value">{{ $conductor->rating }}</span>
+                                </div>
+                                <span class="secondary-text">{{ $conductor->total_viajes }} viajes</span>
                             </div>
+                        </td>
+                        <td>
+                            <span class="payment-badge status-{{ $conductor->estado_pago }}">
+                                {{ ucfirst(str_replace('_', ' ', $conductor->estado_pago)) }}
+                            </span>
                         </td>
                         <td>
                             <span class="contact-text">{{ $conductor->telefono }}</span>
@@ -164,31 +173,21 @@
                         </td>
                         <td>
                             <div class="action-buttons justify-end">
-                                <div class="dropdown-action">
-                                    <button class="btn-icon-more" type="button">
-                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
-                                    </button>
-                                    <div class="dropdown-menu-actions">
-                                        <a href="{{ route('conductores.show', $conductor->id) }}" class="dropdown-item">
-                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                                            Ver Perfil
-                                        </a>
-                                        <a href="{{ route('conductores.edit', $conductor->id) }}" class="dropdown-item">
-                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-                                            Editar
-                                        </a>
-                                        <button class="dropdown-item text-danger btn-delete">
-                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
-                                            Eliminar
-                                        </button>
-                                    </div>
-                                </div>
+                                <a href="{{ route('conductores.show', $conductor->id) }}" class="btn-icon btn-view" title="Ver Perfil">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                                </a>
+                                <a href="{{ route('conductores.edit', $conductor->id) }}" class="btn-icon btn-edit" title="Editar">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                                </a>
+                                <button class="btn-icon btn-delete" title="Eliminar">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+                                </button>
                             </div>
                         </td>
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="8" class="text-center py-5">
+                        <td colspan="9" class="text-center py-5">
                             <div class="empty-state-container">
                                 <div class="empty-icon-wrapper">
                                     <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -218,16 +217,17 @@
                             <span class="card-id">ID: #{{ $conductor->id }}</span>
                         </div>
                     </div>
-                    <div class="card-actions">
-                        <button class="btn-icon-more mobile-action-trigger">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+                    <!-- Mobile Actions (Direct Icons) -->
+                    <div class="card-actions-direct">
+                        <a href="{{ route('conductores.show', $conductor->id) }}" class="btn-icon-sm btn-view">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                        </a>
+                        <a href="{{ route('conductores.edit', $conductor->id) }}" class="btn-icon-sm btn-edit">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                        </a>
+                        <button class="btn-icon-sm btn-delete">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
                         </button>
-                        <!-- Mobile Dropdown Menu (Hidden by default) -->
-                        <div class="mobile-dropdown-menu">
-                            <a href="{{ route('conductores.show', $conductor->id) }}" class="mobile-menu-item">Ver Perfil</a>
-                            <a href="{{ route('conductores.edit', $conductor->id) }}" class="mobile-menu-item">Editar</a>
-                            <button class="mobile-menu-item text-danger btn-delete">Eliminar</button>
-                        </div>
                     </div>
                 </div>
                 
@@ -240,8 +240,16 @@
                         </span>
                     </div>
                     <div class="card-row">
-                        <span class="card-label">Licencia</span>
-                        <span class="card-value">{{ $conductor->licencia_numero }} <span class="badge-category-sm">{{ $conductor->licencia_categoria }}</span></span>
+                        <span class="card-label">Desempeño</span>
+                        <div class="rating-cell">
+                            <span class="star-icon">★</span> {{ $conductor->rating }} <span class="text-muted">({{ $conductor->total_viajes }} viajes)</span>
+                        </div>
+                    </div>
+                    <div class="card-row">
+                        <span class="card-label">Pago</span>
+                        <span class="payment-badge status-{{ $conductor->estado_pago }}">
+                            {{ ucfirst(str_replace('_', ' ', $conductor->estado_pago)) }}
+                        </span>
                     </div>
                     <div class="card-row">
                         <span class="card-label">Teléfono</span>
