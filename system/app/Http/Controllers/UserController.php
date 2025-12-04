@@ -78,10 +78,10 @@ class UserController extends Controller
         return abort(404);
     }
 
-    public function show(User $user)
+    public function show($id)
     {
-        // return view('usuarios.perfil', compact('user'));
-        return abort(404);
+        $usuario = User::findOrFail($id);
+        return view('usuarios.perfil', compact('usuario'));
     }
 
     public function edit($id)
