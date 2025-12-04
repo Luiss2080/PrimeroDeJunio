@@ -13,6 +13,8 @@
                 </th>
                 <th>Email</th>
                 <th>Teléfono</th>
+                <th>Dirección</th>
+                <th>Fecha Nac.</th>
                 <th>
                     <span class="sortable-header" data-sort="rol_id">
                         Rol
@@ -31,7 +33,7 @@
                 </th>
                 <th>
                     <span class="sortable-header" data-sort="created_at">
-                        Fecha Registro
+                        Registro
                         <svg class="sort-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <polyline points="6 9 12 15 18 9"></polyline>
                         </svg>
@@ -45,10 +47,14 @@
             <tr class="usuario-row" data-id="{{ $usuario->id }}">
                 <td>
                     <div class="user-info">
-                        <img src="https://ui-avatars.com/api/?name={{ urlencode($usuario->nombre . ' ' . $usuario->apellido) }}&background=random&color=fff" alt="Avatar" class="user-avatar">
-                        <div>
+                        <div class="user-avatar-wrapper">
+                            <span class="user-initials">
+                                {{ strtoupper(substr($usuario->nombre, 0, 1)) }}{{ strtoupper(substr($usuario->apellido, 0, 1)) }}
+                            </span>
+                        </div>
+                        <div class="user-details">
                             <span class="user-name">{{ $usuario->nombre }} {{ $usuario->apellido }}</span>
-                            <!-- <span class="user-role">{{ $usuario->rol_id }}</span> -->
+                            <span class="user-role-text">{{ ucfirst($usuario->rol_id ?? 'Usuario') }}</span>
                         </div>
                     </div>
                 </td>
@@ -57,6 +63,12 @@
                 </td>
                 <td>
                     <span class="contact-text">{{ $usuario->telefono ?? 'N/A' }}</span>
+                </td>
+                <td>
+                    <span class="secondary-text">{{ Str::limit($usuario->direccion ?? 'N/A', 20) }}</span>
+                </td>
+                <td>
+                    <span class="secondary-text">{{ $usuario->fecha_nacimiento ? \Carbon\Carbon::parse($usuario->fecha_nacimiento)->format('d/m/Y') : 'N/A' }}</span>
                 </td>
                 <td>
                     <span class="role-badge role-{{ strtolower($usuario->rol_id ?? 'usuario') }}">
@@ -88,7 +100,7 @@
             </tr>
             @empty
             <tr>
-                <td colspan="7" class="text-center py-5">
+                <td colspan="9" class="text-center py-5">
                     <div class="empty-state-container">
                         <div class="empty-icon-wrapper">
                             <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -109,7 +121,11 @@
     <div class="user-card usuario-card" data-id="{{ $usuario->id }}">
         <div class="card-header">
             <div class="user-main-info">
-                <img src="https://ui-avatars.com/api/?name={{ urlencode($usuario->nombre . ' ' . $usuario->apellido) }}&background=random&color=fff" alt="Avatar" class="card-avatar">
+                <div class="user-avatar-wrapper">
+                    <span class="user-initials">
+                        {{ strtoupper(substr($usuario->nombre, 0, 1)) }}{{ strtoupper(substr($usuario->apellido, 0, 1)) }}
+                    </span>
+                </div>
                 <div>
                     <h3 class="card-name">{{ $usuario->nombre }} {{ $usuario->apellido }}</h3>
                     <span class="card-role">{{ ucfirst($usuario->rol_id ?? 'Usuario') }}</span>
@@ -143,6 +159,14 @@
             <div class="card-row">
                 <span class="card-label">Teléfono</span>
                 <span class="card-value">{{ $usuario->telefono ?? 'N/A' }}</span>
+            </div>
+            <div class="card-row">
+                <span class="card-label">Dirección</span>
+                <span class="card-value">{{ Str::limit($usuario->direccion ?? 'N/A', 25) }}</span>
+            </div>
+            <div class="card-row">
+                <span class="card-label">Fecha Nac.</span>
+                <span class="card-value">{{ $usuario->fecha_nacimiento ? \Carbon\Carbon::parse($usuario->fecha_nacimiento)->format('d/m/Y') : 'N/A' }}</span>
             </div>
             <div class="card-row">
                 <span class="card-label">Registro</span>
