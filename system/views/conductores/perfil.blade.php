@@ -4,7 +4,50 @@
 
 @section('content')
     <!-- CSS Específico -->
-    <link rel="stylesheet" href="{{ asset('css/conductores/perfil.css') }}?v={{ time() }}">
+    <link rel="stylesheet" href="{{ asset('css/conductores/perfil.css') }}?v={{ time() + 1 }}">
+    <style>
+        /* Hotfix to ensure styles apply immediately */
+        .system-btn-secondary {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            white-space: nowrap;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .system-btn-secondary:hover {
+            background: var(--primary-green);
+            color: #000;
+            border-color: var(--primary-green);
+            transform: translateY(-2px);
+        }
+        .doc-card {
+            min-width: 300px !important;
+            padding: 1.2rem !important;
+            gap: 1rem !important;
+        }
+        .doc-details {
+            min-width: 0 !important;
+            padding-right: 0.5rem !important;
+        }
+        .doc-details h4 {
+            white-space: nowrap !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+            font-size: 1rem !important;
+        }
+    </style>
 
     <div class="conductores-profile-container">
         
