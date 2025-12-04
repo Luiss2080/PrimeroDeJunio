@@ -10,6 +10,8 @@ class Conductor extends Model
 
     protected $table = 'conductores';
     protected $fillable = [
+        'chaleco_id',
+        'fecha_asignacion_chaleco',
         'usuario_id',
         'nombre',
         'apellido',
@@ -118,6 +120,30 @@ class Conductor extends Model
             'ingresos_generados' => $viajesDelMesAnterior->sum('valor_total'),
             'calificacion_promedio' => $viajesDelMesAnterior->avg('calificacion') ?? 0
         ];
+    }
+
+    /**
+     * Relación con Chaleco
+     */
+    public function chaleco()
+    {
+        return $this->belongsTo(Chaleco::class, 'chaleco_id');
+    }
+
+    /**
+     * Obtener el código del chaleco asignado
+     */
+    public function getCodChaleco()
+    {
+        return $this->chaleco ? $this->chaleco->cod_chaleco : null;
+    }
+
+    /**
+     * Verificar si tiene chaleco asignado
+     */
+    public function tieneChaleco()
+    {
+        return !is_null($this->chaleco_id);
     }
 
     /**
