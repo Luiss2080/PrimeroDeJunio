@@ -2,6 +2,29 @@
    CONDUCTORES - PERFIL CSS
    ============================================ */
 
+:root {
+    --glass-bg: rgba(20, 20, 20, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    --primary-green: #00ff66;
+    --text-primary: #ffffff;
+    --text-secondary: #a0a0a0;
+    --card-bg: rgba(30, 30, 30, 0.6);
+}
+
+/* --- Layout --- */
+.conductores-profile-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-bottom: 2rem;
+}
+
+.profile-grid {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 2rem;
+}
+
 /* --- Header --- */
 .page-header {
     display: flex;
@@ -22,10 +45,10 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    color: var(--text-muted);
+    color: var(--text-secondary);
     text-decoration: none;
     font-size: 0.9rem;
-    transition: color 0.2s ease;
+    transition: color 0.2s;
 }
 
 .btn-back:hover {
@@ -39,20 +62,22 @@
 }
 
 .page-title {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: #fff;
-    text-shadow: 0 0 10px rgba(0, 255, 102, 0.3);
+    font-size: 2rem;
+    font-weight: 800;
+    background: linear-gradient(to right, #fff, #a0a0a0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     margin: 0;
 }
 
 .conductor-id {
-    color: var(--primary-green);
-    font-family: monospace;
-    font-size: 0.9rem;
+    font-family: "Monaco", monospace;
     background: rgba(0, 255, 102, 0.1);
+    color: var(--primary-green);
     padding: 0.2rem 0.6rem;
-    border-radius: 4px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    border: 1px solid rgba(0, 255, 102, 0.2);
 }
 
 .header-actions {
@@ -60,67 +85,39 @@
     gap: 1rem;
 }
 
-/* Buttons */
-.btn-primary,
+/* --- Buttons --- */
 .btn-secondary {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    padding: 0.8rem 1.2rem;
+    border-radius: 12px;
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.7rem 1.2rem;
-    border-radius: 10px;
-    font-weight: 600;
-    font-size: 0.9rem;
     cursor: pointer;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    border: none;
-}
-
-.btn-primary {
-    background: var(--primary-green);
-    color: #000;
-    box-shadow: 0 4px 12px rgba(0, 255, 102, 0.3);
-}
-
-.btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0, 255, 102, 0.5);
-}
-
-.btn-secondary {
-    background: rgba(255, 255, 255, 0.05);
-    color: #fff;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.2s;
 }
 
 .btn-secondary:hover {
     background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
 }
 
-/* --- Layout --- */
-.profile-grid {
-    display: grid;
-    grid-template-columns: 350px 1fr;
-    gap: 2rem;
-    max-width: 1400px;
-    margin: 0 auto;
-}
-
-/* --- Sidebar (Profile Card) --- */
-.profile-card {
-    background: rgba(20, 20, 20, 0.6);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 2rem;
+/* --- Profile Sidebar (Left) --- */
+.profile-sidebar {
     position: sticky;
-    top: 100px;
+    top: 2rem;
 }
 
-.profile-header {
+.profile-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 2rem;
     text-align: center;
-    margin-bottom: 2rem;
+    box-shadow: var(--glass-shadow);
 }
 
 .avatar-container {
@@ -135,8 +132,8 @@
     height: 100%;
     border-radius: 50%;
     object-fit: cover;
-    border: 3px solid rgba(255, 255, 255, 0.1);
-    padding: 3px;
+    border: 4px solid rgba(0, 255, 102, 0.2);
+    padding: 4px;
 }
 
 .status-indicator {
@@ -145,6 +142,7 @@
     right: 5px;
     width: 20px;
     height: 20px;
+    background: #333;
     border-radius: 50%;
     border: 3px solid #1a1a1a;
 }
@@ -155,42 +153,24 @@
 }
 
 .profile-name {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     font-weight: 700;
-    color: #fff;
     margin-bottom: 0.3rem;
+    color: #fff;
 }
 
 .profile-role {
-    color: var(--text-muted);
-    font-size: 0.9rem;
-    margin-bottom: 1rem;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
 }
 
 .profile-badges {
     display: flex;
     justify-content: center;
-    gap: 0.5rem;
+    gap: 0.8rem;
+    margin-bottom: 2rem;
     flex-wrap: wrap;
-}
-
-.badge {
-    padding: 0.3rem 0.8rem;
-    border-radius: 50px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-}
-
-.badge-success {
-    background: rgba(0, 255, 102, 0.15);
-    color: var(--primary-green);
-    border: 1px solid rgba(0, 255, 102, 0.3);
-}
-
-.badge-outline {
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: var(--text-muted);
 }
 
 /* Stats Grid */
@@ -199,22 +179,27 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
     margin-bottom: 2rem;
-    padding: 1.5rem 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .stat-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
+    gap: 0.3rem;
 }
 
 .stat-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: rgba(0, 255, 102, 0.1);
     color: var(--primary-green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-bottom: 0.5rem;
-    opacity: 0.8;
 }
 
 .stat-value {
@@ -224,9 +209,9 @@
 }
 
 .stat-label {
-    font-size: 0.7rem;
-    color: var(--text-muted);
-    margin-top: 0.2rem;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
 }
 
 /* Contact Info */
@@ -234,26 +219,21 @@
     display: flex;
     flex-direction: column;
     gap: 1.2rem;
+    text-align: left;
     margin-bottom: 2rem;
 }
 
 .contact-item {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: 1rem;
 }
 
 .contact-icon {
-    color: var(--primary-green);
-    background: rgba(0, 255, 102, 0.1);
-    padding: 0.5rem;
-    border-radius: 8px;
-    display: flex;
-}
-
-.contact-icon svg {
-    width: 18px;
-    height: 18px;
+    color: var(--text-secondary);
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.6rem;
+    border-radius: 10px;
 }
 
 .contact-details {
@@ -263,27 +243,25 @@
 
 .contact-label {
     font-size: 0.75rem;
-    color: var(--text-muted);
-    margin-bottom: 0.2rem;
+    color: var(--text-secondary);
 }
 
 .contact-value {
     color: #fff;
     font-size: 0.9rem;
-    font-weight: 500;
 }
 
 /* Profile Actions */
 .profile-actions {
     display: flex;
-    gap: 1rem;
     justify-content: center;
+    gap: 1rem;
 }
 
 .btn-action-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     background: rgba(255, 255, 255, 0.05);
     color: #fff;
@@ -291,132 +269,111 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.2s;
 }
 
 .btn-action-icon:hover {
     background: var(--primary-green);
     color: #000;
-    border-color: var(--primary-green);
-    transform: translateY(-2px);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 255, 102, 0.3);
 }
 
-.btn-action-icon svg {
-    width: 20px;
-    height: 20px;
+/* --- Main Content (Right) --- */
+.profile-main {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
 }
 
-/* --- Main Content (Tabs) --- */
+/* Tabs */
 .profile-tabs {
     display: flex;
     gap: 1rem;
-    margin-bottom: 1.5rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding-bottom: 1px;
+    padding-bottom: 1rem;
 }
 
 .tab-btn {
-    background: none;
+    background: transparent;
     border: none;
-    color: var(--text-muted);
-    padding: 0.8rem 1.2rem;
-    font-size: 0.95rem;
+    color: var(--text-secondary);
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
     display: flex;
     align-items: center;
     gap: 0.6rem;
-    position: relative;
-    transition: all 0.3s ease;
-}
-
-.tab-btn::after {
-    content: "";
-    position: absolute;
-    bottom: -1px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: var(--primary-green);
-    transform: scaleX(0);
-    transition: transform 0.3s ease;
+    border-radius: 10px;
+    transition: all 0.2s;
 }
 
 .tab-btn:hover {
     color: #fff;
+    background: rgba(255, 255, 255, 0.05);
 }
 
 .tab-btn.active {
-    color: var(--primary-green);
-}
-
-.tab-btn.active::after {
-    transform: scaleX(1);
+    color: #000;
+    background: var(--primary-green);
+    box-shadow: 0 4px 15px rgba(0, 255, 102, 0.2);
 }
 
 /* Tab Content */
 .tab-content {
     display: none;
-    animation: fadeIn 0.3s ease-out;
+    animation: fadeIn 0.3s ease;
 }
 
 .tab-content.active {
     display: block;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
 .content-section {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 16px;
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
 }
 
 .section-title {
     font-size: 1.1rem;
-    font-weight: 700;
-    color: #fff;
-    margin-bottom: 1.5rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 /* Vehicle Card Large */
 .vehicle-card-large {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 2rem;
     display: flex;
     align-items: center;
     gap: 2rem;
-    background: linear-gradient(
-        145deg,
-        rgba(255, 255, 255, 0.05) 0%,
-        rgba(255, 255, 255, 0.02) 100%
-    );
-    padding: 2rem;
-    border-radius: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+.vehicle-card-large::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 100%;
+    background: var(--primary-green);
 }
 
 .vehicle-image {
     width: 100px;
     height: 100px;
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 255, 102, 0.1);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--primary-green);
-    border: 2px solid rgba(0, 255, 102, 0.2);
 }
 
 .vehicle-info-main {
@@ -424,13 +381,13 @@
 }
 
 .vehicle-info-main h4 {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
     color: #fff;
-    margin-bottom: 0.3rem;
 }
 
 .vehicle-model {
-    color: var(--text-muted);
+    color: var(--text-secondary);
     display: block;
     margin-bottom: 1rem;
 }
@@ -441,34 +398,34 @@
 }
 
 .v-tag {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.1);
     padding: 0.3rem 0.8rem;
-    border-radius: 4px;
+    border-radius: 6px;
     font-size: 0.8rem;
-    color: var(--text-muted);
 }
 
 .vehicle-plate-display {
     text-align: center;
-    background: #fff;
+    background: #ffcc00;
     padding: 0.5rem 1rem;
     border-radius: 8px;
     border: 3px solid #000;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .plate-number {
     display: block;
-    color: #000;
-    font-weight: 900;
+    font-family: "Monaco", monospace;
     font-size: 1.5rem;
+    font-weight: 800;
+    color: #000;
     line-height: 1;
 }
 
 .plate-country {
-    display: block;
-    color: #000;
     font-size: 0.6rem;
     font-weight: 700;
+    color: #000;
     letter-spacing: 2px;
 }
 
@@ -480,23 +437,24 @@
 }
 
 .perf-card {
-    background: rgba(0, 0, 0, 0.2);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
     padding: 1.5rem;
-    border-radius: 12px;
+    border-radius: 16px;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
 }
 
 .perf-label {
-    color: var(--text-muted);
-    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
 }
 
 .perf-value {
-    color: #fff;
-    font-size: 1.8rem;
+    font-size: 2rem;
     font-weight: 700;
+    color: #fff;
 }
 
 .perf-trend {
@@ -507,45 +465,42 @@
 .perf-trend.positive {
     color: var(--primary-green);
 }
-.perf-trend.negative {
-    color: #ff3b30;
-}
 .perf-trend.neutral {
-    color: var(--text-muted);
+    color: var(--text-secondary);
 }
 
 /* Documents Grid */
 .documents-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 1.5rem;
 }
 
 .doc-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
+    background: var(--card-bg);
+    border: 1px solid var(--glass-border);
     padding: 1.2rem;
+    border-radius: 16px;
     display: flex;
     align-items: center;
     gap: 1rem;
-    transition: all 0.2s ease;
+    transition: transform 0.2s;
 }
 
 .doc-card:hover {
-    background: rgba(255, 255, 255, 0.05);
-    transform: translateY(-2px);
+    transform: translateY(-3px);
+    border-color: rgba(255, 255, 255, 0.2);
 }
 
 .doc-icon-wrapper {
     width: 48px;
     height: 48px;
-    background: rgba(0, 255, 102, 0.1);
-    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--primary-green);
+    color: #fff;
 }
 
 .doc-details {
@@ -553,91 +508,23 @@
 }
 
 .doc-details h4 {
-    color: #fff;
-    font-size: 0.95rem;
+    font-size: 1rem;
     margin-bottom: 0.2rem;
+    color: #fff;
 }
 
 .doc-meta {
     font-size: 0.75rem;
-    color: var(--text-muted);
+    color: var(--text-secondary);
 }
 
 .doc-status-badge {
     font-size: 0.7rem;
-    padding: 0.2rem 0.6rem;
+    padding: 0.2rem 0.5rem;
     border-radius: 4px;
-    font-weight: 600;
-}
-
-.doc-status-badge.valid {
     background: rgba(0, 255, 102, 0.1);
     color: var(--primary-green);
-}
-
-.btn-icon-sm {
-    background: none;
-    border: none;
-    color: var(--text-muted);
-    cursor: pointer;
-    padding: 0.4rem;
-    border-radius: 6px;
-    transition: all 0.2s ease;
-}
-
-.btn-icon-sm:hover {
-    background: rgba(255, 255, 255, 0.1);
-    color: #fff;
-}
-
-/* History Table */
-.simple-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.simple-table th {
-    text-align: left;
-    padding: 1rem;
-    color: var(--text-muted);
-    font-size: 0.85rem;
-    font-weight: 600;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.simple-table td {
-    padding: 1rem;
-    color: #fff;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    font-size: 0.9rem;
-}
-
-.status-dot {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-size: 0.85rem;
-}
-
-.status-dot::before {
-    content: "";
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-}
-
-.status-dot.completed {
-    color: var(--primary-green);
-}
-.status-dot.completed::before {
-    background: var(--primary-green);
-}
-
-.status-dot.cancelled {
-    color: #ff3b30;
-}
-.status-dot.cancelled::before {
-    background: #ff3b30;
+    border: 1px solid rgba(0, 255, 102, 0.2);
 }
 
 /* Responsive */
@@ -646,13 +533,31 @@
         grid-template-columns: 1fr;
     }
 
-    .profile-card {
+    .profile-sidebar {
         position: static;
-        max-width: 100%;
     }
 
     .vehicle-card-large {
         flex-direction: column;
         text-align: center;
+    }
+
+    .vehicle-info-main {
+        width: 100%;
+    }
+
+    .vehicle-tags {
+        justify-content: center;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }

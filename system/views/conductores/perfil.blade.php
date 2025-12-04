@@ -25,7 +25,7 @@
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                     <span>Exportar</span>
                 </button>
-                <a href="{{ route('conductores.edit', $conductor->id) }}" class="btn-primary">
+                <a href="{{ route('conductores.edit', $conductor->id) }}" class="btn-primary-glow">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
                     <span>Editar Perfil</span>
                 </a>
@@ -44,10 +44,13 @@
                         <h2 class="profile-name">{{ $conductor->nombre }} {{ $conductor->apellido }}</h2>
                         <div class="profile-role">Conductor Profesional</div>
                         <div class="profile-badges">
-                            <span class="badge badge-success">{{ ucfirst($conductor->estado) }}</span>
-                            @if($conductor->vehiculoActual && $conductor->vehiculoActual->asignacion)
-                                <span class="badge badge-outline">Turno {{ ucfirst($conductor->vehiculoActual->asignacion->turno ?? 'Completo') }}</span>
-                            @endif
+                            <span class="status-badge status-{{ $conductor->estado }}">
+                                <span class="status-dot"></span>
+                                {{ ucfirst($conductor->estado) }}
+                            </span>
+                            <span class="payment-badge status-{{ $conductor->estado_pago }}">
+                                {{ ucfirst(str_replace('_', ' ', $conductor->estado_pago)) }}
+                            </span>
                         </div>
                     </div>
                     
@@ -201,32 +204,6 @@
                         </div>
                         
                         <div class="documents-grid">
-                            <!-- Licencia -->
-                            <div class="doc-card">
-                                <div class="doc-icon-wrapper">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                                </div>
-                                <div class="doc-details">
-                                    <h4>Licencia de Conducir</h4>
-                                    <span class="doc-meta">Categoría {{ $conductor->licencia_categoria }} • Expira {{ \Carbon\Carbon::parse($conductor->licencia_vigencia)->format('d/m/Y') }}</span>
-                                </div>
-                                <div class="doc-status-badge valid">Vigente</div>
-                                <button class="btn-icon-sm"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
-                            </div>
-
-                            <!-- Seguro -->
-                            <div class="doc-card">
-                                <div class="doc-icon-wrapper">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                                </div>
-                                <div class="doc-details">
-                                    <h4>Seguro SOAT</h4>
-                                    <span class="doc-meta">Gestión 2024 • Expira 12/2024</span>
-                                </div>
-                                <div class="doc-status-badge valid">Vigente</div>
-                                <button class="btn-icon-sm"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
-                            </div>
-
                             <!-- Antecedentes -->
                             <div class="doc-card">
                                 <div class="doc-icon-wrapper">
@@ -253,6 +230,31 @@
                                     <tr>
                                         <th>Fecha</th>
                                         <th>Origen</th>
+                                        <th>Destino</th>
+                                        <th>Estado</th>
+                                        <th>Monto</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse($conductor->viajes as $viaje)
+                                    <tr>
+                                        <td>{{ \Carbon\Carbon::parse($viaje->fecha_hora_inicio)->format('d/m/Y H:i') }}</td>
+                                        <td>{{ Str::limit($viaje->origen, 20) }}</td>
+                                        <td>{{ Str::limit($viaje->destino, 20) }}</td>
+                                        <td><span class="badge-status {{ $viaje->estado }}">{{ ucfirst($viaje->estado) }}</span></td>
+                                        <td>Bs. {{ number_format($viaje->costo, 2) }}</td>
+                                    </tr>
+                                    @empty
+                                    <tr>
+                                        <td colspan="5" class="text-center">No hay viajes recientes.</td>
+                                    </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </main>
         </div>
     </div>
 
