@@ -1,19 +1,6 @@
 @extends('layouts.dashboard')
 
 @section('title', 'Conductores - 1ro de Junio')
-
-@push('styles')
-    <!-- CSS Específico -->
-    <link rel="stylesheet" href="{{ asset('css/conductores/index.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/filters/conductores-filters.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/mod/confirmar.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/mod/advertencia.css') }}">
-@endpush
-
-@section('content')
-
-    <div class="conductores-index-container">
-        
         <!-- Header -->
         <div class="page-header">
             <h1 class="page-title">Gestión de Conductores</h1>
