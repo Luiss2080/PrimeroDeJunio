@@ -126,68 +126,7 @@
     </table>
 </div>
 
-<!-- Mobile Card View -->
-<div class="mobile-cards-view">
-    @forelse($viajes as $viaje)
-    <div class="driver-card viaje-card" data-id="{{ $viaje->id }}">
-        <div class="card-header">
-            <div class="driver-main-info">
-                <div class="date-badge">
-                    <span class="day">{{ $viaje->fecha_hora_inicio ? $viaje->fecha_hora_inicio->format('d') : '--' }}</span>
-                    <span class="month">{{ $viaje->fecha_hora_inicio ? $viaje->fecha_hora_inicio->format('M') : '--' }}</span>
-                </div>
-                <div>
-                    <h3 class="card-name">{{ $viaje->cliente_nombre }}</h3>
-                    <span class="card-id">#VJ-{{ str_pad($viaje->id, 4, '0', STR_PAD_LEFT) }}</span>
-                </div>
-            </div>
-            <div class="card-actions-direct">
-                <a href="{{ route('viajes.show', $viaje->id) }}" class="btn-icon-sm btn-view">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                </a>
-                <a href="{{ route('viajes.edit', $viaje->id) }}" class="btn-icon-sm btn-edit">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-                </a>
-            </div>
-        </div>
-        
-        <div class="card-body">
-            <div class="card-row">
-                <span class="card-label">Estado</span>
-                <span class="status-badge status-{{ $viaje->estado }} sm">
-                    <span class="status-dot"></span>
-                    {{ ucfirst($viaje->estado) }}
-                </span>
-            </div>
-            <div class="card-row">
-                <span class="card-label">Ruta</span>
-                <div class="route-mini">
-                    <span class="route-text">{{ Str::limit($viaje->origen, 15) }} → {{ Str::limit($viaje->destino, 15) }}</span>
-                </div>
-            </div>
-            <div class="card-row">
-                <span class="card-label">Conductor</span>
-                @if($viaje->conductor)
-                    <span class="card-value">{{ $viaje->conductor->nombre }} {{ $viaje->conductor->apellido }}</span>
-                @else
-                    <span class="card-value text-muted">Sin asignar</span>
-                @endif
-            </div>
-            <div class="card-row">
-                <span class="card-label">Monto</span>
-                <span class="amount-value-sm">Bs. {{ number_format($viaje->valor_total, 2) }}</span>
-            </div>
-        </div>
-    </div>
-    @empty
-    <div class="empty-state-mobile">
-        <div class="empty-icon-wrapper">
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        </div>
-        <p>No se encontraron viajes</p>
-    </div>
-    @endforelse
-</div>
+
 
 <div class="pagination-container">
     {{ $viajes->appends(request()->except('page'))->links('vendor.pagination.custom') }}
