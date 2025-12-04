@@ -26,20 +26,14 @@
 }
 
 /* --- Header --- */
-.profile-page-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end; /* Align to bottom so title aligns with buttons */
+.profile-header-container {
     margin-bottom: 2rem;
-    gap: 2rem;
     padding-bottom: 1rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.profile-header-left {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+.header-top {
+    margin-bottom: 1rem;
 }
 
 .btn-back {
@@ -63,6 +57,14 @@
     color: #fff;
     border-color: rgba(255, 255, 255, 0.2);
     transform: translateX(-2px);
+}
+
+.header-main-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
 }
 
 .header-title-group {
@@ -92,11 +94,10 @@
     font-weight: 600;
 }
 
-.profile-header-actions {
+.header-actions-group {
     display: flex;
     gap: 1rem;
     align-items: center;
-    margin-bottom: 0.2rem; /* Slight adjustment for visual alignment */
 }
 
 /* --- Buttons --- */
