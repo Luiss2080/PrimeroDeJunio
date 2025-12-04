@@ -84,10 +84,11 @@ class UserController extends Controller
         return abort(404);
     }
 
-    public function edit(User $user)
+    public function edit($id)
     {
-        // return view('usuarios.editar', compact('user'));
-        return abort(404);
+        $usuario = User::findOrFail($id);
+        $roles = \App\Models\Role::all();
+        return view('usuarios.editar', compact('usuario', 'roles'));
     }
 
     public function update(Request $request, User $user)
