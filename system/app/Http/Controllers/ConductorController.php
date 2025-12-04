@@ -7,9 +7,78 @@ use Illuminate\Http\Request;
 
 class ConductorController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $conductores = Conductor::with('asignaciones.vehiculo')->get();
+        $query = Conductor::with(['asignaciones.vehiculo', 'viajes']);
+
+        // Búsqueda
+        if ($request->has('search') && $request->search) {
+            $searchTerm = $request->search;
+            $query->where(function($q) use ($searchTerm) {
+                $q->where('nombre', 'LIKE', "%{$searchTerm}%")
+                  ->orWhere('apellido', 'LIKE', "%{$searchTerm}%")
+                  ->orWhere('cedula', 'LIKE', "%{$searchTerm}%")
+                  ->orWhere('telefono', 'LIKE', "%{$searchTerm}%")
+                  ->orWhere('email', 'LIKE', "%{$searchTerm}%");
+            });
+        }
+
+        // Filtros
+        if ($request->has('estado') && $request->estado) {
+            $query->where('estado', $request->estado);
+        }
+
+        if ($request->has('estado_pago') && $request->estado_pago) {
+            $query->where('estado_pago', $request->estado_pago);
+        }
+
+        if ($request->has('vehiculo') && $request->vehiculo) {
+            if ($request->vehiculo === 'asignado') {
+                $query->whereHas('asignaciones', function($q) {
+                    $q->where('estado', 'activa');
+                });
+            } elseif ($request->vehiculo === 'sin_asignar') {
+                $query->whereDoesntHave('asignaciones', function($q) {
+                    $q->where('estado', 'activa');
+                });
+            }
+        }
+
+        if ($request->has('fecha_desde') && $request->fecha_desde) {
+            $query->whereDate('created_at', '>=', $request->fecha_desde);
+        }
+
+        if ($request->has('fecha_hasta') && $request->fecha_hasta) {
+            $query->whereDate('created_at', '<=', $request->fecha_hasta);
+        }
+
+        if ($request->has('rating_min') && $request->rating_min) {
+            $query->where('rating', '>=', $request->rating_min);
+        }
+
+        // Ordenamiento
+        $sortBy = $request->get('sort', 'created_at');
+        $sortOrder = $request->get('order', 'desc');
+        $query->orderBy($sortBy, $sortOrder);
+
+        // Paginación
+        $perPage = $request->get('per_page', 10);
+        $conductores = $query->paginate($perPage);
+
+        // Para AJAX requests
+        if ($request->ajax()) {
+            return response()->json([
+                'html' => view('conductores.partials.table', compact('conductores'))->render(),
+                'pagination' => (string) $conductores->appends($request->except('page'))->links(),
+                'total' => $conductores->total(),
+                'showing' => [
+                    'from' => $conductores->firstItem() ?: 0,
+                    'to' => $conductores->lastItem() ?: 0,
+                    'total' => $conductores->total()
+                ]
+            ]);
+        }
+
         return view('conductores.index', compact('conductores'));
     }
 
