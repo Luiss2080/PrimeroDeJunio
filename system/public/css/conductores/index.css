@@ -801,6 +801,184 @@
     }
 }
 
+/* =================================
+   NUEVOS ELEMENTOS - ESTRUCTURA ACTUALIZADA
+   ================================= */
+
+/* Experience Cell */
+.experience-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.experience-years {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+}
+
+/* Payment Status Cell */
+.payment-status-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+/* Contact Cell */
+.contact-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+/* Operational Status Badge */
+.operational-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: capitalize;
+    white-space: nowrap;
+}
+
+.operational-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+/* Operational Status Colors */
+.operational-badge.status-disponible {
+    background: rgba(34, 197, 94, 0.15);
+    color: #22c55e;
+    border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.operational-badge.status-disponible .operational-dot {
+    background: #22c55e;
+}
+
+.operational-badge.status-ocupado {
+    background: rgba(251, 191, 36, 0.15);
+    color: #fbbf24;
+    border: 1px solid rgba(251, 191, 36, 0.3);
+}
+
+.operational-badge.status-ocupado .operational-dot {
+    background: #fbbf24;
+}
+
+.operational-badge.status-descanso {
+    background: rgba(59, 130, 246, 0.15);
+    color: #3b82f6;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.operational-badge.status-descanso .operational-dot {
+    background: #3b82f6;
+}
+
+.operational-badge.status-mantenimiento {
+    background: rgba(168, 85, 247, 0.15);
+    color: #a855f7;
+    border: 1px solid rgba(168, 85, 247, 0.3);
+}
+
+.operational-badge.status-mantenimiento .operational-dot {
+    background: #a855f7;
+}
+
+.operational-badge.status-offline {
+    background: rgba(107, 114, 128, 0.15);
+    color: #6b7280;
+    border: 1px solid rgba(107, 114, 128, 0.3);
+}
+
+.operational-badge.status-offline .operational-dot {
+    background: #6b7280;
+}
+
+/* Additional Status Colors for New States */
+.status-badge.status-vacaciones {
+    background: rgba(59, 130, 246, 0.15);
+    color: #3b82f6;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.status-badge.status-vacaciones .status-dot {
+    background: #3b82f6;
+}
+
+.status-badge.status-licencia_medica {
+    background: rgba(168, 85, 247, 0.15);
+    color: #a855f7;
+    border: 1px solid rgba(168, 85, 247, 0.3);
+}
+
+.status-badge.status-licencia_medica .status-dot {
+    background: #a855f7;
+}
+
+.status-badge.status-evaluacion {
+    background: rgba(251, 191, 36, 0.15);
+    color: #fbbf24;
+    border: 1px solid rgba(251, 191, 36, 0.3);
+}
+
+.status-badge.status-evaluacion .status-dot {
+    background: #fbbf24;
+}
+
+/* Payment Status Colors */
+.payment-badge.status-suspendido_pago {
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+/* Enhanced Secondary Text */
+.secondary-text {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    line-height: 1.2;
+}
+
+/* Mobile Cards - Additional Rows */
+.card-row .d-block {
+    display: block !important;
+    margin-top: 0.25rem;
+}
+
+/* Responsive Updates */
+@media (max-width: 1200px) {
+    .data-table th:nth-child(5),  /* Experiencia */
+    .data-table td:nth-child(5) {
+        display: none;
+    }
+}
+
+@media (max-width: 992px) {
+    .data-table th:nth-child(7),  /* Contacto */
+    .data-table td:nth-child(7) {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .desktop-view {
+        display: none;
+    }
+    
+    .mobile-cards-view {
+        display: block;
+    }
+}
+
 /* Animations */
 @keyframes fadeIn {
     from {

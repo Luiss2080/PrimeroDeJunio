@@ -79,6 +79,9 @@
                         <option value="activo" {{ request('estado') == 'activo' ? 'selected' : '' }}>Activo</option>
                         <option value="inactivo" {{ request('estado') == 'inactivo' ? 'selected' : '' }}>Inactivo</option>
                         <option value="suspendido" {{ request('estado') == 'suspendido' ? 'selected' : '' }}>Suspendido</option>
+                        <option value="vacaciones" {{ request('estado') == 'vacaciones' ? 'selected' : '' }}>Vacaciones</option>
+                        <option value="licencia_medica" {{ request('estado') == 'licencia_medica' ? 'selected' : '' }}>Licencia Médica</option>
+                        <option value="evaluacion" {{ request('estado') == 'evaluacion' ? 'selected' : '' }}>En Evaluación</option>
                     </select>
                 </div>
                 <div class="filter-group">
@@ -88,6 +91,7 @@
                         <option value="al_dia" {{ request('estado_pago') == 'al_dia' ? 'selected' : '' }}>Al Día</option>
                         <option value="mora" {{ request('estado_pago') == 'mora' ? 'selected' : '' }}>En Mora</option>
                         <option value="pendiente" {{ request('estado_pago') == 'pendiente' ? 'selected' : '' }}>Pendiente</option>
+                        <option value="suspendido_pago" {{ request('estado_pago') == 'suspendido_pago' ? 'selected' : '' }}>Pago Suspendido</option>
                     </select>
                 </div>
                 <div class="filter-group">
@@ -99,12 +103,33 @@
                     </select>
                 </div>
                 <div class="filter-group">
+                    <label class="filter-label">Estado Operativo</label>
+                    <select name="estado_operativo" class="filter-select">
+                        <option value="">Todos</option>
+                        <option value="disponible" {{ request('estado_operativo') == 'disponible' ? 'selected' : '' }}>Disponible</option>
+                        <option value="ocupado" {{ request('estado_operativo') == 'ocupado' ? 'selected' : '' }}>Ocupado</option>
+                        <option value="descanso" {{ request('estado_operativo') == 'descanso' ? 'selected' : '' }}>Descanso</option>
+                        <option value="mantenimiento" {{ request('estado_operativo') == 'mantenimiento' ? 'selected' : '' }}>Mantenimiento</option>
+                        <option value="offline" {{ request('estado_operativo') == 'offline' ? 'selected' : '' }}>Desconectado</option>
+                    </select>
+                </div>
+                <div class="filter-group">
                     <label class="filter-label">Rating Mínimo</label>
                     <select name="rating_min" class="filter-select">
                         <option value="">Cualquier rating</option>
                         <option value="4.5" {{ request('rating_min') == '4.5' ? 'selected' : '' }}>4.5+ estrellas</option>
                         <option value="4.0" {{ request('rating_min') == '4.0' ? 'selected' : '' }}>4.0+ estrellas</option>
                         <option value="3.5" {{ request('rating_min') == '3.5' ? 'selected' : '' }}>3.5+ estrellas</option>
+                        <option value="3.0" {{ request('rating_min') == '3.0' ? 'selected' : '' }}>3.0+ estrellas</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">Experiencia</label>
+                    <select name="experiencia" class="filter-select">
+                        <option value="">Cualquier experiencia</option>
+                        <option value="nuevo" {{ request('experiencia') == 'nuevo' ? 'selected' : '' }}>Nuevo (0-1 años)</option>
+                        <option value="intermedio" {{ request('experiencia') == 'intermedio' ? 'selected' : '' }}>Intermedio (2-5 años)</option>
+                        <option value="experto" {{ request('experiencia') == 'experto' ? 'selected' : '' }}>Experto (5+ años)</option>
                     </select>
                 </div>
             </div>

@@ -29,6 +29,14 @@
                     </span>
                 </th>
                 <th>
+                    <span class="sortable-header" data-sort="experiencia_anos">
+                        Experiencia
+                        <svg class="sort-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </span>
+                </th>
+                <th>
                     <span class="sortable-header" data-sort="estado_pago">
                         Estado Pago
                         <svg class="sort-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -36,10 +44,18 @@
                         </svg>
                     </span>
                 </th>
-                <th>Teléfono</th>
+                <th>Contacto</th>
                 <th>
                     <span class="sortable-header" data-sort="estado">
                         Estado
+                        <svg class="sort-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </span>
+                </th>
+                <th>
+                    <span class="sortable-header" data-sort="estado_operativo">
+                        Operativo
                         <svg class="sort-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <polyline points="6 9 12 15 18 9"></polyline>
                         </svg>
@@ -99,21 +115,58 @@
                             <span class="star-icon">★</span>
                             <span class="rating-value">{{ number_format($conductor->rating, 1) }}</span>
                         </div>
-                        <span class="secondary-text">{{ number_format($conductor->total_viajes) }} viajes</span>
+                        <span class="secondary-text">
+                            {{ number_format($conductor->total_viajes) }} viajes 
+                            @if($conductor->viajes_completados > 0)
+                                • {{ round(($conductor->viajes_completados / $conductor->total_viajes) * 100) }}% éxito
+                            @endif
+                        </span>
                     </div>
                 </td>
                 <td>
-                    <span class="payment-badge status-{{ $conductor->estado_pago }}">
-                        {{ ucfirst(str_replace('_', ' ', $conductor->estado_pago)) }}
-                    </span>
+                    <div class="experience-cell">
+                        <span class="experience-years">{{ $conductor->experiencia_anos }} años</span>
+                        <span class="secondary-text">
+                            @if($conductor->experiencia_anos == 0)
+                                Nuevo conductor
+                            @elseif($conductor->experiencia_anos <= 2)
+                                Principiante
+                            @elseif($conductor->experiencia_anos <= 5)
+                                Experimentado
+                            @else
+                                Experto
+                            @endif
+                        </span>
+                    </div>
                 </td>
                 <td>
-                    <span class="contact-text">{{ $conductor->telefono }}</span>
+                    <div class="payment-status-cell">
+                        <span class="payment-badge status-{{ $conductor->estado_pago }}">
+                            {{ ucfirst(str_replace('_', ' ', $conductor->estado_pago)) }}
+                        </span>
+                        @if($conductor->saldo_pendiente > 0)
+                            <span class="secondary-text">Saldo: ${{ number_format($conductor->saldo_pendiente, 0) }}</span>
+                        @endif
+                    </div>
+                </td>
+                <td>
+                    <div class="contact-cell">
+                        <span class="contact-text">{{ $conductor->telefono }}</span>
+                        @if($conductor->telefono_secundario)
+                            <span class="secondary-text">{{ $conductor->telefono_secundario }}</span>
+                        @endif
+                    </div>
                 </td>
                 <td>
                     <span class="status-badge status-{{ $conductor->estado }}">
                         <span class="status-dot"></span>
                         {{ ucfirst($conductor->estado) }}
+                    </span>
+                </td>
+                <td>
+                    <span class="operational-badge status-{{ $conductor->estado_operativo }}">
+                        <span class="operational-dot"></span>
+                        {{ ucfirst(str_replace('_', ' ', $conductor->estado_operativo)) }}
                     </span>
                 </td>
                 <td>
@@ -143,7 +196,7 @@
             </tr>
             @empty
             <tr>
-                <td colspan="9" class="text-center py-5">
+                <td colspan="11" class="text-center py-5">
                     <div class="empty-state-container">
                         <div class="empty-icon-wrapper">
                             <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -199,18 +252,44 @@
             <div class="card-row">
                 <span class="card-label">Desempeño</span>
                 <div class="rating-cell">
-                    <span class="star-icon">★</span> {{ number_format($conductor->rating, 1) }} <span class="text-muted">({{ number_format($conductor->total_viajes) }} viajes)</span>
+                    <span class="star-icon">★</span> {{ number_format($conductor->rating, 1) }} 
+                    <span class="text-muted">
+                        ({{ number_format($conductor->total_viajes) }} viajes
+                        @if($conductor->viajes_completados > 0) 
+                            • {{ round(($conductor->viajes_completados / $conductor->total_viajes) * 100) }}% éxito
+                        @endif)
+                    </span>
                 </div>
             </div>
             <div class="card-row">
-                <span class="card-label">Pago</span>
-                <span class="payment-badge status-{{ $conductor->estado_pago }}">
-                    {{ ucfirst(str_replace('_', ' ', $conductor->estado_pago)) }}
+                <span class="card-label">Experiencia</span>
+                <span class="card-value">{{ $conductor->experiencia_anos }} años</span>
+            </div>
+            <div class="card-row">
+                <span class="card-label">Estado Operativo</span>
+                <span class="operational-badge status-{{ $conductor->estado_operativo }}">
+                    {{ ucfirst(str_replace('_', ' ', $conductor->estado_operativo)) }}
                 </span>
             </div>
             <div class="card-row">
-                <span class="card-label">Teléfono</span>
-                <span class="card-value">{{ $conductor->telefono }}</span>
+                <span class="card-label">Estado Pago</span>
+                <div>
+                    <span class="payment-badge status-{{ $conductor->estado_pago }}">
+                        {{ ucfirst(str_replace('_', ' ', $conductor->estado_pago)) }}
+                    </span>
+                    @if($conductor->saldo_pendiente > 0)
+                        <span class="text-muted d-block">Saldo: ${{ number_format($conductor->saldo_pendiente, 0) }}</span>
+                    @endif
+                </div>
+            </div>
+            <div class="card-row">
+                <span class="card-label">Contacto</span>
+                <div>
+                    <span class="card-value">{{ $conductor->telefono }}</span>
+                    @if($conductor->telefono_secundario)
+                        <span class="text-muted d-block">{{ $conductor->telefono_secundario }}</span>
+                    @endif
+                </div>
             </div>
             <div class="card-row">
                 <span class="card-label">Vehículo</span>
