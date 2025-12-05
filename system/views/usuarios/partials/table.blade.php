@@ -129,15 +129,11 @@
 <!-- Mobile Card View -->
 <div class="mobile-cards-view">
     @forelse($usuarios as $usuario)
-    <div class="user-card usuario-card" data-id="{{ $usuario->id }}">
+    <div class="driver-card conductor-card" data-id="{{ $usuario->id }}">
         <div class="card-header">
-            <div class="user-main-info">
-                <div class="user-avatar-wrapper">
-                    <span class="user-initials">
-                        {{ strtoupper(substr($usuario->nombre, 0, 1)) }}{{ strtoupper(substr($usuario->apellido, 0, 1)) }}
-                    </span>
-                </div>
-                <div class="user-info-inline">
+            <div class="driver-main-info">
+                <img src="https://ui-avatars.com/api/?name={{ urlencode($usuario->nombre . ' ' . $usuario->apellido) }}&background=00ff66&color=000" alt="Avatar" class="card-avatar">
+                <div>
                     <h3 class="card-name">{{ $usuario->nombre }} {{ $usuario->apellido }}</h3>
                     <span class="card-role">{{ ucfirst($usuario->rol->nombre ?? 'Usuario') }}</span>
                 </div>
