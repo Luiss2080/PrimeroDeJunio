@@ -197,9 +197,19 @@
                         <label for="direccion" class="form-label">Dirección de Domicilio</label>
                         <input type="text" id="direccion" name="direccion" class="form-input" placeholder="Ej: Av. Banzer, Calle 3 #45">
                     </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="ciudad" class="form-label">Ciudad *</label>
+                            <input type="text" id="ciudad" name="ciudad" class="form-input" placeholder="Ej: Santa Cruz" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="telefono_secundario" class="form-label">Teléfono Secundario</label>
+                            <input type="tel" id="telefono_secundario" name="telefono_secundario" class="form-input" placeholder="Teléfono alternativo">
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Professional Information -->
+                <!-- Información Profesional -->
                 <div class="glass-card">
                     <h3 class="card-title">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>
@@ -207,15 +217,40 @@
                     </h3>
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="experiencia_anos" class="form-label">Años de Experiencia</label>
-                            <input type="number" id="experiencia_anos" name="experiencia_anos" class="form-input" placeholder="Ej: 5" min="0" max="50" value="0">
+                            <label for="numero_licencia" class="form-label">Número de Licencia</label>
+                            <input type="text" id="numero_licencia" name="numero_licencia" class="form-input" placeholder="Número de licencia de conducir">
+                        </div>
+                        <div class="form-group">
+                            <label for="categoria_licencia" class="form-label">Categoría de Licencia</label>
+                            <div class="select-wrapper">
+                                <select id="categoria_licencia" name="categoria_licencia" class="form-select">
+                                    <option value="">Seleccionar categoría</option>
+                                    <option value="A">A - Motocicleta</option>
+                                    <option value="B">B - Automóvil</option>
+                                    <option value="C">C - Camión</option>
+                                    <option value="D">D - Transporte Público</option>
+                                </select>
+                                <svg class="select-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fecha_vencimiento_licencia" class="form-label">Vencimiento de Licencia</label>
+                            <input type="date" id="fecha_vencimiento_licencia" name="fecha_vencimiento_licencia" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label for="numero_seguro_social" class="form-label">Número de Seguro Social</label>
+                            <input type="text" id="numero_seguro_social" name="numero_seguro_social" class="form-input" placeholder="Número de seguro">
                         </div>
                     </div>
                     <div class="form-group full-width">
                         <label for="observaciones" class="form-label">Observaciones Adicionales</label>
-                        <textarea id="observaciones" name="observaciones" class="form-textarea" placeholder="Información adicional relevante..." rows="3"></textarea>
+                        <textarea id="observaciones" name="observaciones" class="form-textarea" placeholder="Información adicional relevante sobre el conductor..." rows="3"></textarea>
                     </div>
                 </div>
+
+
 
                 <!-- Emergency Contact -->
                 <div class="glass-card">
