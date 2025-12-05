@@ -185,7 +185,7 @@
 </div>
 
 <div class="pagination-container">
-    {{ $usuarios->appends(request()->except('page'))->links('pages.conductores') }}
+    {{ $usuarios->appends(request()->except('page'))->links('pages.usuarios') }}
 </div>
 
 <script>
