@@ -331,7 +331,7 @@ class Conductor extends Model
         return [
             'viajes_completados' => $viajesDelMesAnterior->count(),
             'ingresos_generados' => $viajesDelMesAnterior->sum('valor_total'),
-            'calificacion_promedio' => $viajesDelMesAnterior->avg('calificacion') ?? 0
+            'calificacion_promedio' => $viajesDelMesAnterior->avg('calificacion_cliente') ?? 0
         ];
     }
 
