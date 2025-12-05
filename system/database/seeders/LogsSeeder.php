@@ -2,122 +2,59 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use App\Models\Log;
+use App\Models\User;
 
 class LogsSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
+    public function run()
     {
+        // Obtener usuarios disponibles
+        $usuarios = User::all();
+        
+        if ($usuarios->isEmpty()) {
+            $this->command->warn('No hay usuarios disponibles. Ejecuta UsuariosSeeder primero.');
+            return;
+        }
+
+        $this->command->info('Creando logs del sistema...');
+
         $logs = [];
         
-        // Generar logs del sistema de los últimos 30 días
-        for ($i = 1; $i <= 100; $i++) {
-            $fechaLog = now()->subDays(rand(0, 30))->subHours(rand(0, 23))->subMinutes(rand(0, 59));
+        // Generar 50 logs variados
+        for ($i = 0; $i < 50; $i++) {
+            $usuario = $usuarios->random();
+            $fechaLog = fake()->dateTimeBetween('-30 days', 'now');
             
             $logs[] = [
-                'usuario_id' => rand(1, 8),
-                'accion' => $this->getAccionAleatoria(),
-                'tabla_afectada' => $this->getTablaAleatoria(),
+                'usuario_id' => $usuario->id,
+                'usuario_nombre' => $usuario->name,
+                'usuario_email' => $usuario->email,
+                'tipo_accion' => fake()->randomElement(['crear', 'actualizar', 'eliminar', 'login', 'logout', 'crear_viaje', 'finalizar_viaje', 'pago_realizado']),
+                'accion_detalle' => fake('es_CO')->sentence(),
+                'nivel' => fake()->randomElement(['info', 'warning', 'error']),
+                'tabla_afectada' => fake()->randomElement(['users', 'conductores', 'vehiculos', 'viajes', 'clientes', 'pagos_conductores']),
                 'registro_id' => rand(1, 50),
-                'datos_anteriores' => $this->getDatosAnteriores(),
-                'datos_nuevos' => $this->getDatosNuevos(),
-                'ip' => $this->getIpAleatoria(),
-                'user_agent' => $this->getUserAgentAleatorio(),
+                'registro_descripcion' => fake('es_CO')->words(3, true),
+                'datos_anteriores' => json_encode(['campo' => 'valor_anterior']),
+                'datos_nuevos' => json_encode(['campo' => 'valor_nuevo']),
+                'ip_address' => fake()->ipv4(),
+                'user_agent' => fake()->userAgent(),
+                'modulo' => fake()->randomElement(['conductores', 'vehiculos', 'viajes', 'clientes', 'sistema']),
+                'metodo_http' => fake()->randomElement(['GET', 'POST', 'PUT', 'DELETE']),
+                'url' => fake()->url(),
+                'duracion_ms' => rand(50, 2000),
+                'requiere_atencion' => fake()->boolean(10), // 10% de probabilidad
                 'created_at' => $fechaLog,
-                'updated_at' => $fechaLog
+                'updated_at' => $fechaLog,
             ];
         }
+
+        foreach (array_chunk($logs, 25) as $chunk) {
+            Log::insert($chunk);
+        }
         
-        DB::table('logs')->insert($logs);
-    }
-    
-    private function getAccionAleatoria()
-    {
-        $acciones = [
-            'CREATE',
-            'UPDATE', 
-            'DELETE',
-            'LOGIN',
-            'LOGOUT',
-            'VIEW',
-            'UPDATE',
-            'CREATE'
-        ];
-        
-        return $acciones[array_rand($acciones)];
-    }
-    
-    private function getTablaAleatoria()
-    {
-        $tablas = [
-            'users',
-            'conductores',
-            'vehiculos',
-            'viajes',
-            'clientes',
-            'asignaciones_vehiculo',
-            'mantenimientos',
-            'pagos_tarifa_diaria'
-        ];
-        
-        return $tablas[array_rand($tablas)];
-    }
-    
-    private function getDatosAnteriores()
-    {
-        $datos = [
-            '{"estado": "inactivo", "telefono": "3001234567"}',
-            '{"nombre": "Juan", "email": "juan@email.com"}',
-            '{"placa": "ABC123", "estado": "mantenimiento"}',
-            null,
-            null
-        ];
-        
-        return $datos[array_rand($datos)];
-    }
-    
-    private function getDatosNuevos()
-    {
-        $datos = [
-            '{"estado": "activo", "telefono": "3009876543"}',
-            '{"nombre": "Juan Carlos", "email": "juancarlos@email.com"}',
-            '{"placa": "ABC123", "estado": "activo"}',
-            '{"login": true, "timestamp": "2025-11-29 10:30:00"}',
-            '{"registro_creado": true}'
-        ];
-        
-        return $datos[array_rand($datos)];
-    }
-    
-    private function getIpAleatoria()
-    {
-        $ips = [
-            '192.168.1.100',
-            '192.168.1.101',
-            '192.168.1.102',
-            '10.0.0.50',
-            '10.0.0.51',
-            '127.0.0.1'
-        ];
-        
-        return $ips[array_rand($ips)];
-    }
-    
-    private function getUserAgentAleatorio()
-    {
-        $userAgents = [
-            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-            'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101',
-            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
-            'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36',
-            'PostmanRuntime/7.28.4'
-        ];
-        
-        return $userAgents[array_rand($userAgents)];
+        $this->command->info('Se crearon 50 logs del sistema');
     }
 }
