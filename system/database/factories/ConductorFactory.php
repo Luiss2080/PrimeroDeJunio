@@ -52,7 +52,7 @@ class ConductorFactory extends Factory
             
             // Documentación
             'antecedentes_penales' => $this->faker->boolean(5),
-            'antecedentes_verificados_at' => $this->faker->optional(0.8)->dateTimeBetween($fechaIngreso, 'now')->format('Y-m-d'),
+            'antecedentes_verificados_at' => $this->faker->boolean(80) ? $this->faker->dateTimeBetween($fechaIngreso, 'now')->format('Y-m-d') : null,
             'licencia_vencimiento' => $this->faker->dateTimeBetween('now', '+2 years')->format('Y-m-d'),
             'licencia_categoria' => $this->faker->randomElement(['B1', 'B2', 'C1', 'C2']),
             'examen_medico_vencimiento' => $this->faker->dateTimeBetween('now', '+1 year')->format('Y-m-d'),
@@ -74,8 +74,8 @@ class ConductorFactory extends Factory
             // Estado financiero
             'estado_pago' => $this->faker->randomElement(['al_dia', 'al_dia', 'al_dia', 'mora', 'pendiente']),
             'saldo_pendiente' => $this->faker->randomFloat(2, 0, 500000),
-            'ultimo_pago' => $this->faker->optional(0.8)->dateTimeBetween('-30 days', 'now')->format('Y-m-d'),
-            'ultimo_monto_pago' => $this->faker->optional(0.8)->randomFloat(2, 100000, 1000000),
+            'ultimo_pago' => $this->faker->boolean(80) ? $this->faker->dateTimeBetween('-30 days', 'now')->format('Y-m-d') : null,
+            'ultimo_monto_pago' => $this->faker->boolean(80) ? $this->faker->randomFloat(2, 100000, 1000000) : null,
             'metodo_pago_preferido' => $this->faker->randomElement(['efectivo', 'transferencia', 'cheque']),
             
             // Estados

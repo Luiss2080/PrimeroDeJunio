@@ -93,12 +93,12 @@ class ConductoresSeeder extends Seeder
         }
 
         // Crear conductores experimentados adicionales
-        Conductor::factory()->count(5)->experimentado()->create([
+        Conductor::factory()->count(7)->experimentado()->create([
             'creado_por' => 1,
         ]);
 
         // Crear conductores regulares
-        Conductor::factory()->count(10)->activo()->create([
+        Conductor::factory()->count(8)->activo()->create([
             'creado_por' => 1,
         ]);
 
@@ -109,14 +109,6 @@ class ConductoresSeeder extends Seeder
             'creado_por' => 1,
         ]);
 
-        // Conductor inactivo
-        Conductor::factory()->create([
-            'estado' => 'inactivo',
-            'fecha_baja' => now()->subDays(15),
-            'motivo_baja' => 'Renuncia voluntaria',
-            'creado_por' => 1,
-        ]);
-
-        echo "Conductores creados exitosamente.\n";
+        $this->command->info('Se crearon 20 conductores: 3 específicos + 17 generados');
     }
 }

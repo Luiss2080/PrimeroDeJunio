@@ -20,9 +20,11 @@ class TurnosSeeder extends Seeder
         }
 
         Turno::factory()
-            ->count(20)
+            ->count(25)
             ->recycle(Conductor::all())
             ->recycle(Vehiculo::all())
             ->create();
+            
+        $this->command->info('Se crearon 25 turnos');
     }
 }

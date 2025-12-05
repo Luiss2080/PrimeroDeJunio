@@ -20,11 +20,13 @@ class ReportesIncidentesSeeder extends Seeder
         }
 
         ReporteIncidente::factory()
-            ->count(15)
+            ->count(20)
             ->recycle(User::all())
             ->create([
                 'viaje_id' => Viaje::inRandomOrder()->first()?->id,
                 'vehiculo_id' => Vehiculo::inRandomOrder()->first()?->id,
             ]);
+            
+        $this->command->info('Se crearon 20 reportes de incidentes');
     }
 }

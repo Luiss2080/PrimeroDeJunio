@@ -18,8 +18,10 @@ class GastosOperativosSeeder extends Seeder
         }
 
         GastoOperativo::factory()
-            ->count(50)
+            ->count(30)
             ->recycle(Vehiculo::all())
             ->create();
+            
+        $this->command->info('Se crearon 30 gastos operativos');
     }
 }
