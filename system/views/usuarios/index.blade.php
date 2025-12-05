@@ -117,7 +117,7 @@
                     <label class="filter-label">Rol del Sistema</label>
                     <select name="rol_id" class="filter-select">
                         <option value="">Todos los roles</option>
-                        @foreach(\App\Models\Perfil::all() as $rol)
+                        @foreach(\App\Models\Role::all() as $rol)
                             <option value="{{ $rol->id }}" {{ request('rol_id') == $rol->id ? 'selected' : '' }}>
                                 {{ ucfirst($rol->nombre) }}
                             </option>
