@@ -114,7 +114,6 @@
         <div id="conductoresContent">
             @include('conductores.partials.table', ['conductores' => $conductores])
         </div>
-    </div>
 
     <!-- Modal de filtros avanzados -->
     @include('filters.conductores-filters')
