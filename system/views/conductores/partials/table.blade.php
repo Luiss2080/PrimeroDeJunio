@@ -150,6 +150,25 @@
                         </div>
                         <h3 class="empty-title">No se encontraron conductores</h3>
                         <p class="empty-desc">Intenta ajustar los filtros o términos de búsqueda.</p>
+                    </div>
+                </td>
+            </tr>
+            @endforelse
+        </tbody>
+    </table>
+</div>
+
+<!-- Pagination -->
+<div class="pagination-container">
+    {{ $conductores->appends(request()->except('page'))->links('pages.conductores') }}
+</div>
+
+<!-- Mobile Card View -->
+<div class="mobile-cards-view">
+    @forelse($conductores as $conductor)
+    <div class="driver-card conductor-card" data-id="{{ $conductor->id }}">
+        <div class="card-header">
+            <div class="driver-main-info">
                 <img src="https://ui-avatars.com/api/?name={{ urlencode($conductor->nombre . ' ' . $conductor->apellido) }}&background=00ff66&color=000" alt="Avatar" class="card-avatar">
                 <div>
                     <h3 class="card-name">{{ $conductor->nombre }} {{ $conductor->apellido }}</h3>

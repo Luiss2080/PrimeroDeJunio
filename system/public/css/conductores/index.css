@@ -799,12 +799,6 @@
     .btn-toolbar {
         padding: 0.8rem;
     }
-
-    .pagination-container {
-        flex-direction: column;
-        gap: 1rem;
-        text-align: center;
-    }
 }
 
 /* Animations */

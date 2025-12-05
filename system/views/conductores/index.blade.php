@@ -1,6 +1,14 @@
 @extends('layouts.dashboard')
 
 @section('title', 'Conductores - 1ro de Junio')
+
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('css/conductores/index.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/pages/paginacion.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/filters/conductores-filters.css') }}">
+@endpush
+
+@section('content')
         <!-- Header -->
         <div class="page-header">
             <h1 class="page-title">Gestión de Conductores</h1>
