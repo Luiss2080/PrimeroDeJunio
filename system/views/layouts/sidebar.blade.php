@@ -38,7 +38,7 @@
                         </svg>
                     </div>
                     <span class="nav-text">Conductores</span>
-                    <span class="nav-badge">4</span>
+                    <span class="nav-badge" title="Total de conductores registrados">{{ $sidebarCounts['conductores'] ?? 0 }}</span>
                 </a>
             </li>
 
@@ -51,7 +51,7 @@
                         </svg>
                     </div>
                     <span class="nav-text">Usuarios</span>
-                    <span class="nav-badge blue">28</span>
+                    <span class="nav-badge blue">{{ $sidebarCounts['usuarios'] ?? 0 }}</span>
                 </a>
             </li>
 
@@ -69,6 +69,7 @@
                         </svg>
                     </div>
                     <span class="nav-text">Vehículos</span>
+                    <span class="nav-badge" title="Total de vehículos registrados">{{ $sidebarCounts['vehiculos'] ?? 0 }}</span>
                 </a>
             </li>
 
@@ -81,7 +82,7 @@
                         </svg>
                     </div>
                     <span class="nav-text">Viajes</span>
-                    <span class="nav-badge green">12</span>
+                    <span class="nav-badge green" title="Total de viajes registrados">{{ $sidebarCounts['viajes_hoy'] ?? 0 }}</span>
                 </a>
             </li>
 
@@ -99,6 +100,7 @@
                         </svg>
                     </div>
                     <span class="nav-text">Clientes</span>
+                    <span class="nav-badge" title="Total de clientes registrados">{{ $sidebarCounts['clientes'] ?? 0 }}</span>
                 </a>
             </li>
 

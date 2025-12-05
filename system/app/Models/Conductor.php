@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\View\Composers\SidebarComposer;
 
 class Conductor extends Model
 {
@@ -170,5 +171,25 @@ class Conductor extends Model
     public function getDocumento($tipo)
     {
         return $this->documentos()->where('tipo_documento', $tipo)->first();
+    }
+
+    /**
+     * Boot method para limpiar cache cuando se actualiza un conductor
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(function () {
+            SidebarComposer::clearCache();
+        });
+
+        static::updated(function () {
+            SidebarComposer::clearCache();
+        });
+
+        static::deleted(function () {
+            SidebarComposer::clearCache();
+        });
     }
 }

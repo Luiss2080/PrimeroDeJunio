@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\View\Composers\SidebarComposer;
 
 class Viaje extends Model
 {
@@ -46,5 +47,25 @@ class Viaje extends Model
     public function vehiculo()
     {
         return $this->belongsTo(Vehiculo::class);
+    }
+
+    /**
+     * Boot method para limpiar cache cuando se actualiza un viaje
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(function () {
+            SidebarComposer::clearCache();
+        });
+
+        static::updated(function () {
+            SidebarComposer::clearCache();
+        });
+
+        static::deleted(function () {
+            SidebarComposer::clearCache();
+        });
     }
 }

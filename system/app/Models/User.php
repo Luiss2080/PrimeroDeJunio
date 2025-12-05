@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\View\Composers\SidebarComposer;
 
 class User extends Authenticatable
 {
@@ -56,5 +57,25 @@ class User extends Authenticatable
     public function rol()
     {
         return $this->belongsTo(Role::class, 'rol_id');
+    }
+
+    /**
+     * Boot method para limpiar cache cuando se actualiza un usuario
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(function () {
+            SidebarComposer::clearCache();
+        });
+
+        static::updated(function () {
+            SidebarComposer::clearCache();
+        });
+
+        static::deleted(function () {
+            SidebarComposer::clearCache();
+        });
     }
 }
