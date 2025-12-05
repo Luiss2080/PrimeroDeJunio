@@ -6,6 +6,7 @@
     <!-- CSS Específico -->
     <link rel="stylesheet" href="{{ asset('css/vehiculos/index.css') }}">
     <link rel="stylesheet" href="{{ asset('css/filters/vehiculos-filters.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/pages/paginacion.css') }}">
     <link rel="stylesheet" href="{{ asset('css/mod/confirmar.css') }}">
     <link rel="stylesheet" href="{{ asset('css/mod/advertencia.css') }}">
 @endpush
