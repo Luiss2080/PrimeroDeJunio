@@ -157,6 +157,16 @@
                         <label for="direccion" class="form-label">Dirección de Domicilio</label>
                         <input type="text" id="direccion" name="direccion" class="form-input" value="{{ $conductor->direccion }}">
                     </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="ciudad" class="form-label">Ciudad *</label>
+                            <input type="text" id="ciudad" name="ciudad" class="form-input" value="{{ $conductor->ciudad }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="telefono_secundario" class="form-label">Teléfono Secundario</label>
+                            <input type="tel" id="telefono_secundario" name="telefono_secundario" class="form-input" value="{{ $conductor->telefono_secundario }}">
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Emergency Contact -->
@@ -185,9 +195,42 @@
                     </h3>
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="experiencia_anos" class="form-label">Años de Experiencia</label>
-                            <input type="number" id="experiencia_anos" name="experiencia_anos" class="form-input" value="{{ $conductor->experiencia_anos }}" min="0" max="50">
+                            <label for="numero_licencia" class="form-label">Número de Licencia</label>
+                            <input type="text" id="numero_licencia" name="numero_licencia" class="form-input" value="{{ $conductor->numero_licencia }}">
                         </div>
+                        <div class="form-group">
+                            <label for="categoria_licencia" class="form-label">Categoría de Licencia</label>
+                            <div class="select-wrapper">
+                                <select id="categoria_licencia" name="categoria_licencia" class="form-select">
+                                    <option value="">Seleccionar categoría</option>
+                                    <option value="A" {{ $conductor->categoria_licencia == 'A' ? 'selected' : '' }}>A - Motocicleta</option>
+                                    <option value="B" {{ $conductor->categoria_licencia == 'B' ? 'selected' : '' }}>B - Automóvil</option>
+                                    <option value="C" {{ $conductor->categoria_licencia == 'C' ? 'selected' : '' }}>C - Camión</option>
+                                    <option value="D" {{ $conductor->categoria_licencia == 'D' ? 'selected' : '' }}>D - Transporte Público</option>
+                                </select>
+                                <svg class="select-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fecha_vencimiento_licencia" class="form-label">Vencimiento de Licencia</label>
+                            <input type="date" id="fecha_vencimiento_licencia" name="fecha_vencimiento_licencia" class="form-input" value="{{ $conductor->fecha_vencimiento_licencia }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="numero_seguro_social" class="form-label">Número de Seguro Social</label>
+                            <input type="text" id="numero_seguro_social" name="numero_seguro_social" class="form-input" value="{{ $conductor->numero_seguro_social }}">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Performance & Status Information -->
+                <div class="glass-card">
+                    <h3 class="card-title">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11H6l2.5-2.5L6 6h3l2 2 2-2h3l-2.5 2.5L16 11h-3l-2-2-2 2z"/><path d="M12 3v6m0 6v6"/></svg>
+                        Estado y Rendimiento
+                    </h3>
+                    <div class="form-row">
                         <div class="form-group">
                             <label for="estado_pago" class="form-label">Estado de Pago</label>
                             <div class="select-wrapper">

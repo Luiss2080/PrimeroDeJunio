@@ -74,10 +74,10 @@
                         </div>
                         <div class="stat-item">
                             <div class="stat-icon">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
                             </div>
-                            <span class="stat-value">{{ $conductor->experiencia_anos }}A</span>
-                            <span class="stat-label">Antigüedad</span>
+                            <span class="stat-value">{{ $conductor->ciudad ?? 'N/A' }}</span>
+                            <span class="stat-label">Ciudad</span>
                         </div>
                     </div>
 
@@ -85,7 +85,7 @@
                     <div class="mini-details-row">
                         <div class="mini-detail">
                             <span class="mini-label">Edad</span>
-                            <span class="mini-value">{{ \Carbon\Carbon::parse($conductor->fecha_nacimiento)->age }} Años</span>
+                            <span class="mini-value">{{ $conductor->fecha_nacimiento ? \Carbon\Carbon::parse($conductor->fecha_nacimiento)->age : 'N/A' }} Años</span>
                         </div>
                         <div class="mini-detail">
                             <span class="mini-label">Sangre</span>
@@ -93,7 +93,7 @@
                         </div>
                         <div class="mini-detail">
                             <span class="mini-label">Licencia</span>
-                            <span class="mini-value">{{ $conductor->getDocumento('licencia_conducir')?->numero ?? 'N/A' }}</span>
+                            <span class="mini-value">{{ $conductor->numero_licencia ?? 'N/A' }}</span>
                         </div>
                     </div>
 
@@ -105,6 +105,9 @@
                             <div class="contact-details">
                                 <span class="contact-label">Móvil Personal</span>
                                 <span class="contact-value">{{ $conductor->telefono }}</span>
+                                @if($conductor->telefono_secundario)
+                                    <span class="contact-subvalue">Alt: {{ $conductor->telefono_secundario }}</span>
+                                @endif
                             </div>
                         </div>
                         <div class="contact-item">
@@ -123,6 +126,9 @@
                             <div class="contact-details">
                                 <span class="contact-label">Domicilio</span>
                                 <span class="contact-value">{{ Str::limit($conductor->direccion, 25) ?? 'No registrado' }}</span>
+                                @if($conductor->ciudad)
+                                    <span class="contact-subvalue">{{ $conductor->ciudad }}</span>
+                                @endif
                             </div>
                         </div>
                         @if($conductor->contacto_emergencia_nombre)
@@ -261,6 +267,40 @@
                                 <span class="stat-label">Fecha de Ingreso:</span>
                                 <span class="stat-value">{{ $conductor->fecha_ingreso ? \Carbon\Carbon::parse($conductor->fecha_ingreso)->format('d/m/Y') : 'No registrada' }}</span>
                             </div>
+                        </div>
+                    </div>
+
+                    <!-- Professional Information -->
+                    <div class="content-section">
+                        <h3 class="section-title">Información Profesional</h3>
+                        <div class="professional-info-grid">
+                            <div class="pro-info-card">
+                                <div class="pro-icon">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>
+                                </div>
+                                <div class="pro-details">
+                                    <span class="pro-label">Licencia de Conducir</span>
+                                    <span class="pro-value">{{ $conductor->numero_licencia ?? 'No registrada' }}</span>
+                                    @if($conductor->categoria_licencia)
+                                        <span class="pro-meta">Categoría: {{ strtoupper($conductor->categoria_licencia) }}</span>
+                                    @endif
+                                    @if($conductor->fecha_vencimiento_licencia)
+                                        <span class="pro-meta">Vence: {{ \Carbon\Carbon::parse($conductor->fecha_vencimiento_licencia)->format('d/m/Y') }}</span>
+                                    @endif
+                                </div>
+                            </div>
+                            
+                            @if($conductor->numero_seguro_social)
+                            <div class="pro-info-card">
+                                <div class="pro-icon">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9c.39 0 .77.02 1.15.07"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                                </div>
+                                <div class="pro-details">
+                                    <span class="pro-label">Seguro Social</span>
+                                    <span class="pro-value">{{ $conductor->numero_seguro_social }}</span>
+                                </div>
+                            </div>
+                            @endif
                         </div>
                     </div>
                 </div>
