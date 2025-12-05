@@ -162,6 +162,10 @@
     @endforelse
 </div>
 
+<div class="pagination-container">
+    {{ $vehiculos->appends(request()->except('page'))->links('pages.vehiculos') }}
+</div>
+
 <script>
 // Manejar botones de eliminación con data attributes
 document.addEventListener('click', function(e) {
