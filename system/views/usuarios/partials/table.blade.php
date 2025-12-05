@@ -78,8 +78,8 @@
                         <span class="role-badge role-{{ strtolower($usuario->rol->nombre ?? 'usuario') }}">
                             {{ ucfirst($usuario->rol->nombre ?? 'Usuario') }}
                         </span>
-                        @if($usuario->rol && $usuario->rol->permisos->count() > 0)
-                            <span class="role-permissions">{{ $usuario->rol->permisos->count() }} permisos</span>
+                        @if($usuario->rol && is_array($usuario->rol->permisos) && count($usuario->rol->permisos) > 0)
+                            <span class="role-permissions">{{ count($usuario->rol->permisos) }} permisos</span>
                         @endif
                     </div>
                 </td>
