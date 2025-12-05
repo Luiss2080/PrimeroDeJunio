@@ -33,14 +33,14 @@ class AsignacionesVehiculoSeeder extends Seeder
                 $asignacionesEspecificas[] = [
                     'conductor_id' => $conductor->id,
                     'vehiculo_id' => $vehiculos[$index]->id,
-                    'fecha_asignacion' => now()->subDays(rand(1, 30)),
-                    'fecha_desasignacion' => null,
+                    'fecha_inicio' => now()->subDays(rand(1, 30))->toDateString(),
+                    'fecha_fin' => null,
                     'estado' => 'activa',
-                    'turno' => ['mañana', 'tarde', 'noche'][rand(0, 2)],
+                    'turno' => ['manana', 'tarde', 'noche'][rand(0, 2)],
+                    'hora_inicio' => '08:00:00',
+                    'hora_fin' => '18:00:00',
+                    'dias_semana' => 'L,M,X,J,V,S',
                     'observaciones' => 'Asignación regular de vehículo',
-                    'kilometraje_inicial' => rand(20000, 80000),
-                    'kilometraje_final' => null,
-                    'responsable_asignacion' => 'Supervisor',
                 ];
             }
         }
@@ -53,15 +53,14 @@ class AsignacionesVehiculoSeeder extends Seeder
             $asignacionesEspecificas[] = [
                 'conductor_id' => $conductores->random()->id,
                 'vehiculo_id' => $vehiculos->random()->id,
-                'fecha_asignacion' => $fechaInicio,
-                'fecha_desasignacion' => $fechaFin,
-                'estado' => 'finalizada',
-                'turno' => ['mañana', 'tarde', 'noche'][rand(0, 2)],
+                'fecha_inicio' => $fechaInicio->toDateString(),
+                'fecha_fin' => $fechaFin->toDateString(),
+                'estado' => 'terminada',
+                'turno' => ['manana', 'tarde', 'noche'][rand(0, 2)],
+                'hora_inicio' => '06:00:00',
+                'hora_fin' => '16:00:00',
+                'dias_semana' => 'L,M,X,J,V',
                 'observaciones' => 'Asignación finalizada por cambio de turno',
-                'kilometraje_inicial' => rand(15000, 60000),
-                'kilometraje_final' => rand(65000, 95000),
-                'responsable_asignacion' => 'Administrador',
-                'motivo_desasignacion' => ['Cambio de turno', 'Mantenimiento', 'Solicitud conductor'][rand(0, 2)],
             ];
         }
 

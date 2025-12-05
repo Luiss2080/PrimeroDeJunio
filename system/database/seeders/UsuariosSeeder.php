@@ -163,8 +163,8 @@ class UsuariosSeeder extends Seeder
             'notas_empleado' => 'Vacaciones programadas del 1-15 de diciembre',
         ]);
 
-        // Create additional random users
-        User::factory()->count(15)->create([
+        // Create additional random users (reduced number to avoid conflicts)
+        User::factory()->count(10)->create([
             'rol_id' => function() use ($conductorRole, $operadorRole, $adminRole) {
                 $roles = array_filter([$conductorRole?->id, $operadorRole?->id]);
                 return !empty($roles) ? fake()->randomElement($roles) : $adminRole->id;

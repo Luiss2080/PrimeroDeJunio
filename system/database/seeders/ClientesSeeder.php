@@ -29,15 +29,15 @@ class ClientesSeeder extends Seeder
                 'cedula' => '52123456',
                 'telefono' => '+57 301 555 1234',
                 'email' => 'ana.ramirez@email.com',
-                'direccion' => 'Calle 85 # 12-45, Bogotá',
-                'ciudad' => 'Bogotá',
-                'departamento' => 'Cundinamarca',
+                'direccion_habitual' => 'Calle 85 # 12-45, Bogotá',
+                'ciudad_residencia' => 'Bogotá',
+                'departamento_residencia' => 'Cundinamarca',
                 'fecha_registro' => '2024-01-15',
                 'estado' => 'activo',
                 'tipo_cliente' => 'frecuente',
-                'rating' => 4.8,
-                'numero_viajes' => 45,
-                'preferencias' => json_encode([
+                'calificacion_promedio' => 4.8,
+                'total_viajes' => 45,
+                'preferencias_viaje' => json_encode([
                     'musica' => 'pop',
                     'temperatura' => 'media',
                     'conversacion' => true
@@ -49,15 +49,15 @@ class ClientesSeeder extends Seeder
                 'cedula' => '10987654',
                 'telefono' => '+57 315 444 5678',
                 'email' => 'roberto.torres@email.com',
-                'direccion' => 'Carrera 15 # 67-89, Medellín',
-                'ciudad' => 'Medellín',
-                'departamento' => 'Antioquia',
+                'direccion_habitual' => 'Carrera 15 # 67-89, Medellín',
+                'ciudad_residencia' => 'Medellín',
+                'departamento_residencia' => 'Antioquia',
                 'fecha_registro' => '2024-02-20',
                 'estado' => 'activo',
                 'tipo_cliente' => 'corporativo',
-                'rating' => 4.9,
-                'numero_viajes' => 67,
-                'preferencias' => json_encode([
+                'calificacion_promedio' => 4.9,
+                'total_viajes' => 67,
+                'preferencias_viaje' => json_encode([
                     'musica' => 'clasica',
                     'temperatura' => 'fria',
                     'conversacion' => false
@@ -69,15 +69,15 @@ class ClientesSeeder extends Seeder
                 'cedula' => '33445566',
                 'telefono' => '+57 320 777 8899',
                 'email' => 'sofia.mendoza@email.com',
-                'direccion' => 'Avenida 6N # 23-45, Cali',
-                'ciudad' => 'Cali',
-                'departamento' => 'Valle del Cauca',
+                'direccion_habitual' => 'Avenida 6N # 23-45, Cali',
+                'ciudad_residencia' => 'Cali',
+                'departamento_residencia' => 'Valle del Cauca',
                 'fecha_registro' => '2024-03-10',
                 'estado' => 'activo',
-                'tipo_cliente' => 'ocasional',
-                'rating' => 4.6,
-                'numero_viajes' => 12,
-                'preferencias' => json_encode([
+                'tipo_cliente' => 'particular',
+                'calificacion_promedio' => 4.6,
+                'total_viajes' => 12,
+                'preferencias_viaje' => json_encode([
                     'musica' => 'reggaeton',
                     'temperatura' => 'caliente',
                     'conversacion' => true
@@ -86,28 +86,6 @@ class ClientesSeeder extends Seeder
         ];
 
         foreach ($clientesEspecificos as $clienteData) {
-            // Crear usuario asociado si existe el rol
-            $usuario = null;
-            if ($roleCliente) {
-                $usuario = User::create([
-                    'rol_id' => $roleCliente->id,
-                    'nombre' => $clienteData['nombre'],
-                    'apellido' => $clienteData['apellido'],
-                    'email' => $clienteData['email'],
-                    'password' => Hash::make('Cliente123!'),
-                    'telefono' => $clienteData['telefono'],
-                    'cedula' => $clienteData['cedula'],
-                    'direccion' => $clienteData['direccion'],
-                    'ciudad' => $clienteData['ciudad'],
-                    'departamento' => $clienteData['departamento'],
-                    'fecha_nacimiento' => now()->subYears(rand(25, 60)),
-                    'estado' => $clienteData['estado'],
-                    'email_verified_at' => now(),
-                ]);
-                
-                $clienteData['usuario_id'] = $usuario->id;
-            }
-
             Cliente::create($clienteData);
         }
 

@@ -78,12 +78,7 @@ class ConfiguracionesSeeder extends Seeder
                 ])
             );
         }
-
-        foreach ($configuraciones as &$config) {
-            $config['created_at'] = now();
-            $config['updated_at'] = now();
-        }
-
-        DB::table('configuraciones')->insert($configuraciones);
+        
+        $this->command->info('Se crearon/actualizaron ' . count($configuraciones) . ' configuraciones');
     }
 }
