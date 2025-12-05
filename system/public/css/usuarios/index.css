@@ -735,6 +735,196 @@
     }
 }
 
+/* --- New Enhanced Header Styles --- */
+.index-header-container {
+    margin-bottom: 1.5rem;
+}
+
+.header-main-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.header-title-group h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    background: linear-gradient(to right, #fff, #a0a0a0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0 0 0.25rem 0;
+}
+
+.page-subtitle {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin: 0;
+    font-weight: 500;
+}
+
+.header-actions-group {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* --- Quick Stats Pills --- */
+.quick-stats-row {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.stat-pill {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    backdrop-filter: blur(10px);
+}
+
+.stat-pill .stat-value {
+    font-weight: 700;
+    color: var(--primary-color);
+    font-size: 0.95rem;
+}
+
+.stat-pill .stat-label {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+/* --- Enhanced Filter Panel --- */
+.filter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.filter-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.filter-reset-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-secondary);
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.filter-reset-btn:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+    color: var(--text-primary);
+}
+
+.filter-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1rem;
+    gap: 1rem;
+}
+
+.btn-filter-apply {
+    background: var(--primary-color);
+    color: #000;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-filter-apply:hover {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+}
+
+/* --- New Table Cell Styles --- */
+.contact-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.contact-primary, .contact-secondary {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+}
+
+.contact-primary {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.contact-secondary {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+}
+
+.contact-primary svg, .contact-secondary svg {
+    flex-shrink: 0;
+    opacity: 0.7;
+}
+
+.cedula-text {
+    font-family: 'Courier New', monospace;
+    color: var(--text-primary);
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.role-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.role-permissions {
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.activity-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.activity-date {
+    color: var(--text-primary);
+    font-weight: 500;
+    font-size: 0.85rem;
+}
+
+.register-date {
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+}
+
 @media (max-width: 768px) {
     .desktop-view {
         display: none;
@@ -748,5 +938,16 @@
         flex-direction: column;
         gap: 1rem;
         align-items: center;
+    }
+
+    .quick-stats-row {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .header-main-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
     }
 }

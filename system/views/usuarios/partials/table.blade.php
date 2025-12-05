@@ -11,13 +11,11 @@
                         </svg>
                     </span>
                 </th>
-                <th>Email</th>
-                <th>Teléfono</th>
-                <th>Dirección</th>
-                <th>Fecha Nac.</th>
+                <th>Contacto</th>
+                <th>Cédula</th>
                 <th>
                     <span class="sortable-header" data-sort="rol_id">
-                        Rol
+                        Rol y Permisos
                         <svg class="sort-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <polyline points="6 9 12 15 18 9"></polyline>
                         </svg>
@@ -33,7 +31,7 @@
                 </th>
                 <th>
                     <span class="sortable-header" data-sort="created_at">
-                        Registro
+                        Última Actividad
                         <svg class="sort-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <polyline points="6 9 12 15 18 9"></polyline>
                         </svg>
@@ -59,21 +57,31 @@
                     </div>
                 </td>
                 <td>
-                    <span class="secondary-text">{{ $usuario->email }}</span>
+                    <div class="contact-cell">
+                        <div class="contact-primary">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                            <span>{{ Str::limit($usuario->email, 25) }}</span>
+                        </div>
+                        @if($usuario->telefono)
+                        <div class="contact-secondary">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                            <span>{{ $usuario->telefono }}</span>
+                        </div>
+                        @endif
+                    </div>
                 </td>
                 <td>
-                    <span class="contact-text">{{ $usuario->telefono ?? 'N/A' }}</span>
+                    <span class="cedula-text">{{ $usuario->cedula ?? 'No registrada' }}</span>
                 </td>
                 <td>
-                    <span class="secondary-text">{{ Str::limit($usuario->direccion ?? 'N/A', 20) }}</span>
-                </td>
-                <td>
-                    <span class="secondary-text">{{ $usuario->fecha_nacimiento ? \Carbon\Carbon::parse($usuario->fecha_nacimiento)->format('d/m/Y') : 'N/A' }}</span>
-                </td>
-                <td>
-                    <span class="role-badge role-{{ strtolower($usuario->rol->nombre ?? 'usuario') }}">
-                        {{ ucfirst($usuario->rol->nombre ?? 'Usuario') }}
-                    </span>
+                    <div class="role-cell">
+                        <span class="role-badge role-{{ strtolower($usuario->rol->nombre ?? 'usuario') }}">
+                            {{ ucfirst($usuario->rol->nombre ?? 'Usuario') }}
+                        </span>
+                        @if($usuario->rol && $usuario->rol->permisos->count() > 0)
+                            <span class="role-permissions">{{ $usuario->rol->permisos->count() }} permisos</span>
+                        @endif
+                    </div>
                 </td>
                 <td>
                     <span class="status-badge status-{{ $usuario->estado }}">
@@ -82,7 +90,10 @@
                     </span>
                 </td>
                 <td>
-                    <span class="secondary-text">{{ $usuario->created_at->format('d/m/Y') }}</span>
+                    <div class="activity-cell">
+                        <span class="activity-date">{{ $usuario->updated_at->diffForHumans() }}</span>
+                        <span class="register-date">Registro: {{ $usuario->created_at->format('d/m/Y') }}</span>
+                    </div>
                 </td>
                 <td>
                     <div class="action-buttons justify-end">

@@ -16,23 +16,42 @@
     <div class="usuarios-index-container">
         
         <!-- Header -->
-        <div class="page-header">
-            <h1 class="page-title">Gestión de Usuarios</h1>
-            <div class="header-actions">
-                <a href="{{ route('usuarios.create') }}" class="btn-primary-glow">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-                    <span>Nuevo Usuario</span>
-                </a>
+        <div class="index-header-container">
+            <div class="header-main-row">
+                <div class="header-title-group">
+                    <h1 class="page-title">Gestión de Usuarios</h1>
+                    <p class="page-subtitle">Administra usuarios del sistema y sus permisos</p>
+                </div>
+                <div class="header-actions-group">
+                    <button class="system-btn-secondary" id="btnBulkActions" title="Acciones en Lote">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11H6l2.5-2.5L6 6h3l2 2 2-2h3l-2.5 2.5L16 11h-3l-2-2-2 2z"/><path d="M12 3v6m0 6v6"/></svg>
+                        <span>Acciones</span>
+                    </button>
+                    <a href="{{ route('usuarios.create') }}" class="btn-primary-glow">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+                        <span>Nuevo Usuario</span>
+                    </a>
+                </div>
             </div>
         </div>
 
         <!-- Enhanced Toolbar -->
         <div class="toolbar-container">
-            <!-- Left: Search -->
+            <!-- Left: Search & Quick Stats -->
             <div class="toolbar-left">
+                <div class="quick-stats-row">
+                    <div class="stat-pill">
+                        <span class="stat-value">{{ $usuarios->total() }}</span>
+                        <span class="stat-label">Total</span>
+                    </div>
+                    <div class="stat-pill">
+                        <span class="stat-value">{{ $usuarios->where('estado', 'activo')->count() }}</span>
+                        <span class="stat-label">Activos</span>
+                    </div>
+                </div>
                 <div class="search-box">
                     <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-                    <input type="text" id="searchUser" class="module-search-input" placeholder="Buscar por nombre, email, teléfono..." value="{{ request('search') }}">
+                    <input type="text" id="searchUser" class="module-search-input" placeholder="Buscar por nombre, email, cédula, teléfono..." value="{{ request('search') }}">
                     @if(request('search'))
                     <button class="search-clear" id="clearSearch" title="Limpiar búsqueda">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
@@ -77,26 +96,59 @@
 
         <!-- Filter Panel (Collapsible) -->
         <div class="filter-panel" id="filterPanel">
+            <div class="filter-header">
+                <h4 class="filter-title">Filtros Avanzados</h4>
+                <button class="filter-reset-btn" id="resetFilters">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+                    Limpiar
+                </button>
+            </div>
             <div class="filter-grid">
                 <div class="filter-group">
-                    <label class="filter-label">Estado</label>
+                    <label class="filter-label">Estado del Usuario</label>
                     <select name="estado" class="filter-select">
                         <option value="">Todos los estados</option>
-                        <option value="activo" {{ request('estado') == 'activo' ? 'selected' : '' }}>Activo</option>
-                        <option value="inactivo" {{ request('estado') == 'inactivo' ? 'selected' : '' }}>Inactivo</option>
-                        <option value="suspendido" {{ request('estado') == 'suspendido' ? 'selected' : '' }}>Suspendido</option>
+                        <option value="activo" {{ request('estado') == 'activo' ? 'selected' : '' }}>✅ Activo</option>
+                        <option value="inactivo" {{ request('estado') == 'inactivo' ? 'selected' : '' }}>⏸️ Inactivo</option>
+                        <option value="suspendido" {{ request('estado') == 'suspendido' ? 'selected' : '' }}>🚫 Suspendido</option>
                     </select>
                 </div>
                 <div class="filter-group">
-                    <label class="filter-label">Rol</label>
-                    <select name="rol" class="filter-select">
+                    <label class="filter-label">Rol del Sistema</label>
+                    <select name="rol_id" class="filter-select">
                         <option value="">Todos los roles</option>
-                        <!-- Ajustar valores según la BD -->
-                        <option value="administrador" {{ request('rol') == 'administrador' ? 'selected' : '' }}>Administrador</option>
-                        <option value="operador" {{ request('rol') == 'operador' ? 'selected' : '' }}>Operador</option>
-                        <option value="usuario" {{ request('rol') == 'usuario' ? 'selected' : '' }}>Usuario</option>
+                        @foreach(\App\Models\Perfil::all() as $rol)
+                            <option value="{{ $rol->id }}" {{ request('rol_id') == $rol->id ? 'selected' : '' }}>
+                                {{ ucfirst($rol->nombre) }}
+                            </option>
+                        @endforeach
                     </select>
                 </div>
+                <div class="filter-group">
+                    <label class="filter-label">Fecha de Registro</label>
+                    <select name="fecha_registro" class="filter-select">
+                        <option value="">Cualquier fecha</option>
+                        <option value="hoy" {{ request('fecha_registro') == 'hoy' ? 'selected' : '' }}>Hoy</option>
+                        <option value="esta_semana" {{ request('fecha_registro') == 'esta_semana' ? 'selected' : '' }}>Esta semana</option>
+                        <option value="este_mes" {{ request('fecha_registro') == 'este_mes' ? 'selected' : '' }}>Este mes</option>
+                        <option value="ultimos_3_meses" {{ request('fecha_registro') == 'ultimos_3_meses' ? 'selected' : '' }}>Últimos 3 meses</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">Último Acceso</label>
+                    <select name="ultimo_acceso" class="filter-select">
+                        <option value="">Sin filtro</option>
+                        <option value="hoy" {{ request('ultimo_acceso') == 'hoy' ? 'selected' : '' }}>Hoy</option>
+                        <option value="esta_semana" {{ request('ultimo_acceso') == 'esta_semana' ? 'selected' : '' }}>Esta semana</option>
+                        <option value="inactivos_30" {{ request('ultimo_acceso') == 'inactivos_30' ? 'selected' : '' }}>Inactivos +30 días</option>
+                    </select>
+                </div>
+            </div>
+            <div class="filter-actions">
+                <button class="btn-filter-apply" id="applyFilters">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                    Aplicar Filtros
+                </button>
             </div>
         </div>
 
