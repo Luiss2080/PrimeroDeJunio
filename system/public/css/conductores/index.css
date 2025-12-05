@@ -805,18 +805,7 @@
    NUEVOS ELEMENTOS - ESTRUCTURA ACTUALIZADA
    ================================= */
 
-/* Experience Cell */
-.experience-cell {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-}
 
-.experience-years {
-    font-weight: 600;
-    color: var(--text-primary);
-    font-size: 0.9rem;
-}
 
 /* Payment Status Cell */
 .payment-status-cell {
@@ -955,12 +944,7 @@
 }
 
 /* Responsive Updates */
-@media (max-width: 1200px) {
-    .data-table th:nth-child(5),  /* Experiencia */
-    .data-table td:nth-child(5) {
-        display: none;
-    }
-}
+
 
 @media (max-width: 992px) {
     .data-table th:nth-child(7),  /* Contacto */

@@ -43,7 +43,7 @@ return new class extends Migration
             $table->date('fecha_ingreso')->default(now()->toDateString());
             $table->date('fecha_baja')->nullable();
             $table->text('motivo_baja')->nullable();
-            $table->integer('experiencia_anos')->default(0);
+
             $table->decimal('salario_base', 10, 2)->nullable();
             $table->decimal('comision_porcentaje', 5, 2)->default(0); // Porcentaje de comisión
             $table->json('horarios_disponibles')->nullable(); // Horarios de disponibilidad
@@ -81,8 +81,7 @@ return new class extends Migration
             
             // Estados y control
             $table->enum('estado', ['activo', 'inactivo', 'suspendido', 'vacaciones', 'licencia_medica', 'evaluacion'])->default('activo');
-            $table->enum('estado_operativo', ['disponible', 'ocupado', 'descanso', 'mantenimiento', 'offline'])->default('disponible');
-            $table->timestamp('ultimo_cambio_estado')->nullable();
+
             $table->text('motivo_estado')->nullable();
             
             // Configuraciones personales
@@ -102,10 +101,10 @@ return new class extends Migration
             // Índices optimizados
             $table->index('cedula');
             $table->index('estado');
-            $table->index('estado_operativo');
+
             $table->index('usuario_id');
             $table->index('estado_pago');
-            $table->index(['estado', 'estado_operativo']);
+
             $table->index('fecha_ingreso');
             $table->index('rating');
             $table->index('licencia_vencimiento');

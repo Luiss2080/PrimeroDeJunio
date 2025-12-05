@@ -31,10 +31,9 @@ class ConductoresSeeder extends Seeder
                 'telefono' => '+57 310 123 4567',
                 'email' => 'carlos.rodriguez@conductor.com',
                 'ciudad' => 'Bogotá',
-                'experiencia_anos' => 8,
+
                 'rating' => 4.8,
                 'estado' => 'activo',
-                'estado_operativo' => 'disponible',
             ],
             [
                 'nombre' => 'María',
@@ -43,10 +42,9 @@ class ConductoresSeeder extends Seeder
                 'telefono' => '+57 315 987 6543',
                 'email' => 'maria.gonzalez@conductor.com',
                 'ciudad' => 'Medellín',
-                'experiencia_anos' => 5,
+
                 'rating' => 4.9,
                 'estado' => 'activo',
-                'estado_operativo' => 'disponible',
             ],
             [
                 'nombre' => 'Luis',
@@ -55,10 +53,9 @@ class ConductoresSeeder extends Seeder
                 'telefono' => '+57 320 111 2233',
                 'email' => 'luis.martinez@conductor.com',
                 'ciudad' => 'Cali',
-                'experiencia_anos' => 12,
+
                 'rating' => 4.7,
                 'estado' => 'activo',
-                'estado_operativo' => 'ocupado',
             ]
         ];
 
@@ -83,10 +80,10 @@ class ConductoresSeeder extends Seeder
                 'telefono' => $conductorData['telefono'],
                 'email' => $conductorData['email'],
                 'ciudad' => $conductorData['ciudad'],
-                'experiencia_anos' => $conductorData['experiencia_anos'],
+
                 'rating' => $conductorData['rating'],
                 'estado' => $conductorData['estado'],
-                'estado_operativo' => $conductorData['estado_operativo'],
+
                 'total_viajes' => fake()->numberBetween(100, 500),
                 'creado_por' => 1, // Asumiendo que el primer usuario es admin
             ]);

@@ -44,7 +44,7 @@ class ConductorFactory extends Factory
             
             // Información laboral
             'fecha_ingreso' => $fechaIngreso->format('Y-m-d'),
-            'experiencia_anos' => $this->faker->numberBetween(1, 25),
+
             'salario_base' => $this->faker->randomFloat(2, 1500000, 3500000),
             'comision_porcentaje' => $this->faker->randomFloat(2, 60, 80),
             'disponible_fines_semana' => $this->faker->boolean(70),
@@ -80,7 +80,7 @@ class ConductorFactory extends Factory
             
             // Estados
             'estado' => $this->faker->randomElement(['activo', 'activo', 'activo', 'activo', 'inactivo', 'suspendido']),
-            'estado_operativo' => $this->faker->randomElement(['disponible', 'disponible', 'ocupado', 'descanso', 'offline']),
+
             
             // Configuraciones
             'acepta_viajes_nocturnos' => $this->faker->boolean(70),
@@ -100,7 +100,7 @@ class ConductorFactory extends Factory
         return $this->state(function (array $attributes) {
             return [
                 'estado' => 'activo',
-                'estado_operativo' => 'disponible',
+
             ];
         });
     }
@@ -125,7 +125,7 @@ class ConductorFactory extends Factory
     {
         return $this->state(function (array $attributes) {
             return [
-                'experiencia_anos' => $this->faker->numberBetween(10, 25),
+
                 'total_viajes' => $this->faker->numberBetween(1000, 3000),
                 'rating' => $this->faker->randomFloat(1, 4.5, 5.0),
                 'asistencia_porcentaje' => $this->faker->numberBetween(95, 100),

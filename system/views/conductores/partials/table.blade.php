@@ -28,14 +28,7 @@
                         </svg>
                     </span>
                 </th>
-                <th>
-                    <span class="sortable-header" data-sort="experiencia_anos">
-                        Experiencia
-                        <svg class="sort-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="6 9 12 15 18 9"></polyline>
-                        </svg>
-                    </span>
-                </th>
+
                 <th>
                     <span class="sortable-header" data-sort="estado_pago">
                         Estado Pago
@@ -53,14 +46,7 @@
                         </svg>
                     </span>
                 </th>
-                <th>
-                    <span class="sortable-header" data-sort="estado_operativo">
-                        Operativo
-                        <svg class="sort-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="6 9 12 15 18 9"></polyline>
-                        </svg>
-                    </span>
-                </th>
+
                 <th>Vehículo</th>
                 <th class="text-right">Acciones</th>
             </tr>
@@ -123,22 +109,7 @@
                         </span>
                     </div>
                 </td>
-                <td>
-                    <div class="experience-cell">
-                        <span class="experience-years">{{ $conductor->experiencia_anos }} años</span>
-                        <span class="secondary-text">
-                            @if($conductor->experiencia_anos == 0)
-                                Nuevo conductor
-                            @elseif($conductor->experiencia_anos <= 2)
-                                Principiante
-                            @elseif($conductor->experiencia_anos <= 5)
-                                Experimentado
-                            @else
-                                Experto
-                            @endif
-                        </span>
-                    </div>
-                </td>
+
                 <td>
                     <div class="payment-status-cell">
                         <span class="payment-badge status-{{ $conductor->estado_pago }}">
@@ -163,12 +134,7 @@
                         {{ ucfirst($conductor->estado) }}
                     </span>
                 </td>
-                <td>
-                    <span class="operational-badge status-{{ $conductor->estado_operativo }}">
-                        <span class="operational-dot"></span>
-                        {{ ucfirst(str_replace('_', ' ', $conductor->estado_operativo)) }}
-                    </span>
-                </td>
+
                 <td>
                     @if($conductor->asignaciones->where('estado', 'activa')->first())
                         @php $vehiculo = $conductor->asignaciones->where('estado', 'activa')->first()->vehiculo; @endphp
@@ -196,7 +162,7 @@
             </tr>
             @empty
             <tr>
-                <td colspan="11" class="text-center py-5">
+                <td colspan="9" class="text-center py-5">
                     <div class="empty-state-container">
                         <div class="empty-icon-wrapper">
                             <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -261,16 +227,8 @@
                     </span>
                 </div>
             </div>
-            <div class="card-row">
-                <span class="card-label">Experiencia</span>
-                <span class="card-value">{{ $conductor->experiencia_anos }} años</span>
-            </div>
-            <div class="card-row">
-                <span class="card-label">Estado Operativo</span>
-                <span class="operational-badge status-{{ $conductor->estado_operativo }}">
-                    {{ ucfirst(str_replace('_', ' ', $conductor->estado_operativo)) }}
-                </span>
-            </div>
+
+
             <div class="card-row">
                 <span class="card-label">Estado Pago</span>
                 <div>

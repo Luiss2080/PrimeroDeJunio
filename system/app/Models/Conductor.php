@@ -36,7 +36,7 @@ class Conductor extends Model
         'fecha_ingreso',
         'fecha_baja',
         'motivo_baja',
-        'experiencia_anos',
+
         'salario_base',
         'comision_porcentaje',
         'horarios_disponibles',
@@ -66,8 +66,7 @@ class Conductor extends Model
         'numero_cuenta_bancaria',
         'banco',
         'estado',
-        'estado_operativo',
-        'ultimo_cambio_estado',
+
         'motivo_estado',
         'preferencias_viajes',
         'acepta_viajes_nocturnos',
@@ -97,7 +96,7 @@ class Conductor extends Model
         'examen_medico_vencimiento' => 'date',
         'ultima_evaluacion' => 'date',
         'ultimo_pago' => 'date',
-        'ultimo_cambio_estado' => 'datetime',
+
         'salario_base' => 'decimal:2',
         'comision_porcentaje' => 'decimal:2',
         'rating' => 'decimal:1',
