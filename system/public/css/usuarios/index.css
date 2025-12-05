@@ -640,6 +640,12 @@
     align-items: center;
 }
 
+.user-info-inline {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
 .card-avatar {
     width: 56px;
     height: 56px;

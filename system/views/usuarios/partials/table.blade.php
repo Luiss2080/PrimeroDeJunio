@@ -137,7 +137,7 @@
                         {{ strtoupper(substr($usuario->nombre, 0, 1)) }}{{ strtoupper(substr($usuario->apellido, 0, 1)) }}
                     </span>
                 </div>
-                <div>
+                <div class="user-info-inline">
                     <h3 class="card-name">{{ $usuario->nombre }} {{ $usuario->apellido }}</h3>
                     <span class="card-role">{{ ucfirst($usuario->rol->nombre ?? 'Usuario') }}</span>
                 </div>

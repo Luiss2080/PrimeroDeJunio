@@ -37,18 +37,8 @@
 
         <!-- Enhanced Toolbar -->
         <div class="toolbar-container">
-            <!-- Left: Search & Quick Stats -->
+            <!-- Left: Search -->
             <div class="toolbar-left">
-                <div class="quick-stats-row">
-                    <div class="stat-pill">
-                        <span class="stat-value">{{ $usuarios->total() }}</span>
-                        <span class="stat-label">Total</span>
-                    </div>
-                    <div class="stat-pill">
-                        <span class="stat-value">{{ $usuarios->where('estado', 'activo')->count() }}</span>
-                        <span class="stat-label">Activos</span>
-                    </div>
-                </div>
                 <div class="search-box">
                     <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
                     <input type="text" id="searchUser" class="module-search-input" placeholder="Buscar por nombre, email, cédula, teléfono..." value="{{ request('search') }}">
