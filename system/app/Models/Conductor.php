@@ -276,9 +276,9 @@ class Conductor extends Model
             
         return [
             'viajes_completados' => $viajesDelMes->count(),
-            'ingresos_totales' => $viajesDelMes->sum('comision_conductor'),
-            'kilometraje' => $viajesDelMes->sum('distancia_km'),
-            'rating_promedio' => $viajesDelMes->avg('calificacion_cliente'),
+            'ingresos_generados' => $viajesDelMes->sum('comision_conductor'),
+            'distancia_total' => $viajesDelMes->sum('distancia_km'),
+            'calificacion_promedio' => $viajesDelMes->avg('calificacion_cliente'),
         ];
     }
 
@@ -330,7 +330,7 @@ class Conductor extends Model
             
         return [
             'viajes_completados' => $viajesDelMesAnterior->count(),
-            'ingresos_generados' => $viajesDelMesAnterior->sum('valor_total'),
+            'ingresos_generados' => $viajesDelMesAnterior->sum('comision_conductor'),
             'calificacion_promedio' => $viajesDelMesAnterior->avg('calificacion_cliente') ?? 0
         ];
     }
