@@ -12,20 +12,28 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
+            // Seeders base - deben ejecutarse primero
             RolesSeeder::class,
             UsuariosSeeder::class,
+            ConfiguracionesSeeder::class, // Configuraciones del sistema
+            
+            // Seeders de entidades principales
             ConductoresSeeder::class,
             VehiculosSeeder::class,
             ClientesSeeder::class,
             TarifasSeeder::class,
+            
+            // Seeders que dependen de las entidades principales
             AsignacionesVehiculoSeeder::class,
             ViajesSeeder::class,
             MantenimientosSeeder::class,
-            DocumentosSeeder::class, // New
-            GastosOperativosSeeder::class, // New
-            PagosConductoresSeeder::class, // Renamed
-            TurnosSeeder::class,
-            ReportesIncidentesSeeder::class,
+            PagosConductoresSeeder::class,
+            
+            // Seeders complementarios (si existen)
+            // DocumentosSeeder::class,
+            // GastosOperativosSeeder::class,
+            // TurnosSeeder::class,
+            // ReportesIncidentesSeeder::class,
         ]);
     }
 }

@@ -25,13 +25,21 @@ return new class extends Migration
             $table->decimal('recargo_lluvia', 5, 2)->default(0.00);
             $table->time('hora_inicio_nocturno')->default('18:00:00');
             $table->time('hora_fin_nocturno')->default('06:00:00');
+            $table->enum('tipo_servicio', ['urbano', 'intermunicipal', 'aeropuerto', 'especial'])->default('urbano');
             $table->enum('estado', ['activa', 'inactiva'])->default('activa');
             $table->date('fecha_vigencia_inicio')->default(now()->toDateString());
             $table->date('fecha_vigencia_fin')->nullable();
+            $table->unsignedBigInteger('creado_por')->nullable();
+            $table->unsignedBigInteger('actualizado_por')->nullable();
             $table->timestamps();
 
             $table->index('estado');
+            $table->index('tipo_servicio');
             $table->index(['fecha_vigencia_inicio', 'fecha_vigencia_fin']);
+            $table->index(['estado', 'tipo_servicio']);
+            
+            $table->foreign('creado_por')->references('id')->on('users')->nullOnDelete();
+            $table->foreign('actualizado_por')->references('id')->on('users')->nullOnDelete();
         });
     }
 

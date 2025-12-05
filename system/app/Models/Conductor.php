@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\View\Composers\SidebarComposer;
+use App\Traits\Auditable;
 
 class Conductor extends Model
 {
-    use \Illuminate\Database\Eloquent\Factories\HasFactory;
+    use \Illuminate\Database\Eloquent\Factories\HasFactory, Auditable;
 
     protected $table = 'conductores';
     protected $fillable = [
@@ -18,15 +19,64 @@ class Conductor extends Model
         'apellido',
         'cedula',
         'telefono',
+        'telefono_secundario',
         'email',
         'direccion',
+        'ciudad',
+        'departamento',
         'fecha_nacimiento',
+        'genero',
+        'estado_civil',
         'grupo_sanguineo',
+        'foto',
         'contacto_emergencia_nombre',
         'contacto_emergencia_telefono',
-        'antecedentes_penales',
+        'contacto_emergencia_relacion',
+        'contacto_emergencia_direccion',
+        'fecha_ingreso',
+        'fecha_baja',
+        'motivo_baja',
         'experiencia_anos',
-        'foto',
+        'salario_base',
+        'comision_porcentaje',
+        'horarios_disponibles',
+        'disponible_fines_semana',
+        'disponible_feriados',
+        'antecedentes_penales',
+        'antecedentes_verificados_at',
+        'licencia_vencimiento',
+        'licencia_categoria',
+        'examen_medico_vencimiento',
+        'documentos_verificados',
+        'observaciones_verificacion',
+        'rating',
+        'total_viajes',
+        'viajes_completados',
+        'viajes_cancelados',
+        'total_ingresos',
+        'kilometraje_total',
+        'asistencia_porcentaje',
+        'puntualidad_porcentaje',
+        'ultima_evaluacion',
+        'estado_pago',
+        'saldo_pendiente',
+        'ultimo_pago',
+        'ultimo_monto_pago',
+        'metodo_pago_preferido',
+        'numero_cuenta_bancaria',
+        'banco',
+        'estado',
+        'estado_operativo',
+        'ultimo_cambio_estado',
+        'motivo_estado',
+        'preferencias_viajes',
+        'acepta_viajes_nocturnos',
+        'acepta_viajes_largos',
+        'radio_operacion_km',
+        'creado_por',
+        'actualizado_por',
+        'observaciones',
+        'historial_cambios',
         'estado',
         'estado_pago',
         'rating',
@@ -41,7 +91,30 @@ class Conductor extends Model
         'fecha_asignacion_chaleco' => 'datetime',
         'fecha_nacimiento' => 'date',
         'fecha_ingreso' => 'date',
-        'antecedentes_verificados_at' => 'datetime'
+        'fecha_baja' => 'date',
+        'antecedentes_verificados_at' => 'date',
+        'licencia_vencimiento' => 'date',
+        'examen_medico_vencimiento' => 'date',
+        'ultima_evaluacion' => 'date',
+        'ultimo_pago' => 'date',
+        'ultimo_cambio_estado' => 'datetime',
+        'salario_base' => 'decimal:2',
+        'comision_porcentaje' => 'decimal:2',
+        'rating' => 'decimal:1',
+        'total_ingresos' => 'decimal:2',
+        'kilometraje_total' => 'decimal:2',
+        'saldo_pendiente' => 'decimal:2',
+        'ultimo_monto_pago' => 'decimal:2',
+        'radio_operacion_km' => 'decimal:2',
+        'disponible_fines_semana' => 'boolean',
+        'disponible_feriados' => 'boolean',
+        'antecedentes_penales' => 'boolean',
+        'acepta_viajes_nocturnos' => 'boolean',
+        'acepta_viajes_largos' => 'boolean',
+        'horarios_disponibles' => 'array',
+        'documentos_verificados' => 'array',
+        'preferencias_viajes' => 'array',
+        'historial_cambios' => 'array',
     ];
 
     /**
@@ -92,6 +165,105 @@ class Conductor extends Model
     }
 
     /**
+     * Relación con Chaleco
+     */
+    public function chaleco()
+    {
+        return $this->belongsTo(Chaleco::class, 'chaleco_id');
+    }
+
+    /**
+     * Relación con Pagos
+     */
+    public function pagos()
+    {
+        return $this->hasMany(PagoConductor::class, 'conductor_id');
+    }
+
+    /**
+     * Scopes
+     */
+    public function scopeActivos($query)
+    {
+        return $query->where('estado', 'activo');
+    }
+
+    public function scopeDisponibles($query)
+    {
+        return $query->where('estado_operativo', 'disponible');
+    }
+
+    public function scopeConVehiculo($query)
+    {
+        return $query->whereHas('asignaciones', function($q) {
+            $q->where('estado', 'activa');
+        });
+    }
+
+    public function scopeConDocumentosVigentes($query)
+    {
+        return $query->where(function($q) {
+            $q->where('licencia_vencimiento', '>', now())
+              ->where('examen_medico_vencimiento', '>', now());
+        });
+    }
+
+    public function scopeDisponiblesFinesDeSemana($query)
+    {
+        return $query->where('disponible_fines_semana', true);
+    }
+
+    /**
+     * Accessors
+     */
+    public function getNombreCompletoAttribute()
+    {
+        return trim($this->nombre . ' ' . $this->apellido);
+    }
+
+    public function getEdadAttribute()
+    {
+        if (!$this->fecha_nacimiento) {
+            return null;
+        }
+        return $this->fecha_nacimiento->diffInYears(now());
+    }
+
+    public function getAnosServicioAttribute()
+    {
+        if (!$this->fecha_ingreso) {
+            return null;
+        }
+        return $this->fecha_ingreso->diffInYears(now());
+    }
+
+    /**
+     * Métodos de estado
+     */
+    public function esActivo()
+    {
+        return $this->estado === 'activo';
+    }
+
+    public function estaDisponible()
+    {
+        return $this->estado_operativo === 'disponible' && $this->esActivo();
+    }
+
+    public function tieneDocumentosVigentes()
+    {
+        $licenciaVigente = !$this->licencia_vencimiento || $this->licencia_vencimiento > now();
+        $examenVigente = !$this->examen_medico_vencimiento || $this->examen_medico_vencimiento > now();
+        
+        return $licenciaVigente && $examenVigente;
+    }
+
+    public function tieneVehiculoAsignado()
+    {
+        return $this->asignaciones()->where('estado', 'activa')->exists();
+    }
+
+    /**
      * Obtener estadísticas del mes actual
      */
     public function estadisticasDelMes()
@@ -105,6 +277,45 @@ class Conductor extends Model
             
         return [
             'viajes_completados' => $viajesDelMes->count(),
+            'ingresos_totales' => $viajesDelMes->sum('comision_conductor'),
+            'kilometraje' => $viajesDelMes->sum('distancia_km'),
+            'rating_promedio' => $viajesDelMes->avg('calificacion_cliente'),
+        ];
+    }
+
+    /**
+     * Cambiar estado operativo
+     */
+    public function cambiarEstadoOperativo($nuevoEstado, $motivo = null)
+    {
+        $this->update([
+            'estado_operativo' => $nuevoEstado,
+            'ultimo_cambio_estado' => now(),
+            'motivo_estado' => $motivo,
+        ]);
+
+        $this->logCustomActivity(
+            'cambio_estado_operativo',
+            "Estado operativo cambiado a: {$nuevoEstado}" . ($motivo ? " - Motivo: {$motivo}" : ''),
+            'info'
+        );
+    }
+
+    /**
+     * Actualizar estadísticas
+     */
+    public function actualizarEstadisticas()
+    {
+        $viajes = $this->viajes()->where('estado', 'completado');
+        
+        $this->update([
+            'total_viajes' => $viajes->count(),
+            'viajes_completados' => $viajes->count(),
+            'total_ingresos' => $viajes->sum('comision_conductor'),
+            'kilometraje_total' => $viajes->sum('distancia_km'),
+            'rating' => $viajes->avg('calificacion_cliente') ?? 5.0,
+        ]);
+    }
             'ingresos_generados' => $viajesDelMes->sum('valor_total'),
             'calificacion_promedio' => $viajesDelMes->avg('calificacion') ?? 0,
             'distancia_total' => $viajesDelMes->sum('distancia_km') ?? 0
