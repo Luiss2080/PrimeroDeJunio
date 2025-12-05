@@ -21,7 +21,7 @@ return new class extends Migration
             $table->enum('categoria', [
                 'empresa', 'tarifas', 'notificaciones', 'pagos', 
                 'sistema', 'seguridad', 'reportes', 'app'
-            ])->default('general');
+            ])->default('sistema');
             $table->boolean('es_publica')->default(false); // Si se puede mostrar en APIs públicas
             $table->boolean('es_editable')->default(true);
             $table->text('validacion_reglas')->nullable(); // Reglas de validación JSON

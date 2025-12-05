@@ -78,7 +78,6 @@ class ConfiguracionesSeeder extends Seeder
                 ])
             );
         }
-        ];
 
         foreach ($configuraciones as &$config) {
             $config['created_at'] = now();

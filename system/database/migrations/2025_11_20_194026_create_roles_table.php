@@ -57,9 +57,7 @@ return new class extends Migration
             $table->index('fecha_vigencia_desde');
             $table->index('fecha_vigencia_hasta');
             
-            // Claves foráneas
-            $table->foreign('creado_por')->references('id')->on('users')->nullOnDelete();
-            $table->foreign('actualizado_por')->references('id')->on('users')->nullOnDelete();
+            // Claves foráneas se agregarán posteriormente
         });
     }
 

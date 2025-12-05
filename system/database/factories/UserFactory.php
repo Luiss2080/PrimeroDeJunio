@@ -34,20 +34,20 @@ class UserFactory extends Factory
             'email' => fake()->unique()->safeEmail(),
             'password' => static::$password ??= Hash::make('password'),
             'telefono' => fake()->phoneNumber(),
-            'telefono_emergencia' => fake()->optional(0.7)->phoneNumber(),
-            'direccion' => fake()->optional(0.8)->address(),
+            'telefono_emergencia' => fake()->boolean(70) ? fake()->phoneNumber() : null,
+            'direccion' => fake()->boolean(80) ? fake()->address() : null,
             'ciudad' => fake()->optional(0.9)->randomElement($ciudades),
             'departamento' => fake()->optional(0.9)->randomElement($departamentos),
-            'codigo_postal' => fake()->optional(0.6)->postcode(),
-            'fecha_nacimiento' => fake()->optional(0.8)->dateTimeBetween('-65 years', '-18 years')->format('Y-m-d'),
+            'codigo_postal' => fake()->boolean(60) ? fake()->postcode() : null,
+            'fecha_nacimiento' => fake()->optional(0.8)->dateTimeBetween('-65 years', '-18 years')?->format('Y-m-d'),
             'genero' => fake()->optional(0.7)->randomElement(['masculino', 'femenino', 'otro', 'prefiero_no_decir']),
-            'cedula' => fake()->optional(0.9)->unique()->numerify('##########'),
-            'avatar' => fake()->optional(0.3)->imageUrl(200, 200, 'people'),
+            'cedula' => fake()->boolean(90) ? fake()->unique()->numerify('##########') : null,
+            'avatar' => fake()->boolean(30) ? fake()->imageUrl(200, 200, 'people') : null,
             
             // Información laboral
             'rol_id' => \App\Models\Role::inRandomOrder()->first()?->id ?? 1,
             'fecha_ingreso' => $fechaIngreso->format('Y-m-d'),
-            'numero_empleado' => fake()->optional(0.8)->unique()->numerify('EMP###'),
+            'numero_empleado' => fake()->boolean(80) ? fake()->unique()->numerify('EMP###') : null,
             'salario_base' => fake()->optional(0.6)->randomFloat(2, 1200000, 8000000), // Salarios en COP
             'turno_preferido' => fake()->optional(0.7)->randomElement(['matutino', 'vespertino', 'nocturno', 'flexible']),
             'disponible_fines_semana' => fake()->boolean(70), // 70% disponible fines de semana
@@ -56,7 +56,7 @@ class UserFactory extends Factory
             // Estado y seguridad
             'estado' => fake()->randomElement(['activo', 'activo', 'activo', 'activo', 'inactivo', 'pendiente']), // Más activos
             'ultimo_acceso' => fake()->optional(0.8)->dateTimeBetween('-1 month', 'now'),
-            'last_login_ip' => fake()->optional(0.7)->ipv4(),
+            'last_login_ip' => fake()->boolean(70) ? fake()->ipv4() : null,
             'intentos_login_fallidos' => fake()->numberBetween(0, 3),
             'bloqueado_hasta' => null, // Por defecto no bloqueados
             'email_verified_at' => fake()->optional(0.9)->dateTimeBetween($fechaIngreso, 'now'),

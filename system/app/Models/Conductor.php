@@ -316,11 +316,6 @@ class Conductor extends Model
             'rating' => $viajes->avg('calificacion_cliente') ?? 5.0,
         ]);
     }
-            'ingresos_generados' => $viajesDelMes->sum('valor_total'),
-            'calificacion_promedio' => $viajesDelMes->avg('calificacion') ?? 0,
-            'distancia_total' => $viajesDelMes->sum('distancia_km') ?? 0
-        ];
-    }
 
     /**
      * Obtener estadísticas del mes anterior para comparación
@@ -339,14 +334,6 @@ class Conductor extends Model
             'ingresos_generados' => $viajesDelMesAnterior->sum('valor_total'),
             'calificacion_promedio' => $viajesDelMesAnterior->avg('calificacion') ?? 0
         ];
-    }
-
-    /**
-     * Relación con Chaleco
-     */
-    public function chaleco()
-    {
-        return $this->belongsTo(Chaleco::class, 'chaleco_id');
     }
 
     /**

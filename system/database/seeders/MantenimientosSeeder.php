@@ -20,6 +20,14 @@ class MantenimientosSeeder extends Seeder
 
         $vehiculos = Vehiculo::all();
         
+        // Usar factory en su lugar
+        Mantenimiento::factory()
+            ->count(25)
+            ->recycle($vehiculos)
+            ->create();
+            
+        return;
+        
         $mantenimientos = [
             // Mantenimientos preventivos programados (8 registros)
             [

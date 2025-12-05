@@ -25,6 +25,7 @@ class ClienteFactory extends Factory
             'tipo_cliente' => $this->faker->randomElement(['particular', 'particular', 'corporativo', 'frecuente']),
             'estado' => 'activo',
             'descuento_porcentaje' => $this->faker->randomElement([0, 0, 0, 5, 10]),
+            'fecha_registro' => $this->faker->dateTimeBetween('-2 years', 'now')->format('Y-m-d H:i:s'),
         ];
     }
 }

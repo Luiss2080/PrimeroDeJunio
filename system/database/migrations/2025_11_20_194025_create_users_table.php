@@ -31,7 +31,7 @@ return new class extends Migration
             $table->string('avatar')->nullable();
             
             // Información laboral
-            $table->foreignId('rol_id')->constrained('roles')->restrictOnDelete();
+            $table->unsignedBigInteger('rol_id')->nullable();
             $table->date('fecha_ingreso')->nullable();
             $table->string('numero_empleado', 50)->nullable()->unique();
             $table->decimal('salario_base', 10, 2)->nullable();
